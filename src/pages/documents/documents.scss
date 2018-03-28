@@ -1,0 +1,51 @@
+page-documents {
+    background: #fff;
+    .bodytext {
+        font-size:10px;
+        color:black;
+    }
+    .headertext {
+        font-size:11px;
+        color:black;
+    }
+    h1{
+        font-size: 30px;
+        margin-top:20px
+    }
+    ion-title{
+        font-size:12px;
+        color:yellow;
+    }
+    ion-card{
+        margin-top:75px;
+    } 
+    ion-button{
+        margin-top:20px;
+    }       
+    ion-list{
+        margin-top:20px;
+        margin-bottom:30px;
+    }
+    .marginTop{
+        margin-top:150px;
+    }
+    .logo{
+        height: 15px;
+    }
+    .hilite{
+        background-color: yellow;
+    }
+    .hilite1{
+        color: white;
+        background-color: blue;
+    }
+a{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.flex-right {
+    justify-content: flex-end;
+  }
+
+}

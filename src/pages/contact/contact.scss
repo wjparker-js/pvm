@@ -1,0 +1,43 @@
+page-contact {
+    background: #fff;
+    .listheader{
+        font-size:20px;
+        color:black; 
+        margin-top:20px;
+        background-color:#4282c1;
+    }
+    
+    h1{
+        font-size: 30px;
+        margin-top:20px
+    }
+    ion-list-header{
+        font-size:16px;
+        color:black;        
+    }
+    ion-title{
+        font-size:12px;
+        color:yellow;
+    }
+    ion-card{
+        margin-top:75px;
+    } 
+    ion-button{
+        margin-top:20px;
+    }       
+    ion-list{
+        margin-top:15px;
+        margin-bottom:30px;
+    }
+    .marginTop{
+        margin-top:150px;
+    }
+    .logo{
+        height: 15px;
+    }
+
+a{
+    text-align: center;
+    margin-top: 30px;
+}
+}

@@ -1,0 +1,48 @@
+  <ion-header>
+    <ion-toolbar>        
+        <ion-title>
+        Document Info - <span [innerHTML]="docno1"></span>
+        </ion-title>
+        <ion-buttons start>
+        <button ion-button (click)="dismiss()">
+            Close
+        </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>  
+
+<ion-content >
+    <ion-list>
+        <ion-item *ngFor="let document of userdocumentsinfo">
+            <ion-card>
+
+                <img [src]="docimg"  style="width:100%;height:100%;"/>
+
+                <ion-card-content>
+                        <ion-list >
+                            <ion-item >
+                                <b>Doc No: </b><span [innerHTML]="document.DocumentNumber"></span>
+                                <br/>
+                                <b>Rev: </b><span [innerHTML]="document.Rev"></span>
+                                <br/>
+                                <b>Title: </b><span [innerHTML]="document.Title"></span>
+                                <br/>
+                                <b>Title: </b><span [innerHTML]="document.Title"></span>
+                                <br/>
+                                <b>Folder: </b><span [innerHTML]="document.FolderName"></span>
+                                <br/>
+                                <b>Designer: </b><span [innerHTML]="document.DesignerName"></span>
+                                <br/>
+                                <b>Discipline: </b><span [innerHTML]="document.DisciplineName"></span>
+                                <br/>
+                                <b>Doc Type: </b><span [innerHTML]="document.TypeName"></span>
+                                <br/>
+                                <b>Issue Reason: </b><span [innerHTML]="document.ReasonName"></span>
+                            </ion-item>
+                        </ion-list>
+                </ion-card-content>   
+
+            </ion-card>
+        </ion-item>
+    </ion-list>
+</ion-content>

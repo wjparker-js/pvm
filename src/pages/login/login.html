@@ -1,0 +1,36 @@
+
+<ion-content padding id="login">
+
+    <img src="assets/imgs/splogonew.png" style="height:25px;"/>
+
+  <ion-card padding>
+
+    <h1>ProjectVault <h3>Mobile</h3></h1>
+
+    <ion-list>
+        <ion-item>
+          <ion-label >Username</ion-label>
+          <ion-input type="text"  [(ngModel)]="userSystemData.id"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label >Password</ion-label>
+          <ion-input type="password"  [(ngModel)]="userSystemData.password"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <button ion-button block color="primary" (click)="login()">Login</button>
+
+    <ion-item>
+        <ion-label>Remember Me</ion-label>
+        
+        <ion-checkbox color="dark"  (click)="remember()" [(ngModel)]="userSystemData.rememberme" checked = "true"></ion-checkbox>
+    </ion-item>
+
+</ion-card>
+
+<!--
+<div style="text-align:center">
+  <a href="#">Forgotten Password?</a>
+</div>-->
+
+</ion-content>

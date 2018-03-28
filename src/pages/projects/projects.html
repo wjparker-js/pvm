@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title ion-right>  Projects - {{selectedProjectName}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let project of userProjects">
+      <ion-thumbnail item-start style="width:40px;">
+          <img [src]="project.Thumbnail" />
+      </ion-thumbnail>
+      <h2><b>{{project.ProjectName}}</b></h2>
+      <p>{{project.Client}}</p>
+      <button ion-button item-end (click)="saveProject(project.ProjectName,project.ProjectID);">Select</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

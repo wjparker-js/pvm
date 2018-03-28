@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar>        
+        <ion-title>
+        Document Viewer - <span [innerHTML]="docno"></span>
+        </ion-title>
+        <ion-buttons start>
+        <button ion-button (click)="dismiss()">
+            Close
+        </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<div [innerHTML]="rev"></div>
+
+<ion-content style="white-space: nowrap; overflow: scroll; overflow-x:scroll; height: 100%">
+    <ion-list>
+        <ion-item>
+            <p><span [innerHTML]="id"></span></p>
+        </ion-item>     
+    </ion-list>
+    <iframe *ngIf="pdfLink" [src]="pdfLink" width="100%" height="90%" frameborder="0" ></iframe>
+    <!--<ion-scroll scrollX="true" scrollY="true" (tap)="tapEvent($event)" zoom="true" style="width:100%;height:100%;text-align:center;">
+        <div class="scroll-item" style="  width:100%; white-space: nowrap; overflow: scroll;">
+                <img [ngStyle]="{'width' : tap + 'px', 'min-width' : tap + 'px'}" alt="logo" [src]="id">
+        </div>     
+    </ion-scroll>  -->
+</ion-content>
