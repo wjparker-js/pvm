@@ -19,3 +19,29 @@
     </ion-item>
   </ion-list>
 </ion-content>
+
+<ion-content>
+    <ion-grid  style="background-color: gray;">
+            <ion-row>
+                <ion-col  *ngFor="let project of userProjects" col-12 col-md-6 col-lg-4 col-xl-3>
+                <ion-card>
+
+                    <ion-card-header>
+                        <img [src]="project.Thumbnail"  style="height:200px;"/>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        <ion-list>
+                            <ion-item>
+                              <h2><b>{{project.ProjectName}}</b></h2>
+                              <p>{{project.Client}}</p>
+                              <button ion-button item-end (click)="saveProject(project.ProjectName,project.ProjectID);">Select</button>
+                            </ion-item>
+                        </ion-list>
+                    </ion-card-content>  
+
+                </ion-card>
+                </ion-col>
+            </ion-row>
+    </ion-grid>
+</ion-content>

@@ -87,8 +87,9 @@ export class DocumentsPage {
   info(){}
 
   openDocument(clientid,projectid,docid,ext){ 
-    let modal = this.modalCtrl.create(DocumentViewer,{clientid,projectid,docid,ext});
-    modal.present();
+    //let modal = this.modalCtrl.create(DocumentViewer,{clientid,projectid,docid,ext});
+    //modal.present();
+    this.navCtrl.push(DocumentViewer,{clientid,projectid,docid,ext});
   }
 
   openDocumentInfo(docimg, docid, docno1){ 

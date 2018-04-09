@@ -1,11 +1,15 @@
 page-documents {
-    background: #fff;
+    background: #e8e8e8;
     .bodytext {
-        font-size:10px;
+        font-size:12px;
         color:black;
     }
+    .cardheadertext {
+        font-size:16px;
+        color:black;
+    }    
     .headertext {
-        font-size:11px;
+        font-size:14px;
         color:black;
     }
     h1{
@@ -47,5 +51,9 @@ a{
 .flex-right {
     justify-content: flex-end;
   }
-
+.masters {
+    background-color: gray;
+  }
 }
+
+

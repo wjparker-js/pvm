@@ -9,16 +9,16 @@ import * as Constants from '../../providers/constants';
 
 export class DocumentViewer {
 
-id;
-docno;
-pdfUrl;
-clientid;
-projectid;
-docid;
-ext;
-pdfLink:any;
-viewdoc;
-fileUrl;
+    id;
+    docno;
+    pdfUrl;
+    clientid;
+    projectid;
+    docid;
+    ext;
+    pdfLink:any;
+    viewdoc;
+    fileUrl;
 
     constructor(public platform: Platform, 
                 public params: NavParams, 
@@ -37,7 +37,7 @@ fileUrl;
     var ext="";
     this.ext = this.params.get('ext');
 
-    var url = "http:/79.174.171.22/api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext;
+    var url = "http://79.174.171.22/api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext;
     var url = url.toLowerCase();
 
     console.log(url);
@@ -45,7 +45,7 @@ fileUrl;
     this.http.get(url).map(res => res.json()).subscribe(data => {
           this.sanitizer.bypassSecurityTrustStyle(data);
           this.viewdoc = data;          
-          console.log(this.viewdoc);
+          console.log("ViewerURL="+this.viewdoc);
       },
       err => {
           console.log("File not available.");

@@ -13,7 +13,7 @@
 <ion-content padding id="home">
 
 
-      <ion-list>
+    <!--  <ion-list>
           <ion-item>
             UserName =  {{userPostData.UserName}}
             <br/>
@@ -22,133 +22,171 @@
             PID      =  {{userPostData.ProjectID }}
             <br/>
             APIkey      =  {{userPostData.apiKey}}
+            <br />
         </ion-item>
-        </ion-list>
+      </ion-list>
+    -->
+    <ion-card padding>
 
+        <ion-card-header>
+            <h1><b>New Documents</b></h1>
+        </ion-card-header>
 
-      <ion-card>
-          <ion-card-title>
-              <u>ProjectVault News</u>
-              <br/>
-              <br/>
-              Southampton Big Brewery
-            </ion-card-title>    
-        <img src="assets/imgs/Construction1.jpg"/>
-    
         <ion-card-content>
 
-          <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes
-          </p>
+          <ion-list  *ngFor="let item of dataSet" >
+              <ion-item>
+                <h2><b>Last24Hours: {{item.Last24Hours}}</b></h2>
+              </ion-item>
+              <ion-item>
+                  <h2><b>Last7Days: {{item.Last7Days}}</b></h2>
+              </ion-item>
+              <ion-item>
+                  <h2><b>Last30Days: {{item.Last30Days}}</b></h2>
+              </ion-item>
+          </ion-list>
+          
         </ion-card-content>
-    
-        <ion-row no-padding>
-          <ion-col>
-            <button ion-button clear small color="danger" icon-start>
-              <ion-icon name='search'></ion-icon>
-              &nbsp;Search
-            </button>
-          </ion-col>
-          <ion-col text-center>
-            <button ion-button clear small color="danger" icon-start>
-              <ion-icon name='rainy'></ion-icon>
-              &nbsp;Site Conditions
-            </button>
-          </ion-col>
-        </ion-row>
-    
-      </ion-card>
-    
-   
-      <ion-card>
-          <ion-card-title>
-              Cardiff Rest Home
-            </ion-card-title>      
-          <img src="assets/imgs/Construction3.jpg"/>
-      
-          <ion-card-content>
 
-            <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. 
-            </p>
-          </ion-card-content>
-      
-          <ion-row no-padding>
-            <ion-col>
-              <button ion-button clear small color="danger" icon-start>
-                <ion-icon name='search'></ion-icon>
-                &nbsp;Search
-              </button>
-            </ion-col>
-            <ion-col text-center>
-              <button ion-button clear small color="danger" icon-start>
-                <ion-icon name='rainy'></ion-icon>
-                &nbsp;Site Conditions
-              </button>
-            </ion-col>
-          </ion-row>
-      
-        </ion-card>
-    
-        <ion-card>
-            <ion-card-title>
-               Dagenham Dog Track
-              </ion-card-title>        
-        <img src="assets/imgs/Construction2.png"/>
-    
-        <ion-card-content>
+    </ion-card>
 
-          <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec
-          </p>
-        </ion-card-content>
-    
-        <ion-row no-padding>
-          <ion-col>
-            <button ion-button clear small color="danger" icon-start>
-              <ion-icon name='search'></ion-icon>
-              &nbsp;Search
-            </button>
-          </ion-col>
-          <ion-col text-center>
-            <button ion-button clear small color="danger" icon-start>
-              <ion-icon name='rainy'></ion-icon>
-              &nbsp;Site Conditions
-            </button>
-          </ion-col>
-        </ion-row>
-    
-      </ion-card>
 
-      <ion-card>
-          <ion-card-title>
-              Dublin Opera House
-            </ion-card-title>    
-        <img src="assets/imgs/Construction4.jpg"/>
-    
-        <ion-card-content>
+        <ion-grid  style="background-color: gray;">
+            <ion-row>
+                <ion-col col-12 col-md-6 col-lg-4 col-xl-3>
 
-          <p>
-              Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
-          </p>
-        </ion-card-content>
-    
-        <ion-row no-padding>
-          <ion-col>
-            <button ion-button clear small color="danger" icon-start>
-              <ion-icon name='search'></ion-icon>
-              &nbsp;Search
-            </button>
-          </ion-col>
-          <ion-col text-center>
-            <button ion-button clear small color="danger" icon-start>
-              <ion-icon name='rainy'></ion-icon>
-              &nbsp;Site Conditions
-            </button>
-          </ion-col>
-        </ion-row>
-    
-      </ion-card>
+                    <ion-card padding> 
+
+                        <ion-card-title>
+                            Southampton Big Brewery
+                        </ion-card-title>    
+                        <img src="assets/imgs/Construction1.jpg"/>
+                  
+                      <ion-card-content>              
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes
+                        </p>
+                      </ion-card-content>
+                  
+                      <ion-row no-padding>
+                        <ion-col>
+                          <button ion-button clear small color="danger" icon-start>
+                            <ion-icon name='search'></ion-icon>
+                            &nbsp;Search
+                          </button>
+                        </ion-col>
+                        <ion-col text-center>
+                          <button ion-button clear small color="danger" icon-start>
+                            <ion-icon name='rainy'></ion-icon>
+                            &nbsp;Site Conditions
+                          </button>
+                        </ion-col>
+                      </ion-row>
+
+                    </ion-card>
+                </ion-col>
+
+                <ion-col col-12 col-md-6 col-lg-4 col-xl-3>
+                    <ion-card padding>
+                        <ion-card-title>
+                            Cardiff Rest Home
+                          </ion-card-title>      
+                        <img src="assets/imgs/Construction3.jpg"/>
+                    
+                        <ion-card-content>
+              
+                          <p>
+                              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. 
+                          </p>
+                        </ion-card-content>
+                    
+                        <ion-row no-padding>
+                          <ion-col>
+                            <button ion-button clear small color="danger" icon-start>
+                              <ion-icon name='search'></ion-icon>
+                              &nbsp;Search
+                            </button>
+                          </ion-col>
+                          <ion-col text-center>
+                            <button ion-button clear small color="danger" icon-start>
+                              <ion-icon name='rainy'></ion-icon>
+                              &nbsp;Site Conditions
+                            </button>
+                          </ion-col>
+                        </ion-row>
+                    
+                      </ion-card>
+                </ion-col>
+
+                <ion-col col-12 col-md-6 col-lg-4 col-xl-3>  
+                      <ion-card padding>
+                          <ion-card-title>
+                             Dagenham Dog Track
+                            </ion-card-title>        
+                      <img src="assets/imgs/Construction2.png"/>
+                  
+                      <ion-card-content>
+              
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec
+                        </p>
+                      </ion-card-content>
+                  
+                      <ion-row no-padding>
+                        <ion-col>
+                          <button ion-button clear small color="danger" icon-start>
+                            <ion-icon name='search'></ion-icon>
+                            &nbsp;Search
+                          </button>
+                        </ion-col>
+                        <ion-col text-center>
+                          <button ion-button clear small color="danger" icon-start>
+                            <ion-icon name='rainy'></ion-icon>
+                            &nbsp;Site Conditions
+                          </button>
+                        </ion-col>
+                      </ion-row>
+                  
+                    </ion-card>
+
+                </ion-col>
+                
+                <ion-col col-12 col-md-6 col-lg-4 col-xl-3>
+              
+                    <ion-card padding>
+                        <ion-card-title>
+                            Dublin Opera House
+                          </ion-card-title>    
+                      <img src="assets/imgs/Construction4.jpg"/>
+                  
+                      <ion-card-content>
+              
+                        <p>
+                            Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
+                        </p>
+                      </ion-card-content>
+                  
+                      <ion-row no-padding>
+                        <ion-col>
+                          <button ion-button clear small color="danger" icon-start>
+                            <ion-icon name='search'></ion-icon>
+                            &nbsp;Search
+                          </button>
+                        </ion-col>
+                        <ion-col text-center>
+                          <button ion-button clear small color="danger" icon-start>
+                            <ion-icon name='rainy'></ion-icon>
+                            &nbsp;Site Conditions
+                          </button>
+                        </ion-col>
+                      </ion-row>
+                  
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+
     
     </ion-content>
 

@@ -1,7 +1,10 @@
 import {Component} from '@angular/core';
-import {NavController, App, AlertController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {App, AlertController} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
 import {Common} from "../../providers/common";
+import {Http} from '@angular/http';
+import * as Constants from '../../providers/constants';
 
 @Component({
   selector: 'page-home', 
@@ -24,7 +27,7 @@ export class HomePage {
     "ProjectID":""
   };
 
-  constructor(public common: Common, private alertCtrl: AlertController,public navCtrl : NavController, public app : App, public authService : AuthService) {
+  constructor(public common: Common, private alertCtrl: AlertController,public http: Http, public navCtrl : NavController, public navParams: NavParams, public app : App, public authService : AuthService) {
     
     const data = JSON.parse(localStorage.getItem('userSystemData'));
 
@@ -35,6 +38,23 @@ export class HomePage {
     this.userPostData.SystemClientID = data[0].SystemClientID;
     this.userPostData.Email          = data[0].Email;  
     this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID');  
+
+    var uid = this.userPostData.SystemUserID;  
+    var pid = this.userPostData.ProjectID;  
+
+    this.http.get(Constants.apiUrl+'api/dashboard/'+uid+"/"+pid).map(res => res.json()).subscribe(data => {
+          this.dataSet = data;
+          console.log(this.dataSet);
+      },
+      err => {
+          console.log("Oops!");
+      }
+    ); 
+
+    //var Last7Days   = this.dataSet["Last7Days"];
+    //var LAst24Hours = this.dataSet.Last24Hours;
+    //var Last30Days  = this.dataSet.Last30Days;
+
 
     //localStorage.setItem('userPostData', JSON.stringify(this.userPostData));
 
