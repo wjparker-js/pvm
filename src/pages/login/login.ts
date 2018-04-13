@@ -15,50 +15,30 @@ import { AuthService } from "../../providers/auth-service";
 export class Login {
   
   public responseData  : any;
-  userSystemData = {"id":"","password":"","rememberme":""};  
+  userSystemData = {"id":"","password":""};  
 
   constructor(public navCtrl: NavController, public authService: AuthService, private toastCtrl:ToastController) {}  
 
-  remember(){
-
-    console.log("Remember: "+this.userSystemData.rememberme);
-
-    if(this.userSystemData.id && this.userSystemData.password){
-
-      if(this.userSystemData.rememberme="true"){
-        localStorage.setItem('login_rememberme', "true");
-        this.presentToast("You credentials have been saved, logging in."); 
-        localStorage.setItem('login_id', this.userSystemData.id);
-        localStorage.setItem('login_password', this.userSystemData.password);        
-      } 
-      
-      if(this.userSystemData.rememberme="false"){
-        localStorage.setItem('login_rememberme', "false");
-        this.presentToast("Your credentials have been erased, logging out");  
-        localStorage.setItem('login_id', "");
-        localStorage.setItem('login_password', "");          
-      }
-
-      this.userSystemData.id         = localStorage.getItem('login_id');
-      this.userSystemData.password   = localStorage.getItem('login_password');
-      //this.userSystemData.rememberme = localStorage.getItem('login_rememberme');
-
-      this.navCtrl.setRoot(this.navCtrl.getActive().component);
-
-    }
+  ionViewDidEnter() {
+  this.userSystemData.id        = localStorage.getItem('login_id');
+  this.userSystemData.password  = localStorage.getItem('login_password');
   }
+
 
   login(){    
 
     if(this.userSystemData.id && this.userSystemData.password){
 
         this.authService.getData(this.userSystemData).then((result) =>{
+
         this.responseData = result;
 
         console.log(this.responseData);
         
-        if(this.responseData)
+        if(this.responseData[0].Email.trim() == this.userSystemData.id.trim())
           {
+            localStorage.setItem('login_id', this.userSystemData.id);
+            localStorage.setItem('login_password', this.userSystemData.password); 
             localStorage.setItem('userSystemData', JSON.stringify(this.responseData));            
             this.navCtrl.push(TabsPage);
           } else {
