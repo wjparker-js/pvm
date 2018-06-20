@@ -1,49 +1,36 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    
-    <ion-title>   Document Issues and Processes</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>    
+      <ion-title>
+        <ion-toolbar color="primary"> 
+         Contacts
+        </ion-toolbar> 
+      </ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <ion-list>    
-
-        <ion-list-header class="listheader" >Issues</ion-list-header>
-    
-        <ion-item>
-          <ion-icon color="primary" name="mail" item-left></ion-icon>
-          Transmittals
-        </ion-item>
-    
-        <ion-item>
-          <ion-icon color="secondary" name="mail" item-left></ion-icon>
-          Submittals
-        </ion-item>   
-    
-        <ion-item>
-          <ion-icon color="bold" name="mail" item-left></ion-icon>
-          Bid Invitation
-        </ion-item>
-    
-        <ion-list-header class="listheader" >Processes</ion-list-header>
-    
-        <ion-item>
-          <ion-icon name="git-network" item-left></ion-icon>
-          Request For Information
-        </ion-item>
-    
-        <ion-item>
-          <ion-icon name="git-network" item-left></ion-icon>
-          Shop Drawing Review
-        </ion-item>  
-    
-        <ion-item>
-          <ion-icon name="git-network" item-left></ion-icon>
-          Handover Documents
-        </ion-item> 
-    
-      </ion-list>
+  <ion-list *ngFor="let contact of userContacts">  
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/ginger.jpg">
+      </ion-avatar>
+      <h2><b>{{contact.PFirstName}}&nbsp;{{contact.PLastName}}&nbsp;</b>({{contact.Email}})</h2>
+      <p>{{contact.PCompanyName}}&nbsp;/&nbsp;{{contact.PPosition}}</p>      
+      <ion-icon style = "font-size: 20px;padding-top: 12px;" name="call" color="primary" class="flex-right" (click)="callJoint(contact.PMobile)">
+          {{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;
+      </ion-icon>
+      <ion-icon style = "font-size: 20px;padding-top: 12px;" name="call" color="bold" class="flex-right" (click)="callJoint(contact.PTelephone)">
+          {{contact.PTelephone}}
+      </ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-content>
+  
+<style>
+  .social-cards ion-col {
+    padding: 0;
+  }
+</style>

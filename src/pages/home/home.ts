@@ -4,6 +4,7 @@ import {App, AlertController} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
 import {Common} from "../../providers/common";
 import {Http} from '@angular/http';
+import {DocumentSummary} from '../documentsummary/documentsummary';
 import * as Constants from '../../providers/constants';
 
 @Component({
@@ -16,6 +17,8 @@ export class HomePage {
   public userDetails : any;
   public resposeData : any;
   public dataSet : any;
+  public dataSet1 : any;
+  public dataSet2 : any;
 
   userPostData = {
     "UserName": "",
@@ -28,8 +31,12 @@ export class HomePage {
   };
 
   constructor(public common: Common, private alertCtrl: AlertController,public http: Http, public navCtrl : NavController, public navParams: NavParams, public app : App, public authService : AuthService) {
-    
-    const data = JSON.parse(localStorage.getItem('userSystemData'));
+  
+  }
+
+  ionViewWillEnter() {
+
+    var data = JSON.parse(localStorage.getItem('userSystemData'));
 
     this.userPostData.SystemUserID   = data[0].SystemUserID;
     this.userPostData.apiKey         = data[0].apiKey;
@@ -39,17 +46,48 @@ export class HomePage {
     this.userPostData.Email          = data[0].Email;  
     this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID');  
 
+    var apiKey = this.userPostData.apiKey;
     var uid = this.userPostData.SystemUserID;  
     var pid = this.userPostData.ProjectID;  
+    var days;
+    
 
-    this.http.get(Constants.apiUrl+'api/dashboard/'+uid+"/"+pid).map(res => res.json()).subscribe(data => {
+    this.http.get('http://pvmremote/api/dashboard/'+uid+"/"+pid).map(res => res.json()).subscribe(data => {
           this.dataSet = data;
           console.log(this.dataSet);
       },
       err => {
           console.log("Oops!");
       }
+
     ); 
+
+
+    this.http.get('http://pvmremote/api/t3/'+apiKey+'/'+uid+"/"+pid).map(res => res.json()).subscribe(data => {
+          this.dataSet1 = data;
+          console.log(this.dataSet1);
+      },
+      err => {
+          console.log("Oops!");
+      }
+
+    ); 
+
+    this.http.get('http://pvmremote/api/t4/'+apiKey+'/'+uid+"/"+pid).map(res => res.json()).subscribe(data => {
+          this.dataSet2 = data;
+          console.log(this.dataSet2);
+      },
+      err => {
+          console.log("Oops!");
+      }
+
+    );   
+
+  }
+
+openDocumentSummary(days){ 
+  this.navCtrl.push(DocumentSummary,{days});
+}
 
     //var Last7Days   = this.dataSet["Last7Days"];
     //var LAst24Hours = this.dataSet.Last24Hours;
@@ -60,7 +98,7 @@ export class HomePage {
 
     //this.getFeed();
 
-  }
+ 
 /*
   getFeed() {
     this.common.presentLoading();

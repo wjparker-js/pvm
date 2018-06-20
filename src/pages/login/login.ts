@@ -18,12 +18,16 @@ export class Login {
   userSystemData = {"id":"","password":""};  
 
   constructor(public navCtrl: NavController, public authService: AuthService, private toastCtrl:ToastController) {}  
+  
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
   this.userSystemData.id        = localStorage.getItem('login_id');
   this.userSystemData.password  = localStorage.getItem('login_password');
   }
 
+  ionViewDidEnter() {
+    //document.location.reload();
+    }
 
   login(){    
 
@@ -35,11 +39,11 @@ export class Login {
 
         console.log(this.responseData);
         
-        if(this.responseData[0].Email.trim() == this.userSystemData.id.trim())
+        if(this.responseData[0].Email.trim().toLowerCase() == this.userSystemData.id.trim().toLowerCase())
           {
-            localStorage.setItem('login_id', this.userSystemData.id);
+            localStorage.setItem('login_id', this.userSystemData.id.toLowerCase());
             localStorage.setItem('login_password', this.userSystemData.password); 
-            localStorage.setItem('userSystemData', JSON.stringify(this.responseData));            
+            localStorage.setItem('userSystemData', JSON.stringify(this.responseData));          
             this.navCtrl.push(TabsPage);
           } else {
             this.presentToast("Please enter a valid username and password");

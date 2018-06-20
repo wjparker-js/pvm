@@ -10,23 +10,37 @@
         </ion-toolbar>
       </ion-header>
       <ion-content>
+          <ion-item-group>
+              
         <ion-list>
-          <button ion-item >
+<!--          <button ion-item >
+            <ion-icon name="home" item-start></ion-icon>
             Home
           </button>
           <button ion-item >
+              <ion-icon name="folder" item-start></ion-icon>
             Projects
           </button>
           <button ion-item >
+              <ion-icon name="document" item-start></ion-icon>
             Documents
           </button>
           <button ion-item >
-            Processes
-          </button>
-          <button ion-item >
+              <ion-icon name="mail" item-start></ion-icon>
             Issues
           </button>
+          <button ion-item >
+              <ion-icon name="git-network" item-start></ion-icon>
+            Processes
+          </button>
+            <ion-item-divider color="light"> </ion-item-divider>
+        -->
+          <button ion-item (click)="logout()">
+              <ion-icon name="exit" item-start></ion-icon>
+            Log Out
+          </button>
         </ion-list>
+        </ion-item-group>
       </ion-content>
     </ion-menu>
 

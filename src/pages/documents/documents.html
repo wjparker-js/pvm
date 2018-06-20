@@ -5,19 +5,18 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>    
-    <ion-title><!--- {{selectedProjectName}}-->
+    <ion-title>
       <ion-toolbar color="primary">  
         <ion-searchbar
         name = "searchBar" 
+        value= "" 
         placeholder="Document Search here..."
         (ionInput)="searchByKeyword($event)" 
         [debounce]="500">  Documents
-        <!-- (search)="searchByKeyword($event)"> -->
       </ion-searchbar>
       </ion-toolbar> 
     </ion-title>
-  </ion-navbar>
- 
+  </ion-navbar> 
 </ion-header>
 
 <ion-content class="masters">

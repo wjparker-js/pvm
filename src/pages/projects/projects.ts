@@ -30,7 +30,12 @@ export class ProjectsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
 
-    const projectData = JSON.parse(localStorage.getItem('userSystemData'));
+
+  }
+
+  ionViewWillEnter() {
+
+    var projectData = JSON.parse(localStorage.getItem('userSystemData'));
 
     this.selectedProjectName       = localStorage.getItem('CurrentProjectName');
 
@@ -55,6 +60,7 @@ export class ProjectsPage {
           console.log("Oops!");
       }
     );  
+    
   }
 
   saveProject(name,id){

@@ -22,6 +22,9 @@ import { DocumentTabs }    from '../pages/documenttabs/documenttabs';
 import { DocumentIssues }  from '../pages/documenttabs/documentissues/documentissues';
 import { DocumentAudit }   from '../pages/documentaudit/documentaudit';
 import { DocumentInfoAll } from '../pages/documenttabs/documentinfoall/documentinfoall';
+import { DocumentSummary } from '../pages/documentsummary/documentsummary';
+
+import { CallNumber } from '@ionic-native/call-number';
 
 //import { MomentModule } from 'angular2-moment';
 
@@ -40,7 +43,8 @@ import { DocumentInfoAll } from '../pages/documenttabs/documentinfoall/documenti
     DocumentTabs,
     DocumentAudit,
     DocumentIssues,
-    DocumentInfoAll    
+    DocumentInfoAll,
+    DocumentSummary  
   ],
   imports: [
     BrowserModule,HttpModule,
@@ -62,11 +66,12 @@ import { DocumentInfoAll } from '../pages/documenttabs/documentinfoall/documenti
     DocumentTabs,
     DocumentAudit,
     DocumentIssues,
-    DocumentInfoAll   
+    DocumentInfoAll,
+    DocumentSummary   
   ],
   providers: [
     StatusBar,
-    SplashScreen,AuthService,SplitPane,Common,
+    SplashScreen,AuthService,SplitPane,Common,CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -26,9 +26,8 @@ export class MyApp {
   }
 
   logout(){
-    localStorage.clear();
-    this.menu.enable(false);
-    setTimeout(()=> this.backToWelcome(), 1000);    
+    //this.menu.enable(false);
+    setTimeout(()=> this.backToWelcome(), 500);    
   }
   
 }

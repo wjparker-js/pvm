@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, Searchbar} from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { DocumentViewer } from '../documentviewer/documentviewer';
@@ -36,7 +36,7 @@ export class DocumentsPage {
               private _sanitizer: DomSanitizer, 
               public modalCtrl: ModalController) {
 
-    
+        
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
     this.userdocumentData.SystemProjectID   = localStorage.getItem('CurrentProjectID');
@@ -56,6 +56,7 @@ export class DocumentsPage {
     var documentThumbnail       = this.userdocumentData.Thumbnail;
     var documentDocumentNumber  = this.userdocumentData.DocumentNumber;
     var documentFileExtension   = this.userdocumentData.FileExtension;
+
 
   }
 

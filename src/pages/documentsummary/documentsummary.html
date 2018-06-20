@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar>        
+        <ion-title>
+        Document Summary - <span [innerHTML]="docdays"> Days</span>
+        </ion-title>
+        <ion-buttons start>
+        <button ion-button (click)="dismiss()">
+            Close
+        </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>  
+    
+<ion-content style="background-color: gray;">
+    <ion-grid>
+        <ion-row>
+            <ion-col  *ngFor="let document of userdocumentssummary" col-12 col-md-6 col-lg-4 col-xl-3>
+                <ion-card>
+
+                    <ion-card-header>
+                        <img [src]="docimg"  style="width:280px;height:200px;"/>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        <ion-list >
+                            <ion-item >
+                                <b>Doc No: </b><span [innerHTML]="document.DocumentNumber"></span>
+                                <br/>
+                                <b>Rev: </b><span [innerHTML]="document.Rev"></span>
+                                <br/>
+                                <b>Title: </b><span [innerHTML]="document.Title"></span>
+                                <br/>
+                                <b>Folder: </b><span [innerHTML]="document.FolderName"></span>
+                                <br/>
+                                <b>Designer: </b><span [innerHTML]="document.DesignerName"></span>
+                                <br/>
+                                <b>Discipline: </b><span [innerHTML]="document.DisciplineName"></span>
+                                <br/>
+                                <b>Doc Type: </b><span [innerHTML]="document.TypeName"></span>
+                                <br/>
+                                <b>Issue Reason: </b><span [innerHTML]="document.ReasonName"></span>
+                            </ion-item>
+                        </ion-list>
+                    </ion-card-content>  
+
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+    
