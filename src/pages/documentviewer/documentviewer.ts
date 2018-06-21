@@ -37,7 +37,7 @@ export class DocumentViewer {
     var ext="";
     this.ext = this.params.get('ext');
 
-    var url = "http://79.174.171.22/api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext;
+    var url = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext;
     var url = url.toLowerCase();
 
     console.log(url);

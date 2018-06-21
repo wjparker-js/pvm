@@ -12,22 +12,35 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let contact of userContacts">  
-    <ion-item>
+  <ion-list>  
+    <ion-item *ngFor="let contact of userContacts">
+
       <ion-avatar item-start>
-        <img src="assets/imgs/ginger.jpg">
+        <img src="assets/imgs/user.jpg">
       </ion-avatar>
+
       <h2><b>{{contact.PFirstName}}&nbsp;{{contact.PLastName}}&nbsp;</b>({{contact.Email}})</h2>
-      <p>{{contact.PCompanyName}}&nbsp;/&nbsp;{{contact.PPosition}}</p>      
-      <ion-icon style = "font-size: 20px;padding-top: 12px;" name="call" color="primary" class="flex-right" (click)="callJoint(contact.PMobile)">
-          {{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;
-      </ion-icon>
-      <ion-icon style = "font-size: 20px;padding-top: 12px;" name="call" color="bold" class="flex-right" (click)="callJoint(contact.PTelephone)">
-          {{contact.PTelephone}}
-      </ion-icon>
+      <h3>{{contact.PCompanyName}}&nbsp;&nbsp;{{contact.PPosition}}</h3>   
+      <h3>  
+
+        <span *ngIf="contact.PMobile">
+          <ion-icon style = "font-size: 16px;" name="call" color="primary" class="flex-right" (click)="callJoint(contact.PMobile)">
+              <span style="font-family:arial;">{{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;</span>
+          </ion-icon>
+        </span>
+
+        <span *ngIf="contact.PTelephone">
+          <ion-icon style = "font-size: 16px;" name="call" color="bold" class="flex-right" (click)="callJoint(contact.PTelephone)">
+              <span style="font-family:arial;">{{contact.PTelephone}}</span>
+          </ion-icon>
+      </span>
+
+      </h3>
+
     </ion-item>
   </ion-list>
 </ion-content>
+
   
 <style>
   .social-cards ion-col {

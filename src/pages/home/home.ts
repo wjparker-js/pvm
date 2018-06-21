@@ -50,9 +50,12 @@ export class HomePage {
     var uid = this.userPostData.SystemUserID;  
     var pid = this.userPostData.ProjectID;  
     var days;
+    var urld  = Constants.apiUrl+"api/dashboard/"+uid+"/"+pid;
+    var urlt3 = Constants.apiUrl+"api/t3/"+apiKey+"/"+uid+"/"+pid;
+    var urlt4 = Constants.apiUrl+"api/t4/"+apiKey+"/"+uid+"/"+pid;
     
 
-    this.http.get('http://pvmremote/api/dashboard/'+uid+"/"+pid).map(res => res.json()).subscribe(data => {
+    this.http.get(urld).map(res => res.json()).subscribe(data => {
           this.dataSet = data;
           console.log(this.dataSet);
       },
@@ -63,7 +66,7 @@ export class HomePage {
     ); 
 
 
-    this.http.get('http://pvmremote/api/t3/'+apiKey+'/'+uid+"/"+pid).map(res => res.json()).subscribe(data => {
+    this.http.get(urlt3).map(res => res.json()).subscribe(data => {
           this.dataSet1 = data;
           console.log(this.dataSet1);
       },
@@ -73,7 +76,7 @@ export class HomePage {
 
     ); 
 
-    this.http.get('http://pvmremote/api/t4/'+apiKey+'/'+uid+"/"+pid).map(res => res.json()).subscribe(data => {
+    this.http.get(urlt4).map(res => res.json()).subscribe(data => {
           this.dataSet2 = data;
           console.log(this.dataSet2);
       },
@@ -88,6 +91,42 @@ export class HomePage {
 openDocumentSummary(days){ 
   this.navCtrl.push(DocumentSummary,{days});
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //var Last7Days   = this.dataSet["Last7Days"];
     //var LAst24Hours = this.dataSet.Last24Hours;
