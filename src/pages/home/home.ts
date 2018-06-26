@@ -51,7 +51,7 @@ export class HomePage {
     this.userPostData.Email          = data[0].Email;  
     this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID'); 
     this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName'); 
-    this.userPostData.avatardata     = localStorage.getItem('avatar'); 
+    this.avatardata     = localStorage.getItem('avatar'); 
 
     var apiKey = this.userPostData.apiKey;
     var uid   = this.userPostData.SystemUserID;  
