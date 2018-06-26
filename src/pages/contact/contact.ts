@@ -16,6 +16,7 @@ export class ContactPage {
 
   userContacts: any;
   userApiKey : any;
+  avatardata: any;
 
   userContactData = {
     "SystemProjectID":"",
@@ -29,7 +30,8 @@ export class ContactPage {
     "ContactPhone":"",
     "ContactMobile":"",
     "apiKey":"",
-    "ContactPicture":""
+    "ContactPicture":"",
+    "ProjectName":""
   };
 
   constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public http: Http, private callNumber: CallNumber) {
@@ -38,9 +40,11 @@ export class ContactPage {
 
     this.userContactData.SystemProjectID   = localStorage.getItem('CurrentProjectID');
     this.userContactData.apiKey            = contactData[0].apiKey;   
-
+    this.avatardata                        = localStorage.getItem('avatar');
 
   }
+
+
 
   ionViewWillEnter() {
 
@@ -48,6 +52,8 @@ export class ContactPage {
 
     this.userContactData.SystemProjectID   = localStorage.getItem('CurrentProjectID');
     this.userContactData.apiKey            = contactData[0].apiKey; 
+    this.userContactData.ProjectName       = localStorage.getItem('CurrentProjectName'); 
+    this.avatardata                        = localStorage.getItem('avatar');
 
     var url = Constants.apiUrl+"api/contacts/"+this.userContactData.apiKey+"/"+this.userContactData.SystemProjectID;
 

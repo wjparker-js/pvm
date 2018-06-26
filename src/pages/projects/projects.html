@@ -1,10 +1,21 @@
 <ion-header>
+
   <ion-navbar>
+    
     <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <img [src]="this.avatardata" class="item item-avatar" />
+      <!--<ion-icon name="contact" style="font-size:30px;padding-left:15px;color:white;"></ion-icon>-->
     </button>
-    <ion-title ion-right>  Projects - {{selectedProjectName}}</ion-title>
+        
+    <span style="font-size:20px;color:white;padding-left:15px;">{{userProjectData.ProjectName}}</span>
+
+   <!-- <button ion-button end> 
+      <img [src]="this.avatardata" class="item item-avatar" />
+    </button> -->
+
+
   </ion-navbar>
+
 </ion-header>
 
 <ion-content>

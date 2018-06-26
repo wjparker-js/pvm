@@ -18,6 +18,7 @@ export class DocumentsPage {
   userdocuments: any;
   userApiKey : any;
   selectedProjectName: any;
+  avatardata: any;
 
   userdocumentData = {
     "SystemProjectID":"",
@@ -47,6 +48,7 @@ export class DocumentsPage {
     this.userdocumentData.Thumbnail         = documentData[0].PhotoTiny;
     this.userdocumentData.DocumentNumber    = documentData[0].DocumentNumber; 
     this.userdocumentData.FileExtension     = documentData[0].FileExtension; 
+    this.avatardata              = localStorage.getItem('avatar');
 
     var documentSystemProjectID = this.userdocumentData.SystemProjectID; 
     var selectedProjectName     = this.userdocumentData.SystemProjectName;    
@@ -69,6 +71,9 @@ export class DocumentsPage {
     var searchTerm               = $event.srcElement.value;
     var localDocumentData        = JSON.parse(localStorage.getItem('userSystemData'));
     var localApiKey              = localDocumentData[0].apiKey;
+    this.avatardata              = localStorage.getItem('avatar');
+
+    console.log("Documents Avatar = "+this.avatardata);
 
     var url = Constants.apiUrl+"api/documents/"+localApiKey+"/"+documentSystemUserID1+"/"+documentSystemProjectID1+"/"+searchTerm;
 

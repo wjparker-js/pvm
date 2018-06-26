@@ -2,9 +2,12 @@
 
 <ion-header>
   <ion-navbar>
+    
     <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>    
+      <img [src]="this.avatardata" class="item item-avatar" />
+      <!--<ion-icon name="contact" style="font-size:30px;padding-left:15px;color:white;"></ion-icon>-->
+    </button>
+
     <ion-title>
       <ion-toolbar color="primary">  
         <ion-searchbar
@@ -16,6 +19,11 @@
       </ion-searchbar>
       </ion-toolbar> 
     </ion-title>
+
+    <!--<ion-buttons end> 
+      <ion-icon name="contact" style="font-size:35px;padding-right:15px;color:white;" (click)="showAcc();"></ion-icon>
+    </ion-buttons>-->
+
   </ion-navbar> 
 </ion-header>
 

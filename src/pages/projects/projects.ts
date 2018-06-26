@@ -18,6 +18,7 @@ export class ProjectsPage {
   userProjects: any;
   userApiKey : any;
   selectedProjectName: any;
+  avatardata: any;
 
   userProjectData = {
     "UserName": "",
@@ -25,7 +26,8 @@ export class ProjectsPage {
     "SystemUserID": "",
     "apiKey":"",
     "Company":"",
-    "Email":""
+    "Email":"",
+    "ProjectName":""
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
@@ -45,7 +47,11 @@ export class ProjectsPage {
     this.userProjectData.Company        = projectData[0].Company;
     this.userProjectData.SystemClientID = projectData[0].SystemClientID;
     this.userProjectData.Email          = projectData[0].Email; 
+    this.userProjectData.ProjectName    = localStorage.getItem('CurrentProjectName'); 
+    this.avatardata                     = localStorage.getItem('avatar');
 
+
+    console.log("Projects Avatar = "+this.avatardata);
     console.log(this.userProjectData.UserName);
 
     var userApiKey = this.userProjectData.apiKey;  

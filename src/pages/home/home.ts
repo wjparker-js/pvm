@@ -16,6 +16,7 @@ export class HomePage {
 
   public userDetails : any;
   public resposeData : any;
+  public avatardata: any;
   public dataSet : any;
   public dataSet1 : any;
   public dataSet2 : any;
@@ -27,12 +28,16 @@ export class HomePage {
     "apiKey":"",
     "Company":"",
     "Email":"", 
-    "ProjectID":""
+    "ProjectID":"",
+    "ProjectName":""
   };
 
   constructor(public common: Common, private alertCtrl: AlertController,public http: Http, public navCtrl : NavController, public navParams: NavParams, public app : App, public authService : AuthService) {
-  
+
+    //this.avatardata = "https://go.projectvaultuk.com/PublicPics/avatar.png"
+
   }
+
 
   ionViewWillEnter() {
 
@@ -44,16 +49,37 @@ export class HomePage {
     this.userPostData.Company        = data[0].Company;
     this.userPostData.SystemClientID = data[0].SystemClientID;
     this.userPostData.Email          = data[0].Email;  
-    this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID');  
+    this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID'); 
+    this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName'); 
+    this.userPostData.avatardata     = localStorage.getItem('avatar'); 
 
     var apiKey = this.userPostData.apiKey;
-    var uid = this.userPostData.SystemUserID;  
-    var pid = this.userPostData.ProjectID;  
+    var uid   = this.userPostData.SystemUserID;  
+    var pid   = this.userPostData.ProjectID;  
+    var pname = this.userPostData.ProjectName;
+    var avatar= "../assets/imgs/user.png";
     var days;
-    var urld  = Constants.apiUrl+"api/dashboard/"+uid+"/"+pid;
-    var urlt3 = Constants.apiUrl+"api/t3/"+apiKey+"/"+uid+"/"+pid;
-    var urlt4 = Constants.apiUrl+"api/t4/"+apiKey+"/"+uid+"/"+pid;
-    
+
+    var avatarid = Constants.apiUrl+"api/avatar/"+uid;
+    var urld   = Constants.apiUrl+"api/dashboard/"+uid+"/"+pid;
+    var urlt3  = Constants.apiUrl+"api/t3/"+apiKey+"/"+uid+"/"+pid;
+    var urlt4  = Constants.apiUrl+"api/t4/"+apiKey+"/"+uid+"/"+pid;
+
+  
+    this.http.get(avatarid).map(res => res.json()).subscribe(data => {
+          this.avatardata = data;
+          avatar = this.avatardata;
+          console.log("Avatar = " + avatar);
+          localStorage.setItem('avatar', this.avatardata);
+      },
+      err => {
+          this.avatardata = "https://go.projectvaultuk.com/PublicPics/avatar.png";
+          console.log("Avatar = https://go.projectvaultuk.com/PublicPics/avatar.png");
+          localStorage.setItem('avatar', "https://go.projectvaultuk.com/PublicPics/avatar.png");
+      }
+
+    ); 
+
 
     this.http.get(urld).map(res => res.json()).subscribe(data => {
           this.dataSet = data;
@@ -91,6 +117,11 @@ export class HomePage {
 openDocumentSummary(days){ 
   this.navCtrl.push(DocumentSummary,{days});
 }
+
+showAcc(){
+  console.log("Clicked");
+}
+
 
 
 

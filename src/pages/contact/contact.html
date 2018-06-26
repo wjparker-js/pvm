@@ -1,14 +1,21 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>    
-      <ion-title>
-        <ion-toolbar color="primary"> 
-         Contacts
-        </ion-toolbar> 
-      </ion-title>
-    </ion-navbar>
+
+  <ion-navbar>
+    
+    <button ion-button menuToggle>
+      <img [src]="this.avatardata" class="item item-avatar" />
+      <!--<ion-icon name="contact" style="font-size:30px;padding-left:15px;color:white;"></ion-icon>-->
+    </button>
+        
+    <span style="font-size:20px;color:white;padding-left:15px;">{{userContactData.ProjectName}}</span>
+
+   <!-- <button ion-button end> 
+      <img [src]="this.avatardata" class="item item-avatar" />
+    </button> -->
+
+
+  </ion-navbar>
+
 </ion-header>
 
 <ion-content>
@@ -16,7 +23,7 @@
     <ion-item *ngFor="let contact of userContacts">
 
       <ion-avatar item-start>
-        <img src="assets/imgs/user.jpg">
+        <img [src]="contact.avatar"/>
       </ion-avatar>
 
       <h2><b>{{contact.PFirstName}}&nbsp;{{contact.PLastName}}&nbsp;</b>({{contact.Email}})</h2>
@@ -24,14 +31,14 @@
       <h3>  
 
         <span *ngIf="contact.PMobile">
-          <ion-icon style = "font-size: 16px;" name="call" color="primary" class="flex-right" (click)="callJoint(contact.PMobile)">
-              <span style="font-family:arial;">{{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;</span>
+          <ion-icon style = "font-size: 15px;" name="call" color="primary" class="flex-right" (click)="callJoint(contact.PMobile)">
+              <span style="font-family:arial;font-size: 12px;">{{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;</span>
           </ion-icon>
         </span>
 
         <span *ngIf="contact.PTelephone">
-          <ion-icon style = "font-size: 16px;" name="call" color="bold" class="flex-right" (click)="callJoint(contact.PTelephone)">
-              <span style="font-family:arial;">{{contact.PTelephone}}</span>
+          <ion-icon style = "font-size: 15px;" name="call" color="bold" class="flex-right" (click)="callJoint(contact.PTelephone)">
+              <span style="font-family:arial;font-size: 12px;">{{contact.PTelephone}}</span>
           </ion-icon>
       </span>
 
