@@ -14,3 +14,9 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.platform-ios 
+{
+  page-home, page-documents, page-contact, page-projects, page-documentaudit, page-documentviewer, page-login, page-documentinfo { // replaced by your page HERE
+     top: 20px !important;
+  }
+}

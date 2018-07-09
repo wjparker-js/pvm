@@ -16,6 +16,7 @@ import * as Constants from '../../providers/constants';
 export class ProjectsPage {
 
   userProjects: any;
+  
   userApiKey : any;
   selectedProjectName: any;
   avatardata: any;
@@ -39,14 +40,14 @@ export class ProjectsPage {
 
     var projectData = JSON.parse(localStorage.getItem('userSystemData'));
 
-    this.selectedProjectName       = localStorage.getItem('CurrentProjectName');
-
     this.userProjectData.SystemUserID   = projectData[0].SystemUserID;
+    this.userProjectData.SystemClientID = projectData[0].SystemClientID;
     this.userProjectData.apiKey         = projectData[0].apiKey;
     this.userProjectData.UserName       = projectData[0].Name;
     this.userProjectData.Company        = projectData[0].Company;
-    this.userProjectData.SystemClientID = projectData[0].SystemClientID;
     this.userProjectData.Email          = projectData[0].Email; 
+
+    this.selectedProjectName            = localStorage.getItem('CurrentProjectName');
     this.userProjectData.ProjectName    = localStorage.getItem('CurrentProjectName'); 
     this.avatardata                     = localStorage.getItem('avatar');
 

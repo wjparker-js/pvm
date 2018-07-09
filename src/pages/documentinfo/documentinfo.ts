@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as Constants from '../../providers/constants';
 
-@Component({templateUrl: 'documentinfo.html'})
+@Component({selector: 'page-documentinfo', templateUrl: 'documentinfo.html'})
 
 export class DocumentInfo {
 
@@ -14,6 +14,8 @@ export class DocumentInfo {
   docno1: any;
   userdocumentsinfo: any;
   userApiKey : any;
+  avatardata: any;
+
 
   userdocumentInfoData = {
     "SystemUserID": "",
@@ -44,6 +46,9 @@ export class DocumentInfo {
     this.userdocumentInfoData.SystemProjectID = localStorage.getItem('CurrentProjectID');    
     this.userdocumentInfoData.Thumbnail       = documentData[0].PhotoTiny;
     this.userdocumentInfoData.DocumentNumber  = documentData[0].DocumentNumber;
+
+    this.avatardata     = localStorage.getItem('avatar');
+     console.log("Documents Avatar = "+this.avatardata);
 
     var documentApiKey          = this.userdocumentInfoData.apiKey;  
     var documentSystemUserID    = this.userdocumentInfoData.SystemUserID;

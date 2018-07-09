@@ -48,8 +48,14 @@ import { CallNumber } from '@ionic-native/call-number';
   ],
   imports: [
     BrowserModule,HttpModule,
-    IonicModule.forRoot(MyApp)
-    //MomentModule,
+    IonicModule.forRoot(MyApp, {
+      platforms: {
+          ios: {
+            statusbarPadding: true,
+            tabsHideOnSubPages: true
+          }
+        }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

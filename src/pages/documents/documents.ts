@@ -42,12 +42,14 @@ export class DocumentsPage {
 
     this.userdocumentData.SystemProjectID   = localStorage.getItem('CurrentProjectID');
     this.userdocumentData.SystemProjectName = localStorage.getItem('CurrentProjectName'); 
+
     this.userdocumentData.SystemClientID    = documentData[0].SystemClientID;
     this.userdocumentData.SystemUserID      = documentData[0].SystemUserID;
     this.userdocumentData.apiKey            = documentData[0].apiKey;    
     this.userdocumentData.Thumbnail         = documentData[0].PhotoTiny;
     this.userdocumentData.DocumentNumber    = documentData[0].DocumentNumber; 
     this.userdocumentData.FileExtension     = documentData[0].FileExtension; 
+    
     this.avatardata              = localStorage.getItem('avatar');
 
     var documentSystemProjectID = this.userdocumentData.SystemProjectID; 

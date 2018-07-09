@@ -1,25 +1,25 @@
+<ion-header>
+  <ion-navbar>   
+    <ion-title style="font-size:12px;color:white;">ProjectVault Mobile</ion-title>    
+  </ion-navbar>
+</ion-header>
 
 <ion-content padding id="login">
-
-    <img src="https://go.projectvaultuk.com/PublicPics/splogonew.png" style="height:25px;"/>
+    <br/><br/>
+    <img src="../assets/imgs/splogonew.png" style="height:25px;"/>
 
   <ion-card padding>
-
-    <h1>ProjectVault</h1>
-
     <ion-list>
         <ion-item>
-          <ion-label >Username</ion-label>
+          <ion-label stacked>Username</ion-label>
           <ion-input type="email"  [(ngModel)]="userSystemData.id" ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label >Password</ion-label>
+          <ion-label stacked >Password</ion-label>
           <ion-input type="password"  [(ngModel)]="userSystemData.password"></ion-input>
         </ion-item>
     </ion-list>
-
     <button ion-button block color="primary" (click)="login()">Login</button>
-
   </ion-card>
 
 <!--

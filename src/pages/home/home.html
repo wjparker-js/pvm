@@ -3,7 +3,7 @@
   <ion-navbar>
     
     <button ion-button menuToggle>
-      <img [src]="this.avatardata" class="item item-avatar" />
+      <img [src]="this.avatardata" class="item item-avatar" style="position:relative;top:-2px;height:40px;width:40px;border:0px;"/>
       <!--<ion-icon name="contact" style="font-size:30px;padding-left:15px;color:white;"></ion-icon>-->
     </button>
         
@@ -31,7 +31,7 @@
             <ion-card-content>
             
               <div class="box green">
-                <b><span  style="text-align:center;padding:4px;">Documents</span></b>
+                <b><span  style="text-align:center;padding:4px;">Recent Documents Summary</span></b>
                 <ion-list  *ngFor="let item of dataSet" >
                   <ion-item>
                     <table style="width:100%;">
@@ -40,12 +40,10 @@
                           <td style="text-align:center;"><h3>7 Days</h3></td>
                           <td style="text-align:center;"><h3>30 Days</h3></td>
                         </tr>
-                        <tr>
-                          <b>                   
-                          <td><h3><span (click)="openDocumentSummary(1)" style="text-align:center;">{{item.Last24Hours}}</span></h3></td>
-                          <td><h3><span (click)="openDocumentSummary(7)" style="text-align:center;" >{{item.Last7Days}}</span></h3></td>
-                          <td><h3><span (click)="openDocumentSummary(30)" style="text-align:center;">{{item.Last30Days}}</span></h3></td>
-                          </b>
+                        <tr>                  
+                          <td style="text-align:center;"><h3><span (click)="openDocumentSummary(1)" >{{item.Last24Hours}}</span></h3></td>
+                          <td style="text-align:center;"><h3><span (click)="openDocumentSummary(7)" >{{item.Last7Days}}</span></h3></td>
+                          <td style="text-align:center;"><h3><span (click)="openDocumentSummary(30)" >{{item.Last30Days}}</span></h3></td>
                         </tr>
                       </table>
                     </ion-item>
@@ -67,7 +65,7 @@
             <ion-card-content>
 
               <div class="box yellow">
-                  <b><span  style="text-align:center;padding:4px;">Approvals</span></b>
+                  <b><span  style="text-align:center;padding:4px;">Approvals Summary</span></b>
                 <ion-list  *ngFor="let item of dataSet1" >
                     <ion-item>
                       <table style="width:100%;">
@@ -80,11 +78,9 @@
                           <td style="text-align:center;"><h3>OverDue</h3></td>
                         </tr>
                         <tr>
-                          <b>
                           <td style="text-align:center;"><h3>{{item.Intime}}</h3></td>
                           <td style="text-align:center;"><h3>{{item.SoonDue}}</h3></td>
                           <td style="text-align:center;"><h3>{{item.OverDue}}</h3></td>
-                          </b>
                         </tr>
                       </table>
                     </ion-item>
@@ -107,7 +103,7 @@
             <ion-card-content>
 
               <div class="box blue">
-              <b><span  style="text-align:center;padding:4px;">Request For Information</span></b>
+              <b><span  style="text-align:center;padding:4px;">Request For Information Summary</span></b>
               <ion-list  *ngFor="let item of dataSet2" >
                   <ion-item>
                     <table style="width:100%;">

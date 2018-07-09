@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as Constants from '../../providers/constants';
 
-@Component({templateUrl: 'documentviewer.html'})
+@Component({selector: 'page-documentviewer', templateUrl: 'documentviewer.html'})
 
 export class DocumentViewer {
 
@@ -28,28 +28,28 @@ export class DocumentViewer {
                 public viewCtrl: ViewController
               ) {
 
-    var clientid="";
-    this.clientid = this.params.get('clientid');
-    var projectid="";
-    this.projectid = this.params.get('projectid');
-    var docid="";
-    this.docid = this.params.get('docid');
-    var ext="";
-    this.ext = this.params.get('ext');
+        var clientid="";
+        this.clientid = this.params.get('clientid');
+        var projectid="";
+        this.projectid = this.params.get('projectid');
+        var docid="";
+        this.docid = this.params.get('docid');
+        var ext="";
+        this.ext = this.params.get('ext');
 
-    var url = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext;
-    var url = url.toLowerCase();
+        var url = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext;
+        var url = url.toLowerCase();
 
-    console.log(url);
+        console.log(url);
 
-    this.http.get(url).map(res => res.json()).subscribe(data => {
-          this.sanitizer.bypassSecurityTrustStyle(data);
-          this.viewdoc = data;          
-          console.log("ViewerURL="+this.viewdoc);
-      },
-      err => {
-          console.log("File not available.");
-      }
+        this.http.get(url).map(res => res.json()).subscribe(data => {
+              this.sanitizer.bypassSecurityTrustStyle(data);
+              this.viewdoc = data;          
+              console.log("ViewerURL="+this.viewdoc);
+        },
+        err => {
+            console.log("File not available.");
+        }
     );
     
     this.sleep(2000);
@@ -58,8 +58,7 @@ export class DocumentViewer {
 
     console.log(this.fileUrl);
     
-    this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileUrl); 
-    
+    this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileUrl);     
 
   }
 
@@ -69,7 +68,7 @@ export class DocumentViewer {
  
     while (currentTime + miliseconds >= new Date().getTime()) {
     }
- }  
+  }  
 
   dismiss() {
     this.viewCtrl.dismiss();
