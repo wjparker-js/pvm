@@ -17,7 +17,8 @@ import * as Constants from '../../providers/constants';
 export class Login {
   
   public responseData  : any;
-  userSystemData = {"id":"","password":"","sysuserid":"","currentproject":""};  
+  userLoginData: any;
+  userSystemData = {"id":"","password":"","sysuserid":"","currentproject":"","apiKey":""};  
 
   constructor(public navCtrl: NavController, public authService: AuthService, private toastCtrl:ToastController, public http: Http) {}  
   
@@ -56,8 +57,8 @@ export class Login {
 
 
             this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+'00000000-0000-0000-0000-000000000000'+'/'+'96'+'/'+'Mobile+-+Logged+In').map(res => res.json()).subscribe(data => {
-                  this.userProjects = data;
-                  console.log(this.userProjects);
+                  this.userLoginData = data;
+                  console.log(this.userLoginData);
               },
               err => {
                   console.log("Oops!");
