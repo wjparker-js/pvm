@@ -108,8 +108,7 @@ export class DocumentsPage {
     this.navCtrl.push(DocumentAudit,{docimg, docid, docno1});
   }
 
-  openDocumentIssues(docimg, docid, docno1){ 
-    //this.navCtrl.push(DocumentAudit,{docimg, docid, docno1});
+  openDocumentSend(docimg, docid, docno1){ 
     this.navCtrl.push(AboutPage,{docimg, docid, docno1});
   }
 

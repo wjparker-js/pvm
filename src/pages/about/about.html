@@ -1,50 +1,62 @@
+<ion-header>
+
+  <ion-toolbar>
+    
+    <button ion-button start>
+      <img [src]="this.avatardata" class="item item-avatar" style="position:relative;top:-2px;height:40px;width:40px;border:0px;"/>
+    </button>
+
+    <span style="position:relative;top:6px;overflow:hidden;font-size:12px;color:white;padding-left:15px;" >
+        Send Document - {{docno1}}
+    </span>
+
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()">
+          Close
+      </button>
+    </ion-buttons>
+
+  </ion-toolbar>
+
+</ion-header>
+
 <ion-content padding id="about">
 
-  <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      
-      <ion-title>  About - Document Issues and Processes</ion-title>
-    </ion-navbar>
-  </ion-header>
-
   <ion-list>
-    
-    <ion-list-header>Issues</ion-list-header>
 
     <ion-item>
-      <ion-icon color="primary" name="mail" item-left></ion-icon>
-      Transmittals
+      <ion-label class="mylabel" style="width:20%">From</ion-label>
+      <ion-input class="mytext" style="width:80%" type="text"  [(ngModel)]="docSystemData.from" name="subject" value="{{this.userdata}}"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-icon color="secondary" name="mail" item-left></ion-icon>
-      Submittals
-    </ion-item>   
-
-    <ion-item>
-      <ion-icon color="bold" name="mail" item-left></ion-icon>
-      Bid Invitation
-    </ion-item>
-
-    <ion-list-header>Processes</ion-list-header>
-
-    <ion-item>
-      <ion-icon name="git-network" item-left></ion-icon>
-      Request For Information
+      <ion-label class="mylabel" style="width:20%">To</ion-label>
+      <ion-select  class="myCustomSelect" [(ngModel)]="docSystemData.to" multiple="true" name="to">
+        <ion-option *ngFor="let contact of userContacts" [value] = "contact.Email">{{contact.PFirstName}} {{contact.PLastName}}</ion-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-icon name="git-network" item-left></ion-icon>
-      Shop Drawing Review
-    </ion-item>  
+      <ion-label class="mylabel" style="width:20%">Subject</ion-label>
+      <ion-input class="mytext" style="width:80%" type="text"  [(ngModel)]="docSystemData.subject" name="subject" value="{{this.mailsubject}}"></ion-input>
+    </ion-item>
 
     <ion-item>
-      <ion-icon name="git-network" item-left></ion-icon>
-      Handover Documents
-    </ion-item> 
+      <ion-label class="mylabel" style="width:20%">Text</ion-label>
+      <ion-textarea class="mytext" style="width:80%" [(ngModel)]="docSystemData.message" name="message"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+        <ion-card>
+            <ion-card-header>
+                <img [src]="docimg" style="width:280px;height:200px;padding:5px;border:1px;margin:5px;"/>
+            </ion-card-header>
+
+        </ion-card>
+    </ion-item>
 
   </ion-list>
+
+  <button ion-button full (click)="sendEmail()">Send Email</button>
+
 </ion-content>
