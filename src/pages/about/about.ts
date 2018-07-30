@@ -86,7 +86,7 @@ export class AboutPage {
 
     this.http.post(Constants.apiUrl+'api/sendemail/'+this.docSystemData.apiKey+'/'+this.docSystemData.uid+'/'+this.docSystemData.pid+'/'+this.docSystemData.from+'/'+this.docSystemData.to+'/'+this.docSystemData.subject+'/'+this.docSystemData.message+'/'+this.docSystemData.docid+'/'+this.docno1).map(res => res.json()).subscribe(data => {
           this.userEmailData = data;
-          console.log(this.userLoginData);
+          console.log(this.userEmailData);
       },
       err => {
           console.log("Oops!");
