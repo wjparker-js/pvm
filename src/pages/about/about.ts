@@ -13,6 +13,11 @@ export class AboutPage {
   userdata: any;
   mailsubject: any;
   userContacts: any;
+  useremaildata: any;
+
+  docimg: any;
+  docid: any;
+  docno1: any;
 
   docSystemData = {"docid":"","message":"","to":"","subject":"","from":"","img":"","uid":"","pid":"","scid":"","apiKey":""};
 
@@ -38,8 +43,7 @@ export class AboutPage {
     this.docSystemData.pid     = localStorage.getItem('CurrentProjectID');
     this.docSystemData.scid    = documentData[0].SystemClientID;
     this.docSystemData.uid     = documentData[0].SystemUserID;
-    this.docSystemData.apiKey  = documentData[0].apiKey;    
- 
+    this.docSystemData.apiKey  = documentData[0].apiKey;     
 	this.docSystemData.from    =  localStorage.getItem('login_id');
 	this.docSystemData.subject = "Document: "+this.docno1;
 	this.docSystemData.img     = this.docimg;
@@ -62,12 +66,12 @@ export class AboutPage {
 
 
   sendEmail(){
+/*
   	console.log(this.docSystemData.from);
   	console.log(this.docSystemData.to);
   	console.log(this.docSystemData.subject);
   	console.log(this.docSystemData.message);
   	console.log(this.docSystemData.img);
-  	console.log(this.docSystemData.docno);
 
     var url = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext;
     var url = url.toLowerCase();
@@ -82,11 +86,11 @@ export class AboutPage {
         }
     );
 
+*/
 
-
-    this.http.post(Constants.apiUrl+'api/sendemail/'+this.docSystemData.apiKey+'/'+this.docSystemData.uid+'/'+this.docSystemData.pid+'/'+this.docSystemData.from+'/'+this.docSystemData.to+'/'+this.docSystemData.subject+'/'+this.docSystemData.message+'/'+this.docSystemData.docid+'/'+this.docno1).map(res => res.json()).subscribe(data => {
-          this.userEmailData = data;
-          console.log(this.userEmailData);
+    this.http.get(Constants.apiUrl+'api/sendemail/'+this.docSystemData.apiKey+'/'+this.docSystemData.uid+'/'+this.docSystemData.pid+'/'+this.docSystemData.from+'/'+this.docSystemData.to+'/'+this.docSystemData.subject+'/'+this.docSystemData.message+'/'+this.docSystemData.docid+'/'+this.docno1).map(res => res.json()).subscribe(data => {
+          this.useremaildata = data;
+          console.log(this.useremaildata);
       },
       err => {
           console.log("Oops!");
