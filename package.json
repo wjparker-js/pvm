@@ -43,7 +43,7 @@
     "mx.ferreyra.callnumber": "~0.0.2"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.1.8",
+    "@ionic/app-scripts": "^3.1.11",
     "typescript": "~2.6.2"
   },
   "description": "Mobile App for ProjectVault",
