@@ -28,6 +28,7 @@ export class Login {
 
     if (localStorage.getItem('login_password') !== null) {
     this.userSystemData.password       = localStorage.getItem('login_password');
+    this.userSystemData.id             = localStorage.getItem('login_id');
     this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');
 
     var userData = JSON.parse(localStorage.getItem('userSystemData'));
@@ -37,9 +38,7 @@ export class Login {
 
   }
 
-  ionViewDidEnter() {
-    //document.location.reload();
-    }
+  ionViewDidEnter() {}
 
   login(){    
 
@@ -53,7 +52,7 @@ export class Login {
         
         if(this.responseData[0].Email.trim().toLowerCase() == this.userSystemData.id.trim().toLowerCase())
           {
-            localStorage.setItem('login_id', this.userSystemData.id.toLowerCase());
+            localStorage.setItem('login_id',       this.userSystemData.id.toLowerCase());
             localStorage.setItem('login_password', this.userSystemData.password); 
             localStorage.setItem('userSystemData', JSON.stringify(this.responseData));  
 
@@ -66,11 +65,7 @@ export class Login {
               }
             ); 
 
-
-
             this.navCtrl.push(TabsPage);
-
-            //api/writeaudit/{apikey}/{uid}/{pid}/{eid}/{aid}/{atx}
 
           } else {
             this.presentToast("Please enter a valid username and password");
@@ -78,8 +73,7 @@ export class Login {
         }, (err) => {
           this.presentToast("There was a connection error.");
         });
-    }
-    else{
+    } else {
       this.presentToast("Please enter a valid username and password");
     }  
   }
