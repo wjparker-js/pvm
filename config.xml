@@ -7,6 +7,7 @@
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <allow-navigation href="*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
@@ -81,7 +82,7 @@
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <engine name="ios" spec="~4.5.4" />
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
-    <engine name="android" spec="~6.4.0" />
+    <engine name="ios" spec="4.5.5" />
+    <engine name="android" spec="7.0.0" />
 </widget>

@@ -37,6 +37,11 @@ export class DocumentsPage {
               private _sanitizer: DomSanitizer, 
               public modalCtrl: ModalController) {
 
+  }
+
+
+  ionViewWillEnter() {
+
         
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
@@ -61,6 +66,20 @@ export class DocumentsPage {
     var documentDocumentNumber  = this.userdocumentData.DocumentNumber;
     var documentFileExtension   = this.userdocumentData.FileExtension;
 
+/*    var localDocumentData1       = JSON.parse(localStorage.getItem('userSystemData'));
+    var localApiKey1            = localDocumentData1[0].apiKey;
+
+    var url1 = Constants.apiUrl+"api/documents/"+localApiKey1+"/"+documentSystemUserID+"/"+documentSystemProjectID+"/|";
+
+    this.http.get(url1).map(res => res.json()).subscribe(data => {
+          this._sanitizer.bypassSecurityTrustStyle(data);
+          this.userdocuments = data;          
+          console.log(this.userdocuments);
+      },
+      err => {
+          console.log("Oops!");
+      }
+    ); */
 
   }
 
@@ -92,6 +111,7 @@ export class DocumentsPage {
   }
   
   onSearchCancel($event){}
+
   info(){}
 
   openDocument(clientid,projectid,docid,ext){ 

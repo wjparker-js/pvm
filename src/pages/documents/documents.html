@@ -36,7 +36,7 @@
         <ion-card>
 
           <ion-card-header>
-                  <img [src]="document.PhotoTiny"  style="width:280px;height:200px;border:2px;" (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"/>
+                  <img [src]="document.PhotoTiny"  style="width:100%;border:2px;" (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"/>
           </ion-card-header>
 
           <ion-card-content>
@@ -73,13 +73,13 @@
             
             <h2>
               <b>          
-                <ion-icon style = "font-size: 12px;padding-top: 9px;" name="information-circle" color="primary" class="flex-right" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
-                <label class="bodytext" color="primary" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)">Revisions</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <ion-icon style = "font-size: 13px;padding-top: 9px;" name="information-circle" color="primary" class="flex-right" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
+                <label class="bodytext" color="primary" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)">Revisions</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 
-                <ion-icon style = "font-size: 12px;padding-top: 9px;" name="paper" color="primary" class="flex-right" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
-                <label class="bodytext" color="primary" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Audit Trail</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <ion-icon style = "font-size: 13px;padding-top: 9px;" name="paper" color="primary" class="flex-right" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
+                <label class="bodytext" color="primary" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Audit Trail</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 
-                <ion-icon style = "font-size: 12px;padding-top: 9px;" name="mail" color="primary" class="flex-right" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
+                <ion-icon style = "font-size: 13px;padding-top: 9px;" name="mail" color="primary" class="flex-right" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
                 <label class="bodytext" color="primary" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber)">Send</label>
               </b>
             </h2>
