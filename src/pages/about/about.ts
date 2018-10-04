@@ -24,7 +24,7 @@ export class AboutPage {
   docid: any;
   docno1: any;
 
-  docSystemData = {"docid":"","message":"","to":"","subject":"","from":"","img":"","uid":"","pid":"","scid":"","apiKey":""};
+  docSystemData = {"docid":"","docno1":"","message":"","to":"","subject":"","from":"","img":"","uid":"","pid":"","scid":"","apiKey":""};
 
   constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public params: NavParams, public http: Http, public modalCtrl: ModalController, public viewCtrl: ViewController) {
 
