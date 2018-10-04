@@ -14,6 +14,11 @@ export class AboutPage {
   mailsubject: any;
   userContacts: any;
   useremaildata: any;
+  projectContacts: any;
+  groupContacts: any;
+  selectedGroup:any;
+  public projectGroups: any;
+  public selectedGroups: any[];
 
   docimg: any;
   docid: any;
@@ -44,23 +49,61 @@ export class AboutPage {
     this.docSystemData.scid    = documentData[0].SystemClientID;
     this.docSystemData.uid     = documentData[0].SystemUserID;
     this.docSystemData.apiKey  = documentData[0].apiKey;     
-	this.docSystemData.from    =  localStorage.getItem('login_id');
-	this.docSystemData.subject = "Document: "+this.docno1;
-	this.docSystemData.img     = this.docimg;
-	this.docSystemData.docid   = this.docid;
+  	this.docSystemData.from    =  localStorage.getItem('login_id');
+  	this.docSystemData.subject = "Document: "+this.docno1;
+  	this.docSystemData.img     = this.docimg;
+  	this.docSystemData.docid   = this.docid;
+    this.docSystemData.docno1  = this.docno1;
 
-    var contacturl = Constants.apiUrl+"api/contacts/"+this.docSystemData.apiKey+"/"+this.docSystemData.pid;
+    
+    var groupurl = Constants.apiUrl+"api/groups/"+this.docSystemData.apiKey+"/"+this.docSystemData.pid+"/1";
 
-    this.http.get(contacturl).map(res => res.json()).subscribe(data => {
+    this.http.get(groupurl).map(res => res.json()).subscribe(data => {
           this._sanitizer.bypassSecurityTrustStyle(data);
-          this.userContacts = data;          
-          console.log(this.userContacts);
+          this.projectGroups = data;          
+          console.log(this.projectGroups);
       },
       err => {
-          console.log("Oops!");
+          console.log("Oops! Project Groups Error");
       }
     ); 
 
+  }
+
+
+  setUserType(sGroup) {
+
+    if(sGroup.GroupName == "Users" || sGroup == "Users" ){
+
+      var contacturl = Constants.apiUrl+"api/contacts/"+this.docSystemData.apiKey+"/"+this.docSystemData.pid+"/"+this.docSystemData.from+"/1";
+
+      this.http.get(contacturl).map(res => res.json()).subscribe(data => {
+            this._sanitizer.bypassSecurityTrustStyle(data);
+            this.groupContacts = data;          
+            console.log(this.groupContacts);
+        },
+        err => {
+            console.log("Oops!");
+        }
+      ); 
+
+    } 
+
+    if(sGroup.GroupName != "Users"){
+
+      var groupcontacturl = Constants.apiUrl+"api/groups/"+this.docSystemData.apiKey+"/"+this.docSystemData.pid+"/"+sGroup.GroupName;
+
+      this.http.get(groupcontacturl).map(res => res.json()).subscribe(data => {
+            this._sanitizer.bypassSecurityTrustStyle(data);
+            this.groupContacts = data;          
+            console.log(this.groupContacts);
+        },
+        err => {
+            console.log("Oops!");
+        }
+      ); 
+
+    }
 
   }
 

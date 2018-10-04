@@ -1,51 +1,62 @@
 <ion-header>
 
-  <ion-navbar>
-    
+  <ion-navbar>    
     <button ion-button menuToggle>
       <img [src]="this.avatardata" class="item item-avatar" style="position:relative;top:-2px;height:40px;width:40px;border:0px;"/>
-      <!--<ion-icon name="contact" style="font-size:30px;padding-left:15px;color:white;"></ion-icon>-->
     </button>
         
     <span style="font-size:20px;color:white;padding-left:15px;">{{userContactData.ProjectName}}</span>
-
-   <!-- <button ion-button end> 
-      <img [src]="this.avatardata" class="item item-avatar" />
-    </button> -->
-
-
   </ion-navbar>
+
+  <div padding>
+    <ion-segment color="secondary"  [(ngModel)]="phonelist" (ionChange)="segmentChanged(phonelist)">
+      <ion-segment-button value="users">
+        Project Users
+      </ion-segment-button>
+      <ion-segment-button value="contacts">
+        Company Contacts
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
 </ion-header>
 
 <ion-content>
-  <ion-list>  
-    <ion-item *ngFor="let contact of userContacts">
 
-      <ion-avatar item-start>
-        <img [src]="contact.avatar"/>
-      </ion-avatar>
+    <!-- <div [ngSwitch]="phonelist"> -->
 
-      <h2><b>{{contact.PFirstName}}&nbsp;{{contact.PLastName}}&nbsp;</b>({{contact.Email}})</h2>
-      <h3>{{contact.PCompanyName}}&nbsp;&nbsp;{{contact.PPosition}}</h3>   
-      <h3>  
+      <ion-list>
 
-        <span *ngIf="contact.PMobile">
-          <ion-icon style = "font-size: 15px;" name="call" color="primary" class="flex-right" (click)="callJoint(contact.PMobile)">
-              <span style="font-family:arial;font-size: 12px;">{{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;</span>
-          </ion-icon>
-        </span>
+        <ion-item *ngFor="let contact of userContacts">
 
-        <span *ngIf="contact.PTelephone">
-          <ion-icon style = "font-size: 15px;" name="call" color="bold" class="flex-right" (click)="callJoint(contact.PTelephone)">
-              <span style="font-family:arial;font-size: 12px;">{{contact.PTelephone}}</span>
-          </ion-icon>
-      </span>
+          <ion-avatar item-start>
+            <img [src]="contact.avatar"/>
+          </ion-avatar>
 
-      </h3>
+          <h2><b>{{contact.PFirstName}}&nbsp;{{contact.PLastName}}&nbsp;</b></h2>
+          <h3>{{contact.Email}}</h3> 
+          <h3>  
 
-    </ion-item>
-  </ion-list>
+            <span *ngIf="contact.PMobile">
+              <ion-icon style = "font-size: 15px;" name="call" color="primary" class="flex-right" (click)="callJoint(contact.PMobile)">
+                  <span style="font-family:arial;font-size: 12px;">{{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;</span>
+              </ion-icon>
+            </span>
+
+            <span *ngIf="contact.PTelephone">
+              <ion-icon style = "font-size: 15px;" name="call" color="bold" class="flex-right" (click)="callJoint(contact.PTelephone)">
+                  <span style="font-family:arial;font-size: 12px;">{{contact.PTelephone}}</span>
+              </ion-icon>
+          </span>
+
+          </h3>
+
+        </ion-item>
+
+      </ion-list>
+
+    <!-- </div> -->
+
 </ion-content>
 
   

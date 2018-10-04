@@ -17,6 +17,7 @@ export class ContactPage {
   userContacts: any;
   userApiKey : any;
   avatardata: any;
+  phonelist: any;
 
   userContactData = {
     "SystemProjectID":"",
@@ -41,7 +42,7 @@ export class ContactPage {
     this.userContactData.SystemProjectID   = localStorage.getItem('CurrentProjectID');
     this.userContactData.apiKey            = contactData[0].apiKey;   
     this.avatardata                        = localStorage.getItem('avatar');
-
+    this.phonelist                         = "users";
   }
 
 
@@ -52,10 +53,11 @@ export class ContactPage {
 
     this.userContactData.SystemProjectID   = localStorage.getItem('CurrentProjectID');
     this.userContactData.apiKey            = contactData[0].apiKey; 
+    this.userName                          = localStorage.getItem('login_id');
     this.userContactData.ProjectName       = localStorage.getItem('CurrentProjectName'); 
     this.avatardata                        = localStorage.getItem('avatar');
 
-    var url = Constants.apiUrl+"api/contacts/"+this.userContactData.apiKey+"/"+this.userContactData.SystemProjectID;
+    var url = Constants.apiUrl+"api/contacts/"+this.userContactData.apiKey+"/"+this.userContactData.SystemProjectID+"/"+this.userName+"/1";
 
     this.http.get(url).map(res => res.json()).subscribe(data => {
           this._sanitizer.bypassSecurityTrustStyle(data);
@@ -68,6 +70,44 @@ export class ContactPage {
     ); 
   }
 
+
+  segmentChanged(segment){
+    console.log(segment);
+    
+    if(segment == "users"){
+
+      var url = Constants.apiUrl+"api/contacts/"+this.userContactData.apiKey+"/"+this.userContactData.SystemProjectID+"/"+this.userName+"/1";
+
+      this.http.get(url).map(res => res.json()).subscribe(data => {
+            this._sanitizer.bypassSecurityTrustStyle(data);
+            this.userContacts = data;          
+            console.log(this.userContacts);
+        },
+        err => {
+            console.log("Oops!");
+        }
+      ); 
+
+    }
+
+    if(segment == "contacts"){
+
+      var url = Constants.apiUrl+"api/contacts/"+this.userContactData.apiKey+"/"+this.userContactData.SystemProjectID+"/"+this.userName+"/2";
+
+      this.http.get(url).map(res => res.json()).subscribe(data => {
+            this._sanitizer.bypassSecurityTrustStyle(data);
+            this.userContacts = data;          
+            console.log(this.userContacts);
+        },
+        err => {
+            console.log("Oops!");
+        }
+      ); 
+
+    } 
+     
+
+  }
 
   callJoint(telephoneNumber) {
       this.callNumber.callNumber(telephoneNumber, true);

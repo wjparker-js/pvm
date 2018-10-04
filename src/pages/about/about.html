@@ -24,21 +24,24 @@
 
   <ion-list>
 
-    <ion-item>
-      <ion-label class="mylabel" style="width:20%">From</ion-label>
-      <ion-input class="mytext" style="width:80%" type="text"  [(ngModel)]="docSystemData.from" name="subject" value="{{this.userdata}}"></ion-input>
-    </ion-item>
+     <ion-item>
+       <ion-label class="mylabel" style="width:20%">User or Group</ion-label>
+       <ion-select class="myCustomSelect" (ionChange)="setUserType(projectGroup)" [(ngModel)]="projectGroup" name="group"  style="text-align:left;" >
+          <ion-option class="myCustomSelect" [value] = "Users">Users</ion-option>
+          <ion-option  *ngFor="let projectGroup of projectGroups" [value] = "projectGroup">{{projectGroup.GroupName}}</ion-option>
+       </ion-select>
+     </ion-item>
 
     <ion-item>
       <ion-label class="mylabel" style="width:20%">To</ion-label>
-      <ion-select  class="myCustomSelect" [(ngModel)]="docSystemData.to" multiple="true" name="to">
-        <ion-option *ngFor="let contact of userContacts" [value] = "contact.Email">{{contact.PFirstName}} {{contact.PLastName}}</ion-option>
+      <ion-select  class="myCustomSelect" [(ngModel)]="docSystemData.to" multiple="true" name="to" style="text-align:left;" >
+        <ion-option    *ngFor="let contact of groupContacts" [value] = "contact.Email">{{contact.PFirstName}} {{contact.PLastName}}</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label class="mylabel" style="width:20%">Subject</ion-label>
-      <ion-input class="mytext" style="width:80%" type="text"  [(ngModel)]="docSystemData.subject" name="subject" value="{{this.mailsubject}}"></ion-input>
+      <ion-input class="mytext" style="width:80%" type="text"  [(ngModel)]="docSystemData.subject" name="subject" value="{{this.docSystemData.subject}}"></ion-input>
     </ion-item>
 
     <ion-item>
