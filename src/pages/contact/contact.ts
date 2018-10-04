@@ -18,6 +18,7 @@ export class ContactPage {
   userApiKey : any;
   avatardata: any;
   phonelist: any;
+  userName: any;
 
   userContactData = {
     "SystemProjectID":"",
