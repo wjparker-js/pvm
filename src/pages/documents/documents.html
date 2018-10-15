@@ -1,25 +1,21 @@
 <!--<ion-split-pane [when]="splitPane.getSplitPane()">-->
 
 <ion-header>
-  <ion-navbar style = "height:56px;">
+  <ion-navbar style = "height:56px;" color="primary">
     
     <button ion-button menuToggle>
       <img [src]="this.avatardata" class="item item-avatar" style="position:relative;top:-2px;height:40px;width:40px;border:0px;"/>
       <!--<ion-icon name="contact" style="font-size:30px;padding-left:15px;color:white;"></ion-icon>-->
     </button>
 
-    <ion-title>
-      <ion-toolbar color="primary">  
         <ion-searchbar
         name = "searchBar" 
-        style = "height:20px;" 
+        style = "height:20px;width:100%;" 
         value= "" 
         placeholder="Document Search here..."
         (ionInput)="searchByKeyword($event)" 
         [debounce]="500">  Documents
       </ion-searchbar>
-      </ion-toolbar> 
-    </ion-title>
 
     <!--<ion-buttons end> 
       <ion-icon name="contact" style="font-size:35px;padding-right:15px;color:white;" (click)="showAcc();"></ion-icon>
@@ -40,20 +36,21 @@
           </ion-card-header>
 
           <ion-card-content>
-          <h2>
+
+            <h2>
+                <b>
+
+                  <span class="cardheadertext" [innerHTML]="document.DocumentNumber"></span>
+                  <span class="cardheadertext">  Rev: </span>
+                  <span class="cardheadertext" [innerHTML]="document.Rev"></span>
+                </b>
+            </h2>
+
+            <p>
               <b>
-                <span class="cardheadertext" [innerHTML]="document.DocumentNumber"></span>
-                <span class="cardheadertext">  Rev: </span>
-                <span class="cardheadertext" [innerHTML]="document.Rev"></span>
+                <span class="cardheadertext" [innerHTML]="document.Title"></span>
               </b>
-          </h2>
-
-          <p>
-            <b>
-              <span class="cardheadertext" [innerHTML]="document.Title"></span>
-            </b>
-          </p>
-
+            </p>
       
             <p>
                 <b>
@@ -83,7 +80,10 @@
                 <label class="bodytext" color="primary" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber)">Send</label>
               </b>
             </h2>
+
           </ion-card-content>
+
+
         </ion-card>
       </ion-col>
     </ion-row>

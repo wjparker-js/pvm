@@ -121,6 +121,18 @@ export class DocumentsPage {
   }
 
   openDocumentInfo(docimg, docid, docno1){ 
+
+    var pt1 = "<span class='hilite'>";
+    var pt2 = "</span>";
+    var rep = "";
+    var docno1 = docno1.replace(pt1,rep);
+    var docno1 = docno1.replace(pt2,rep);
+
+    console.log(pt1);
+    console.log(pt2);
+    console.log(rep);
+    console.log(docno1);
+
     this.navCtrl.push(DocumentInfo,{docimg, docid, docno1});
   }
 

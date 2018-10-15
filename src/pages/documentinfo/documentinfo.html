@@ -21,35 +21,63 @@
 </ion-header>
 
 <ion-content style="background-color: gray;">
+
     <ion-grid>
+
             <ion-row>
+
                 <ion-col  *ngFor="let document of userdocumentsinfo" col-12 col-md-6 col-lg-4 col-xl-3>
+
                 <ion-card>
 
                     <ion-card-header>
-                        <img [src]="docimg"  style="width:280px;height:200px;"/>
+                        <img [src]="docimg"  style="width:100%;border:2px;" (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"/>
                     </ion-card-header>
 
                     <ion-card-content>
-                            <ion-list >
-                                <ion-item >
-                                    <b>Doc No: </b><span [innerHTML]="document.DocumentNumber"></span>
-                                    <br/>
-                                    <b>Rev: </b><span [innerHTML]="document.Rev"></span>
-                                    <br/>
-                                    <b>Title: </b><span [innerHTML]="document.Title"></span>
-                                    <br/>
-                                    <b>Folder: </b><span [innerHTML]="document.FolderName"></span>
-                                    <br/>
-                                    <b>Designer: </b><span [innerHTML]="document.DesignerName"></span>
-                                    <br/>
-                                    <b>Discipline: </b><span [innerHTML]="document.DisciplineName"></span>
-                                    <br/>
-                                    <b>Doc Type: </b><span [innerHTML]="document.TypeName"></span>
-                                    <br/>
-                                    <b>Issue Reason: </b><span [innerHTML]="document.ReasonName"></span>
-                                </ion-item>
-                            </ion-list>
+
+
+                        <h2>
+                            <b>
+
+                              <span class="cardheadertext" [innerHTML]="document.DocumentNumber"></span>
+                              <span class="cardheadertext">  Rev: </span>
+                              <span class="cardheadertext" [innerHTML]="document.Rev"></span>
+                            </b>
+                        </h2>
+
+                        <p>
+                          <b>
+                            <span class="cardheadertext" [innerHTML]="document.Title"></span>
+                          </b>
+                        </p>
+                  
+                        <p>
+                            <b>
+                              <span class="bodytext" [innerHTML]="document.FolderName">"</span> / 
+                              <span class="bodytext" [innerHTML]="document.DesignerName">"</span> / 
+                              <span class="bodytext" [innerHTML]="document.IssueDate"></span>
+                            </b>
+                        </p>
+
+                        <p>
+                            <b>
+                              <span class="bodytext" [innerHTML]="document.DisciplineName"></span> / 
+                              <span class="bodytext" [innerHTML]="document.TypeName"></span> / 
+                              <span class="bodytext" [innerHTML]="document.ReasonName"></span>
+                             </b>
+                        </p>
+                        
+                        <h2>
+                          <b>          
+                            <ion-icon style = "font-size: 13px;padding-top: 9px;" name="paper" color="primary" class="flex-right" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
+                            <label class="bodytext" color="primary" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">My Audit Trail</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            
+                            <ion-icon style = "font-size: 13px;padding-top: 9px;" name="mail" color="primary" class="flex-right" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
+                            <label class="bodytext" color="primary" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber)">Send Document</label>
+                          </b>
+                        </h2>
+
                     </ion-card-content>  
 
                 </ion-card>

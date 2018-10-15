@@ -1,9 +1,18 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, ModalController,  NavController, Platform, NavParams, ViewController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as Constants from '../../providers/constants';
+
+
+import { DocumentViewer } from '../documentviewer/documentviewer';
+import { DocumentAudit } from '../documentaudit/documentaudit';
+import { AboutPage } from '../about/about';
+
+import * as Constants from '../../providers/constants';
+
+@IonicPage()
 
 @Component({selector: 'page-documentinfo', templateUrl: 'documentinfo.html'})
 
@@ -25,7 +34,17 @@ export class DocumentInfo {
     "DocumentNumber":""
   };
 
-  constructor(public platform: Platform, public params: NavParams, public http: Http, private _sanitizer: DomSanitizer, public modalCtrl: ModalController, public viewCtrl: ViewController) {
+
+  constructor(
+              public navCtrl: NavController,
+              public platform: Platform, 
+              public params: NavParams, 
+              public http: Http, 
+              private _sanitizer: DomSanitizer, 
+              public modalCtrl: ModalController, 
+              public viewCtrl: ViewController
+    ) 
+  {
 
     var docimg="";
     this.docimg = this.params.get('docimg');
@@ -67,19 +86,20 @@ export class DocumentInfo {
               console.log("Document info not found.");
           }
         ); 
+  }
 
+  openDocument(clientid,projectid,docid,ext){ 
+    this.navCtrl.push(DocumentViewer,{clientid,projectid,docid,ext});
   }
 
 
-  //searchByKeyword($event){
+  openDocumentAudit(docimg, docid, docno1){ 
+    this.navCtrl.push(DocumentAudit,{docimg, docid, docno1});
+  }
 
-    //var documentSystemUserID1    = this.userdocumentInfoData.SystemUserID;
-    //var documentSystemProjectID1 = this.userdocumentInfoData.SystemProjectID;
-    //var searchTerm               = this.docid;
-
-
- 
-  //}
+  openDocumentSend(docimg, docid, docno1){ 
+    this.navCtrl.push(AboutPage,{docimg, docid, docno1});
+  }
 
   dismiss() {
     this.viewCtrl.dismiss();
