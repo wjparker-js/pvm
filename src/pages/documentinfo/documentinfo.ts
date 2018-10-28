@@ -10,8 +10,6 @@ import { DocumentViewer } from '../documentviewer/documentviewer';
 import { DocumentAudit } from '../documentaudit/documentaudit';
 import { AboutPage } from '../about/about';
 
-import * as Constants from '../../providers/constants';
-
 //@IonicPage()
 
 @Component({selector: 'page-documentinfo', templateUrl: 'documentinfo.html'})
