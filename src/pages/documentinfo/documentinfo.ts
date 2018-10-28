@@ -12,7 +12,7 @@ import { AboutPage } from '../about/about';
 
 import * as Constants from '../../providers/constants';
 
-@IonicPage()
+//@IonicPage()
 
 @Component({selector: 'page-documentinfo', templateUrl: 'documentinfo.html'})
 
