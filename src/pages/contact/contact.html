@@ -25,15 +25,21 @@
 
     <!-- <div [ngSwitch]="phonelist"> -->
 
+  <ion-grid>
+    <ion-row>
+      <ion-col  *ngFor="let contact of userContacts" col-12 col-md-6 col-lg-4 col-xl-3>
+
       <ion-list>
 
-        <ion-item *ngFor="let contact of userContacts">
+        <ion-item>
 
           <ion-avatar item-start>
             <img [src]="contact.avatar"/>
           </ion-avatar>
 
           <h2><b>{{contact.PFirstName}}&nbsp;{{contact.PLastName}}&nbsp;</b></h2>
+          <h3><b>{{contact.PCompanyName}}&nbsp;/&nbsp;{{contact.PDepartment}}</b></h3>
+          <br>
           <h3>{{contact.Email}}</h3> 
           <h3>  
 
@@ -56,6 +62,9 @@
       </ion-list>
 
     <!-- </div> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
 

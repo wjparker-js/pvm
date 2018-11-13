@@ -12,8 +12,10 @@ export class DocumentInfo {
   docimg: any;
   docid: any;
   docno1: any;
+
   userdocumentsinfo: any;
   userApiKey : any;
+  avatardata: any;
 
   userdocumentInfoData = {
     "SystemUserID": "",
@@ -27,15 +29,15 @@ export class DocumentInfo {
 
     var docimg="";
     this.docimg = this.params.get('docimg');
-    console.log(this.docimg);
+    console.log("IMG: %s",this.docimg);
 
     var docid="";
     this.docid = this.params.get('docid');
-    console.log(this.docid);
+    console.log("ID: %s",this.docid);
 
     var docno1="";
     this.docno1 = this.params.get('docno1');
-    console.log(this.docno1);
+    console.log("DOC: %s",this.docno1);
 
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
@@ -44,6 +46,8 @@ export class DocumentInfo {
     this.userdocumentInfoData.SystemProjectID = localStorage.getItem('CurrentProjectID');    
     this.userdocumentInfoData.Thumbnail       = documentData[0].PhotoTiny;
     this.userdocumentInfoData.DocumentNumber  = documentData[0].DocumentNumber;
+
+    this.avatardata             = localStorage.getItem('avatar');
 
     var documentApiKey          = this.userdocumentInfoData.apiKey;  
     var documentSystemUserID    = this.userdocumentInfoData.SystemUserID;

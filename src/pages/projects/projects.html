@@ -19,16 +19,30 @@
 </ion-header>
 
 <ion-content>
-  <ion-list >  
-    <ion-item *ngFor="let project of userProjects">
-      <ion-thumbnail item-start style="width:16px;">
-          <img [src]="project.Thumbnail" />
-      </ion-thumbnail>
-      <h2><b>{{project.ProjectName}}</b></h2>
-      <h3>{{project.Client}}</h3>
-      <button ion-button item-end (click)="saveProject(project.ProjectName,project.ProjectID);">Select</button>
-    </ion-item>
-  </ion-list>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col  *ngFor="let project of userProjects" col-12 col-md-6 col-lg-4 col-xl-3>
+        <ion-card>  
+          <ion-card-content>
+
+          <ion-list >  
+            <ion-item >
+              <ion-thumbnail item-start style="width:16px;">
+                  <img [src]="project.Thumbnail" />
+              </ion-thumbnail>
+              <h2><b>{{project.ProjectName}}</b></h2>
+              <h3>{{project.Client}}</h3>
+              <button ion-button item-end (click)="saveProject(project.ProjectName,project.ProjectID);">Select</button>
+            </ion-item>
+          </ion-list>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
 
 <!--
