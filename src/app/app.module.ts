@@ -23,10 +23,9 @@ import { DocumentIssues }  from '../pages/documenttabs/documentissues/documentis
 import { DocumentAudit }   from '../pages/documentaudit/documentaudit';
 import { DocumentInfoAll } from '../pages/documenttabs/documentinfoall/documentinfoall';
 import { DocumentSummary } from '../pages/documentsummary/documentsummary';
-
 import { CallNumber } from '@ionic-native/call-number';
+import { WeatherProvider } from '../providers/weather/weather';
 
-//import { MomentModule } from 'angular2-moment';
 
 @NgModule({
   declarations: [
@@ -78,7 +77,9 @@ import { CallNumber } from '@ionic-native/call-number';
   providers: [
     StatusBar,
     SplashScreen,AuthService,SplitPane,Common,CallNumber,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    WeatherProvider
   ]
 })
+
 export class AppModule {}

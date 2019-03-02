@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild, ElementRef} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {App, AlertController} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
@@ -6,6 +6,9 @@ import {Common} from "../../providers/common";
 import {Http} from '@angular/http';
 import {DocumentSummary} from '../documentsummary/documentsummary';
 import * as Constants from '../../providers/constants';
+import {WeatherProvider} from '../../providers/weather/weather';
+
+declare var google: any;
 
 @Component({
   selector: 'page-home', 
@@ -14,12 +17,25 @@ import * as Constants from '../../providers/constants';
 
 export class HomePage {
 
+  @ViewChild('map') mapRef: ElementRef;
+
+  public map: any;
   public userDetails : any;
   public resposeData : any;
   public avatardata: any;
   public dataSet : any;
   public dataSet1 : any;
   public dataSet2 : any;
+
+  weather:any;
+
+  public city:any;
+  public weatherCity: any;
+  public weatherIcon: any;
+  public weatherDes: any;
+  public weatherTemp: any;
+  public weatherTemp_Max: any;
+  public weatherTemp_Min: any;
 
   userPostData = {
     "UserName": "",
@@ -32,14 +48,53 @@ export class HomePage {
     "ProjectName":""
   };
 
-  constructor(public common: Common, private alertCtrl: AlertController,public http: Http, public navCtrl : NavController, public navParams: NavParams, public app : App, public authService : AuthService) {
+  constructor(public common: Common, private alertCtrl: AlertController, public weatherProvider:WeatherProvider, public http: Http, public navCtrl : NavController, public navParams: NavParams, public app : App, public authService : AuthService) {
 
-    //this.avatardata = "https://go.projectvaultuk.com/PublicPics/avatar.png"
 
   }
 
+  ionViewDidLoad() {
+    console.log(this.mapRef);
+    this.showMap();
+  }
+
+
+  showMap(){
+    const location = new google.maps.LatLng(51.5209815,0.2083337);
+    const options = {center: location,zoom:18};
+    this.map = new google.maps.Map(this.mapRef.nativeElement,options);
+  }
+
+  
 
   ionViewWillEnter() {
+
+    this.city = "Rainham";
+
+    this.weatherProvider.getWeather(this.city).subscribe(data => {
+      //console.log(data.list[0]);
+      this.weatherCity = data.city.name;
+      this.weatherDes  = data.list[0].weather[0].description;
+      this.weatherIcon = "http://openweathermap.org/img/w/"+data.list[0].weather[0].icon+".png";
+      this.weatherTemp = data.list[0].main.temp - 273;
+      this.weatherTemp = Math.round(this.weatherTemp);
+      //thia.weatherTemp_Min = data.list[0].main.temp_min -273;
+      //thia.weatherTemp_Max = data.list[0].main.temp_max -273;
+    });
+
+    //var weatherData = JSON.parse(this.weather);
+
+    //console.log(this.weatherCity);
+
+    //{this.weather = weather.city;}
+    
+    /*this.weatherCity = this.weather.city.name;
+    this.weatherDes  = this.weather.list[0].weather[0].description;
+    this.weatherIcon = "http://openweathermap.org/img/w/"+this.weather.list[0].weather[0].icon+".png";
+    thia.weatherTemp = this.weather.list[0].main.temp - 273;
+    thia.weatherTemp_Min = this.weather.list[0].main.temp_min -273;
+    thia.weatherTemp_Max = this.weather.list[0].main.temp_max -273;*/
+
 
     var data = JSON.parse(localStorage.getItem('userSystemData'));
 
@@ -66,7 +121,8 @@ export class HomePage {
     var urlt4  = Constants.apiUrl+"api/t4/"+apiKey+"/"+uid+"/"+pid;
 
   
-    this.http.get(avatarid).map(res => res.json()).subscribe(data => {
+    /*
+        this.http.get(avatarid).map(res => res.json()).subscribe(data => {
           this.avatardata = data;
           avatar = this.avatardata;
           console.log("Avatar = " + avatar);
@@ -78,7 +134,7 @@ export class HomePage {
           localStorage.setItem('avatar', "https://go.projectvaultuk.com/PublicPics/avatar.png");
       }
 
-    ); 
+    ); */
 
 
     this.http.get(urld).map(res => res.json()).subscribe(data => {
@@ -90,7 +146,6 @@ export class HomePage {
       }
 
     ); 
-
 
     this.http.get(urlt3).map(res => res.json()).subscribe(data => {
           this.dataSet1 = data;
@@ -114,171 +169,13 @@ export class HomePage {
 
   }
 
-openDocumentSummary(days){ 
-  this.navCtrl.push(DocumentSummary,{days});
-}
-
-showAcc(){
-  console.log("Clicked");
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //var Last7Days   = this.dataSet["Last7Days"];
-    //var LAst24Hours = this.dataSet.Last24Hours;
-    //var Last30Days  = this.dataSet.Last30Days;
-
-
-    //localStorage.setItem('userPostData', JSON.stringify(this.userPostData));
-
-    //this.getFeed();
-
- 
-/*
-  getFeed() {
-    this.common.presentLoading();
-    this
-      .authService
-      .postData(this.userPostData, "feed")
-      .then((result) => {
-        this.resposeData = result;
-        if (this.resposeData.feedData) {
-              this.common.closeLoading();
-          this.dataSet = this.resposeData.feedData;
-          console.log(this.dataSet);
-
-        } else {
-          console.log("No access");
-        }
-
-      }, (err) => {
-        //Connection failed message
-      });
+  openDocumentSummary(days){ 
+    this.navCtrl.push(DocumentSummary,{days});
   }
 
-  feedUpdate() {
-    if (this.userPostData.feed) {
-      this.common.presentLoading();
-       this
-      .authService
-      .postData(this.userPostData, "feedUpdate")
-      .then((result) => {
-        this.resposeData = result;
-        if (this.resposeData.feedData) {
-          this.common.closeLoading();
-          this.dataSet.unshift(this.resposeData.feedData);
-          this.userPostData.feed = "";
-        } else {
-          console.log("No access");
-        }
-
-      }, (err) => {
-        //Connection failed message
-      });
-    }
-
+  showAcc(){
+    console.log("Clicked");
   }
 
-  feedDelete(feed_id, msgIndex) {
-  
-    if (feed_id > 0) {
-
-
-      let alert = this.alertCtrl.create({
-    title: 'Delete Feed',
-    message: 'Do you want to buy this feed?',
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      },
-      {
-        text: 'Delete',
-        handler: () => {
-           this.userPostData.feed_id = feed_id;
-       this
-      .authService
-      .postData(this.userPostData, "feedDelete")
-      .then((result) => {
-        this.resposeData = result;
-        if (this.resposeData.success) {
-        this.dataSet.splice(msgIndex, 1);
-        } else {
-          console.log("No access");
-        }
-
-      }, (err) => {
-        //Connection failed message
-      });
-        }
-      }
-    ]
-  });
-  alert.present();
-
-
-     
-    }
-
-  }
-
-  converTime(time) {
-    let a = new Date(time * 1000);
-    return a;
-  }
-
-  backToWelcome() {
-    const root = this
-      .app
-      .getRootNav();
-    root.popToRoot();
-  }
-
-  logout() {
-    //Api Token Logout
-
-    localStorage.clear();
-    setTimeout(() => this.backToWelcome(), 1000);
-
-  }
-*/
 };
 

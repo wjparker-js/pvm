@@ -1,235 +1,110 @@
 <ion-header>
-
-  <ion-navbar>
-    
-    <button ion-button menuToggle>
-      <img [src]="this.avatardata" class="item item-avatar" style="position:relative;top:-2px;height:40px;width:40px;border:0px;"/>
-      <!--<ion-icon name="contact" style="font-size:30px;padding-left:15px;color:white;"></ion-icon>-->
-    </button>
-        
-    <span style="font-size:20px;color:white;padding-left:15px;">{{userPostData.ProjectName}}</span>
-
-   <!-- <button ion-button end> 
-      <img [src]="this.avatardata" class="item item-avatar" />
-    </button> -->
-
-
+  <ion-navbar>   
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>        
+    <span style="font-size:16px;color:white;padding-left:15px;">{{userPostData.ProjectName}}</span> 
   </ion-navbar>
-
 </ion-header>
- 
+    
 <ion-content padding id="home">
 
-  <ion-grid  style="background-color: white;">
+  <b>
+    <span  style="text-align:center;padding:4px;">
+      <h3>{{userPostData.ProjectName}} Location</h3>
+    </span>
+  </b>
+  
+  <div #map id="map"></div>
 
-    <ion-row>
+  <br>
+  <br>
 
-      <ion-col col-12 col-md-6 col-lg-4 col-xl-3>
+  <ion-row>
+    <ion-col width-25 offset-25>
+      <h2 class="location">{{weatherCity}}</h2>
+      <h1 class="temp">{{weatherTemp}}&deg;</h1>
+    </ion-col>  
+    <ion-col width-25>
+      <div class="icon">
+        <h3 class="description">{{weatherDes}}</h3>
+        <img [src]="weatherIcon" />
+      </div>
+    </ion-col>   
+  </ion-row>
 
-        <ion-card>      
-
-            <ion-card-content>
+  <div class="box blue">
+    <b><span  style="text-align:center;padding:4px;">Recent Documents Summary</span></b>
+    <ion-list  *ngFor="let item of dataSet" >
+      <ion-item>
+        <table style="width:100%;">
+          <tr>                
+            <td style="text-align:center;"><h3>24 Hours</h3></td>
+            <td style="text-align:center;"><h3>7 Days</h3></td>
+            <td style="text-align:center;"><h3>30 Days</h3></td>
+          </tr>
+          <tr>  
             
-              <div class="box blue">
-                <b><span  style="text-align:center;padding:4px;">Recent Documents Summary</span></b>
-                <ion-list  *ngFor="let item of dataSet" >
-                  <ion-item>
-                    <table style="width:100%;">
-                        <tr>                
-                          <td style="text-align:center;"><h3>24 Hours</h3></td>
-                          <td style="text-align:center;"><h3>7 Days</h3></td>
-                          <td style="text-align:center;"><h3>30 Days</h3></td>
-                        </tr>
-                        <tr>  
-                          
-                          <!--<td style="text-align:center;"><h3><span (click)="openDocumentSummary(1)" >{{item.Last24Hours}}</span></h3></td>
-                          <td style="text-align:center;"><h3><span (click)="openDocumentSummary(7)" >{{item.Last7Days}}</span></h3></td>
-                          <td style="text-align:center;"><h3><span (click)="openDocumentSummary(30)" >{{item.Last30Days}}</span></h3></td>-->
-                                          
-                          <td style="text-align:center;"><h3><span>{{item.Last24Hours}}</span></h3></td>
-                          <td style="text-align:center;"><h3><span>{{item.Last7Days}}</span></h3></td>
-                          <td style="text-align:center;"><h3><span>{{item.Last30Days}}</span></h3></td>
-                        </tr>
-                      </table>
-                    </ion-item>
-                </ion-list> 
-              </div>
+            <!--<td style="text-align:center;"><h3><span (click)="openDocumentSummary(1)" >{{item.Last24Hours}}</span></h3></td>
+            <td style="text-align:center;"><h3><span (click)="openDocumentSummary(7)" >{{item.Last7Days}}</span></h3></td>
+            <td style="text-align:center;"><h3><span (click)="openDocumentSummary(30)" >{{item.Last30Days}}</span></h3></td>-->
+                            
+            <td style="text-align:center;"><h3><span>{{item.Last24Hours}}</span></h3></td>
+            <td style="text-align:center;"><h3><span>{{item.Last7Days}}</span></h3></td>
+            <td style="text-align:center;"><h3><span>{{item.Last30Days}}</span></h3></td>
+          </tr>
+        </table>
+      </ion-item>
+    </ion-list> 
+  </div>
+  <br>
+  <div class="box blue">
+    <b><span  style="text-align:center;padding:4px;">Approvals Summary</span></b>
+    <ion-list  >
+      <ion-item  >
+        <table style="width:100%;" *ngFor="let item of dataSet1">
+          <tr>
+            <td style="text-align:left;" colspan="3"><h3><b><u>{{item.Process}}</u></b></h3></td>
+          </tr>
+          <tr>
+            <td style="text-align:center;"><h3>Current</h3></td>
+            <td style="text-align:center;"><h3>Due</h3></td>
+            <td style="text-align:center;"><h3>OverDue</h3></td>
+          </tr>
+          <tr>
+            <td style="text-align:center;"><h3>{{item.Intime}}</h3></td>
+            <td style="text-align:center;"><h3>{{item.SoonDue}}</h3></td>
+            <td style="text-align:center;"><h3>{{item.OverDue}}</h3></td>
+          </tr>
+        </table>
+      </ion-item>
+    </ion-list>
+  </div>
+  <br>
+  <div class="box blue">
+    <b><span  style="text-align:center;padding:4px;">Request For Information Summary</span></b>
+    <ion-list  >
+      <ion-item>
+        <table style="width:100%;" *ngFor="let item of dataSet2">
+          <tr>
+            <td style="text-align:left;" colspan="4"><h3><b><u>{{item.Process}}</u></b></h3></td>
+          </tr>
+          <tr>  
+            <td style="text-align:center;"><h3>New</h3></td>                  
+            <td style="text-align:center;"><h3>In Process</h3></td>
+            <td style="text-align:center;"><h3>Due</h3></td>
+            <td style="text-align:center;"><h3>OverDue</h3></td>
+          </tr>
+          <tr>                      
+            <td style="text-align:center;"><h3>{{item.New}}</h3></td>
+            <td style="text-align:center;"><h3>{{item.Intime}}</h3></td>
+            <td style="text-align:center;"><h3>{{item.SoonDue}}</h3></td>
+            <td style="text-align:center;"><h3>{{item.OverDue}}</h3></td>
+          </tr>
+        </table>
+      </ion-item>
+    </ion-list> 
+  </div>
 
-            </ion-card-content>
-
-        </ion-card>
-
-      </ion-col>
-
-
-
-      <ion-col col-12 col-md-6 col-lg-4 col-xl-3>  
-
-        <ion-card>      
-
-            <ion-card-content>
-
-              <div class="box blue">
-                  <b><span  style="text-align:center;padding:4px;">Approvals Summary</span></b>
-                <ion-list  *ngFor="let item of dataSet1" >
-                    <ion-item>
-                      <table style="width:100%;">
-                        <tr>
-                          <td style="text-align:left;" colspan="3"><h3><b><u>{{item.Process}}</u></b></h3></td>
-                        </tr>
-                        <tr>
-                          <td style="text-align:center;"><h3>Current</h3></td>
-                          <td style="text-align:center;"><h3>Due</h3></td>
-                          <td style="text-align:center;"><h3>OverDue</h3></td>
-                        </tr>
-                        <tr>
-                          <td style="text-align:center;"><h3>{{item.Intime}}</h3></td>
-                          <td style="text-align:center;"><h3>{{item.SoonDue}}</h3></td>
-                          <td style="text-align:center;"><h3>{{item.OverDue}}</h3></td>
-                        </tr>
-                      </table>
-                    </ion-item>
-                </ion-list>
-              </div>
-
-            </ion-card-content>
-
-        </ion-card>
-
-      </ion-col>
-
-
-
-
-      <ion-col col-12 col-md-6 col-lg-4 col-xl-3>  
-
-        <ion-card>      
-
-            <ion-card-content>
-
-              <div class="box blue">
-              <b><span  style="text-align:center;padding:4px;">Request For Information Summary</span></b>
-              <ion-list  *ngFor="let item of dataSet2" >
-                  <ion-item>
-                    <table style="width:100%;">
-                      <tr>
-                        <td style="text-align:left;" colspan="4"><h3><b><u>{{item.Process}}</u></b></h3></td>
-                      </tr>
-                      <tr>  
-                        <td style="text-align:center;"><h3>New</h3></td>                  
-                        <td style="text-align:center;"><h3>In Process</h3></td>
-                        <td style="text-align:center;"><h3>Due</h3></td>
-                        <td style="text-align:center;"><h3>OverDue</h3></td>
-                      </tr>
-                      <tr>                      
-                        <td style="text-align:center;"><h3>{{item.New}}</h3></td>
-                        <td style="text-align:center;"><h3>{{item.Intime}}</h3></td>
-                        <td style="text-align:center;"><h3>{{item.SoonDue}}</h3></td>
-                        <td style="text-align:center;"><h3>{{item.OverDue}}</h3></td>
-                      </tr>
-                    </table>
-                  </ion-item>
-              </ion-list> 
-              </div>
-
-
-            </ion-card-content>
-
-        </ion-card>
-
-      </ion-col>
-
-    </ion-row>
-
-  </ion-grid>
-
-<!--
-
-  <ion-grid  style="background-color: gray;">
-
-    <ion-row>
-
-      <ion-col col-12 col-md-6 col-lg-4 col-xl-3>
-
-          <ion-card padding> 
-
-            <ion-card-title>
-                Southampton Big Brewery
-            </ion-card-title>    
-
-            <img src="assets/imgs/Construction1.jpg"/>
-        
-            <ion-card-content>              
-              <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes
-              </p>
-            </ion-card-content>
-
-          </ion-card>
-
-      </ion-col>
-
-      <ion-col col-12 col-md-6 col-lg-4 col-xl-3>
-
-          <ion-card padding>
-
-              <ion-card-title>
-                  Cardiff Rest Home
-                </ion-card-title>      
-              <img src="assets/imgs/Construction3.jpg"/>
-          
-              <ion-card-content>
-    
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. 
-                </p>
-              </ion-card-content>                    
-            </ion-card>
-      </ion-col>
-
-      <ion-col col-12 col-md-6 col-lg-4 col-xl-3>  
-           
-          <ion-card padding>
-
-            <ion-card-title>
-               Dagenham Dog Track
-            </ion-card-title>    
-
-            <img src="assets/imgs/Construction2.png"/>
-        
-            <ion-card-content>
-    
-              <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec
-              </p>
-
-            </ion-card-content>
-         
-          </ion-card>
-      </ion-col>
-      
-      <ion-col col-12 col-md-6 col-lg-4 col-xl-3>
-    
-          <ion-card padding>
-              <ion-card-title>
-                  Dublin Opera House
-                </ion-card-title>    
-            <img src="assets/imgs/Construction4.jpg"/>
-        
-            <ion-card-content>
-    
-              <p>
-                  Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
-              </p>
-            </ion-card-content>
-        
-          </ion-card>
-      </ion-col>
-
-    </ion-row>
-
-  </ion-grid>
-
--->
 
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, ModalController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as Constants from '../../providers/constants';
@@ -26,7 +26,7 @@ export class AboutPage {
 
   docSystemData = {"docid":"","docno1":"","message":"","to":"","subject":"","from":"","img":"","uid":"","pid":"","scid":"","apiKey":""};
 
-  constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public params: NavParams, public http: Http, public modalCtrl: ModalController, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public params: NavParams, public http: Http, public modalCtrl: ModalController, public viewCtrl: ViewController, private toastCtrl:ToastController) {
 
     this.avatardata     = localStorage.getItem('avatar');
     console.log("Documents Avatar = "+this.avatardata);
@@ -108,6 +108,23 @@ export class AboutPage {
   }
 
 
+  private delay(ms: number)
+  {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  private async presentProjectToast(msg){
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'middle'
+    });
+    toast.present();
+    await this.delay(3000);
+    this.dismiss();
+  }
+
+
   sendEmail(){
 /*
   	console.log(this.docSystemData.from);
@@ -139,6 +156,12 @@ export class AboutPage {
           console.log("Oops!");
       }
     ); 
+
+    this.presentProjectToast("Email Sent");
+
+    
+
+    
 
 
 

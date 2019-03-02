@@ -1,29 +1,17 @@
 <ion-header>
-
-  <ion-toolbar>
-    
-    <button ion-button start>
-      <img [src]="this.avatardata" class="item item-avatar" style="position:relative;top:-2px;height:40px;width:40px;border:0px;"/>
-    </button>
-
-    <span style="position:relative;top:6px;overflow:hidden;font-size:12px;color:white;padding-left:15px;" >
-        Send Document - {{docno1}}
+  <ion-toolbar>   
+    <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>    
+    <span style="font-size:16px;color:white;padding-left:15px;">Email: 
+      <span style="font-size:12px;color:white;padding-left:5px;">{{docno1}}</span>
     </span>
-
     <ion-buttons end>
-      <button ion-button (click)="dismiss()">
-          Close
-      </button>
+      <button ion-button (click)="dismiss()">Close</button>
     </ion-buttons>
-
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content padding id="about">
-
   <ion-list>
-
      <ion-item>
        <ion-label class="mylabel" style="width:20%">User or Group</ion-label>
        <ion-select class="myCustomSelect" (ionChange)="setUserType(projectGroup)" [(ngModel)]="projectGroup" name="group"  style="text-align:left;" >

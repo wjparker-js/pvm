@@ -1,16 +1,14 @@
 <ion-header>
-    <ion-toolbar>        
-        <ion-title>
-        Document Viewer - <span [innerHTML]="docno"></span>
-        </ion-title>
-        <ion-buttons start>
-        <button ion-button (click)="dismiss()">
-            Close
-        </button>
-        </ion-buttons>
-    </ion-toolbar>
+  <ion-toolbar>   
+    <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>    
+    <span style="font-size:16px;color:white;padding-left:15px;">Viewing: 
+      <span style="font-size:12px;color:white;padding-left:5px;" [innerHTML]="docno"></span>
+    </span>
+    <ion-buttons end>
+      <button ion-button (click)="dismiss()">Close</button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
-
 <div [innerHTML]="rev"></div>
 
 <ion-content style="white-space: nowrap; overflow: scroll; overflow-x:scroll; height: 100%">

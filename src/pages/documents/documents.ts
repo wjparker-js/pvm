@@ -13,12 +13,15 @@ import * as Constants from '../../providers/constants';
 
 @Component({selector: 'page-documents',templateUrl: 'documents.html',})
 
+
+
 export class DocumentsPage {  
 
   userdocuments: any;
   userApiKey : any;
   selectedProjectName: any;
-  avatardata: any;
+  avatardata: any
+  eventInstance : any;
 
   userdocumentData = {
     "SystemProjectID":"",
@@ -33,7 +36,7 @@ export class DocumentsPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
-              public http: Http, 
+              public http: Http,
               private _sanitizer: DomSanitizer, 
               public modalCtrl: ModalController) {
 
@@ -42,7 +45,6 @@ export class DocumentsPage {
 
   ionViewWillEnter() {
 
-        
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
     this.userdocumentData.SystemProjectID   = localStorage.getItem('CurrentProjectID');
@@ -93,6 +95,7 @@ export class DocumentsPage {
     var localDocumentData        = JSON.parse(localStorage.getItem('userSystemData'));
     var localApiKey              = localDocumentData[0].apiKey;
     this.avatardata              = localStorage.getItem('avatar');
+    this.eventInstance           = $event;
 
     console.log("Documents Avatar = "+this.avatardata);
 
@@ -100,13 +103,17 @@ export class DocumentsPage {
 
     this.http.get(url).map(res => res.json()).subscribe(data => {
           this._sanitizer.bypassSecurityTrustStyle(data);
-          this.userdocuments = data;          
+          this.userdocuments = data;  
+          //var json123 = '"data":{"inserts":{"technologies":'+this.userdocuments+'}}';        
+          //console.log('"data":{"inserts":{"technologies":'+this.userdocuments+'}}');
           console.log(this.userdocuments);
       },
       err => {
           console.log("Oops!");
       }
     ); 
+
+    $event.srcElement.value = "";
  
   }
   

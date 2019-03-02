@@ -1,4 +1,31 @@
 page-home {
+
+        .temp{
+          font-size: 30px;
+          text-align: center;
+        }
+
+        .icon, .description, .location{
+          text-align: center
+        }
+
+        .location{
+          font-size: 30px
+        }
+
+        .description{
+          font-size: 20px
+        }
+
+        .icon img{
+          width: 75px;
+        }
+
+
+
+        #map{
+          height: 50%;
+        }
     
         background: #fff;
         h1{
@@ -83,9 +110,9 @@ footer {
 // Define the style rules for each panel within the grid
 // container
 .box {
-   border-radius: 5px;
+   border-radius: 3px;
    padding: 3px;
-   margin:10px;
+   margin:3px;
    // Add a flex rule for browsers not supporting the
    // CSS Grid Layout spec
    flex: 1 1 350px;

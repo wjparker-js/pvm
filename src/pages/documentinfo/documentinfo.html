@@ -1,25 +1,14 @@
 <ion-header>
-
-  <ion-toolbar>
-    
-    <button ion-button start>
-      <img [src]="this.avatardata" class="item item-avatar" style="position:relative;top:-2px;height:40px;width:40px;border:0px;"/>
-    </button>
-
-    <span style="position:relative;top:6px;overflow:hidden;font-size:12px;color:white;padding-left:15px;" >
-        Revs - {{docno1}}
+  <ion-toolbar>   
+    <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>    
+    <span style="font-size:16px;color:white;padding-left:15px;">Revisions: 
+      <span style="font-size:12px;color:white;padding-left:5px;">{{docno1}}</span>
     </span>
-
     <ion-buttons end>
-    <button ion-button (click)="dismiss()">
-        Close
-    </button>
+      <button ion-button (click)="dismiss()">Close</button>
     </ion-buttons>
-
   </ion-toolbar>
-
 </ion-header>
-
 <ion-content style="background-color: gray;">
 
     <ion-grid>
@@ -31,7 +20,7 @@
                 <ion-card>
 
                     <ion-card-header>
-                        <img [src]="docimg"  style="width:100%;border:2px;" (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"/>
+                        <img [src]="docimg"  style="width:100%;border:2px;" />
                     </ion-card-header>
 
                     <ion-card-content>

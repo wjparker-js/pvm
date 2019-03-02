@@ -1,45 +1,45 @@
-<!--<ion-split-pane [when]="splitPane.getSplitPane()">-->
-
 <ion-header>
-
-  <ion-navbar style = "height:56px;" color="primary">
-    
-    <button ion-button menuToggle>
-      <img [src]="this.avatardata" class="item item-avatar" style="position:relative;top:-2px;height:40px;width:40px;border:0px;"/>
-    </button>
-
+  <ion-navbar>   
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>        
+    <span id="docnameheader" style="font-size:16px;color:white;padding-left:15px;">{{userdocumentData.SystemProjectName}}</span> 
+  </ion-navbar>
+  <ion-toolbar>
     <ion-searchbar
+      #mySearchbar 
       name = "searchBar" 
-      style = "height:20px;width:100%;" 
+      style = "height:15px;width:100%;background-color:white;color:black;" 
       value= "" 
       placeholder="Document Search here..."
       (ionInput)="searchByKeyword($event)" 
-      [debounce]="500">  Documents
+      [debounce]="500"
+      class="android">  Documents
     </ion-searchbar>
-
-  </ion-navbar> 
-  
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="masters">
-
+<ion-content>
   <ion-grid>
     <ion-row>
       <ion-col  *ngFor="let document of userdocuments" col-12 col-md-6 col-lg-4 col-xl-3>
         <ion-card>
 
-          <ion-card-header>
+        
+          <!--<ion-card-header>
                   <img [src]="document.PhotoTiny"  style="width:100%;border:2px;" (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"/>
-          </ion-card-header>
+          </ion-card-header>-->
+      
 
           <ion-card-content>
 
             <h2>
                 <b>
-
-                  <span class="cardheadertext" [innerHTML]="document.DocumentNumber"></span>
-                  <span class="cardheadertext">  Rev: </span>
-                  <span class="cardheadertext" [innerHTML]="document.Rev"></span>
+                  <div style="color:blue;">
+                  <span  [innerHTML]="document.DocumentNumber" (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"></span>
+                  <span (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)">  Rev: </span>
+                  <span  [innerHTML]="document.Rev" (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"></span>
+                  </div>
                 </b>
             </h2>
 
@@ -70,11 +70,12 @@
                 <ion-icon style = "font-size: 13px;padding-top: 9px;" name="information-circle" color="primary" class="flex-right" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
                 <label class="bodytext" color="primary" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)">Revisions</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 
-                <ion-icon style = "font-size: 13px;padding-top: 9px;" name="paper" color="primary" class="flex-right" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
+                <ion-icon style = "font-size: 13px;padding-top: 9px;" name="document" color="primary" class="flex-right" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
                 <label class="bodytext" color="primary" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Audit Trail</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 
-                <ion-icon style = "font-size: 13px;padding-top: 9px;" name="mail" color="primary" class="flex-right" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
-                <label class="bodytext" color="primary" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber)">Send</label>
+                <ion-icon style = "font-size: 13px;padding-top: 9px;" name="mail" color="primary" class="flex-right" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
+                <label class="bodytext" color="primary" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Send</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
               </b>
             </h2>
 

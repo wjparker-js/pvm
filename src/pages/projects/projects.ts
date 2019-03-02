@@ -15,8 +15,7 @@ import * as Constants from '../../providers/constants';
 
 export class ProjectsPage {
 
-  userProjects: any;
-  
+  userProjects: any;  
   userApiKey : any;
   selectedProjectName: any;
   avatardata: any;
@@ -31,10 +30,7 @@ export class ProjectsPage {
     "ProjectName":""
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {
-
-
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl:ToastController) {}
 
   ionViewWillEnter() {
 
@@ -46,33 +42,25 @@ export class ProjectsPage {
     this.userProjectData.UserName       = projectData[0].Name;
     this.userProjectData.Company        = projectData[0].Company;
     this.userProjectData.Email          = projectData[0].Email; 
-
     this.selectedProjectName            = localStorage.getItem('CurrentProjectName');
     this.userProjectData.ProjectName    = localStorage.getItem('CurrentProjectName'); 
     this.avatardata                     = localStorage.getItem('avatar');
 
-
-    console.log("Projects Avatar = "+this.avatardata);
-    console.log(this.userProjectData.UserName);
-
     var userApiKey = this.userProjectData.apiKey;  
-    
-    console.log(userApiKey);
-  
+ 
     this.http.get(Constants.apiUrl+'api/projects/'+userApiKey).map(res => res.json()).subscribe(data => {
           this.userProjects = data;
-          console.log(this.userProjects);
       },
       err => {
           console.log("Oops!");
       }
-    );  
-    
+    );      
   }
 
   saveProject(name,id){
     localStorage.setItem('CurrentProjectName', name);
     localStorage.setItem('CurrentProjectID', id);
+    this.userProjectData.ProjectName = localStorage.getItem('CurrentProjectName');
     this.presentProjectToast("Project changed to: "+name);
     this.selectedProjectName = name;
   }
@@ -84,6 +72,7 @@ export class ProjectsPage {
       position: 'middle'
     });
     toast.present();
+    this.navCtrl.parent.select(0);
   }
 
 }

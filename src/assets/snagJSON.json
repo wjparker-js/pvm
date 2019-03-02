@@ -1,0 +1,14 @@
+//Create the base tables in SQLite
+
+{
+	"structure": {
+		"tables": {
+			"M_BranchOrders": "([AutoUpdate], [Bim], [DateCreated], [DateIsssued], [DeliverBy], [DeliverByT3], [DisciplineID], [DisputeText], [EffectID], [EmailType], [EmailUID], [EndFixDate], [Files], [LastModified], [LocationID], [OrderReference], [OrderStatus], [OrderSubject], [OwnerCreator], [OwnerID], [ParentOrderID], [PostProcessDeleted], [ProjectID], [ReasonID], [RecipientID], [RFIImage], [ScheduledInspectionDate], [Secure], [Sends], [SMTPReturn], [SpecialInstructions], [SubOwner], [SubOwner2], [SubType], [SytemOrderNumber], [Type], [TypeOrderNumber], [UpdateNew], [UpdateSupersede], [EmailDate], [OrderID], [UpdateRemove])",
+			"M_ProjectLocationMap": "([LocationMapID], [ProjectID], [L1ID], [L2ID], [L3ID], [L4ID], [Name], [LID], [LocationImage], [LocationOwnerID], [Latitude], [Longitude], [Altitude])",
+			"M_ProjectFormComponentsValues": "([ComponentValueID], [ProjectID], [TextValue], [Active])",
+			"M_ProjectFormFlatTypeValues": "([FlatTypeValueID], [ProjectID], [TextValue], [Active])",
+			"M_ProjectFormFloorLevelValues": "([FloorLevelValueID], [ProjectID], [TextValue], [Active])",
+			"M_ProjectFormPlotFlatValues": "([PlotFlatValueID], [ProjectID], [TextValue], [Active])"
+		}
+	}
+}

@@ -1,87 +1,25 @@
 <ion-header>
-
-  <ion-navbar>
-    
-    <button ion-button menuToggle>
-      <img [src]="this.avatardata" class="item item-avatar" style="position:relative;top:-2px;height:40px;width:40px;border:0px;"/>
-      <!--<ion-icon name="contact" style="font-size:30px;padding-left:15px;color:white;"></ion-icon>-->
-    </button>
-        
-    <span style="font-size:20px;color:white;padding-left:15px;">{{userProjectData.ProjectName}}</span>
-
-   <!-- <button ion-button end> 
-      <img [src]="this.avatardata" class="item item-avatar" />
-    </button> -->
-
-
+  <ion-navbar>   
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>        
+    <span style="font-size:16px;color:white;padding-left:15px;">{{selectedProjectName}}</span> 
   </ion-navbar>
-
 </ion-header>
-
 <ion-content>
-
   <ion-grid>
     <ion-row>
-      <ion-col  *ngFor="let project of userProjects" col-12 col-md-6 col-lg-4 col-xl-3>
-        <ion-card>  
-          <ion-card-content>
-
-          <ion-list >  
-            <ion-item >
-              <ion-thumbnail item-start style="width:16px;">
-                  <img [src]="project.Thumbnail" />
-              </ion-thumbnail>
-              <h2><b>{{project.ProjectName}}</b></h2>
-              <h3>{{project.Client}}</h3>
-              <button ion-button item-end (click)="saveProject(project.ProjectName,project.ProjectID);">Select</button>
-            </ion-item>
-          </ion-list>
-
-          </ion-card-content>
-        </ion-card>
+      <ion-col *ngFor="let project of userProjects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
+        <ion-list  style="margin-bottom: 0px;">  
+          <ion-item (click)="saveProject(project.ProjectName,project.ProjectID);">
+            <ion-avatar item-start>
+              <img [src]="project.Thumbnail" style="height:40px;width:40px;border:1px;" />
+            </ion-avatar>
+            <h2><b>{{project.ProjectName}}</b></h2>
+            <h3>{{project.Client}}</h3>
+          </ion-item>
+        </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>
-
-<!--
-<ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let project of userProjects">
-      <ion-thumbnail item-start style="width:40px;">
-          <img [src]="project.Thumbnail" />
-      </ion-thumbnail>
-      <h2><b>{{project.ProjectName}}</b></h2>
-      <h3>{{project.Client}}</h3>
-      <button ion-button item-end (click)="saveProject(project.ProjectName,project.ProjectID);">Select</button>
-    </ion-item>
-  </ion-list>
-</ion-content>
-
-<ion-content>
-    <ion-grid  style="background-color: gray;">
-            <ion-row>
-                <ion-col  *ngFor="let project of userProjects" col-12 col-md-6 col-lg-4 col-xl-3>
-                <ion-card>
-
-                    <ion-card-header>
-                        <img [src]="project.Thumbnail"  style="height:200px;"/>
-                    </ion-card-header>
-
-                    <ion-card-content>
-                        <ion-list>
-                            <ion-item>
-                              <h2><b>{{project.ProjectName}}</b></h2>
-                              <p>{{project.Client}}</p>
-                              <button ion-button item-end (click)="saveProject(project.ProjectName,project.ProjectID);">Select</button>
-                            </ion-item>
-                        </ion-list>
-                    </ion-card-content>  
-
-                </ion-card>
-                </ion-col>
-            </ion-row>
-    </ion-grid>
-</ion-content>
--->
