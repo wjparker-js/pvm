@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>   
+    <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>        
+    <span style="font-size:16px;color:white;padding-left:15px;">Snagging</span> 
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label class="mylabel" stacked>Inspection Reference</ion-label>
+      <ion-input class="mytext" type="text"  name="Reference" value="Inspection"></ion-input>
+    </ion-item>
+
+	<ion-item>
+	  <ion-label class="mylabel" stacked>Location</ion-label>
+      <ion-input class="text" type="text"  name="Location" value="{{location}}"></ion-input>
+      <button ion-button clear color="dark" type="button" item-right (click)="openGetQRCode()"> 
+      	<ion-icon name="qr-scanner"> </ion-icon> 
+      </button>    
+      <button ion-button clear color="dark" type="button" item-right (click)="openList()"> 
+      	<ion-icon name="list"> </ion-icon> 
+      </button>          
+	</ion-item>
+    <ion-item>
+      <ion-label class="mylabel" stacked>Discipline</ion-label>
+      <ion-input class="mytext" type="text"  name="Discipline" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="mylabel" stacked>Recipients</ion-label>
+      <ion-input class="mytext" type="text"  name="Recipients" value=""></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button full primary style="padding:0px;margin:0px;"><ion-icon name="camera" style="font-size:25px;color:white;padding-right:10px;" mode="ios" left> </ion-icon> Capture a new snag</button>
+  </ion-item>
+    <ion-item>
+      <ion-label class="mylabel" stacked>Snag Details</ion-label>
+      <ion-input class="mytext" type="text"  name="subject" value=""></ion-input>
+    </ion-item>
+  </ion-list>
+
+
+
+</ion-content>
