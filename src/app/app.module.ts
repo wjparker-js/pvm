@@ -19,6 +19,8 @@ import { DocumentInfo } from '../pages/documentinfo/documentinfo';
 import { ProjectsPage } from '../pages/projects/projects';
 import { SnaggingPage } from '../pages/snagging/snagging';
 import { QrcodePage } from '../pages/qrcode/qrcode';
+import { LocationmapPage } from '../pages/locationmap/locationmap';
+
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DocumentTabs }    from '../pages/documenttabs/documenttabs';
@@ -44,6 +46,7 @@ import { WeatherProvider } from '../providers/weather/weather'
     DocumentSummary,
     SnaggingPage,
     QrcodePage,
+    LocationmapPage,
     TabsPage,
     DocumentTabs,
     DocumentAudit,
@@ -74,6 +77,7 @@ import { WeatherProvider } from '../providers/weather/weather'
     ProjectsPage,
     SnaggingPage,
     QrcodePage,
+    LocationmapPage,
     TabsPage,
     DocumentTabs,
     DocumentAudit,

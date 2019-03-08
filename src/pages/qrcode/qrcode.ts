@@ -3,13 +3,15 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 @IonicPage()
+
 @Component({
   selector: 'page-qrcode',
   templateUrl: 'qrcode.html',
 })
+
 export class QrcodePage {
 
-  scannedCode:string = "Plot 1 > Floor 2 > Single Unit > Bedroom 1";
+  scannedCode:string;
   callback: any;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams, private barcodeScanner:BarcodeScanner) {

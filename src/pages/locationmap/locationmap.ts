@@ -1,25 +1,85 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the LocationmapPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Http } from '@angular/http';
+import * as Constants from '../../providers/constants';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @IonicPage()
+
 @Component({
   selector: 'page-locationmap',
-  templateUrl: 'locationmap.html',
+  templateUrl: 'locationmap.html'
 })
+
 export class LocationmapPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  selectedCode:string;
+  callback: any;
+
+  locationmapApiKey : any;
+  locationmapSystemProjectID:any;
+  locationmapUserID:any;
+  locationMaps:any;
+
+  LocationmapData = {
+    "SystemProjectID":"",
+    "SystemProjectName":"",
+    "SystemUserID": "",
+    "LocationID":"",
+    "LocationOwnerID":"",
+    "LocationImage":"",
+    "L1Name":"",
+    "L1ID":"",
+    "L2Name":"",
+    "L2ID":"",
+    "L3Name":"",
+    "L3ID":"",
+    "L4Name":"",
+    "L4ID":"",
+    "Lat":"",
+    "Long":"",
+    "Alt":""
+  };
+
+constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public viewCtrl: ViewController, public navParams: NavParams, public http: Http) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LocationmapPage');
-  }
+	ionViewWillEnter() {
+
+		this.callback = this.navParams.get("callback")
+
+		var locationmapData = JSON.parse(localStorage.getItem('userSystemData'));
+
+		this.locationmapSystemProjectID = localStorage.getItem('CurrentProjectID');
+		this.locationmapApiKey          = locationmapData[0].apiKey;
+		this.locationmapUserID          = locationmapData[0].SystemUserID;
+
+		var url = Constants.apiUrl+"api/locationmap/"+this.locationmapApiKey+"/"+this.locationmapSystemProjectID+"/"+this.locationmapUserID;
+
+		    this.http.get(url).map(res => res.json()).subscribe(data => {
+		        this._sanitizer.bypassSecurityTrustStyle(data);
+		      this.locationMaps = data;          
+		      console.log(this.locationMaps);
+		    },
+		    err => {
+		        console.log("Oops!");
+		    }
+		); 
+	}
+
+
+	dismiss() {
+		this.viewCtrl.dismiss();
+	} 
+
+	ionViewWillLeave() {
+		this.callback(this.selectedCode).then(()=>{});
+	}
+
+	sendBack(item){
+		this.selectedCode = item;
+		this.viewCtrl.dismiss();
+	}
 
 }
+
