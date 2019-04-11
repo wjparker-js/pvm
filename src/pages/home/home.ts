@@ -7,8 +7,9 @@ import {Http} from '@angular/http';
 import {DocumentSummary} from '../documentsummary/documentsummary';
 import * as Constants from '../../providers/constants';
 import {WeatherProvider} from '../../providers/weather/weather';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-declare var google: any;
+//declare var google: any;
 
 @Component({
   selector: 'page-home', 
@@ -17,9 +18,9 @@ declare var google: any;
 
 export class HomePage {
 
-  @ViewChild('map') mapRef: ElementRef;
+ // @ViewChild('map') mapRef: ElementRef;
 
-  public map: any;
+  //public map: any;
   public userDetails : any;
   public resposeData : any;
   public avatardata: any;
@@ -48,23 +49,32 @@ export class HomePage {
     "ProjectName":""
   };
 
-  constructor(public common: Common, private alertCtrl: AlertController, public weatherProvider:WeatherProvider, public http: Http, public navCtrl : NavController, public navParams: NavParams, public app : App, public authService : AuthService) {
+  constructor(
+    public common: Common, 
+    private geolocation: Geolocation, 
+    private alertCtrl: AlertController, 
+    public weatherProvider:WeatherProvider, 
+    public http: Http, 
+    public navCtrl : NavController, 
+    public navParams: NavParams, 
+    public app : App, 
+    public authService : AuthService) {
 
 
   }
 
   ionViewDidLoad() {
-    console.log(this.mapRef);
-    this.showMap();
+    //console.log(this.mapRef);
+    //this.showMap();
   }
 
-
+/*
   showMap(){
     const location = new google.maps.LatLng(51.5209815,0.2083337);
     const options = {center: location,zoom:18};
     this.map = new google.maps.Map(this.mapRef.nativeElement,options);
   }
-
+*/
   
 
   ionViewWillEnter() {

@@ -1,14 +1,10 @@
-page-documents {
+page-documentinfo {
 
-ion-item {
-   border-top: none;
-   border-bottom: none;
-}
+    ion-item {
+       border-top: none;
+       border-bottom: none;
+    }
 
-.searchbar-input {
-  //background: linear-gradient(to bottom right, #009da3, #018287);
-  background-color: #ffffff;
-}
 
     background: #e8e8e8;
     .bodytext {
@@ -48,11 +44,13 @@ ion-item {
         height: 15px;
     }
     .hilite{
-        background-color: yellow;
+        font-size:14px;
+        color:black;
+        font-weight:bold;
     }
     .hilite1{
-        color: white;
-        background-color: blue;
+        color: black;
+        background-color: yellow;
     }
 a{
     text-align: center;

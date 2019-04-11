@@ -20,16 +20,24 @@ import { ProjectsPage } from '../pages/projects/projects';
 import { SnaggingPage } from '../pages/snagging/snagging';
 import { QrcodePage } from '../pages/qrcode/qrcode';
 import { LocationmapPage } from '../pages/locationmap/locationmap';
+import { DisciplinePage } from '../pages/discipline/discipline';
+
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DocumentTabs }    from '../pages/documenttabs/documenttabs';
 import { DocumentIssues }  from '../pages/documenttabs/documentissues/documentissues';
 import { DocumentAudit }   from '../pages/documentaudit/documentaudit';
-import { DocumentInfoAll } from '../pages/documenttabs/documentinfoall/documentinfoall';
+//import { DocumentInfoAll } from '../pages/documenttabs/documentinfoall/documentinfoall';
 import { DocumentSummary } from '../pages/documentsummary/documentsummary';
 import { CallNumber } from '@ionic-native/call-number';
 import { WeatherProvider } from '../providers/weather/weather'
+
+//import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+//import { File } from '@ionic-native/file';
+//import { FilePath } from '@ionic-native/file-path/ngx';
+//import { Camera } from '@ionic-native/camera/ngx';
 
 
 @NgModule({
@@ -47,11 +55,11 @@ import { WeatherProvider } from '../providers/weather/weather'
     SnaggingPage,
     QrcodePage,
     LocationmapPage,
+    DisciplinePage,
     TabsPage,
     DocumentTabs,
     DocumentAudit,
-    DocumentIssues,
-    DocumentInfoAll
+    DocumentIssues
   ],
   imports: [
     BrowserModule,HttpModule,NgxQRCodeModule,
@@ -78,18 +86,22 @@ import { WeatherProvider } from '../providers/weather/weather'
     SnaggingPage,
     QrcodePage,
     LocationmapPage,
+    DisciplinePage,
     TabsPage,
     DocumentTabs,
     DocumentAudit,
     DocumentIssues,
-    DocumentInfoAll,
     DocumentSummary   
   ],
   providers: [
     StatusBar,
-    SplashScreen,AuthService,SplitPane,Common,CallNumber,
+    SplashScreen,
+    AuthService,
+    SplitPane,
+    Common,
+    CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    WeatherProvider,BarcodeScanner
+    WeatherProvider,BarcodeScanner,Geolocation
   ]
 })
 

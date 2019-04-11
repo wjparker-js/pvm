@@ -13,15 +13,15 @@ import * as Constants from '../../providers/constants';
 
 @Component({selector: 'page-documents',templateUrl: 'documents.html',})
 
-
-
 export class DocumentsPage {  
 
   userdocuments: any;
+  customfieldnames: any;
+  fieldnames: any;
   userApiKey : any;
   selectedProjectName: any;
-  avatardata: any
   eventInstance : any;
+  dsearch : any;
 
   userdocumentData = {
     "SystemProjectID":"",
@@ -38,10 +38,7 @@ export class DocumentsPage {
               public navParams: NavParams, 
               public http: Http,
               private _sanitizer: DomSanitizer, 
-              public modalCtrl: ModalController) {
-
-  }
-
+              public modalCtrl: ModalController) {}
 
   ionViewWillEnter() {
 
@@ -57,8 +54,6 @@ export class DocumentsPage {
     this.userdocumentData.DocumentNumber    = documentData[0].DocumentNumber; 
     this.userdocumentData.FileExtension     = documentData[0].FileExtension; 
     
-    this.avatardata              = localStorage.getItem('avatar');
-
     var documentSystemProjectID = this.userdocumentData.SystemProjectID; 
     var selectedProjectName     = this.userdocumentData.SystemProjectName;    
     var documentSystemClientID  = this.userdocumentData.SystemClientID;
@@ -67,6 +62,30 @@ export class DocumentsPage {
     var documentThumbnail       = this.userdocumentData.Thumbnail;
     var documentDocumentNumber  = this.userdocumentData.DocumentNumber;
     var documentFileExtension   = this.userdocumentData.FileExtension;
+
+
+    var furl  = Constants.apiUrl+"api/documentsfields/"+documentSystemProjectID;
+    this.http.get(furl).map(res => res.json()).subscribe(data => {
+          this._sanitizer.bypassSecurityTrustStyle(data);
+          this.fieldnames = data; 
+          console.log(this.fieldnames);
+      },
+      err => {
+          console.log("Field Names Oops!");
+      }
+    ); 
+
+    var cfurl = Constants.apiUrl+"api/documentscustomfields/"+documentSystemProjectID+"/"+documentSystemClientID;
+    this.http.get(cfurl).map(res => res.json()).subscribe(data => {
+          this._sanitizer.bypassSecurityTrustStyle(data);
+          this.customfieldnames = data; 
+          console.log(this.customfieldnames);
+      },
+      err => {
+          console.log("Custom Field Names Oops!");
+      }
+    ); 
+
 
 /*    var localDocumentData1       = JSON.parse(localStorage.getItem('userSystemData'));
     var localApiKey1            = localDocumentData1[0].apiKey;
@@ -84,6 +103,11 @@ export class DocumentsPage {
     ); */
 
   }
+  
+
+  keys(obj){
+      return Object.keys(obj);
+  }
 
 
   searchByKeyword($event){
@@ -94,40 +118,34 @@ export class DocumentsPage {
     var searchTerm               = $event.srcElement.value;
     var localDocumentData        = JSON.parse(localStorage.getItem('userSystemData'));
     var localApiKey              = localDocumentData[0].apiKey;
-    this.avatardata              = localStorage.getItem('avatar');
     this.eventInstance           = $event;
+    this.dsearch                 = $event.srcElement.value;
 
-    console.log("Documents Avatar = "+this.avatardata);
-
-    var url = Constants.apiUrl+"api/documents/"+localApiKey+"/"+documentSystemUserID1+"/"+documentSystemProjectID1+"/"+searchTerm;
-
+    var url   = Constants.apiUrl+"api/documents/"+localApiKey+"/"+documentSystemUserID1+"/"+documentSystemProjectID1+"/"+searchTerm+"/xxx";
     this.http.get(url).map(res => res.json()).subscribe(data => {
           this._sanitizer.bypassSecurityTrustStyle(data);
-          this.userdocuments = data;  
-          //var json123 = '"data":{"inserts":{"technologies":'+this.userdocuments+'}}';        
-          //console.log('"data":{"inserts":{"technologies":'+this.userdocuments+'}}');
+          this.userdocuments = data;
           console.log(this.userdocuments);
       },
       err => {
           console.log("Oops!");
       }
     ); 
-
-    $event.srcElement.value = "";
- 
   }
   
+
   onSearchCancel($event){}
+
 
   info(){}
 
-  openDocument(clientid,projectid,docid,ext){ 
-    //let modal = this.modalCtrl.create(DocumentViewer,{clientid,projectid,docid,ext});
-    //modal.present();
+
+  openDocument(clientid,projectid,docid,ext){
     this.navCtrl.push(DocumentViewer,{clientid,projectid,docid,ext});
   }
 
-  openDocumentInfo(docimg, docid, docno1){ 
+
+  openDocumentInfo(docimg, docid, docno1,search){ 
 
     var pt1 = "<span class='hilite'>";
     var pt2 = "</span>";
@@ -135,12 +153,7 @@ export class DocumentsPage {
     var docno1 = docno1.replace(pt1,rep);
     var docno1 = docno1.replace(pt2,rep);
 
-    console.log(pt1);
-    console.log(pt2);
-    console.log(rep);
-    console.log(docno1);
-
-    this.navCtrl.push(DocumentInfo,{docimg, docid, docno1});
+    this.navCtrl.push(DocumentInfo,{docimg, docid, docno1, search});
   }
 
   openDocumentAudit(docimg, docid, docno1){ 

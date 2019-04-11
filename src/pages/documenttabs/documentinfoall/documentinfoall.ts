@@ -6,11 +6,12 @@ import 'rxjs/add/operator/map';
 
 @Component({templateUrl: 'documentinfoall.html'})
 
+
 export class DocumentInfoAll {
 
-docimg: any;
-docid: any;
-docno1: any;
+  docimg: any;
+  docid: any;
+  docno1: any;
 
   userdocumentsinfo: any;
   userApiKey : any;
