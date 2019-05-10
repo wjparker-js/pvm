@@ -6,6 +6,7 @@ import { ProjectsPage } from '../projects/projects';
 import { DefectsPage } from '../Defects/defects';
 import { AboutPage } from '../about/about';
 
+
 @Component({
   templateUrl: 'tabs.html'
 })

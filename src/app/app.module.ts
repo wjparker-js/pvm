@@ -39,7 +39,6 @@ import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
 
-
 @NgModule({
   declarations: [
     MyApp,
