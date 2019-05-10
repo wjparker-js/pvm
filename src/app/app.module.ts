@@ -18,7 +18,7 @@ import { DocumentViewer } from '../pages/documentviewer/documentviewer';
 import { DocumentInfo } from '../pages/documentinfo/documentinfo';
 import { ProjectsPage } from '../pages/projects/projects';
 import { SnaggingPage } from '../pages/snagging/snagging';
-import { DefectsPage }  from '../pages/defects/defects';
+import { DefectsPage }  from '../pages/Defects/defects';
 import { SubtypesPage } from '../pages/subtypes/subtypes';
 import { QrcodePage } from '../pages/qrcode/qrcode';
 import { LocationmapPage } from '../pages/locationmap/locationmap';
