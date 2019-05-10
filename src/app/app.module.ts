@@ -18,26 +18,26 @@ import { DocumentViewer } from '../pages/documentviewer/documentviewer';
 import { DocumentInfo } from '../pages/documentinfo/documentinfo';
 import { ProjectsPage } from '../pages/projects/projects';
 import { SnaggingPage } from '../pages/snagging/snagging';
+import { DefectsPage } from '../pages/defects/defects';
+import { SubtypesPage } from '../pages/subtypes/subtypes';
 import { QrcodePage } from '../pages/qrcode/qrcode';
 import { LocationmapPage } from '../pages/locationmap/locationmap';
 import { DisciplinePage } from '../pages/discipline/discipline';
-
+import { EffectsPage } from '../pages/effects/effects';
+import { ReasonsPage } from '../pages/reasons/reasons';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DocumentTabs }    from '../pages/documenttabs/documenttabs';
 import { DocumentIssues }  from '../pages/documenttabs/documentissues/documentissues';
 import { DocumentAudit }   from '../pages/documentaudit/documentaudit';
-//import { DocumentInfoAll } from '../pages/documenttabs/documentinfoall/documentinfoall';
 import { DocumentSummary } from '../pages/documentsummary/documentsummary';
 import { CallNumber } from '@ionic-native/call-number';
 import { WeatherProvider } from '../providers/weather/weather'
-
-//import { FileTransfer } from '@ionic-native/file-transfer/ngx';
-//import { File } from '@ionic-native/file';
-//import { FilePath } from '@ionic-native/file-path/ngx';
-//import { Camera } from '@ionic-native/camera/ngx';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { FilePath } from '@ionic-native/file-path';
 
 
 @NgModule({
@@ -53,9 +53,13 @@ import { WeatherProvider } from '../providers/weather/weather'
     ProjectsPage,
     DocumentSummary,
     SnaggingPage,
+    DefectsPage,
     QrcodePage,
     LocationmapPage,
     DisciplinePage,
+    EffectsPage,
+    ReasonsPage,
+    SubtypesPage,
     TabsPage,
     DocumentTabs,
     DocumentAudit,
@@ -84,9 +88,13 @@ import { WeatherProvider } from '../providers/weather/weather'
     DocumentInfo,
     ProjectsPage,
     SnaggingPage,
+    DefectsPage,
+    SubtypesPage,
     QrcodePage,
     LocationmapPage,
     DisciplinePage,
+    EffectsPage,
+    ReasonsPage,
     TabsPage,
     DocumentTabs,
     DocumentAudit,
@@ -99,9 +107,16 @@ import { WeatherProvider } from '../providers/weather/weather'
     AuthService,
     SplitPane,
     Common,
+    BarcodeScanner,
+    Geolocation,
     CallNumber,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    WeatherProvider,BarcodeScanner,Geolocation
+    WeatherProvider,
+    Camera,
+    File,
+    FileTransfer,
+    FilePath,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}   
+
   ]
 })
 

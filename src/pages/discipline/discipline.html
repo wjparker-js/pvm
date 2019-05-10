@@ -14,11 +14,15 @@
       <ion-col  *ngFor="let discipline of disciplines" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
         <ion-list style="margin-bottom: 0px;">
           <ion-item>
-            <button ion-button full style="background-color:#eeee;border:0px;margin:0px;padding:0px;color:#000000;height:50px;" (click)='sendBack(discipline.GroupName)'>
+            <button ion-button full style="background-color:#dddddd;border:0px;margin:0px;padding:0px;color:#000000" (click)='sendBack(discipline.GroupName)'>
           	 <b>{{discipline.GroupName}}</b>
-       		</button>
+           </button>
+          </ion-item>
+          <ion-item  [hidden]="discipline.GroupName !== '' || discipline.GroupName !==  undefined ">
+            <span>No distribution for selected Defect Type</span>
           </ion-item>
         </ion-list>
+
       </ion-col>
     </ion-row>
   </ion-grid>

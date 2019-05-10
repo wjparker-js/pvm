@@ -1,20 +1,36 @@
 <ion-header>
   <ion-navbar>   
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>        
-    <span style="font-size:16px;color:white;padding-left:15px;">Snagging</span> 
+    <span style="font-size:16px;color:white;padding-left:15px;">New Defect</span> 
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-label class="mylabel" stacked>Inspection Reference</ion-label>
-      <ion-input class="mytext" type="text"  id = "Reference" name="Reference" value="{{reference}}"></ion-input>
+      <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;" >Reference</ion-label>
+      <ion-input class="mytext" type="text"  id = "reference" name="reference" [(ngModel)]="frmData.reference" style="font-size:13px;"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Defect Type</ion-label>
+        <ion-input class="text" type="text" id = "Defecttype" name="defecttype" value="{{defecttype}}" style="font-size:13px;"></ion-input>  
+        <button ion-button clear color="dark" type="button" item-right (click)="openDTList()"> 
+          <ion-icon name="list"> </ion-icon> 
+        </button>          
+    </ion-item>
+
+    <ion-item  [hidden]="defecttype === '' || defecttype === undefined ">
+        <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Discipline</ion-label>
+          <ion-input class="text" type="text" id = "Discipline" name="discipline" value="{{discipline}}" style="font-size:13px;"></ion-input>  
+          <button ion-button clear color="dark" type="button" item-right (click)="openDList(defecttype)"> 
+            <ion-icon name="list"> </ion-icon> 
+          </button>          
     </ion-item>
 
 	<ion-item>
-	  <ion-label class="mylabel" stacked>Location</ion-label>
-      <ion-input class="text" type="text"   id = "Location" name="Location" value="{{location}}"></ion-input>
+	  <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Location</ion-label>
+      <ion-input class="text" type="text"   id = "Location" name="location" value="{{name}}" style="font-size:13px;"></ion-input>
       <button ion-button clear color="dark" type="button" item-right (click)="openGetQRCode()"> 
       	<ion-icon name="qr-scanner"> </ion-icon> 
       </button>    
@@ -22,43 +38,52 @@
       	<ion-icon name="list"> </ion-icon> 
       </button>          
 	</ion-item>
+
+  
   <ion-item>
-    <ion-label class="mylabel" stacked>Discipline</ion-label>
-      <ion-input class="text" type="text" id = "Discipline" name="Discipline" value="{{discipline}}"></ion-input>  
-      <button ion-button clear color="dark" type="button" item-right (click)="openDList()"> 
+    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Reason</ion-label>
+      <ion-input class="text" type="text" id = "Reason" name="reason" value="{{reason}}" style="font-size:13px;"></ion-input>  
+      <button ion-button clear color="dark" type="button" item-right (click)="openRList()"> 
+        <ion-icon name="list"> </ion-icon> 
+      </button>          
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Effect</ion-label>
+      <ion-input class="text" type="text" id = "Effect" name="effect" value="{{effect}}" style="font-size:13px;"></ion-input>  
+      <button ion-button clear color="dark" type="button" item-right (click)="openEList()"> 
         <ion-icon name="list"> </ion-icon> 
       </button>          
   </ion-item>
   
     <ion-item>
-      <ion-label class="mylabel" stacked>Snag Details</ion-label>
-      <ion-textarea class="mytext" rows="3"  name="details" placeholder="Enter detailled snag information here..."></ion-textarea>
+      <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;" >Snag Details</ion-label>
+      <ion-textarea class="mytext" rows="3"  name="details" [(ngModel)]="frmData.details" placeholder="Enter detailled snag information here..."  style="font-size:13px;"></ion-textarea>
     </ion-item>
   </ion-list>
 
 
 <ion-card>
-  <ion-card-header>
-    <button ion-button full primary style="padding:0px;margin:0px;"><ion-icon name="camera" style="font-size:25px;color:white;padding-right:10px;" mode="ios" left> </ion-icon> Capture an image</button>
-  </ion-card-header>
   <ion-card-content>
+    <img [src]="currentImage" style="width: 100%">
+    <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
   </ion-card-content>
-</ion-card>
-</ion-content>
-<!--
+</ion-card> 
 
-    <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
-  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+</ion-content>
+
+
+
 <ion-footer>
   <ion-toolbar color="primary">
     <ion-buttons>
-      <button ion-button icon-left (click)="presentActionSheet()">
-        <ion-icon name="camera"></ion-icon>Select Image
+      <button ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
+        <ion-icon name="camera"></ion-icon>Take Picture
       </button>
       <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
-        <ion-icon name="cloud-upload"></ion-icon>Upload
+        <ion-icon name="cloud-upload"></ion-icon>Upload Snag
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>
--->
+  

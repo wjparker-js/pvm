@@ -1,0 +1,58 @@
+<ion-header> 
+    <ion-navbar primary>   
+      <ion-buttons left>
+          <button ion-button menuToggle icon-only>
+              <ion-icon name="menu"></ion-icon>
+          </button>
+      </ion-buttons>
+      <span style="font-size:16px;color:white;padding-left:15px;">{{selectedProjectName}}</span> 
+      <ion-buttons right>
+          <button ion-button icon-only (click)="showSnags()">
+              Add
+          </button>
+      </ion-buttons>
+  </ion-navbar>
+  <div padding>   
+  <ion-segment color="secondary"  [(ngModel)]="defectslist" (ionChange)="segmentChanged(defectslist)">
+      <ion-segment-button value="all">
+        All
+      </ion-segment-button>
+      <ion-segment-button value="new">
+        New
+      </ion-segment-button>
+      <ion-segment-button value="open">
+        Open
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col  *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
+        <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
+          <ion-item style="padding-left:3px;">
+            <ion-thumbnail item-left style="padding-left:3px;padding-right: 6px;width: 42px !Important;height: 50px !Important;margin-top: 10px;margin-bottom: 0px;">
+              <img src="assets/imgs/defect.jpg" style="width:50px;height:42px;"/>
+            </ion-thumbnail>
+            <h2><b>{{defect.OrderReference}}</b></h2>
+            <h3><b>Subject:</b>&nbsp;{{defect.OrderSubject}}</h3>
+            <h3><b>Inst:</b>&nbsp;{{defect.SpecialInstructions}}</h3>            
+           <h3  text-wrap>  
+            <span *ngIf="defect.DateCreated"><b>Created:</b>&nbsp;{{defect.DateCreated}}&nbsp;&nbsp;</span>
+            <span *ngIf="defect.DateIsssued"><b>Issued:</b>&nbsp;{{defect.DateIsssued}}&nbsp;&nbsp;</span>
+            <span *ngIf="defect.DeliverBy"><b>Required:</b>&nbsp;{{defect.DeliverBy}}</span>
+           </h3> 
+          </ion-item>
+      </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+  
+<style>
+  .social-cards ion-col {
+    padding: 0;
+  }
+</style>

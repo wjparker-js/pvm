@@ -3,7 +3,7 @@ import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { DocumentsPage } from '../documents/documents';
 import { ProjectsPage } from '../projects/projects';
-import { SnaggingPage } from '../snagging/snagging';
+import { DefectsPage } from '../defects/defects';
 import { AboutPage } from '../about/about';
 
 @Component({
@@ -15,7 +15,7 @@ export class TabsPage {
   tab1Root = HomePage;
   tab2Root = ProjectsPage;
   tab3Root = DocumentsPage;
-  tab4Root = SnaggingPage;
+  tab4Root = DefectsPage;
   tab5Root = ContactPage;
 
 

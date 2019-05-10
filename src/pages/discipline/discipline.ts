@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class DisciplinePage {
 
   selectedDiscipline:string;
+  selectedDefect:string;
   callback: any;
 
   disciplineApiKey : any;
@@ -21,12 +22,13 @@ export class DisciplinePage {
   disciplineUserID:any;
   disciplines:any;
 
-constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public viewCtrl: ViewController, public navParams: NavParams, public http: Http) {
+	constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public viewCtrl: ViewController, public navParams: NavParams, public http: Http) {
   }
 
 	ionViewWillEnter() {
 
-		this.callback = this.navParams.get("callback")
+		this.selectedDefect = this.navParams.get('selecteddefect');
+		this.callback       = this.navParams.get("callback");
 
 		var disciplineData = JSON.parse(localStorage.getItem('userSystemData'));
 
@@ -34,12 +36,13 @@ constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, pub
 		this.disciplineApiKey          = disciplineData[0].apiKey;
 		this.disciplineUserID          = disciplineData[0].SystemUserID;
 
-		var url = Constants.apiUrl+"api/discipline/"+this.disciplineApiKey+"/"+this.disciplineSystemProjectID+"/"+this.disciplineUserID;
+		var url = Constants.apiUrl+"api/discipline/"+this.disciplineApiKey+"/"+this.disciplineSystemProjectID+"/"+this.selectedDefect;
 
 		    this.http.get(url).map(res => res.json()).subscribe(data => {
 		        this._sanitizer.bypassSecurityTrustStyle(data);
 		      this.disciplines = data;  
-		      console.log(this.disciplines);    
+			  console.log(this.disciplines);   
+			  console.log(this.disciplines.GroupName); 
 		    },
 		    err => {
 		        console.log("Oops!");

@@ -25,6 +25,9 @@ $colors: (  primary :      #0061c1,
 
 $toolbar-background: color($colors, primary);
 $searchbar-ios-input-search-background:#ffffff;
+$item-md-thumbnail-size:58px;
+$item-md-padding-right:7px;
+$item-md-padding-left:1px;
 
 // App iOS Variables
 // --------------------------------------------------
@@ -91,7 +94,7 @@ button,
 p {
   font-family: "Open Sans" !important;
 }
-
+/*
 @import "../assets/scss/font-awesome/font-awesome";
 
 @font-face {
@@ -105,3 +108,4 @@ p {
   font-weight: normal;
   font-style: normal;
 }
+*/
