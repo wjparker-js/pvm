@@ -18,6 +18,8 @@ import { DocumentViewer } from '../pages/documentviewer/documentviewer';
 import { DocumentInfo } from '../pages/documentinfo/documentinfo';
 import { ProjectsPage } from '../pages/projects/projects';
 import { SnaggingPage } from '../pages/snagging/snagging';
+import { Snagging51Page } from '../pages/snagging51/snagging51';
+import { Snagging52Page } from '../pages/snagging52/snagging52';
 import { DefectsPage }  from '../pages/Defects/defects';
 import { SubtypesPage } from '../pages/subtypes/subtypes';
 import { QrcodePage } from '../pages/qrcode/qrcode';
@@ -52,6 +54,8 @@ import { FilePath } from '@ionic-native/file-path';
     ProjectsPage,
     DocumentSummary,
     SnaggingPage,
+    Snagging51Page,
+    Snagging52Page,
     DefectsPage,
     SubtypesPage,
     QrcodePage,
@@ -87,6 +91,8 @@ import { FilePath } from '@ionic-native/file-path';
     DocumentInfo,
     ProjectsPage,
     SnaggingPage,
+    Snagging51Page,
+    Snagging52Page,
     DefectsPage,
     SubtypesPage,
     QrcodePage,

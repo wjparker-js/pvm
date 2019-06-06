@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar>   
+    <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>        
+    <span style="font-size:16px;color:white;padding-left:15px;">Defect Details - Fix 51</span> 
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content *ngFor="let defect1 of defect1s">
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Reference: </span>
+      <span class="mytext">{{defect1.OrderReference}}</span>
+      <br>
+      <span  style="font-size:13px;font-weight:bold !important;width:100px;">Subject: </span>
+      <span class="text">{{defect1.OrderSubject}}</span> 
+      <br>
+      <span  style="font-size:13px;font-weight:bold !important;width:100px;">Location: </span>
+      <span class="text">{{defect1.name}}</span>  
+      <br>
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Details: </span>
+      <div class="text" [innerHTML]="defect1.SpecialInstructions"></div>
+      <br>
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Issued: </span>
+      <span class="text">{{defect1.DateIssued}}</span>
+      <br>
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Required: </span>
+      <span class="text">{{defect1.DeliverBy}}</span>
+      <br>
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed: </span>
+      <span class="text">{{defect1.ProposedCompletionDate}}</span>
+      <br>
+    </ion-card-content>
+  </ion-card> 
+
+  <span *ngIf="ImgUrl">
+    <ion-card  [hidden]="ImgUrl === null">
+      <ion-card-content>        
+            <img [src]="ImgUrl" style="width: 100%">        
+      </ion-card-content>
+    </ion-card>
+  </span>
+
+  <ion-card [hidden]="currentImage !== null">
+    <ion-card-content>
+      <h3>Remember to take a photo and comment.</h3>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item>
+    <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;" >Update Defect Details</ion-label>
+    <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter your comments here..."  style="font-size:13px;"></ion-textarea>
+  </ion-item>
+
+  <ion-card [hidden]="currentImage === null">
+      <ion-card-content>
+        <img [src]="currentImage" style="width: 100%">
+      </ion-card-content>
+  </ion-card> 
+
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <button ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
+        <ion-icon name="camera"></ion-icon>Take Picture
+      </button>
+      <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
+        <ion-icon name="cloud-upload"></ion-icon>Confirm Fix Complete
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+  

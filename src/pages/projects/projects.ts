@@ -57,9 +57,10 @@ export class ProjectsPage {
     );      
   }
 
-  saveProject(name,id){
+  saveProject(name,id,scid){
     localStorage.setItem('CurrentProjectName', name);
     localStorage.setItem('CurrentProjectID', id);
+    localStorage.setItem('CurrentProjectClientID', scid);
     this.userProjectData.ProjectName = localStorage.getItem('CurrentProjectName');
     this.presentProjectToast("Project changed to: "+name);
     this.selectedProjectName = name;

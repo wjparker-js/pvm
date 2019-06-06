@@ -23,7 +23,6 @@ declare var cordova: any;
 
 export class SnaggingPage {
 
-	//public reference: string ="";
 	public name: string = "";
 	public discipline: string = "";
 	public reason: string = "";
@@ -37,7 +36,9 @@ export class SnaggingPage {
 
 	public lastImage: string = null;
   public loading: Loading;
-	public currentImage:any;
+	public currentImage: string;
+
+	public snagid: string;
 
 	frmData = {reference:"", details: ""};
 
@@ -52,181 +53,182 @@ export class SnaggingPage {
 				public toastCtrl: ToastController, 
 				public platform: Platform,
 				public loadingCtrl: LoadingController
-			 ) { 
+			 ) {}
 
-			 }
 
 	ionViewWillEnter() {
+
+		this.currentImage = null;
 
 		var snagData = JSON.parse(localStorage.getItem('userSystemData'));
 
 		this.pid     = localStorage.getItem('CurrentProjectID');
     this.api     = snagData[0].apiKey;
-    this.cid     = snagData[0].SystemClientID;
-    this.uid     = snagData[0].SystemUserID;
+    this.cid     = localStorage.getItem('CurrentProjectClientID');
+		this.uid     = snagData[0].SystemUserID;		
+		this.snagid  = this.navParams.get('snagid');
 
 	}
+		
+	public presentActionSheet() {
+		let actionSheet = this.actionSheetCtrl.create({
+			title: 'Select Image Source',
+			buttons: [
+				{
+					text: 'Load from Library',
+					handler: () => {
+						this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+					}
+				},
+				{
+					text: 'Use Camera',
+					handler: () => {
+						this.takePicture(this.camera.PictureSourceType.CAMERA);
+					}
+				},
+				{
+					text: 'Cancel',
+					role: 'cancel'
+				}
+			]
+		});
+		actionSheet.present();
+	}
 
-			 
-			 public presentActionSheet() {
-				let actionSheet = this.actionSheetCtrl.create({
-					title: 'Select Image Source',
-					buttons: [
-						{
-							text: 'Load from Library',
-							handler: () => {
-								this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
-							}
-						},
-						{
-							text: 'Use Camera',
-							handler: () => {
-								this.takePicture(this.camera.PictureSourceType.CAMERA);
-							}
-						},
-						{
-							text: 'Cancel',
-							role: 'cancel'
-						}
-					]
-				});
-				actionSheet.present();
-			}
+  public takePicture(sourceType) {
+
+		var options = {
+			quality: 80,
+			sourceType: sourceType,
+			saveToPhotoAlbum: true,
+			correctOrientation: true,
+			allowEdit : true,
+		};
 		
-			public takePicture(sourceType) {
-		
-				var options = {
-					quality: 80,
-					sourceType: sourceType,
-					saveToPhotoAlbum: true,
-					correctOrientation: true,
-					allowEdit : true,
-				};
-			 
-				this.camera.getPicture(options).then((imagePath) => {
-		
-					if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {        
-						this.filePath.resolveNativePath(imagePath)
-							.then(filePath => {
-								let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-								let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-								var correctFilename = this.createFileName();
-								this.currentImage = normalizeURL(correctPath + currentName);
-								this.copyFileToLocalDir(correctPath, currentName, correctFilename);
-								this.file.readAsDataURL(correctPath, currentName).then((imageDataUrl) => {
-									this.currentImage = imageDataUrl;
-								})
-							});
-					} else {
-						var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-						var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+		this.camera.getPicture(options).then((imagePath) => {
+
+			if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {        
+				this.filePath.resolveNativePath(imagePath)
+					.then(filePath => {
+						let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+						let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
 						var correctFilename = this.createFileName();
 						this.currentImage = normalizeURL(correctPath + currentName);
-						console.log(correctPath);
-						console.log(currentName);
-						console.log(correctFilename);	
-						console.log(this.currentImage);
-						this.copyFileToLocalDir(correctPath, currentName, correctFilename);  
+						this.copyFileToLocalDir(correctPath, currentName, correctFilename);
 						this.file.readAsDataURL(correctPath, currentName).then((imageDataUrl) => {
-						this.currentImage = imageDataUrl;
-						console.log(this.currentImage);
+							this.currentImage = imageDataUrl;
 						})
-					}
-				}, (err) => {
-					this.presentToast('Error while selecting image.');
-				});
-			}  
-		
-			private createFileName() {
-				var d = new Date(),
-				n = d.getTime(),
-				newFileName =  n + ".jpg";
-				return newFileName;
-			}  
-		
-			private copyFileToLocalDir(namePath, currentName, newFileName) {
-				console.log("in fun");
-				console.log(namePath);
+					});
+			} else {
+				var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+				var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+				var correctFilename = this.createFileName();
+				this.currentImage = normalizeURL(correctPath + currentName);
+				console.log(correctPath);
 				console.log(currentName);
-				console.log(newFileName);
-				console.log(cordova.file.dataDirectory);
-				this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-					this.lastImage = newFileName;
-				}, error => {
-					this.presentToast('Error while storing file.');
-				});
+				console.log(correctFilename);	
+				console.log(this.currentImage);
+				this.copyFileToLocalDir(correctPath, currentName, correctFilename);  
+				this.file.readAsDataURL(correctPath, currentName).then((imageDataUrl) => {
+				this.currentImage = imageDataUrl;
+				console.log(this.currentImage);
+				})
 			}
-			
-			private presentToast(text) {
-				let toast = this.toastCtrl.create({
-					message: text,
-					duration: 3000,
-					position: 'top'
-				});
-				toast.present();
-			}
-		 
-			public pathForImage(img) {
-				if (img === null) {
-					return '';
-				} else {
-					console.log(cordova.file.dataDirectory + img);
-					return cordova.file.dataDirectory + img;
-				}
-			}
-		
-			public uploadImage() {
-				// Destination URL
-				var url = "http://79.174.171.22/iupload.php";
-			
-				// File for Upload
-				var targetPath = this.pathForImage(this.lastImage);
-			
-				// File name only
-				var filename = this.lastImage;
-			
-				var options = {
-					fileKey: "file",
-					fileName: filename,
-					chunkedMode: false,
-					mimeType: "multipart/form-data",
-					params : {
-						"reference": this.frmData.reference,
-						"location": this.name,
-						"discipline": this.discipline,
-						"details": this.frmData.details,
-						"pid": this.pid,
-						"uid": this.uid,
-						"cid": this.cid,
-						"api": this.api,
-						"effect": this.effect,
-						"reason": this.reason,
-						"defecttype": this.defecttype
-					}
-				};
+		}, (err) => {
+			this.presentToast('Error while selecting image.');
+		});
+	}  
 
-				console.log(options);
-			
-				const fileTransfer: FileTransferObject = this.transfer.create();
-			
-				this.loading = this.loadingCtrl.create({
-					content: 'Uploading...',
-				});
-				
-				this.loading.present();
-		
-			
-				// Use the FileTransfer to upload the image
-				fileTransfer.upload(targetPath, url, options).then(data => {
-					this.loading.dismissAll()
-					this.presentToast('Image succesful uploaded.');
-				}, err => {
-					this.loading.dismissAll()
-					this.presentToast('Error while uploading file.');
-				});
-			}
-		
+	private createFileName() {
+		var d = new Date(),
+		n = d.getTime(),
+		newFileName =  n + ".jpg";
+		return newFileName;
+	}  
 
+	private copyFileToLocalDir(namePath, currentName, newFileName) {
+		console.log("in fun");
+		console.log(namePath);
+		console.log(currentName);
+		console.log(newFileName);
+		console.log(cordova.file.dataDirectory);
+		this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
+			this.lastImage = newFileName;
+		}, error => {
+			this.presentToast('Error while storing file.');
+		});
+	}
+	
+	private presentToast(text) {
+		let toast = this.toastCtrl.create({
+			message: text,
+			duration: 3000,
+			position: 'top'
+		});
+		toast.present();
+	}
+	
+	public pathForImage(img) {
+		if (img === null) {
+			return '';
+		} else {
+			console.log(cordova.file.dataDirectory + img);
+			return cordova.file.dataDirectory + img;
+		}
+	}
+
+	public uploadImage() {
+		console.log("in pre upload");
+		// Destination URL
+		var url = "http://79.174.171.22/iupload.php";
+		console.log(url);
+	
+		// File for Upload
+		var targetPath = this.pathForImage(this.lastImage);
+	
+		// File name only
+		var filename = this.lastImage;
+	
+		var options = {
+			fileKey: "file",
+			fileName: filename,
+			chunkedMode: false,
+			mimeType: "multipart/form-data",
+			params : {
+				"reference": this.frmData.reference,
+				"location": this.name,
+				"discipline": this.discipline,
+				"details": this.frmData.details,
+				"pid": this.pid,
+				"uid": this.uid,
+				"cid": this.cid,
+				"api": this.api,
+				"effect": this.effect,
+				"reason": this.reason,
+				"defecttype": this.defecttype
+			}
+		};
+
+		console.log(options);
+	
+		const fileTransfer: FileTransferObject = this.transfer.create();
+	
+		this.loading = this.loadingCtrl.create({
+			content: 'Uploading...',
+		});
+		
+		this.loading.present();
+
+	
+		// Use the FileTransfer to upload the image
+		fileTransfer.upload(targetPath, url, options).then(data => {
+			this.loading.dismissAll()
+			this.presentToast('Image succesful uploaded.');
+		}, err => {
+			this.loading.dismissAll()
+			this.presentToast('Error while uploading file.');
+		});
+	}
 
 	ionViewDidLoad() {
 	console.log('ionViewDidLoad SnaggingPage');	
@@ -235,14 +237,6 @@ export class SnaggingPage {
 	ionSelected() {
 	  console.log("Page has been selected");
 	}
-
-/*
-	ionViewWillEnter(){
-		if(this.reference == ""){
-			this.location = ""	
-		}	
-	}
-*/
 
 	openGetQRCode(){
 		this.navCtrl.push(QrcodePage, {callback:this.myCallbackFunction1});
