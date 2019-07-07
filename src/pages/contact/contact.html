@@ -7,7 +7,7 @@
   </ion-navbar>
   <div padding>
     <ion-segment color="secondary"  [(ngModel)]="phonelist" (ionChange)="segmentChanged(phonelist)">
-      <ion-segment-button value="users">
+      <ion-segment-button  selected value="users">
         Project Users
       </ion-segment-button>
       <ion-segment-button value="contacts">
@@ -24,7 +24,7 @@
         <ion-list style="margin-bottom: 0px;">
           <ion-item>
             <ion-thumbnail item-left>
-              <img src="assets/img/blueprint.jpg"/>
+              <img [src]="contact.avatar"  style="height:40px;width:40px;border:1px;" />
             </ion-thumbnail>
             <h2><b>{{contact.PFirstName}}&nbsp;{{contact.PLastName}}&nbsp;-&nbsp;{{contact.PCompanyName}}</b></h2>
             <h3>{{contact.Email}}</h3> 

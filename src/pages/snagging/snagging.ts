@@ -97,17 +97,22 @@ export class SnaggingPage {
 
   public takePicture(sourceType) {
 
+		console.log("in takePicture");
+
 		var options = {
 			quality: 80,
 			sourceType: sourceType,
-			saveToPhotoAlbum: true,
+			saveToPhotoAlbum: false,
 			correctOrientation: true,
 			allowEdit : true,
 		};
 		
 		this.camera.getPicture(options).then((imagePath) => {
 
-			if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {        
+			console.log("in getPicture"); 
+
+			if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) { 
+				console.log("in using library");       
 				this.filePath.resolveNativePath(imagePath)
 					.then(filePath => {
 						let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
@@ -120,18 +125,20 @@ export class SnaggingPage {
 						})
 					});
 			} else {
+				console.log("in using camera");
 				var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
 				var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
 				var correctFilename = this.createFileName();
 				this.currentImage = normalizeURL(correctPath + currentName);
-				console.log(correctPath);
-				console.log(currentName);
-				console.log(correctFilename);	
-				console.log(this.currentImage);
+				console.log("correctPath: ",correctPath);
+				console.log("currentName: ",currentName);
+				console.log("correctFilename: ",correctFilename);	
+				console.log("this.currentImage: ",this.currentImage);
 				this.copyFileToLocalDir(correctPath, currentName, correctFilename);  
+				console.log("doing readAsDataURL");
 				this.file.readAsDataURL(correctPath, currentName).then((imageDataUrl) => {
 				this.currentImage = imageDataUrl;
-				console.log(this.currentImage);
+				console.log("this.currentImage: ",this.currentImage);
 				})
 			}
 		}, (err) => {
@@ -147,13 +154,14 @@ export class SnaggingPage {
 	}  
 
 	private copyFileToLocalDir(namePath, currentName, newFileName) {
-		console.log("in fun");
-		console.log(namePath);
-		console.log(currentName);
-		console.log(newFileName);
-		console.log(cordova.file.dataDirectory);
+		console.log("in copyFileToLocalDir");
+		console.log("namePath: ",namePath);
+		console.log("currentName: ",currentName);
+		console.log("newFileName: ",newFileName);
+		console.log("cordova.file.dataDirectory: ",cordova.file.dataDirectory);
 		this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
 			this.lastImage = newFileName;
+			console.log("this.lastImage: ",this.lastImage);
 		}, error => {
 			this.presentToast('Error while storing file.');
 		});
@@ -180,7 +188,7 @@ export class SnaggingPage {
 	public uploadImage() {
 		console.log("in pre upload");
 		// Destination URL
-		var url = "http://79.174.171.22/iupload.php";
+		var url = "https://pvmobile.online/iupload.php";
 		console.log(url);
 	
 		// File for Upload

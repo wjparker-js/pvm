@@ -26,17 +26,17 @@
         <ion-list style="margin-bottom: 0px;">
           <ion-item no-padding>
 
-            <ion-thumbnail item-left no-padding style="height: 60px;width: 50px;margin:0px;padding:0px;margin-top: 5px;">
+            <ion-thumbnail item-left no-padding style="height: 60px;width: 50px;margin:0px;padding:0px;margin-top: 5px;margin-right:15px;">
               <img 
-                src="assets/imgs/pdf.png" 
-                style="min-height: 60px;min-width:50px;margin:0px;padding:6px;margin-top:-3px;margin-right:19px;" 
+                src="{{fixImage(document.PhotoTiny)}}"
+                style="min-height: 60px;min-width:60px;margin:0px;padding:6px;margin-top:-3px;margin-right:19px;" 
                 (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"
               />
             </ion-thumbnail>
 
             <div (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"  >
-            <h3><b>{{document.DocumentNumber}} Rev: {{document.Rev}}</b></h3>
-            <h3>{{document.Title}}</h3>
+            <h3><b><span [innerHtml]="document.DocumentNumber"></span> Rev: <span [innerHtml]="document.Rev"></span></b></h3>
+            <h3><span [innerHtml]="document.Title"></span></h3>
             </div>
             
             <h2>                       

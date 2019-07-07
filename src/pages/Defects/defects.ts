@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { SnaggingPage } from '../snagging/snagging';
 import { Snagging51Page } from '../snagging51/snagging51';
 import { Snagging52Page } from '../snagging52/snagging52';
+import { QrcodePage } from '../qrcode/qrcode';
 
 import 'rxjs/add/operator/map';
 
@@ -21,19 +22,28 @@ export class DefectsPage {
 	SystemProjectID: any;
 	selectedProjectName:any;
 	apiKey: any;
+	location: string = "";
 
 	constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public http: Http) {}
-	
-
 
   ionViewWillEnter() {
+
+		console.log("ionViewWillEnter");
 
     var defectData           = JSON.parse(localStorage.getItem('userSystemData'));
 		this.SystemProjectID     = localStorage.getItem('CurrentProjectID');
 		this.selectedProjectName = localStorage.getItem('CurrentProjectName');
-    this.apiKey              = defectData[0].apiKey; 
+		this.apiKey              = defectData[0].apiKey; 
+		
+		var url = "";
 
-    var url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/1";
+		if(this.location === ""){
+			url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/1";
+		} else {
+			url = Constants.apiUrl+"api/defectsqr/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.location;
+		}
+
+		console.log(url);
 
     this.http.get(url).map(res => res.json()).subscribe(data => {
           this._sanitizer.bypassSecurityTrustStyle(data);
@@ -46,10 +56,27 @@ export class DefectsPage {
     ); 
   }
 
-	newSnag(snagid){
-		console.log(snagid);
-		this.navCtrl.push(SnaggingPage,{snagid});
+	searchDefectsByKeyword(){
+		
 	}
+
+	newSnag(snagid){
+		this.navCtrl.push(SnaggingPage,{snagid});
+		console.log(snagid);
+	}
+
+	openLocationQRCode(){
+		this.navCtrl.push(QrcodePage, {callback:this.myCallbackFunction1,"parentPage": this});
+	}
+
+	myCallbackFunction1 = (_params) => {		
+		return new Promise((resolve, reject) => {
+			this.location = _params;
+			resolve();
+			console.log("myCallbackFunction1",this.location);
+			console.log(_params);
+		});
+	 }
 
 	openSnag(snagid,orderstatus){
 		console.log(snagid);
@@ -67,9 +94,9 @@ export class DefectsPage {
 
     if(segment == "all"){
 
-			var url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/1";
+			var urls1 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/1";
 
-			    this.http.get(url).map(res => res.json()).subscribe(data => {
+			    this.http.get(urls1).map(res => res.json()).subscribe(data => {
 				        this._sanitizer.bypassSecurityTrustStyle(data);
 								this.defects = data;          
 								console.log(this.defects);
@@ -83,9 +110,9 @@ export class DefectsPage {
 
     if(segment == "new"){
 
-			var url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/2";
+			var urls2 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/2";
 
-			    this.http.get(url).map(res => res.json()).subscribe(data => {
+			    this.http.get(urls2).map(res => res.json()).subscribe(data => {
 				        this._sanitizer.bypassSecurityTrustStyle(data);
 								this.defects = data;          
 								console.log(this.defects);
@@ -99,9 +126,9 @@ export class DefectsPage {
 		
     if(segment == "open"){
 
-			var url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/3";
+			var urls3 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/3";
 
-			    this.http.get(url).map(res => res.json()).subscribe(data => {
+			    this.http.get(urls3).map(res => res.json()).subscribe(data => {
 				        this._sanitizer.bypassSecurityTrustStyle(data);
 								this.defects = data;          
 								console.log(this.defects);

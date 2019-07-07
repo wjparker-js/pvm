@@ -1,4 +1,4 @@
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
@@ -12,7 +12,9 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 export class QrcodePage {
 
   scannedCode:string;
-  callback: any;
+	callback: any;
+	scanData : {};
+  options :BarcodeScannerOptions;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams, private barcodeScanner:BarcodeScanner) {
   }
@@ -26,9 +28,14 @@ export class QrcodePage {
 	}
 
 	scanQRCode(){
-		this.barcodeScanner.scan().then(barcodedata => {
+		this.options = {
+			prompt : "Scan your barcode "
+		}
+		this.barcodeScanner.scan(this.options).then(barcodedata => {
 			this.scannedCode = barcodedata.text;
-		})
+		}).catch(err => {
+			console.log('Error', err);
+	});
 	}
 
 	dismiss() {
@@ -37,11 +44,10 @@ export class QrcodePage {
 
 	ionViewWillLeave() {
 		this.callback(this.scannedCode).then(()=>{
+			console.log(this.scannedCode);
 		   //this.navController.pop();
 		   //this.viewCtrl.dismiss();
 		});
 	}
-
-  
 
 }

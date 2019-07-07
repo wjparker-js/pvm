@@ -63,6 +63,20 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-item>
+      <ion-label class="mylabel" style="width:20%">Defect Status</ion-label>
+      <ion-select class="myCustomSelect" [(ngModel)]="approval" name="approval"  style="text-align:left;" >
+          <ion-option class="myCustomSelect" [value] = "Approved">Approved</ion-option>
+          <ion-option class="myCustomSelect" [value] = "Rejected">Rejected</ion-option>
+      </ion-select>
+    </ion-item>
+
+  <ion-item>
+    <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;" >Update Defect Details</ion-label>
+    <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter your comments here..."  style="font-size:13px;"></ion-textarea>
+  </ion-item>
+
+
   <ion-card [hidden]="currentImage === null">
       <ion-card-header>
           <ion-card-title>
@@ -73,23 +87,6 @@
       <img [src]="currentImage" style="width: 100%">
     </ion-card-content>
   </ion-card> 
-
-  <ion-item>
-    <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;" >Update Defect Details</ion-label>
-    <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter your comments here..."  style="font-size:13px;"></ion-textarea>
-  </ion-item>
-
-  <ion-list radio-group>
-    <ion-item>
-      <ion-label>Approved</ion-label>
-      <ion-radio name="approval" slot="start" value="Approved" checked></ion-radio>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Rejected</ion-label>
-      <ion-radio name="approval" slot="start" value="Rejected"></ion-radio>
-    </ion-item>
-  </ion-list>
 
 
 </ion-content>

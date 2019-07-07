@@ -145,6 +145,18 @@ export class DocumentsPage {
   }
 
 
+  fixImage(image){
+
+    console.log(image);
+    var newstr = "";
+    newstr = image.replace("<span class='hilite'>", ""); 
+    newstr = newstr.replace("</span>", "");
+    console.log(newstr);
+
+    return newstr;
+    
+  }
+
   openDocumentInfo(docimg, docid, docno1,search){ 
 
     var pt1 = "<span class='hilite'>";

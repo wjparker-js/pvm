@@ -50,7 +50,7 @@ export class Snagging51Page {
         private loadingCtrl: LoadingController, 
         private http: Http, 
         private _sanitizer: DomSanitizer
-		) {}
+	) {}
 
       ionViewWillEnter() {
 
@@ -85,8 +85,7 @@ export class Snagging51Page {
         ); 
 
       }
-
-			 
+		 
 			 public presentActionSheet() {
 				let actionSheet = this.actionSheetCtrl.create({
 					title: 'Select Image Source',
@@ -117,7 +116,7 @@ export class Snagging51Page {
 				var options = {
 					quality: 80,
 					sourceType: sourceType,
-					saveToPhotoAlbum: true,
+					saveToPhotoAlbum: false,
 					correctOrientation: true,
 					allowEdit : true,
 				};
@@ -197,7 +196,7 @@ export class Snagging51Page {
 			public uploadImage() {
 				console.log("in post upload");
 				// Destination URL
-				var url = "http://79.174.171.22/iupload51.php";
+				var url = "https://pvmobile.online/iupload51.php";
 			  console.log(url);
 				// File for Upload
 				var targetPath = this.pathForImage(this.lastImage);

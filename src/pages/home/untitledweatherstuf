@@ -21,7 +21,7 @@
 
   
     this.weatherDes  = weather.list[0].weather[0].description;
-    this.weatherIcon = "http://openweathermap.org/img/w/"+weather.list[0].weather[0].icon+".png";
+    this.weatherIcon = "https://openweathermap.org/img/w/"+weather.list[0].weather[0].icon+".png";
     thia.weatherTemp = weather.list[0].main.temp - 273;
     thia.weatherTemp_Min = weather.list[0].main.temp_min -273;
     thia.weatherTemp_Max = weather.list[0].main.temp_max -273;

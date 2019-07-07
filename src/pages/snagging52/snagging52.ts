@@ -79,8 +79,8 @@ export class Snagging52Page {
               this.defect2s = data;          
 							console.log(this.defect2s);
 							this.branchOrder = this.defect2s[0].OrderId;
-						  this.preUrl  = "http://projectvaultuk.com/PublicPics/"+this.cid+"/"+this.pid+"/dfx/"+this.branchOrder+"/"+this.branchOrder+".jpg";
-						  this.postUrl = "http://projectvaultuk.com/PublicPics/"+this.cid+"/"+this.pid+"/dfx/"+this.branchOrder+"/"+this.branchOrder+"Post.jpg";
+						  this.preUrl  = "https://projectvaultuk.com/PublicPics/"+this.cid+"/"+this.pid+"/dfx/"+this.branchOrder+"/"+this.branchOrder+".jpg";
+						  this.postUrl = "https://projectvaultuk.com/PublicPics/"+this.cid+"/"+this.pid+"/dfx/"+this.branchOrder+"/"+this.branchOrder+"Post.jpg";
 							    console.log(this.preUrl);
 							console.log(this.postUrl);
 						},
@@ -121,7 +121,7 @@ export class Snagging52Page {
 				var options = {
 					quality: 80,
 					sourceType: sourceType,
-					saveToPhotoAlbum: true,
+					saveToPhotoAlbum: false,
 					correctOrientation: true,
 					allowEdit : true,
 				};
@@ -201,7 +201,7 @@ export class Snagging52Page {
 			public uploadImage() {
 				console.log("in post upload");
 				// Destination URL
-				var url = "http://79.174.171.22/iupload52.php";
+				var url = "https://pvmobile.online/iupload52.php";
 			  console.log(url);
 				// File for Upload
 				var targetPath = this.pathForImage(this.lastImage);

@@ -85,7 +85,7 @@ export class HomePage {
       //console.log(data.list[0]);
       this.weatherCity = data.city.name;
       this.weatherDes  = data.list[0].weather[0].description;
-      this.weatherIcon = "http://openweathermap.org/img/w/"+data.list[0].weather[0].icon+".png";
+      this.weatherIcon = "https://openweathermap.org/img/w/"+data.list[0].weather[0].icon+".png";
       this.weatherTemp = data.list[0].main.temp - 273;
       this.weatherTemp = Math.round(this.weatherTemp);
       //thia.weatherTemp_Min = data.list[0].main.temp_min -273;

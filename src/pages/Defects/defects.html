@@ -7,23 +7,39 @@
       </ion-buttons>
       <span style="font-size:16px;color:white;padding-left:15px;">{{selectedProjectName}}</span> 
       <ion-buttons right>
-          <button ion-button icon-only (click)="newSnag('new')">
+        <button ion-button  color="light" type="button" item-right (click)="openLocationQRCode()"> 
+          <ion-icon name="qr-scanner"> </ion-icon> 
+        </button>  
+        <button ion-button  strong color="light" type="button" item-right (click)="newSnag('new')"> 
+          <ion-icon strong name="add"> </ion-icon> 
+        </button>  
+        <!--<button ion-button icon-only (click)="newSnag('new')">
               Add
-          </button>
+          </button>-->
       </ion-buttons>
   </ion-navbar>
+  <ion-searchbar
+  #myDefectsSearchbar 
+  name = "defectsSearchBar" 
+  value= "" 
+  placeholder="Defect Search..."
+  (ionInput)="searchDefectsByKeyword($event)" 
+  [debounce]="500"
+  class="android"
+  style = "height:15px;width:100%;background-color:white;color:black;padding-right: 0px;padding-left: 0px;" >
+</ion-searchbar>
   <div padding>   
   <ion-segment color="secondary"  [(ngModel)]="defectslist" (ionChange)="segmentChanged(defectslist)">
-      <ion-segment-button value="all">
-        Issued
-      </ion-segment-button>
-      <ion-segment-button value="new">
-        Scheduled
-      </ion-segment-button>
-      <ion-segment-button value="open">
-        Reinspect
-      </ion-segment-button>
-    </ion-segment>
+    <ion-segment-button selected value="all">
+      Issued
+    </ion-segment-button>
+    <ion-segment-button value="new">
+      Scheduled
+    </ion-segment-button>
+    <ion-segment-button value="open">
+      Reinspect
+    </ion-segment-button>
+  </ion-segment>
   </div>
 </ion-header>
 
@@ -37,13 +53,14 @@
             <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 42px !Important;height: 50px !Important;margin-top: 10px;margin-bottom: 0px;">
               <img src="assets/imgs/defect.jpg" style="width:50px;height:42px;"/>
             </ion-thumbnail> 
-            <h2><b>{{defect.OrderReference}}</b></h2>
-            <h3><b>Subject:</b>&nbsp;{{defect.OrderSubject}}</h3>
-            <h3><b>Inst:</b>&nbsp;{{defect.SpecialInstructions}}</h3>            
+            <h3><b>{{defect.OrderReference}}</b></h3>
+            <span *ngIf="defect.name"><h3>Location:&nbsp;{{defect.name}}</h3></span>
+            <h3>Subject:&nbsp;{{defect.OrderSubject}}</h3>
+            <h3  text-wrap>Detail:&nbsp;:&nbsp;{{defect.SpecialInstructions}}</h3>            
            <h3  text-wrap>              
-            <span *ngIf="defect.DateIsssued"><b>Issued:</b>&nbsp;{{defect.DateIsssued}}&nbsp;&nbsp;</span>
-            <span *ngIf="defect.DeliverBy"><b>Required By:</b>&nbsp;{{defect.DeliverBy}}</span>
-            <span *ngIf="defect.ProposedDate"><b>Scheduled:</b>&nbsp;{{defect.ProposedDate}}&nbsp;&nbsp;</span>
+            <span *ngIf="defect.DateIsssued">Issued:&nbsp;{{defect.DateIsssued}}&nbsp;&nbsp;</span>
+            <span *ngIf="defect.DeliverBy">Required By:&nbsp;{{defect.DeliverBy}}</span>
+            <span *ngIf="defect.ProposedDate">Scheduled:&nbsp;{{defect.ProposedDate}}&nbsp;&nbsp;</span>
            </h3>            
           </ion-item>
       </ion-list>
