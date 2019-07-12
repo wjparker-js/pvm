@@ -17,10 +17,13 @@ import 'rxjs/add/operator/map';
 
 export class DefectsPage {
 
-  defects: any;
+	defects: any;
+	defectslist: any;
 	userApiKey : any;
 	SystemProjectID: any;
 	selectedProjectName:any;
+  eventInstance : any;
+  dsearch : any;
 	apiKey: any;
 	location: string = "";
 
@@ -34,11 +37,13 @@ export class DefectsPage {
 		this.SystemProjectID     = localStorage.getItem('CurrentProjectID');
 		this.selectedProjectName = localStorage.getItem('CurrentProjectName');
 		this.apiKey              = defectData[0].apiKey; 
+
+		this.defectslist         = "all";
 		
 		var url = "";
 
 		if(this.location === ""){
-			url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/1";
+			url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/nosearch/1";
 		} else {
 			url = Constants.apiUrl+"api/defectsqr/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.location;
 		}
@@ -56,8 +61,30 @@ export class DefectsPage {
     ); 
   }
 
-	searchDefectsByKeyword(){
-		
+	searchDefectsByKeyword($event){
+	
+    var defectData           = JSON.parse(localStorage.getItem('userSystemData'));
+		this.SystemProjectID     = localStorage.getItem('CurrentProjectID');
+		this.selectedProjectName = localStorage.getItem('CurrentProjectName');
+		this.apiKey              = defectData[0].apiKey; 
+
+    var searchTerm           = $event.srcElement.value;
+    this.eventInstance       = $event;
+		this.dsearch             = $event.srcElement.value;
+		this.defectslist         = "";
+
+		var url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+searchTerm+"/xxx";
+		console.log(url);
+
+    this.http.get(url).map(res => res.json()).subscribe(data => {
+          this._sanitizer.bypassSecurityTrustStyle(data);
+          this.defects = data;          
+					console.log(this.defects);
+      },
+      err => {
+          console.log("Oops!");
+      }
+    ); 
 	}
 
 	newSnag(snagid){
@@ -90,11 +117,17 @@ export class DefectsPage {
 		if(orderstatus == 56){this.navCtrl.push(Snagging52Page,{snagid,orderstatus});}
 	}
 
-  segmentChanged(segment){
+  segmentChanged(segment){ 
+
+		var htmlElement = document.getElementsByClassName("searchbar-input");
+		var searchTerm = htmlElement[0].value;
+
+		if(searchTerm == ""){searchTerm = "nosearch";}
 
     if(segment == "all"){
 
-			var urls1 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/1";
+			var urls1 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+searchTerm+"/1";
+			console.log(urls1);
 
 			    this.http.get(urls1).map(res => res.json()).subscribe(data => {
 				        this._sanitizer.bypassSecurityTrustStyle(data);
@@ -110,7 +143,8 @@ export class DefectsPage {
 
     if(segment == "new"){
 
-			var urls2 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/2";
+			var urls2 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+searchTerm+"/2";
+			console.log(urls2);
 
 			    this.http.get(urls2).map(res => res.json()).subscribe(data => {
 				        this._sanitizer.bypassSecurityTrustStyle(data);
@@ -126,7 +160,8 @@ export class DefectsPage {
 		
     if(segment == "open"){
 
-			var urls3 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/3";
+			var urls3 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+searchTerm+"/3";
+			console.log(urls3);
 
 			    this.http.get(urls3).map(res => res.json()).subscribe(data => {
 				        this._sanitizer.bypassSecurityTrustStyle(data);

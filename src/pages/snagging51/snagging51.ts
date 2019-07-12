@@ -67,7 +67,7 @@ export class Snagging51Page {
 
         console.log("Snag ID:",this.snagid);
 
-        var url = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/"+this.snagid;
+        var url = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/nosearch/"+this.snagid;
 
         this.http.get(url).map(res => res.json()).subscribe(data => {
               this._sanitizer.bypassSecurityTrustStyle(data);
