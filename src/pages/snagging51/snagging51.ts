@@ -27,6 +27,8 @@ export class Snagging51Page {
 	private snagid: string;
 	private details: string;
 	private defect1s:  any;
+	private defect1snotes:  any;
+	private defect1snotesid:  any;
 	
 	public ImgUrl:any;
 	public thumbbase64:any;
@@ -57,8 +59,8 @@ export class Snagging51Page {
 				this.currentImage = null;
 				this.postImage    = null;
 
-        var snagData = JSON.parse(localStorage.getItem('userSystemData'));
-
+				var snagData = JSON.parse(localStorage.getItem('userSystemData'));
+				
         this.pid     = localStorage.getItem('CurrentProjectID');
         this.api     = snagData[0].apiKey;
 				this.cid     = localStorage.getItem('CurrentProjectClientID');
@@ -77,12 +79,26 @@ export class Snagging51Page {
 								this.ImgUrl = this._sanitizer.bypassSecurityTrustUrl("data:Image/*;base64,"+this.defect1s[0].thumbbase64);
 							} else {
 								this.ImgUrl = null;
-							}							
+							}						
+							this.defect1snotesid = 	this.defect1s[0].OrderID;
           },
           err => {
               console.log("Get Data Oops!");
           }
         ); 
+
+
+        var url1 = Constants.apiUrl+"api/defectsnotes/"+this.api+"/"+this.cid+"/"+this.defect1snotesid;
+
+		    this.http.get(url1).map(res => res.json()).subscribe(data => {
+			        this._sanitizer.bypassSecurityTrustStyle(data);
+							this.defect1snotes = data;          
+							console.log(this.defect1snotes);						
+			    },
+			    err => {
+			        console.log("Get Data Oops!");
+			    }
+				); 
 
       }
 		 

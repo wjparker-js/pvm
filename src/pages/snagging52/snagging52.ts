@@ -28,6 +28,7 @@ export class Snagging52Page {
 	private details: string;
 	private approval: string;
 	private defect2s:  any;
+	private defect1snotes:  any;	
 	
 	public ImgUrl:any;
 	public thumbbase64:any;
@@ -72,7 +73,8 @@ export class Snagging52Page {
 
         console.log("Snag ID:",this.snagid);
 
-        var url = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/nosearch/"+this.snagid;
+				var url = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/nosearch/"+this.snagid;
+				var url1 = "";
 
         this.http.get(url).map(res => res.json()).subscribe(data => {
               this._sanitizer.bypassSecurityTrustStyle(data);
@@ -81,14 +83,32 @@ export class Snagging52Page {
 							this.branchOrder = this.defect2s[0].OrderId;
 						  this.preUrl  = "https://projectvaultuk.com/PublicPics/"+this.cid+"/"+this.pid+"/dfx/"+this.branchOrder+"/"+this.branchOrder+".jpg";
 						  this.postUrl = "https://projectvaultuk.com/PublicPics/"+this.cid+"/"+this.pid+"/dfx/"+this.branchOrder+"/"+this.branchOrder+"Post.jpg";
-							    console.log(this.preUrl);
-							console.log(this.postUrl);
+							console.log(this.preUrl);
+							
+									url1 = Constants.apiUrl+"api/defectsnotes/"+this.api+"/"+this.cid+"/"+this.branchOrder;
+							    this.http.get(url1).map(res => res.json()).subscribe(data => {
+								        this._sanitizer.bypassSecurityTrustStyle(data);
+												this.defect1snotes = data;          
+												console.log(this.defect1snotes);						
+								    },
+								    err => {
+								        console.log("Get Data Oops!");
+								    }
+									); 
+
+							console.log(url1);
 						},
           err => {
               console.log("Get Data Oops!");
           			 }
         ); 
-      }
+
+
+        
+
+
+
+			}
 
 			 
 			 public presentActionSheet() {

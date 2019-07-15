@@ -35,6 +35,14 @@
     </ion-card-content>
   </ion-card> 
 
+  <ion-card>
+  <ion-card-content *ngFor="let defect1note of defect1snotes">
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Note By: </span>
+      <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}}</B><br>{{defect1note.Note}}</span>
+      <br>
+  </ion-card-content>
+</ion-card> 
+
   <ion-card  [hidden]="preUrl === null">
       <ion-card-header>
           <ion-card-title>
