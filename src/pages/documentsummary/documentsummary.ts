@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ModalController, Platform, NavParams, ViewController } from 'ionic-angular';
+import { ModalController, Platform, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import * as Constants from '../../providers/constants';
+import { DocumentViewer } from '../documentviewer/documentviewer';
 
 @Component({selector: 'page-documentsummary', templateUrl: 'documentsummary.html'})
 
@@ -15,13 +16,14 @@ export class DocumentSummary {
 
   userdocumentInfoData = {
     "SystemUserID": "",
+    "SystemClientID": "",
     "apiKey":"",
     "SystemProjectID":"",
     "Thumbnail":"",
     "DocumentNumber":""
   };
 
-  constructor(public platform: Platform, public params: NavParams, public http: Http, private _sanitizer: DomSanitizer, public modalCtrl: ModalController, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController,public platform: Platform, public params: NavParams, public http: Http, private _sanitizer: DomSanitizer, public modalCtrl: ModalController, public viewCtrl: ViewController) {
 
     var docdays="";
     this.docdays = this.params.get('days');
@@ -29,7 +31,8 @@ export class DocumentSummary {
 
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
-    this.userdocumentInfoData.SystemUserID    = documentData[0].SystemUserID;
+    this.userdocumentInfoData.SystemUserID    = documentData[0].SystemUserID;    
+    this.userdocumentInfoData.SystemClientID  = documentData[0].SystemClientID;
     this.userdocumentInfoData.apiKey          = documentData[0].apiKey;
     this.userdocumentInfoData.SystemProjectID = localStorage.getItem('CurrentProjectID');    
     this.userdocumentInfoData.Thumbnail       = documentData[0].PhotoTiny;
@@ -56,6 +59,11 @@ export class DocumentSummary {
           }
         ); 
 
+  }
+
+  
+  openDocuments(clientid,projectid,docid,ext){
+    this.navCtrl.push(DocumentViewer,{clientid,projectid,docid,ext});
   }
 
 

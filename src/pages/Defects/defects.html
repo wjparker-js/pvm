@@ -61,9 +61,9 @@
             <h3>Subject:&nbsp;{{defect.OrderSubject}}</h3>
             <h3  text-wrap>Detail:&nbsp;:&nbsp;{{defect.SpecialInstructions}}</h3>            
             <h3  text-wrap>              
-              <span *ngIf="defect.DateIsssued">Issued:&nbsp;{{defect.DateIsssued}}&nbsp;&nbsp;</span>
-              <span *ngIf="defect.DeliverBy">Required By:&nbsp;{{defect.DeliverBy}}</span>
-              <span *ngIf="defect.ProposedDate">Scheduled:&nbsp;{{defect.ProposedDate}}&nbsp;&nbsp;</span>
+              <span *ngIf="defect.DateIsssued">Issued:&nbsp;{{defect.DateIsssued  | date : 'dd MMM yyyy' }}&nbsp;&nbsp;</span>
+              <span *ngIf="defect.DeliverBy">Required By:&nbsp;{{defect.DeliverBy  | date : 'dd MMM yyyy' }}&nbsp;&nbsp;</span>
+              <span *ngIf="defect.ProposedDate">Scheduled:&nbsp;{{defect.ProposedDate  | date : 'dd MMM yyyy' }}&nbsp;&nbsp;</span>
             </h3>            
           </ion-item>
           </ion-card>

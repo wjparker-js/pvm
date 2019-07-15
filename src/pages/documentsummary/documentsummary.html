@@ -16,8 +16,8 @@
                 <ion-card>
 
                     <ion-card-header>
-                        <img [src]="docimg"  style="width:280px;height:200px;"/>
-                    </ion-card-header>
+                            <img [src]="document.PhotoTiny"  style="width:100%;border:2px;" (click)= "openDocuments(userdocumentInfoData.SystemClientID,userdocumentInfoData.SystemProjectID,document.DocumentID,document.FileExtension)"/>
+                    </ion-card-header> 
 
                     <ion-card-content>
                         <ion-list >
