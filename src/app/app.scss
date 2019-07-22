@@ -16,7 +16,14 @@
 // automatically applied to the <body> element in the app.
 .platform-ios 
 {
-  page-home, page-documents, page-contact, page-projects, page-documentaudit, page-documentviewer, page-login, page-documentinfo { // replaced by your page HERE
+  page-home, page-documents, page-defects, page-contact, page-projects, page-documentaudit, page-documentviewer, page-login, page-documentinfo { // replaced by your page HERE
+     top: 20px !important;
+  }
+}
+
+.platform-anfroid 
+{
+  page-home, page-documents, page-defects, page-contact, page-projects, page-documentaudit, page-documentviewer, page-login, page-documentinfo { // replaced by your page HERE
      top: 20px !important;
   }
 }

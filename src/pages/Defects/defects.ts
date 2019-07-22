@@ -122,9 +122,7 @@ export class DefectsPage {
 		var htmlElement = document.getElementsByClassName("searchbar-input");
 		var searchTerm = htmlElement["0"].value;
 
-		console.log(searchTerm);
-
-		//var searchTerm = htmlElement[0].value;
+		console.log(htmlElement["0"].value);
 
 		if(searchTerm == ""){searchTerm = "nosearch";}
 

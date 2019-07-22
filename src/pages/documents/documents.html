@@ -1,11 +1,14 @@
 <ion-header>
-  <ion-navbar>   
-    <button ion-button menuToggle start>
-      <ion-icon name="menu"></ion-icon>
-    </button>        
-    <span id="docnameheader" style="font-size:16px;color:white;padding-left:15px;">{{userdocumentData.SystemProjectName}}</span> 
+  <ion-navbar primary>   
+    <ion-buttons left style='margin-left: 0px;margin-right: 0px;'>
+        <button ion-button menuToggle start style='margin-left:6px'>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-buttons>
+    <span style="font-size:16px;color:white;padding-left:15px;">{{this.userdocumentData.SystemProjectName}}</span>  
   </ion-navbar>
-  <ion-toolbar>
+
+  <div>
     <ion-searchbar
       #mySearchbar 
       name = "searchBar" 
@@ -13,10 +16,10 @@
       placeholder="Document Search..."
       (ionInput)="searchByKeyword($event)" 
       [debounce]="500"
-      class="android"
-      style = "height:15px;width:100%;background-color:white;color:black;padding-right: 0px;padding-left: 0px;" >
+      class="android">
     </ion-searchbar>
-  </ion-toolbar>
+  </div>
+
 </ion-header>
 
 <ion-content>

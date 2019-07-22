@@ -1,12 +1,14 @@
 <ion-header>
+
   <ion-navbar>   
     <button ion-button menuToggle start>
       <ion-icon name="menu"></ion-icon>
     </button>        
     <span style="font-size:16px;color:white;padding-left:15px;">{{userContactData.ProjectName}}</span> 
   </ion-navbar>
+
   <div padding>
-    <ion-segment color="secondary"  [(ngModel)]="phonelist" (ionChange)="segmentChanged(phonelist)">
+    <ion-segment color="primary"  mode='ios'  [(ngModel)]="phonelist" (ionChange)="segmentChanged(phonelist)">
       <ion-segment-button  selected value="users">
         Project Users
       </ion-segment-button>
@@ -17,31 +19,43 @@
   </div>
 </ion-header>
 
+        
+
 <ion-content>
   <ion-grid>
     <ion-row>
       <ion-col  *ngFor="let contact of userContacts" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
         <ion-list style="margin-bottom: 0px;">
+         <ion-card> 
           <ion-item>
             <ion-thumbnail item-left>
               <img [src]="contact.avatar"  style="height:40px;width:40px;border:1px;" />
             </ion-thumbnail>
             <h2><b>{{contact.PFirstName}}&nbsp;{{contact.PLastName}}&nbsp;-&nbsp;{{contact.PCompanyName}}</b></h2>
             <h3>{{contact.Email}}</h3> 
+
             <h3>  
-              <span *ngIf="contact.PMobile">
+              <span *ngIf="contact.PMobile; else nomob">
                 <ion-icon style = "font-size: 15px;" name="call" color="primary" class="flex-right" (click)="callJoint(contact.PMobile)">
                     <span style="font-family:arial;font-size: 12px;">{{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;</span>
                 </ion-icon>
               </span>
-              <span *ngIf="contact.PTelephone">
+              <span *ngIf="contact.PTelephone; else nomob">
                 <ion-icon style = "font-size: 15px;" name="call" color="bold" class="flex-right" (click)="callJoint(contact.PTelephone)">
                     <span style="font-family:arial;font-size: 12px;">{{contact.PTelephone}}</span>
                 </ion-icon>
               </span>
-            </h3>
-          </ion-item>
+              <ng-template #nomob>
+                <span>
+                      <span style="font-family:arial;font-size: 12px;"> </span>
+                </span>
+                </ng-template>
 
+
+            </h3>
+
+          </ion-item>
+         </ion-card> 
       </ion-list>
 
     <!-- </div> -->
