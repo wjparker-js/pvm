@@ -1,26 +1,33 @@
 page-contact {
     background: #fff;
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+
     .listheader{
         font-size:20px;
         color:black; 
         margin-top:20px;
         background-color:#4282c1;
+        font-family: "Roboto", "Helvetica Neue", sans-serif;
     }
     
     h1{
         font-size: 30px;
-        margin-top:20px
+        margin-top:20px;
+        font-family: "Roboto", "Helvetica Neue", sans-serif;
     }
     ion-list-header{
         font-size:16px;
-        color:black;        
+        color:black;   
+        font-family: "Roboto", "Helvetica Neue", sans-serif;     
     }
     ion-title{
         font-size:12px;
         color:yellow;
+        font-family: "Roboto", "Helvetica Neue", sans-serif;
     }
     ion-card{
         margin-top:75px;
+        font-family: "Roboto", "Helvetica Neue", sans-serif;
     } 
     ion-button{
         margin-top:20px;
@@ -28,6 +35,7 @@ page-contact {
     ion-list{
         margin-top:15px;
         margin-bottom:30px;
+        font-family: "Roboto", "Helvetica Neue", sans-serif;
     }
     .marginTop{
         margin-top:150px;
@@ -39,5 +47,6 @@ page-contact {
 a{
     text-align: center;
     margin-top: 30px;
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
 }
 }

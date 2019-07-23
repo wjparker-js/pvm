@@ -23,6 +23,7 @@
 </ion-header>
 
 <ion-content>
+  <div *ngIf="this.hasdocs; else nodocs">
   <ion-grid>
     <ion-row>
       <ion-col  *ngFor="let document of userdocuments" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
@@ -38,15 +39,15 @@
             </ion-thumbnail>
 
             <div (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"  >
-            <h3><b><span [innerHtml]="document.DocumentNumber"></span> Rev: <span [innerHtml]="document.Rev"></span></b></h3>
+            <h3><b><span [innerHtml]="document.DNREV"></span></b></h3>
             <h3><span [innerHtml]="document.Title"></span></h3>
             </div>
             
             <h2>                       
-              <ion-icon style = "font-size: 13px;padding-top: 8px;" name="information-circle" color="secondary" class="flex-right" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
+              <ion-icon style = "font-size: 13px;padding-top: 0px;" name="information-circle"  class="flex-right hilite1" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
               <label class="bodytext" color="primary" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber,dsearch)">Details</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               
-              <ion-icon style = "font-size: 13px;padding-top: 8px;" name="document" color="secondary" class="flex-right" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
+              <ion-icon style = "font-size: 13px;padding-top: 0px;" name="refresh-circle"  class="flex-right hilite2" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
               <label class="bodytext" color="primary" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Audit Trail</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               
               <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="secondary" class="flex-right" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
@@ -58,4 +59,12 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  </div>
+
+  <ng-template #nodocs>
+    <div>
+          <div style="font-family:arial;font-size: 20px;text-align: center;"><br>No Documents</div>
+    </div>
+  </ng-template>
+
 </ion-content>

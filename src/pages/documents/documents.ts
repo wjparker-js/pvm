@@ -22,6 +22,7 @@ export class DocumentsPage {
   selectedProjectName: any;
   eventInstance : any;
   dsearch : any;
+  hasdocs : any;
 
   userdocumentData = {
     "SystemProjectID":"",
@@ -63,7 +64,8 @@ export class DocumentsPage {
     var documentDocumentNumber  = this.userdocumentData.DocumentNumber;
     var documentFileExtension   = this.userdocumentData.FileExtension;
 
-
+    this.hasdocs = false;
+    
     var furl  = Constants.apiUrl+"api/documentsfields/"+documentSystemProjectID;
     this.http.get(furl).map(res => res.json()).subscribe(data => {
           this._sanitizer.bypassSecurityTrustStyle(data);
@@ -125,6 +127,11 @@ export class DocumentsPage {
     this.http.get(url).map(res => res.json()).subscribe(data => {
           this._sanitizer.bypassSecurityTrustStyle(data);
           this.userdocuments = data;
+          if ( this.userdocuments.length == 0 ) {
+            this.hasdocs = false;
+          } else {
+            this.hasdocs = true;
+          }
           console.log(this.userdocuments);
       },
       err => {

@@ -53,7 +53,7 @@ export class DefectsPage {
     this.http.get(url).map(res => res.json()).subscribe(data => {
           this._sanitizer.bypassSecurityTrustStyle(data);
           this.defects = data;          
-					console.log(this.defects);
+		  console.log(this.defects);
       },
       err => {
           console.log("Oops!");
