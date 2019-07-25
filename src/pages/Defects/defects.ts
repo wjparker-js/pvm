@@ -64,17 +64,17 @@ export class DefectsPage {
 	searchDefectsByKeyword($event){
 	
     var defectData           = JSON.parse(localStorage.getItem('userSystemData'));
-		this.SystemProjectID     = localStorage.getItem('CurrentProjectID');
-		this.selectedProjectName = localStorage.getItem('CurrentProjectName');
-		this.apiKey              = defectData[0].apiKey; 
+	this.SystemProjectID     = localStorage.getItem('CurrentProjectID');
+	this.selectedProjectName = localStorage.getItem('CurrentProjectName');
+	this.apiKey              = defectData[0].apiKey; 
 
     var searchTerm           = $event.srcElement.value;
     this.eventInstance       = $event;
-		this.dsearch             = $event.srcElement.value;
-		this.defectslist         = "";
+	this.dsearch             = $event.srcElement.value;
+	this.defectslist         = "";
 
-		var url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+searchTerm+"/xxx";
-		console.log(url);
+	var url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+searchTerm+"/xxx";
+	console.log(url);
 
     this.http.get(url).map(res => res.json()).subscribe(data => {
           this._sanitizer.bypassSecurityTrustStyle(data);
@@ -120,9 +120,12 @@ export class DefectsPage {
   segmentChanged(segment){ 
 
 		var htmlElement = document.getElementsByClassName("searchbar-input");
-		var searchTerm = htmlElement["0"].value;
+		if(htmlElement.length == 1){var searchTerm = htmlElement["0"].value;}
+		if(htmlElement.length == 2){var searchTerm = htmlElement["1"].value;}
+		
 
-		console.log(htmlElement["0"].value);
+		console.log(htmlElement);
+		console.log(searchTerm);
 
 		if(searchTerm == ""){searchTerm = "nosearch";}
 

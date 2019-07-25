@@ -26,17 +26,18 @@
   <div *ngIf="this.hasdocs; else nodocs">
   <ion-grid>
     <ion-row>
-      <ion-col  *ngFor="let document of userdocuments" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
+      <ion-col  *ngFor="let document of userdocuments" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;margin-left:5px;margin-right:5px;">
+        <ion-card style="padding-top:5px;margin:5px;margin-right:0px;"> 
         <ion-list style="margin-bottom: 0px;">
           <ion-item no-padding>
-
-            <ion-thumbnail item-left no-padding style="height: 60px;width: 50px;margin:0px;padding:0px;margin-top: 5px;margin-right:15px;">
+          
+            <ion-thumbnail item-left no-padding style="height: 70px;width: 100px;margin:10px;padding:10px;margin-top: 5px;margin-right:15px;">
               <img 
                 src="{{fixImage(document.PhotoTiny)}}"
-                style="min-height: 60px;min-width:60px;margin:0px;padding:6px;margin-top:-3px;margin-right:19px;" 
+                border="2" 
                 (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"
               />
-            </ion-thumbnail>
+            </ion-thumbnail>          
 
             <div (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"  >
             <h3><b><span [innerHtml]="document.DNREV"></span></b></h3>
@@ -44,18 +45,19 @@
             </div>
             
             <h2>                       
-              <ion-icon style = "font-size: 13px;padding-top: 0px;" name="information-circle"  class="flex-right hilite1" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
-              <label class="bodytext" color="primary" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber,dsearch)">Details</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <ion-icon style = "font-size: 13px;padding-top: 0px;" name="refresh-circle"  class="flex-right hilite1" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
+              <label class="bodytext" color="primary" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber,dsearch)">Details</label>&nbsp;&nbsp;
               
-              <ion-icon style = "font-size: 13px;padding-top: 0px;" name="refresh-circle"  class="flex-right hilite2" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
-              <label class="bodytext" color="primary" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Audit Trail</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <ion-icon style = "font-size: 13px;padding-top: 0px;" name="information-circle"  class="flex-right hilite2" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
+              <label class="bodytext" color="primary" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Audit</label>&nbsp;&nbsp;
               
               <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="secondary" class="flex-right" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
-              <label class="bodytext" color="primary" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Send</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <label class="bodytext" color="primary" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Send</label>
             </h2>
 
           </ion-item>
-        </ion-list>
+          </ion-list>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

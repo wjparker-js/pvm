@@ -10,6 +10,7 @@
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let project of userProjects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
+        <ion-card>
         <ion-list  style="margin-bottom: 0px;">  
           <ion-item (click)="saveProject(project.ProjectName,project.ProjectID,project.SystemClientID);">
             <ion-avatar item-start>
@@ -19,6 +20,7 @@
             <h3>{{project.Client}}</h3>
           </ion-item>
         </ion-list>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
