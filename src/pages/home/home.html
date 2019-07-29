@@ -9,33 +9,38 @@
     
 <ion-content padding id="home">
 
+
   <b>
-    <span  style="text-align:center;padding:4px;">
-      <h3>{{userPostData.ProjectName}} Location</h3>
+    <span  style="text-align:center;padding:4px;margin-bottom: 0px;">
+      <h2 style="margin-bottom: 0px;">{{userPostData.ProjectName}} Location</h2>
     </span>
   </b>
+
   
   <!--<div #map id="map"></div>-->
 
-  <br>
-  <br>
 
-  <ion-row>
+
+<ion-card> 
+  <ion-row>   
     <ion-col width-25 offset-25>
-      <h2 class="location">{{weatherCity}}</h2>
-      <h1 class="temp">{{weatherTemp}}&deg;</h1>
+      <h2 class="location" style="margin:0px;">{{weatherCity}}</h2>
+      <h4 class="description" style="margin:0px;">{{weatherDes}}</h4>
+      <h1 class="temp" style="margin-top:0px;">{{weatherTemp}}&deg;</h1>
     </ion-col>  
     <ion-col width-25>
-      <div class="icon">
-        <h3 class="description">{{weatherDes}}</h3>
-        <img [src]="weatherIcon" />
+      <div class="icon">        
+        <img [src]="weatherIcon" style="width: 150px;height: 100px;" />
       </div>
-    </ion-col>   
+    </ion-col>     
   </ion-row>
+ </ion-card>
+
+ <br>
 
   <div class="box blue">
     <b><span  style="text-align:center;padding:4px;">Recent Documents Summary</span></b>
-    <ion-list  *ngFor="let item of dataSet" >
+    <ion-list  *ngFor="let item of dataSet" style="margin-bottom: 1px;">
       <ion-item>
         <table style="width:100%;">
           <tr>                
@@ -75,11 +80,12 @@
       </ion-item>
     </ion-list>
   </div>
+-->
 
   <br>
   <div class="box blue">
     <b><span  style="text-align:center;padding:4px;">Request For Information Summary</span></b>
-    <ion-list  >
+    <ion-list  style="margin-bottom: 1px;" >
       <ion-item>
         <table style="width:100%;" *ngFor="let item of dataSet2">
           <tr>
@@ -101,6 +107,6 @@
       </ion-item>
     </ion-list> 
   </div>
--->
+
 
 </ion-content>

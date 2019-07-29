@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { QrcodePage } from '../qrcode/qrcode';
 import { LocationmapPage } from '../locationmap/locationmap';
 import { DisciplinePage } from '../discipline/discipline';
@@ -43,17 +43,18 @@ export class SnaggingPage {
 	frmData = {reference:"", details: ""};
 
   constructor(
-			  public navCtrl: NavController, 
-			  public navParams: NavParams,
-				public camera: Camera,
-				public transfer: FileTransfer,
-				public file: File,
-				public filePath: FilePath,
-				public actionSheetCtrl: ActionSheetController, 
-				public toastCtrl: ToastController, 
-				public platform: Platform,
-				public loadingCtrl: LoadingController
-			 ) {}
+	public navCtrl: NavController, 
+	public navParams: NavParams,
+	public camera: Camera,
+	public transfer: FileTransfer,
+	public file: File,
+	public filePath: FilePath,
+	public actionSheetCtrl: ActionSheetController, 
+	public toastCtrl: ToastController, 
+	public platform: Platform,
+	public viewCtrl: ViewController,
+	public loadingCtrl: LoadingController
+	) {}
 
 
 	ionViewWillEnter() {
@@ -63,8 +64,8 @@ export class SnaggingPage {
 		var snagData = JSON.parse(localStorage.getItem('userSystemData'));
 
 		this.pid     = localStorage.getItem('CurrentProjectID');
-    this.api     = snagData[0].apiKey;
-    this.cid     = localStorage.getItem('CurrentProjectClientID');
+    	this.api     = snagData[0].apiKey;
+    	this.cid     = localStorage.getItem('CurrentProjectClientID');
 		this.uid     = snagData[0].SystemUserID;		
 		this.snagid  = this.navParams.get('snagid');
 
@@ -95,7 +96,7 @@ export class SnaggingPage {
 		actionSheet.present();
 	}
 
-  public takePicture(sourceType) {
+  	public takePicture(sourceType) {
 
 		console.log("in takePicture");
 
@@ -310,5 +311,10 @@ export class SnaggingPage {
 				console.log(this.defecttype);
 		});
 	 }
-	
+
+	 dismiss() {
+		this.viewCtrl.dismiss('') ;
+	 } 
+
+	 
 }

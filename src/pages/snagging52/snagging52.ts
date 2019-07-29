@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
@@ -51,6 +51,7 @@ export class Snagging52Page {
 				private actionSheetCtrl: ActionSheetController, 
 				private toastCtrl: ToastController, 
 				private platform: Platform,
+				public viewCtrl: ViewController,
         private loadingCtrl: LoadingController, 
         private http: Http, 
         private _sanitizer: DomSanitizer
@@ -265,5 +266,10 @@ export class Snagging52Page {
 					this.presentToast('Error while uploading file.');
 				});
 			}
+			
+			dismiss() {
+				this.viewCtrl.dismiss('') ;
+			 } 
 		
-}
+			 
+		}

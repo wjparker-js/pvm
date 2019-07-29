@@ -12,8 +12,8 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 export class QrcodePage {
 
   scannedCode:string;
-	callback: any;
-	scanData : {};
+  callback: any;
+  scanData : {};
   options :BarcodeScannerOptions;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams, private barcodeScanner:BarcodeScanner) {

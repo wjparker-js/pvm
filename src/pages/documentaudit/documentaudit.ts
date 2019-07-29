@@ -12,6 +12,8 @@ export class DocumentAudit {
   docimg: any;
   docid: any;
   docno1: any;
+  auditdocs: any;
+  callback: any;
 
   userdocumentaudit: any;
   userApiKey : any;
@@ -27,6 +29,8 @@ export class DocumentAudit {
   };
 
   constructor(public platform: Platform, public params: NavParams, public http: Http, private _sanitizer: DomSanitizer, public modalCtrl: ModalController, public viewCtrl: ViewController) {
+
+    this.auditdocs = true;
 
     var docimg="";
     this.docimg = this.params.get('docimg');
@@ -74,11 +78,21 @@ export class DocumentAudit {
         ); 
 
   }
+/*
+	ionViewWillEnter() {
+	  this.callback = this.navParams.get("callback")
+	}
 
+ 
 
-  dismiss() {
-    this.viewCtrl.dismiss();
-  }  
+	ionViewWillLeave() {
+		this.callback(this.auditdocs).then(()=>{});
+	}
+*/
+
+dismiss() {
+  this.viewCtrl.dismiss();
+} 
 
 }
                                                   

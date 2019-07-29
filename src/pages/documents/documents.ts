@@ -7,6 +7,7 @@ import { DocumentViewer } from '../documentviewer/documentviewer';
 import { DocumentInfo } from '../documentinfo/documentinfo';
 import { DocumentAudit } from '../documentaudit/documentaudit';
 import { AboutPage } from '../about/about';
+import { SubtypesPage } from '../subtypes/subtypes';
 import * as Constants from '../../providers/constants';
 
 @IonicPage()
@@ -64,7 +65,7 @@ export class DocumentsPage {
     var documentDocumentNumber  = this.userdocumentData.DocumentNumber;
     var documentFileExtension   = this.userdocumentData.FileExtension;
 
-    this.hasdocs = false;
+    //this.hasdocs = false;
     
     var furl  = Constants.apiUrl+"api/documentsfields/"+documentSystemProjectID;
     this.http.get(furl).map(res => res.json()).subscribe(data => {
@@ -183,5 +184,20 @@ export class DocumentsPage {
     this.navCtrl.push(AboutPage,{docimg, docid, docno1});
   }
 
+  
+/*
+	openDTList(){		
+		this.navCtrl.push(SubtypesPage, {callback:this.myCallbackFunction5});
+	}
+
+
+  myCallbackFunctiondAudit = (_params) => {
+	 return new Promise((resolve, reject) => {
+	     this.hasdocs = _params;
+	     resolve();
+	     console.log(this.name);
+	 });
+	}
+*/
 }
                                                   
