@@ -18,15 +18,15 @@
     <ion-item>
       <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Defect Type</ion-label>
         <ion-input class="text" type="text" id = "Defecttype" name="defecttype" value="{{defecttype}}" style="font-size:13px;"></ion-input>  
-        <button ion-button clear color="dark" type="button" item-right (click)="openDTList()"> 
+        <button ion-button color="light" type="button" item-right (click)="openDTList()"> 
           <ion-icon name="list"> </ion-icon> 
-        </button>          
+        </button>       
     </ion-item>
 
     <ion-item  [hidden]="defecttype == '' || defecttype == undefined ">
         <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Discipline</ion-label>
           <ion-input class="text" type="text" id = "Discipline" name="discipline" value="{{discipline}}" style="font-size:13px;"></ion-input>  
-          <button ion-button clear [hidden]="snagid !== 'new'" color="dark" type="button" item-right (click)="openDList(defecttype)"> 
+          <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openDList(defecttype)"> 
             <ion-icon name="list"> </ion-icon> 
           </button>          
     </ion-item>
@@ -34,10 +34,10 @@
 	<ion-item>
 	  <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Location</ion-label>
       <ion-input class="text" type="text"   id = "Location" name="location" value="{{name}}" style="font-size:13px;"></ion-input>
-      <button ion-button clear [hidden]="snagid !== 'new'" color="dark" type="button" item-right (click)="openGetQRCode()"> 
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openGetQRCode()"> 
       	<ion-icon name="qr-scanner"> </ion-icon> 
       </button>    
-      <button ion-button clear [hidden]="snagid !== 'new'" color="dark" type="button" item-right (click)="openList()"> 
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openList()"> 
       	<ion-icon name="list"> </ion-icon> 
       </button>          
 	</ion-item>
@@ -46,7 +46,7 @@
   <ion-item>
     <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Reason</ion-label>
       <ion-input class="text" type="text" id = "Reason" name="reason" value="{{reason}}" style="font-size:13px;"></ion-input>  
-      <button ion-button clear [hidden]="snagid !== 'new'" color="dark" type="button" item-right (click)="openRList()"> 
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openRList()"> 
         <ion-icon name="list"> </ion-icon> 
       </button>          
   </ion-item>
@@ -54,7 +54,7 @@
   <ion-item>
     <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Effect</ion-label>
       <ion-input class="text" type="text" id = "Effect" name="effect" value="{{effect}}" style="font-size:13px;"></ion-input>  
-      <button ion-button clear [hidden]="snagid !== 'new'" color="dark" type="button" item-right (click)="openEList()"> 
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openEList()"> 
         <ion-icon name="list"> </ion-icon> 
       </button>          
   </ion-item>

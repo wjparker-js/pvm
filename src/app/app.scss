@@ -14,17 +14,61 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+
+
+
+
 .platform-ios 
 {
-  page-home, page-documents, page-defects, page-contact, page-projects, page-documentaudit, page-documentviewer, page-login, page-documentinfo { // replaced by your page HERE
+  page-about,
+  page-contact,
+  page-documents,
+  page-documentViewer,
+  page-documentInfo,
+  page-projects,
+  page-snagging,
+  page-snagging51,
+  page-snagging52,
+  page-defects,
+  page-subtypes,
+  page-qrcode,
+  page-locationmap,
+  page-discipline,
+  page-effects,
+  page-reasons,
+  page-home,
+  page-documentissues,
+  page-documentaudit,
+  page-documentsummary { // replaced by your page HERE
      top: 20px !important;
   }
 }
 
 .platform-android 
 {
-  page-home, page-documents, page-defects, page-contact, page-projects, page-documentaudit, page-documentviewer, page-login, page-documentinfo { // replaced by your page HERE
-     top: 0px !important;
+  page-about,
+page-contact,
+page-documents,
+page-documentViewer,
+page-documentInfo,
+page-projects,
+page-snagging,
+page-snagging51,
+page-snagging52,
+page-defects,
+page-subtypes,
+page-qrcode,
+page-locationmap,
+page-discipline,
+page-effects,
+page-reasons,
+page-home,
+page-documentissues,
+page-documentaudit,
+page-documentsummary {
+    top: 0px !important;
   }
 }
 
@@ -32,3 +76,11 @@
 .alert-md .alert-radio-label{ white-space: pre-line;}
 .alert-wp .alert-radio-label{ white-space: pre-line;}
 .select-text { white-space: pre-line;}
+
+ion-item {
+  border-top: none;
+  border-bottom: none;
+}
+
+ion-card { border-top: 3px solid #2d3054; border-bottom: 0px solid #e8e8e8; padding-bottom: 15px;  }
+

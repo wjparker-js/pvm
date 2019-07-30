@@ -24,16 +24,16 @@
       <div class="text" [innerHTML]="defect2.SpecialInstructions"></div>
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Issued: </span>
-      <span class="text">{{defect2.DateIssued}}</span>
+      <span class="text">{{defect2.DateIssued  | date : 'dd MMM yyyy' }}</span>
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Required: </span>
-      <span class="text">{{defect2.DeliverBy}}</span>
+      <span class="text">{{defect2.DeliverBy  | date : 'dd MMM yyyy' }}</span>
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed: </span>
-      <span class="text">{{defect2.ProposedCompletionDate}}</span>
+      <span class="text">{{defect2.ProposedCompletionDate  | date : 'dd MMM yyyy' }}</span>
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Fixed: </span>
-      <span class="text">{{defect2.EndFixDate}}</span>
+      <span class="text">{{defect2.EndFixDate  | date : 'dd MMM yyyy' }}</span>
       <br>        
     </ion-card-content>
   </ion-card> 
@@ -41,7 +41,7 @@
   <ion-card>
   <ion-card-content *ngFor="let defect1note of defect1snotes">
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Note By: </span>
-      <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}}</B><br>{{defect1note.Note}}</span>
+      <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated  | date : 'dd/mm/yy' }}</B><br>{{defect1note.Note}}</span>
       <br>
   </ion-card-content>
 </ion-card> 

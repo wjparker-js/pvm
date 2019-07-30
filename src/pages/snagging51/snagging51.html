@@ -9,6 +9,7 @@
 </ion-header>
 
 <ion-content padding>
+
   <ion-card>
     <ion-card-content *ngFor="let defect1 of defect1s">
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Reference: </span>
@@ -24,30 +25,25 @@
       <div class="text" [innerHTML]="defect1.SpecialInstructions"></div>
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Issued: </span>
-      <span class="text">{{defect1.DateIssued}}</span>
+      <span class="text">{{defect1.DateIssued  | date : 'dd MMM yyyy' }}</span>
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Required: </span>
-      <span class="text">{{defect1.DeliverBy}}</span>
+      <span class="text">{{defect1.DeliverBy  | date : 'dd MMM yyyy' }}</span>
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed: </span>
-      <span class="text">{{defect1.ProposedCompletionDate}}</span>
+      <span class="text">{{defect1.ProposedCompletionDate  | date : 'dd MMM yyyy' }}</span>
       <br>
     </ion-card-content>
-    <ion-card-content *ngFor="let defect1note of defect1snotes">
-        <span style="font-size:13px;font-weight:bold !important;width:100px;" >Notes: </span>
-        <span class="mytext">{{defect1note.note}}</span>
-        <br>
-    </ion-card-content>
-  </ion-card> 
+  </ion-card>
 
-  
-  <ion-card>
+    <ion-card>
       <ion-card-content *ngFor="let defect1note of defect1snotes">
-          <span style="font-size:13px;font-weight:bold !important;width:100px;" >Notes: </span>
-          <span class="mytext">{{defect1note.note}}</span>
+          <span style="font-size:13px;font-weight:bold !important;width:100px;" >Note By: </span>
+          <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated  | date : 'dd/mm/yy' }}</B><br>{{defect1note.Note}}</span>
           <br>
       </ion-card-content>
     </ion-card> 
+
 
   <span *ngIf="ImgUrl">
     <ion-card  [hidden]="ImgUrl === null">

@@ -1,4 +1,4 @@
-<ion-header> 
+<ion-header>
   <ion-navbar>       
     <ion-buttons left style='margin-left: 0px;margin-right: 0px;'>
         <button ion-button menuToggle start style='margin-left:6px'>
@@ -6,14 +6,18 @@
         </button>
     </ion-buttons>
     <span style="font-size:16px;color:white;padding-left:15px;">{{selectedProjectName}}</span> 
+    
+    
     <ion-buttons right>
         <button ion-button  color="light" type="button" item-right (click)="openLocationQRCode()"> 
-          <ion-icon name="qr-scanner"> </ion-icon> 
+         <h2> <b><ion-icon name="qr-scanner"> </ion-icon></b> </h2>
         </button>  
+        &nbsp;
         <button ion-button  strong color="light" type="button" item-right (click)="newSnag('new')"> 
-          <ion-icon strong name="add"> </ion-icon> 
+         <h2> <b><ion-icon strong name="add"> </ion-icon></b> </h2>
         </button>  
     </ion-buttons>
+
  </ion-navbar>   
     
  <div> 
@@ -52,7 +56,7 @@
       <ion-col  *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
        
         <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
-        <ion-card>
+        <ion-card style=" padding-bottom: 0px; margin-bottom: 0px;">
           <ion-item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus)" style="padding-left:3px;">            
             <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 42px !Important;height: 50px !Important;margin-top: 10px;margin-bottom: 0px;">
               <img src="assets/imgs/defect.jpg" style="width:50px;height:42px;"/>

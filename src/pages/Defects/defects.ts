@@ -26,6 +26,8 @@ export class DefectsPage {
   dsearch : any;
 	apiKey: any;
 	location: string = "";
+	public ImgUrl:any;
+	public thumbbase:any;
 
 	constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public http: Http) {}
 
@@ -54,6 +56,13 @@ export class DefectsPage {
           this._sanitizer.bypassSecurityTrustStyle(data);
           this.defects = data;          
 		  console.log(this.defects);
+		  
+		  if(this.defects[0].thumbbase64 !== null || this.defects[0].thumbbase64 !== ""){
+			this.ImgUrl = this._sanitizer.bypassSecurityTrustUrl("data:Image/*;base64,"+this.defects[0].thumbbase64);
+			} else {
+			this.ImgUrl = null;
+			}
+
       },
       err => {
           console.log("Oops!");
@@ -79,7 +88,14 @@ export class DefectsPage {
     this.http.get(url).map(res => res.json()).subscribe(data => {
           this._sanitizer.bypassSecurityTrustStyle(data);
           this.defects = data;          
-					console.log(this.defects);
+		  console.log(this.defects);
+
+		  if(this.defects[0].thumbbase64 !== null || this.defects[0].thumbbase64 !== ""){
+			this.ImgUrl = this._sanitizer.bypassSecurityTrustUrl("data:Image/*;base64,"+this.defects[0].thumbbase64);
+			} else {
+			this.ImgUrl = null;
+			}
+
       },
       err => {
           console.log("Oops!");

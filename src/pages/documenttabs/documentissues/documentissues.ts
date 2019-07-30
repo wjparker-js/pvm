@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 
-@Component({templateUrl: 'documentissues.html'})
+@Component({selector: 'page-documentissues',templateUrl: 'documentissues.html'})
 
 export class DocumentIssues {
 
