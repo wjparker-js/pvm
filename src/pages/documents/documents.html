@@ -13,8 +13,11 @@
       #mySearchbar 
       name = "searchBar" 
       value= "" 
+      showCancelButton = "always" 
       placeholder="Document Search..."
       (ionInput)="searchByKeyword($event)" 
+      (ionCancel)="onSearchCancel($event)" 
+      (ionFocus)="checkFocus()"
       [debounce]="500"
       class="android">
     </ion-searchbar>
@@ -23,7 +26,8 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="this.hasdocs; else nodocs">
+  <div id="maindiv">
+  <div *ngIf="this.hasdocs; else nodocs" >
   <ion-grid>
     <ion-row>
       <ion-col  *ngFor="let document of userdocuments" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;margin-left:0px;margin-right:0px;">
@@ -61,6 +65,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  </div>
   </div>
 
   <ng-template #nodocs>

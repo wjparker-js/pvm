@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ViewChild } from '@angular/core';
 import { IonicPage, ModalController, NavController, NavParams, Searchbar} from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -15,6 +16,8 @@ import * as Constants from '../../providers/constants';
 @Component({selector: 'page-documents',templateUrl: 'documents.html',})
 
 export class DocumentsPage {  
+
+  @ViewChild('mySearchbar') myInput;
 
   userdocuments: any;
   customfieldnames: any;
@@ -42,7 +45,16 @@ export class DocumentsPage {
               private _sanitizer: DomSanitizer, 
               public modalCtrl: ModalController) {}
 
-  ionViewWillEnter() {
+  ionViewDidLeave(){
+    //document.getElementsByClassName("searchbar-input")["0"].value = "";
+    //console.log(searchvalue);
+    //this.searchbar.clearInput(null);
+    //this.searchbar.value = '';
+    //this.navCtrl.pop();
+  }
+  
+  ionViewDidEnter() {
+
 
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
@@ -65,7 +77,39 @@ export class DocumentsPage {
     var documentDocumentNumber  = this.userdocumentData.DocumentNumber;
     var documentFileExtension   = this.userdocumentData.FileExtension;
 
+    var currentProjectName      = localStorage.getItem('CurrentProjectName');
+    var oldProjectName          = localStorage.getItem('OldProjectName');
+
+    setTimeout(() => {
+      this.myInput.setFocus();
+      if(currentProjectName != oldProjectName ){
+      this.myInput.value = "";}
+    },150);
+  
+
     //this.hasdocs = false;
+    //this.searchbar.clearInput(null);
+    if(currentProjectName != oldProjectName ){
+
+      document.getElementsByClassName("searchbar-input")["0"].value = "";
+      document.getElementById("maindiv").style.display="none";
+
+      var oldurl = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxxxxxxxxxxxxxxx/xxx";
+      this.http.get(oldurl).map(res => res.json()).subscribe(data => {
+            this._sanitizer.bypassSecurityTrustStyle(data);
+            this.userdocuments = data;
+            localStorage.setItem('OldProjectName', this.userdocumentData.SystemProjectName);
+            document.getElementById("maindiv").style.display="block";
+            //document.getElementsByClassName("searchbar-input")["0"].value = "";
+            console.log(this.userdocuments);
+        },
+        err => {
+            console.log("Oops!");
+        }
+      );    
+      
+    }
+
     
     var furl  = Constants.apiUrl+"api/documentsfields/"+documentSystemProjectID;
     this.http.get(furl).map(res => res.json()).subscribe(data => {
@@ -112,8 +156,17 @@ export class DocumentsPage {
       return Object.keys(obj);
   }
 
+checkFocus(){
+  console.log("Got Focus");
+  //document.getElementsByClassName("searchbar-input")["0"].value = "";
+}
+
 
   searchByKeyword($event){
+
+    //var searchvalue = document.getElementsByClassName("searchbar-input")["0"].value;
+    //console.log(searchvalue);
+
 
     this.selectedProjectName     = localStorage.getItem('CurrentProjectName');    
     var documentSystemUserID1    = this.userdocumentData.SystemUserID;
@@ -139,14 +192,9 @@ export class DocumentsPage {
           console.log("Oops!");
       }
     ); 
+
   }
   
-
-  onSearchCancel($event){}
-
-
-  info(){}
-
 
   openDocument(clientid,projectid,docid,ext){
     this.navCtrl.push(DocumentViewer,{clientid,projectid,docid,ext});

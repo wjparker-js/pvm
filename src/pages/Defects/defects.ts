@@ -57,11 +57,14 @@ export class DefectsPage {
           this.defects = data;          
 		  console.log(this.defects);
 		  
+		  if ( this.defects.length > 0 ) {  
+
 		  if(this.defects[0].thumbbase64 !== null || this.defects[0].thumbbase64 !== ""){
 			this.ImgUrl = this._sanitizer.bypassSecurityTrustUrl("data:Image/*;base64,"+this.defects[0].thumbbase64);
 			} else {
 			this.ImgUrl = null;
 			}
+		  }
 
       },
       err => {
@@ -90,11 +93,13 @@ export class DefectsPage {
           this.defects = data;          
 		  console.log(this.defects);
 
-		  if(this.defects[0].thumbbase64 !== null || this.defects[0].thumbbase64 !== ""){
+          if ( this.defects.length > 0 ) {          
+			if(this.defects[0].thumbbase64 !== null || this.defects[0].thumbbase64 !== ""){
 			this.ImgUrl = this._sanitizer.bypassSecurityTrustUrl("data:Image/*;base64,"+this.defects[0].thumbbase64);
 			} else {
 			this.ImgUrl = null;
 			}
+		  }
 
       },
       err => {

@@ -73,17 +73,17 @@
 </ion-content>
 
 
-
 <ion-footer>
-  <ion-toolbar color="primary">
-    <ion-buttons>
-      <button ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
-        <ion-icon name="camera"></ion-icon>Take Picture
-      </button>
-      <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
-        <ion-icon name="cloud-upload"></ion-icon>Confirm Fix Complete
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
+    <div  style="width:100%;">
+      <ion-buttons  style="width:100%" >
+        <button style="width:48%;margin-left:2%;margin-right:auto;" ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
+          <ion-icon name="camera"></ion-icon>Take Picture
+        </button>
+        <button style="width:48%;margin-left:auto;margin-right:1%;" ion-button icon-left (click)="uploadImage()" ><!--[disabled]="lastImage === null"-->
+          <ion-icon name="cloud-upload"></ion-icon>Upload Snag
+        </button>
+      </ion-buttons>
+      </div>
+    <br><br>
+  </ion-footer>
   
