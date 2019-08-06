@@ -23,7 +23,6 @@ export class Login {
 
   constructor(public navCtrl: NavController, public authService: AuthService, private toastCtrl:ToastController, public http: Http) {}  
   
-
   ionViewWillEnter() {
 
     if (localStorage.getItem('login_password') !== null) {

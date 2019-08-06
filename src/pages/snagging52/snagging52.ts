@@ -82,7 +82,7 @@ export class Snagging52Page {
               this.defect2s = data;          
 							console.log(this.defect2s);
 							this.branchOrder = this.defect2s[0].OrderId;
-						  this.preUrl  = "https://projectvaultuk.com/PublicPics/"+this.cid+"/"+this.pid+"/dfx/"+this.branchOrder+"/"+this.branchOrder+".jpg";
+						  this.preUrl  = "https://projectvaultuk.com/PublicPics/"+this.cid+"/"+this.pid+"/dfx/"+this.branchOrder+"/"+this.branchOrder+"Pre.jpg";
 						  this.postUrl = "https://projectvaultuk.com/PublicPics/"+this.cid+"/"+this.pid+"/dfx/"+this.branchOrder+"/"+this.branchOrder+"Post.jpg";
 							console.log(this.preUrl);
 							
