@@ -101,6 +101,7 @@ export class DefectsPage {
 			}
 		  }
 
+		  //
       },
       err => {
           console.log("Oops!");
