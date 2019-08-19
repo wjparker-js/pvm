@@ -19,14 +19,12 @@ export class DocumentViewer {
     pdfLink:any;
     viewdoc;
     fileUrl;
-
+    delfileUrl;
     userViewDocData: any;
 
     userSystemData = {"id":"","password":"","sysuserid":"","currentproject":"","apiKey":""}; 
 
-    ionViewWillEnter() {
-
-    }
+    ionViewWillEnter() {}
 
     constructor(public platform: Platform, 
                 public params: NavParams, 
@@ -55,57 +53,59 @@ export class DocumentViewer {
         var ext="";
         this.ext = this.params.get('ext');
 
-        var url = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext;
+        var url = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext+"/view";
         var url = url.toLowerCase();
 
-        //console.log(url);
+        this.delfileUrl = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext+"/delete";
+        this.delfileUrl = this.delfileUrl.toLowerCase();
 
 
+        this.http.get(url).map(res => res.json()).subscribe(data => {
+              this.sanitizer.bypassSecurityTrustStyle(data);
+              this.viewdoc = data;          
+              console.log("ViewerURL="+this.viewdoc);
+            },
+            err => {
+                console.log("File not available.");
+            }
+        );
 
-    this.http.get(url).map(res => res.json()).subscribe(data => {
-          this.sanitizer.bypassSecurityTrustStyle(data);
-          this.viewdoc = data;          
-          console.log("ViewerURL="+this.viewdoc);
-        },
-        err => {
-            console.log("File not available.");
-        }
-    );
+
+        this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+this.docid+'/'+'91'+'/'+'Mobile+-+Viewed+Drawing').map(res => res.json()).subscribe(data => {
+              this.userViewDocData = data;
+              console.log(this.userViewDocData);
+          },
+          err => {
+              //console.log("Oops!");
+          }
+        ); 
+
+        
+        this.sleep(3000);
+      
+        this.fileUrl = Constants.fileUrl+this.docid+this.ext;
+
+        console.log(this.fileUrl);
+        
+        this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileUrl);     
 
 
-    this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+this.docid+'/'+'91'+'/'+'Mobile+-+Viewed+Drawing').map(res => res.json()).subscribe(data => {
-          this.userViewDocData = data;
-          console.log(this.userViewDocData);
-      },
-      err => {
-          //console.log("Oops!");
-      }
-    ); 
-
-    
-    this.sleep(3000);
-  
-    this.fileUrl = Constants.fileUrl+this.docid+this.ext;
-
-    console.log(this.fileUrl);
-    
-    this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileUrl);     
 
   }
 
-
+  dismiss(dfile) {
+        this.http.get(dfile);          
+        this.viewCtrl.dismiss();
+      }
 
 
   sleep(miliseconds) {
-    var currentTime = new Date().getTime();
- 
+    var currentTime = new Date().getTime(); 
     while (currentTime + miliseconds >= new Date().getTime()) {
     }
   }  
 
 
 
-  dismiss() {
-    this.viewCtrl.dismiss();
-  }
+
 }

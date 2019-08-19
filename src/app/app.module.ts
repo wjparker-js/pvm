@@ -40,6 +40,7 @@ import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @NgModule({
   declarations: [
@@ -116,6 +117,7 @@ import { FilePath } from '@ionic-native/file-path';
     Geolocation,
     CallNumber,
     WeatherProvider,
+    Keyboard,
     Camera,
     File,
     FileTransfer,

@@ -8,6 +8,7 @@ import { DocumentViewer } from '../documentviewer/documentviewer';
 import { DocumentInfo } from '../documentinfo/documentinfo';
 import { DocumentAudit } from '../documentaudit/documentaudit';
 import { AboutPage } from '../about/about';
+import { Keyboard } from '@ionic-native/keyboard';
 import { SubtypesPage } from '../subtypes/subtypes';
 import * as Constants from '../../providers/constants';
 
@@ -27,6 +28,8 @@ export class DocumentsPage {
   eventInstance : any;
   dsearch : any;
   hasdocs : any;
+  cpid : any;
+  scid : any;
 
   userdocumentData = {
     "SystemProjectID":"",
@@ -43,6 +46,7 @@ export class DocumentsPage {
               public navParams: NavParams, 
               public http: Http,
               private _sanitizer: DomSanitizer, 
+              private keyboard : Keyboard,
               public modalCtrl: ModalController) {}
 
   ionViewDidLeave(){
@@ -55,10 +59,12 @@ export class DocumentsPage {
   
   ionViewDidEnter() {
 
+    //https://www.sky-vault.co.uk/PublicPics/"+this.scid+"/"+cpid+"/' + 
 
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
     this.userdocumentData.SystemProjectID   = localStorage.getItem('CurrentProjectID');
+
     this.userdocumentData.SystemProjectName = localStorage.getItem('CurrentProjectName'); 
 
     this.userdocumentData.SystemClientID    = documentData[0].SystemClientID;
@@ -79,6 +85,8 @@ export class DocumentsPage {
 
     var currentProjectName      = localStorage.getItem('CurrentProjectName');
     var oldProjectName          = localStorage.getItem('OldProjectName');
+    this.cpid = localStorage.getItem('CurrentProjectID');
+    this.scid = localStorage.getItem('CurrentProjectClientID');
 
     setTimeout(() => {
       this.myInput.setFocus();
@@ -132,23 +140,6 @@ export class DocumentsPage {
           console.log("Custom Field Names Oops!");
       }
     ); 
-
-
-/*    var localDocumentData1       = JSON.parse(localStorage.getItem('userSystemData'));
-    var localApiKey1            = localDocumentData1[0].apiKey;
-
-    var url1 = Constants.apiUrl+"api/documents/"+localApiKey1+"/"+documentSystemUserID+"/"+documentSystemProjectID+"/|";
-
-    this.http.get(url1).map(res => res.json()).subscribe(data => {
-          this._sanitizer.bypassSecurityTrustStyle(data);
-          this.userdocuments = data;          
-          console.log(this.userdocuments);
-      },
-      err => {
-          console.log("Oops!");
-      }
-    ); */
-
   }
   
 
@@ -185,8 +176,14 @@ checkFocus(){
             this.hasdocs = false;
           } else {
             this.hasdocs = true;
+
+
+
+
+
           }
           console.log(this.userdocuments);
+          this.keyboard.hide();
       },
       err => {
           console.log("Oops!");
@@ -203,14 +200,16 @@ checkFocus(){
 
   fixImage(image){
 
-    console.log(image);
-    var newstr = "";
-    newstr = image.replace("<span class='hilite'>", ""); 
-    newstr = newstr.replace("</span>", "");
-    console.log(newstr);
+    if(image.indexOf("<span") != -1){
+      var pt1 = "<span class='hilite'>";
+      var pt2 = "</span>";
+      var rep = "";
+      var image = image.replace(pt1,rep);
+      var image = image.replace(pt2,rep);
+    }
 
-    return newstr;
-    
+    console.log("Image:",image);
+    return image;    
   }
 
   openDocumentInfo(docimg, docid, docno1,search){ 
