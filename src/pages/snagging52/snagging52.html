@@ -10,6 +10,9 @@
 
 <ion-content padding>
   <ion-card>
+    <ion-card-title>
+        Defect Details
+    </ion-card-title>
     <ion-card-content *ngFor="let defect2 of defect2s">
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Reference: </span>
       <span class="mytext">{{defect2.OrderReference}}</span>
@@ -34,28 +37,11 @@
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Fixed: </span>
       <span class="text">{{defect2.EndFixDate  | date : 'dd MMM yyyy' }}</span>
-      <br>        
+      <br><br>
+      <img [src]="preUrl" style="width: 100%"> 
     </ion-card-content>
   </ion-card> 
 
-  <ion-card>
-  <ion-card-content *ngFor="let defect1note of defect1snotes">
-      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Note By: </span>
-      <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated  | date : 'dd/mm/yy' }}</B><br>{{defect1note.Note}}</span>
-      <br>
-  </ion-card-content>
-</ion-card> 
-
-  <ion-card  [hidden]="preUrl === null">
-      <ion-card-header>
-          <ion-card-title>
-          Original Defect
-          </ion-card-title>
-        </ion-card-header>
-    <ion-card-content>        
-          <img [src]="preUrl" style="width: 100%">        
-    </ion-card-content>
-  </ion-card>
 
   <ion-card  [hidden]="postUrl === null">
       <ion-card-header>
@@ -63,30 +49,34 @@
           Defect Remediation
         </ion-card-title>
       </ion-card-header>
-    <ion-card-content>        
-          <img [src]="postUrl" style="width: 100%">        
-    </ion-card-content>
+      <ion-card-content *ngFor="let defect1note of defect1snotes">
+          <span style="font-size:13px;font-weight:bold !important;width:100px;" >Note By: </span>
+          <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated  | date : 'dd MMM yyyy'  }}</B><br>{{defect1note.Note}}</span>
+          <br>
+          <img [src]="postUrl" style="width: 100%">  
+      </ion-card-content>
   </ion-card>
 
-  <ion-card [hidden]="currentImage !== null">
+  <ion-card>
+      <ion-card-header>
+          <ion-card-title>
+          Defect Status
+        </ion-card-title>
+      </ion-card-header>
     <ion-card-content>
-      <h3>Remember to take a photo and comment.</h3>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-item>
-      <ion-label class="mylabel" style="width:20%">Defect Status</ion-label>
-      <ion-select class="myCustomSelect" [(ngModel)]="approval" name="approval"  style="text-align:left;" >
-          <ion-option class="myCustomSelect" [value] = "Approved">Approved</ion-option>
-          <ion-option class="myCustomSelect" [value] = "Rejected">Rejected</ion-option>
-      </ion-select>
-    </ion-item>
-
-  <ion-item>
-    <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;" >Update Defect Details</ion-label>
-    <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter your comments here..."  style="font-size:13px;"></ion-textarea>
-  </ion-item>
-
+      <ion-item>
+        <ion-label class="text" style="width:20%"><b>Status</b></ion-label>
+        <ion-select class="myCustomSelect" [(ngModel)]="approval" name="approval"  style="text-align:left;" >
+            <ion-option class="myCustomSelect" [value] = "Approved">Approved</ion-option>
+            <ion-option class="myCustomSelect" [value] = "Rejected">Rejected</ion-option>
+        </ion-select>
+      </ion-item>            
+      <ion-item>
+        <ion-label class="mytext" style="font-size:13px;font-weight:bold !important;" >Notes</ion-label>
+        <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter your comments here..."  style="font-size:13px;"></ion-textarea>
+      </ion-item>
+      </ion-card-content>
+    </ion-card> 
 
   <ion-card [hidden]="currentImage === null">
       <ion-card-header>
@@ -99,21 +89,21 @@
     </ion-card-content>
   </ion-card> 
 
+  <div>
+    <ion-buttons style="width:100%;background-color: #ffffff;">
+      <button style="width:150px;margin-left:5%;margin-right:auto;background-color: #2d3054;" ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
+        <ion-icon name="camera"></ion-icon>Take Picture
+      </button>
+      <button style="width:150px;margin-left:auto;margin-right:5%;background-color: #2d3054;" ion-button icon-left [disabled]="lastImage === null" (click)="uploadImage()" ><!---->
+        <ion-icon name="cloud-upload"></ion-icon>Upload Snag
+      </button>
+    </ion-buttons>    
+  </div>
 
 </ion-content>
 
 
 <ion-footer>
-    <div  style="width:100%;">
-      <ion-buttons  style="width:100%" >
-        <button style="width:48%;margin-left:2%;margin-right:auto;" ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
-          <ion-icon name="camera"></ion-icon>Take Picture
-        </button>
-        <button style="width:48%;margin-left:auto;margin-right:1%;" ion-button icon-left (click)="uploadImage()" ><!--[disabled]="lastImage === null"-->
-          <ion-icon name="cloud-upload"></ion-icon>Upload Snag
-        </button>
-      </ion-buttons>
-      </div>
-    <br><br>
+
   </ion-footer>
   

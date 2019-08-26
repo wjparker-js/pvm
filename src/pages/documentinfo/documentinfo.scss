@@ -44,13 +44,15 @@ page-documentinfo {
         height: 15px;
     }
     .hilite{
-        font-size:14px;
-        color:black;
-        font-weight:bold;
+        background-color: yellow;
     }
     .hilite1{
-        color: black;
-        background-color: yellow;
+        color: rgb(248, 96, 8);
+        background-color:white;
+    }
+    .hilite2{
+        color:  blue;
+        background-color: white;
     }
 a{
     text-align: center;

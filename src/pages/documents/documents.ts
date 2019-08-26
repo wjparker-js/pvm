@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ViewChild } from '@angular/core';
+import { ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, ModalController, NavController, NavParams, Searchbar} from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -18,7 +18,9 @@ import * as Constants from '../../providers/constants';
 
 export class DocumentsPage {  
 
-  @ViewChild('mySearchbar') myInput;
+  //@ViewChild('mySearchbar') myInput;
+
+  @ViewChild('mySearchbar', { read: ElementRef }) myInput: ElementRef;
 
   userdocuments: any;
   customfieldnames: any;
@@ -89,9 +91,12 @@ export class DocumentsPage {
     this.scid = localStorage.getItem('CurrentProjectClientID');
 
     setTimeout(() => {
-      this.myInput.setFocus();
+      //this.myInput.setFocus();
+      this.myInput.nativeElement.focus();
       if(currentProjectName != oldProjectName ){
-      this.myInput.value = "";}
+      this.myInput.nativeElement.value = "";}
+      this.myInput.nativeElement.blur();
+      //this.myInput.setBlur();
     },150);
   
 
