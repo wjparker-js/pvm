@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>      
+    <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>     
+    <span style="font-size:16px;color:white;padding-left:15px;">Edit Location Image</span> 
+    <ion-buttons end>
+      <button ion-button (click)="save()" ><ion-icon name="checkmark"></ion-icon></button>
+      <button ion-button (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <canvas id="drawing-container"></canvas>
+</ion-content>
+
+<!-- In footer we added settings -->
+<ion-footer>
+  <ion-toolbar color="primary" text-center>
+    <ion-buttons  color="primary">
+
+      <div *ngIf="drawingEnabled">
+
+        <button ion-button (click)="openColorsPopover($event)" icon-only>
+          <ion-icon name="color-palette" style="color:white"></ion-icon>
+        </button>
+
+        <button ion-button (click)="openWidthsPopover($event)" icon-only>
+          <ion-icon name="options" style="color:white"></ion-icon>
+        </button>
+
+        <button ion-button (click)="addText()" icon-only>
+          <ion-icon name="text" style="color:white"></ion-icon>
+        </button>
+
+        <button ion-button (click)="undo()" icon-only>
+          <ion-icon name="undo" style="color:white"></ion-icon>
+        </button>
+
+      </div>
+
+      <div *ngIf="!drawingEnabled">
+        <button ion-button (click)="ok()">
+          <ion-icon name="checkmark"></ion-icon>
+        </button>
+        
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

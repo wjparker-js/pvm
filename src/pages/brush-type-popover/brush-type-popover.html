@@ -1,0 +1,6 @@
+<ion-list>
+  <button *ngFor="let type of drawing.brushTypes"
+          ion-item
+          (click)="setType(type.value)"
+  >{{type.label}}</button>
+</ion-list>

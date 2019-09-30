@@ -37,10 +37,18 @@ import { DocumentSummary } from '../pages/documentsummary/documentsummary';
 import { CallNumber } from '@ionic-native/call-number';
 import { WeatherProvider } from '../providers/weather/weather'
 import { Camera } from '@ionic-native/camera';
+import { DrawingProvider } from '../providers/drawing/drawing';
 import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Keyboard } from '@ionic-native/keyboard';
+import { ImgEditPage } from '../pages/imgedit/imgedit';
+import { ImgEditPagePre } from '../pages/imgeditpre/imgeditpre';
+//import { ImgEditPagePostPost } from '../pages/imgeditpostpost/imgeditpostpost';
+//import { ImgEditPagePost } from '../pages/imgeditpost/imgeditpost';
+import { ColorsPopoverPage } from '../pages/colors-popover/colors-popover';
+import { WidthPopoverPage } from '../pages/width-popover/width-popover';
+import { BrushTypePopoverPage } from '../pages/brush-type-popover/brush-type-popover';
 
 @NgModule({
   declarations: [
@@ -67,7 +75,14 @@ import { Keyboard } from '@ionic-native/keyboard';
     TabsPage,
     DocumentTabs,
     DocumentAudit,
-    DocumentIssues
+    DocumentIssues,
+    ImgEditPage,
+    ImgEditPagePre,
+    //ImgEditPagePostPost,
+    //ImgEditPagePost,
+    ColorsPopoverPage,
+    WidthPopoverPage,
+    BrushTypePopoverPage
   ],
   imports: [
     BrowserModule,HttpModule,NgxQRCodeModule,
@@ -105,7 +120,14 @@ import { Keyboard } from '@ionic-native/keyboard';
     DocumentTabs,
     DocumentAudit,
     DocumentIssues,
-    DocumentSummary   
+    DocumentSummary,
+    ImgEditPage,
+    ImgEditPagePre,
+    //ImgEditPagePostPost,
+    //ImgEditPagePost,
+    ColorsPopoverPage,
+    WidthPopoverPage,
+    BrushTypePopoverPage   
   ],
   providers: [
     StatusBar,
@@ -122,8 +144,8 @@ import { Keyboard } from '@ionic-native/keyboard';
     File,
     FileTransfer,
     FilePath,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}   
-
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DrawingProvider  
   ]
 })
 

@@ -1,0 +1,6 @@
+<div colors-container>
+  <button *ngFor="let color of drawing.brushColors"
+          [style.background]="color"
+          (click)="setColor(color)"
+  ></button>
+</div>

@@ -57,12 +57,12 @@ constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, pub
 		var url = Constants.apiUrl+"api/locationmap/"+this.locationmapApiKey+"/"+this.locationmapSystemProjectID+"/"+this.locationmapUserID;
 
 		    this.http.get(url).map(res => res.json()).subscribe(data => {
-		        this._sanitizer.bypassSecurityTrustStyle(data);
+		      this._sanitizer.bypassSecurityTrustStyle(data);
 		      this.locationMaps = data;          
 		      console.log(this.locationMaps);
 		    },
 		    err => {
-		        console.log("Oops!");
+		      console.log("Oops!");
 		    }
 		); 
 	}
@@ -77,7 +77,8 @@ constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, pub
 	}
 
 	sendBack(item){
-		this.selectedCode = item;
+    this.selectedCode = item;
+    localStorage.setItem('location', this.selectedCode); 
 		this.viewCtrl.dismiss();
 	}
 
