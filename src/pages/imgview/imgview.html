@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>      
+    <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>     
+    <span style="font-size:14px;color:white;">{{selectedProjectName}} Edit Location Image</span> 
+    <ion-buttons end>
+      <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <canvas id="drawing-container"></canvas>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary" text-center>
+    <ion-buttons  color="primary">
+
+      <div *ngIf="!drawingEnabled">
+        <button ion-button (click)="dismiss()">
+          {{imageName}}
+        </button>        
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

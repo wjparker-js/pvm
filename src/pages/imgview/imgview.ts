@@ -7,11 +7,11 @@ import { WidthPopoverPage } from '../width-popover/width-popover';
 import { BrushTypePopoverPage } from '../brush-type-popover/brush-type-popover';
 
 @Component({
-  selector: 'page-imgedit',
-  templateUrl: 'imgedit.html'
+  selector: 'page-imgview',
+  templateUrl: 'imgview.html'
 })
 
-export class ImgEditPage {
+export class ImgViewPage {
 
   @ViewChild(Content) content: Content;
 
@@ -20,6 +20,8 @@ export class ImgEditPage {
   imgheight:any;
   callback: any;
   noedit:any;
+  imgType: any;
+  imageName: any;
 
   constructor(
     public alertCtrl: AlertController,
@@ -34,9 +36,9 @@ export class ImgEditPage {
   ) {}
 
   ionViewDidLoad() {
-
-    this.callback = this.navParams.get("callback");
     
+    this.imgType = this.navParams.get("imgtype");
+
     let dimensions = this.content.getContentDimensions();
     let width   = dimensions.contentWidth;
     let height  = dimensions.scrollHeight;
@@ -54,12 +56,22 @@ export class ImgEditPage {
     this.drawing.create(width, height);   
 
     this.drawingEnabled = false;
-    var imageToView = localStorage.getItem('locationimage');    
+    var imageToView = "";
+
+    if(this.imgType === "location"){
+      imageToView = localStorage.getItem('locationimage');
+      this.imageName   = localStorage.getItem('location');
+    } else {
+      imageToView = localStorage.getItem('preimage');
+      this.imageName   = "Defect in "+localStorage.getItem('location');
+    }
+
+
     this.drawing.addImage(imageToView);
-   }
+
+  }
 
   save() {
-    localStorage.setItem('locationimage', this.drawing.getAsImage()); 
     this.dismiss();
   }
 
@@ -213,7 +225,6 @@ export class ImgEditPage {
   }
 
   ionViewWillLeave() {
-		this.callback(this.drawing.getAsImage()).then(()=>{});
 	}
 
   dismiss() {

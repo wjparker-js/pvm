@@ -19,8 +19,10 @@ export class TabsPage {
   tab4Root = DefectsPage;
   tab5Root = ContactPage;
 
+  
+
 
   constructor() {
-
+    let yourColor = "primary";
   }
 }

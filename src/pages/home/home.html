@@ -1,41 +1,33 @@
 <ion-header>
-  <ion-navbar>   
-    <button ion-button menuToggle start>
-      <ion-icon name="menu"></ion-icon>
-    </button>        
-    <span style="font-size:16px;color:white;padding-left:15px;">{{userPostData.ProjectName}}</span> 
-  </ion-navbar>
-</ion-header>
+    <ion-navbar>   
+      <button ion-button menuToggle start>
+        <ion-icon name="menu"></ion-icon>
+      </button>        
+      <span style="font-size:14px;color:white;">{{userPostData.ProjectName}}</span> 
+    </ion-navbar>
+  </ion-header>
     
 <ion-content padding id="home">
 
 
-  <b>
-    <span  style="text-align:center;padding:4px;margin-bottom: 0px;">
-      <h3 style="margin-bottom: 0px;">{{userPostData.ProjectName}}</h3>
-    </span>
-  </b>
-
-
-  
-  <!--<div #map id="map"></div>-->
+<!--<  
+  div #map id="map"></div>-->
 
 
 
-<ion-card> 
-  <ion-row>   
+
+  <ion-row [hidden]="currentImage === null" >   
     <ion-col width-25 offset-25>
       <h2 class="location" style="margin:0px;">{{weatherCity}}</h2>
-      <h4 class="description" style="margin:0px;">{{weatherDes}}</h4>
+      <h3 class="description" style="margin:0px;">{{weatherDes}}</h3>
       <h1 class="temp" style="margin-top:0px;">{{weatherTemp}}&deg;</h1>
     </ion-col>  
     <ion-col width-25>
       <div class="icon">        
-        <img [src]="weatherIcon" style="width: 90px;height: 60px;" />
+        <img [src]="weatherIcon" style="width: 90px;height: 70px;" />
       </div>
     </ion-col>     
   </ion-row>
- </ion-card>
 
  <br>
 
@@ -58,6 +50,7 @@
       </ion-item>
     </ion-list> 
   </div>
+  
   <!--
   <div class="box blue">
     <b><span  style="text-align:center;padding:4px;">Approvals Summary</span></b>

@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>    
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>       
-    <span style="font-size:16px;color:white;padding-left:15px;">Defect Details</span> 
+    <span style="font-size:14px;color:white;">{{selectedProjectName}} Defect Details</span> 
     <ion-buttons end>
-      <button ion-button (click)="dismiss()">Close</button>
+      <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -36,7 +36,7 @@
     </ion-card-content>
   </ion-card>
 
-    <ion-card>
+    <ion-card  [hidden]="hasNotes !== 'hasNotes'">
       <ion-card-content *ngFor="let defect1note of defect1snotes">
           <span style="font-size:13px;font-weight:bold !important;width:100px;" >Note By: </span>
           <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated  | date : 'dd/mm/yy' }}</B><br>{{defect1note.Note}}</span>
@@ -44,24 +44,21 @@
       </ion-card-content>
     </ion-card> 
 
+  
+  <ion-item style="position:relative;top:0px;padding-left:10px;height:100px;">  
+    <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
+      <img [src]="image"  style="width:100px; border: 2px;border-color:black;"  (click)="viewloc()">
+    </ion-thumbnail>   
+    &nbsp;
+    <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
+      <img [src]="ImgUrl"  style="width:100px;  border: 2px;border-color:black;" (click)="viewpre()">
+    </ion-thumbnail>  
+  </ion-item>            
 
-  <span *ngIf="ImgUrl">
-    <ion-card  [hidden]="ImgUrl === null">
-      <ion-card-content>        
-            <img [src]="ImgUrl" style="width: 100%">        
-      </ion-card-content>
-    </ion-card>
-  </span>
-
-  <ion-card [hidden]="currentImage !== null">
-    <ion-card-content>
-      <h3>Remember to take a photo and comment.</h3>
-    </ion-card-content>
-  </ion-card>
 
   <ion-item>
-    <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;" >Update Defect Details</ion-label>
-    <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter your comments here..."  style="font-size:13px;"></ion-textarea>
+    <ion-label class="mylabel" style="font-size:15px;font-weight:bold !important;" ><b>Fix Notes</b></ion-label>
+    <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter notes here..."  style="font-size:13px;"></ion-textarea>
   </ion-item>
 
   <ion-card [hidden]="currentImage === null">
@@ -70,20 +67,37 @@
       </ion-card-content>
   </ion-card> 
 
+  <div  style="width:100%;">
+    <ion-buttons  style="width:100%" >
+      <button style="width:100%;" ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
+        <ion-icon name="camera"></ion-icon>Take Picture
+      </button>
+    </ion-buttons>
+  </div>
+
+  <div [hidden]="currentImage === null"  style="width:100%;">
+    <ion-buttons  style="width:100%" >
+      <button style="width:100%;" ion-button icon-left (click)="sendUploadData()" >
+        <ion-icon name="cloud-upload"></ion-icon>Upload Fix
+      </button>
+    </ion-buttons>
+  </div>
+
 </ion-content>
 
-
+<!--
 <ion-footer>
     <div  style="width:100%;">
       <ion-buttons  style="width:100%" >
         <button style="width:48%;margin-left:2%;margin-right:auto;" ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
           <ion-icon name="camera"></ion-icon>Take Picture
         </button>
-        <button style="width:48%;margin-left:auto;margin-right:1%;" ion-button icon-left [disabled]="lastImage === null" (click)="uploadImage()" ><!--[disabled]="lastImage === null"-->
+        <button style="width:48%;margin-left:auto;margin-right:1%;" ion-button icon-left [disabled]="lastImage === null" (click)="uploadImage()" ><!--[disabled]="lastImage === null"
           <ion-icon name="cloud-upload"></ion-icon>Upload Snag
         </button>
       </ion-buttons>
-      </div>
+    </div>
     <br><br>
   </ion-footer>
+-->
   

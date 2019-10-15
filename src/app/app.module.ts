@@ -42,6 +42,7 @@ import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Keyboard } from '@ionic-native/keyboard';
+import { ImgViewPage } from '../pages/imgview/imgview';
 import { ImgEditPage } from '../pages/imgedit/imgedit';
 import { ImgEditPagePre } from '../pages/imgeditpre/imgeditpre';
 //import { ImgEditPagePostPost } from '../pages/imgeditpostpost/imgeditpostpost';
@@ -76,6 +77,7 @@ import { BrushTypePopoverPage } from '../pages/brush-type-popover/brush-type-pop
     DocumentTabs,
     DocumentAudit,
     DocumentIssues,
+    ImgViewPage,
     ImgEditPage,
     ImgEditPagePre,
     //ImgEditPagePostPost,
@@ -121,6 +123,7 @@ import { BrushTypePopoverPage } from '../pages/brush-type-popover/brush-type-pop
     DocumentAudit,
     DocumentIssues,
     DocumentSummary,
+    ImgViewPage,
     ImgEditPage,
     ImgEditPagePre,
     //ImgEditPagePostPost,

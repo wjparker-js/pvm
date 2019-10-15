@@ -4,8 +4,8 @@
     <button ion-button menuToggle start>
       <ion-icon name="menu"></ion-icon>
     </button>        
-    <span style="font-size:16px;color:white;padding-left:15px;">{{userContactData.ProjectName}}</span> 
-  </ion-navbar>
+    <span style="font-size:14px;color:white;overflow:hidden">{{userContactData.ProjectName}}</span> 
+  </ion-navbar> 
 
   <div padding>
     <ion-segment color="primary"  mode='ios'  [(ngModel)]="phonelist" (ionChange)="segmentChanged(phonelist)">
@@ -19,42 +19,42 @@
   </div>
 </ion-header>
 
-        
+
 
 <ion-content>
   <ion-grid>
     <ion-row>
       <ion-col  *ngFor="let contact of userContacts" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
-        <ion-list style="margin-bottom: 0px;">
-         <ion-card> 
-          <ion-item>
-            <ion-thumbnail item-left>
-              <img [src]="contact.avatar"  style="height:40px;width:40px;border:1px;" />
-            </ion-thumbnail>
-            <h2><b>{{contact.PFirstName}}&nbsp;{{contact.PLastName}}&nbsp;-&nbsp;{{contact.PCompanyName}}</b></h2>
-            <h3>{{contact.Email}}</h3> 
+        <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
+          <ion-card style=" padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;">
+            <ion-item style="padding-left:3px;">
 
-            <h3>  
-              <span *ngIf="contact.PMobile; else nomob">
-                <ion-icon style = "font-size: 15px;" name="call" color="primary" class="flex-right" (click)="callJoint(contact.PMobile)">
-                    <span style="font-family:arial;font-size: 12px;">{{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;</span>
-                </ion-icon>
-              </span>
-              <span *ngIf="contact.PTelephone; else nomob">
-                <ion-icon style = "font-size: 15px;" name="call" color="bold" class="flex-right" (click)="callJoint(contact.PTelephone)">
-                    <span style="font-family:arial;font-size: 12px;">{{contact.PTelephone}}</span>
-                </ion-icon>
-              </span>
-              <ng-template #nomob>
-                <span>
-                      <span style="font-family:arial;font-size: 12px;"> </span>
+              <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 60px !Important;height: 60px !Important;margin-top: 5px;margin-bottom: 5px;">
+                <img [src]="contact.avatar"   border="1" style="width:60px;height:60px;border-color:black;border:1px;"/>    
+              </ion-thumbnail>
+
+              <h3><b>{{contact.PFirstName}}&nbsp;{{contact.PLastName}}&nbsp;-&nbsp;{{contact.PCompanyName}}</b></h3>
+              <h3>{{contact.Email}}</h3> 
+
+              <h3>  
+                <span *ngIf="contact.PMobile; else nomob">
+                  <ion-icon style = "font-size: 15px;" name="call" color="primary" class="flex-right" (click)="callJoint(contact.PMobile)">
+                      <span style="font-family:arial;font-size: 12px;">{{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;</span>
+                  </ion-icon>
                 </span>
-                </ng-template>
+                <span *ngIf="contact.PTelephone; else nomob">
+                  <ion-icon style = "font-size: 15px;" name="call" color="bold" class="flex-right" (click)="callJoint(contact.PTelephone)">
+                      <span style="font-family:arial;font-size: 12px;">{{contact.PTelephone}}</span>
+                  </ion-icon>
+                </span>
+                <ng-template #nomob>
+                  <span>
+                        <span style="font-family:arial;font-size: 12px;"> </span>
+                  </span>
+                  </ng-template>
+              </h3>
 
-
-            </h3>
-
-          </ion-item>
+            </ion-item>
          </ion-card> 
       </ion-list>
 
@@ -65,9 +65,3 @@
 
 </ion-content>
 
-  
-<style>
-  .social-cards ion-col {
-    padding: 0;
-  }
-</style>

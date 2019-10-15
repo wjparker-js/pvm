@@ -2,7 +2,13 @@ import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as Constants from '../../providers/constants';
 import { IonicPage, NavController, AlertController, NavParams, ViewController, ActionSheetController, ToastController, Platform, LoadingController, Loading, Img } from 'ionic-angular';
-import { QrcodePage } from '../qrcode/qrcode';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { normalizeURL } from 'ionic-angular';
+import { Http } from '@angular/http';
+
 import { ImgEditPage } from '../imgedit/imgedit';
 import { ImgEditPagePre } from '../imgeditpre/imgeditpre';
 import { LocationmapPage } from '../locationmap/locationmap';
@@ -10,12 +16,8 @@ import { DisciplinePage } from '../discipline/discipline';
 import { EffectsPage } from '../effects/effects';
 import { ReasonsPage } from '../reasons/reasons';
 import { SubtypesPage } from '../subtypes/subtypes';
-import { Camera } from '@ionic-native/camera';
-import { File } from '@ionic-native/file';
-import { FilePath } from '@ionic-native/file-path';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
-import { normalizeURL } from 'ionic-angular';
-import { Http } from '@angular/http';
+import { QrcodePage } from '../qrcode/qrcode';
+
 
 declare var cordova: any;
 
@@ -45,6 +47,7 @@ export class SnaggingPage {
     public loading: Loading;
 	public imageUrl: any;
 	public snagid: string;
+
 	frmData = {reference:"", details: ""};
 
   	constructor(
@@ -182,16 +185,33 @@ export class SnaggingPage {
 
 		var upurl = "https://pvmobile.online/iuploadnofile.php";
 
-        const formData = new FormData();
+		//var headers = {'Content-Type' : 'multipart/form-data'};
+
+		const formData = new FormData();
+		
         formData.append('limg', this.image);
-        formData.append('pimg', this.currentImage);
+		formData.append('pimg', this.currentImage);
+		formData.append('reference', this.frmData.reference);
+		formData.append('location', this.name);
+		formData.append('discipline', this.discipline);
+		formData.append('details', this.frmData.details);
+		formData.append('pid', this.pid);
+		formData.append('uid', this.uid);
+		formData.append('cid', this.cid);
+		formData.append('api', this.api);
+		formData.append('effect', this.effect);
+		formData.append('reason', this.reason);
+		formData.append('defecttype', this.defecttype);		
 
 	    this.http.post(upurl,formData).map(res => res.json()).subscribe(data => {
 	        this.updata = data;
+			console.log(data);
 	    },err => {console.log("Oops!")}); 
 
-	}
+	this.dismiss();
 
+	}
+/*
 	public uploadImage() {
 		// Destination URL
 		//var url = "https://pvmobile.online/iupload.php";
@@ -220,8 +240,8 @@ export class SnaggingPage {
 				"effect": this.effect,
 				"reason": this.reason,
 				"defecttype": this.defecttype,
-				"limg": this.image,
-				"pimg": this.currentImage
+				//"limg": this.image,
+				//"pimg": this.currentImage
 			}
 		};
 	
@@ -243,7 +263,7 @@ export class SnaggingPage {
 		});
 	}
 
-
+*/
 	public openlocimg(){
 
 		var theLocation                     = localStorage.getItem('location');
@@ -257,6 +277,7 @@ export class SnaggingPage {
 		this.http.get(url).map(res => res.json()).subscribe(data => {
 		    this._sanitizer.bypassSecurityTrustStyle(data);
 			this.locationImg = data; 
+			
 			if(this.locationImg["0"].locationimage !== null){
 				this.image = "data:image/jpeg;base64," +  this.hexToBase64(this.locationImg["0"].locationimage);			
 				localStorage.setItem('locationimage', this.image); 

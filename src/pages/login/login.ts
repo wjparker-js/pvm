@@ -17,27 +17,32 @@ import * as Constants from '../../providers/constants';
 export class Login {
   
   public responseData : any;
-  userLoginData       : any;
+  public userLoginData: any;
 
   userSystemData = {"id":"","password":"","sysuserid":"","currentproject":"","apiKey":""};  
 
-  constructor(public navCtrl: NavController, public authService: AuthService, private toastCtrl:ToastController, public http: Http) {}  
+  constructor(
+    public navCtrl: NavController, 
+    public authService: AuthService, 
+    private toastCtrl:ToastController, 
+    public http: Http) 
+  {}  
   
+
+
   ionViewWillEnter() {
 
     if (localStorage.getItem('login_password') !== null) {
-    this.userSystemData.password       = localStorage.getItem('login_password');
-    this.userSystemData.id             = localStorage.getItem('login_id');
-    this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');
-
-    var userData = JSON.parse(localStorage.getItem('userSystemData'));
-    this.userSystemData.sysuserid  = userData[0].SystemUserID;
-    this.userSystemData.apiKey     = userData[0].apiKey;
+      this.userSystemData.password       = localStorage.getItem('login_password');
+      this.userSystemData.id             = localStorage.getItem('login_id');
+      this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');
+      var userData                       = JSON.parse(localStorage.getItem('userSystemData'));
+      this.userSystemData.sysuserid      = userData[0].SystemUserID;
+      this.userSystemData.apiKey         = userData[0].apiKey;
     }
-
   }
 
-  ionViewDidEnter() {}
+
 
   login(){    
 
@@ -56,8 +61,8 @@ export class Login {
             localStorage.setItem('userSystemData', JSON.stringify(this.responseData));  
 
             this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+'00000000-0000-0000-0000-000000000000'+'/'+'96'+'/'+'Mobile+-+Logged+In').map(res => res.json()).subscribe(data => {
-                  this.userLoginData = data;
-                  console.log(this.userLoginData);
+                this.userLoginData = data;
+                console.log(this.userLoginData);
               },
               err => {
                   console.log("Oops!");

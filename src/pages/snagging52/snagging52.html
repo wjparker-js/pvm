@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>    
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>       
-    <span style="font-size:16px;color:white;padding-left:15px;">Defect Details</span> 
+    <span style="font-size:14px;color:white;">{{selectedProjectName}} Defect Details</span> 
     <ion-buttons end>
-      <button ion-button (click)="dismiss()">Close</button>
+      <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -38,7 +38,15 @@
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Fixed: </span>
       <span class="text">{{defect2.EndFixDate  | date : 'dd MMM yyyy' }}</span>
       <br><br>
-      <img [src]="preUrl" style="width: 100%"> 
+      <ion-item style="height:80px !Important;">  
+        <ion-thumbnail item-left  style="padding-left:5px;padding-right:10px;width: 100px !Important;height: 80px !Important;margin-top: 0px;margin-bottom: 0px;">
+          <img [src]="ImgUrl"  style="width:100px; border: 1px;" >
+        </ion-thumbnail>   
+        &nbsp;
+        <ion-thumbnail item-left  style="padding-left:5px;padding-right:10px;width: 100px !Important;height: 80px !Important;margin-top: 0px;margin-bottom: 0px;">
+          <img [src]="ImgUrl"  style="width:100px; border: 1px;" >
+        </ion-thumbnail>  
+      </ion-item> 
     </ion-card-content>
   </ion-card> 
 
@@ -54,29 +62,24 @@
           <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated  | date : 'dd MMM yyyy'  }}</B><br>{{defect1note.Note}}</span>
           <br>
           <img [src]="postUrl" style="width: 100%">  
-      </ion-card-content>
+
+          <ion-item>
+              <ion-label class="text" style="width:20%"><b>Status</b></ion-label>
+              <ion-select class="myCustomSelect" [(ngModel)]="approval" name="approval"  style="text-align:left;" >
+                  <ion-option class="myCustomSelect" [value] = "Approved">Approved</ion-option>
+                  <ion-option class="myCustomSelect" [value] = "Rejected">Rejected</ion-option>
+              </ion-select>
+            </ion-item>            
+            <ion-item>
+              <ion-label class="mytext" style="font-size:14px;font-weight:bold !important;" ><b>Approval Notes</b></ion-label>
+              <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter your comments here..."  style="font-size:13px;"></ion-textarea>
+            </ion-item>
+
+        </ion-card-content>
   </ion-card>
 
-  <ion-card>
-      <ion-card-header>
-          <ion-card-title>
-          Defect Status
-        </ion-card-title>
-      </ion-card-header>
-    <ion-card-content>
-      <ion-item>
-        <ion-label class="text" style="width:20%"><b>Status</b></ion-label>
-        <ion-select class="myCustomSelect" [(ngModel)]="approval" name="approval"  style="text-align:left;" >
-            <ion-option class="myCustomSelect" [value] = "Approved">Approved</ion-option>
-            <ion-option class="myCustomSelect" [value] = "Rejected">Rejected</ion-option>
-        </ion-select>
-      </ion-item>            
-      <ion-item>
-        <ion-label class="mytext" style="font-size:13px;font-weight:bold !important;" >Notes</ion-label>
-        <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter your comments here..."  style="font-size:13px;"></ion-textarea>
-      </ion-item>
-      </ion-card-content>
-    </ion-card> 
+
+
 
   <ion-card [hidden]="currentImage === null">
       <ion-card-header>
@@ -89,21 +92,34 @@
     </ion-card-content>
   </ion-card> 
 
+  <div  style="width:100%;">
+    <ion-buttons  style="width:100%" >
+      <button style="width:100%;" ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
+        <ion-icon name="camera"></ion-icon>Take Picture
+      </button>
+    </ion-buttons>
+  </div>
+
+  <div [hidden]="currentImage === null"  style="width:100%;">
+    <ion-buttons  style="width:100%" >
+      <button style="width:100%;" ion-button icon-left [disabled]="lastImage === null" (click)="uploadImage()" >
+        <ion-icon name="cloud-upload"></ion-icon>Upload Fix
+      </button>
+    </ion-buttons>
+  </div>
+
+
+<!--
   <div>
     <ion-buttons style="width:100%;background-color: #ffffff;">
       <button style="width:150px;margin-left:5%;margin-right:auto;background-color: #2d3054;" ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
         <ion-icon name="camera"></ion-icon>Take Picture
       </button>
-      <button style="width:150px;margin-left:auto;margin-right:5%;background-color: #2d3054;" ion-button icon-left [disabled]="lastImage === null" (click)="uploadImage()" ><!---->
+      <button style="width:150px;margin-left:auto;margin-right:5%;background-color: #2d3054;" ion-button icon-left [disabled]="lastImage === null" (click)="uploadImage()" >
         <ion-icon name="cloud-upload"></ion-icon>Upload Snag
       </button>
     </ion-buttons>    
   </div>
+-->
 
 </ion-content>
-
-
-<ion-footer>
-
-  </ion-footer>
-  

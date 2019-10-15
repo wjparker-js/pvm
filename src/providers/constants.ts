@@ -7,3 +7,4 @@ export const fileUrl = 'http://docs.google.com/gview?embedded=true&url=http://79
 
 //export const defectUploadPath = "//dev.wowow.es/PublicPics/";
 export const defectUploadPath = "//filesrv-1/websites/SV/projectvaultuk.com/PublicPics/";
+export const publicUploadPath = "https://projectvaultuk.com/PublicPics/";

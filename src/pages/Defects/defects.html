@@ -5,17 +5,18 @@
             <ion-icon name="menu"></ion-icon>
         </button>
     </ion-buttons>
-    <span style="font-size:16px;color:white;padding-left:15px;">{{selectedProjectName}}</span> 
+    <span style="font-size:14px;color:white;">{{selectedProjectName}}</span>
     
     
     <ion-buttons right>
-        <button ion-button  color="light" type="button" item-right (click)="openLocationQRCode()"> 
-         <h2> <b><ion-icon name="qr-scanner"> </ion-icon></b> </h2>
+        <button ion-button  color="light" type="button" item-right style="font-size:19x;" (click)="openLocationQRCode()"> 
+         <ion-icon name="qr-scanner"> </ion-icon>
         </button>  
         &nbsp;
-        <button ion-button  strong color="light" type="button" item-right (click)="newSnag('new')"> 
-         <h2> <b><ion-icon strong name="add"> </ion-icon></b> </h2>
+        <button ion-button  color="light" type="button" item-right style="font-size:19x;" (click)="newSnag('new')"> 
+         <ion-icon strong name="add"> </ion-icon>
         </button>  
+        &nbsp;
     </ion-buttons>
 
  </ion-navbar>   
@@ -56,11 +57,25 @@
       <ion-col  *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
        
         <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
-        <ion-card style=" padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;"> <!--margin-left: 2px;margin-right: 2px;-->
-          <ion-item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus)" style="padding-left:3px;">            
+         <ion-card style=" padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;"> <!--margin-left: 2px;margin-right: 2px;-->
+          <ion-item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name)" style="padding-left:3px;">            
+            
             <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin-top: 10px;margin-bottom: 0px;">
               <img src="{{'data:image/jpeg;base64,' +  this.hexToBase64(defect.LocationImage)}}" border="1" style="width:100px;height:71px;border-color:black;border:2px;"/>
             </ion-thumbnail> 
+<!--            
+            <span *ngIf="imageUrl + defect.OrderId + '.png'">
+                <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin-top: 10px;margin-bottom: 0px;">
+                  <img [src]="imageUrl + defect.OrderId + '.png'" border="1" style="width:100px;height:71px;border-color:black;border:2px;"/>
+                </ion-thumbnail> 
+            </span>
+  
+            <span *ngIf="!imageUrl + defect.Order + '.png'">
+              <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin-top: 10px;margin-bottom: 0px;">
+                <img src="{{'data:image/jpeg;base64,' +  this.hexToBase64(defect.LocationImage)}}" border="1" style="width:100px;height:71px;border-color:black;border:2px;"/>
+              </ion-thumbnail> 
+            </span>    
+-->
             <div id="defectdetails">
               <b>{{defect.OrderReference}}</b><br>
               <span *ngIf="defect.statustext">{{defect.statustext}}<br></span>
@@ -72,9 +87,10 @@
                 <span *ngIf="defect.ProposedDate">Scheduled:&nbsp;{{defect.ProposedDate  | date : 'dd MMM yyyy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <span *ngIf="defect.DeliverBy">Required:&nbsp;{{defect.DeliverBy  | date : 'dd MMM yyyy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
               </span>   
-            </div>         
+            </div>     
+
           </ion-item>
-          </ion-card>
+         </ion-card>
         </ion-list>
 
       </ion-col>

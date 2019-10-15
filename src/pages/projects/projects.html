@@ -3,24 +3,25 @@
     <button ion-button menuToggle start>
       <ion-icon name="menu"></ion-icon>
     </button>        
-    <span style="font-size:16px;color:white;padding-left:15px;">{{selectedProjectName}}</span> 
+    <span style="font-size:14px;color:white;">{{selectedProjectName}}</span> 
   </ion-navbar>
 </ion-header>
+
 <ion-content>
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let project of userProjects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
-        <ion-card>
         <ion-list  style="margin-bottom: 0px;">  
-          <ion-item (click)="saveProject(project.ProjectName,project.ProjectID,project.SystemClientID);">           
-            <ion-thumbnail item-left>
-              <img [src]="project.Thumbnail" style="height:60px;width:70px;border:1px;" />
-            </ion-thumbnail>
-            <h2><b>{{project.ProjectName}}</b></h2>
-            <h3>{{project.Client}}</h3>
-          </ion-item>
-        </ion-list>
-        </ion-card>
+          <ion-card style=" padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;">
+            <ion-item style="padding-left:3px;" (click)="saveProject(project.ProjectName,project.ProjectID,project.SystemClientID);">           
+              <ion-thumbnail item-left>
+                <img [src]="project.Thumbnail" style="height:60px;width:70px;border:1px;" />
+              </ion-thumbnail>
+              <h2><b>{{project.ProjectName}}</b></h2>
+              <h3>{{project.Client}}</h3>
+            </ion-item>
+          </ion-card>
+        </ion-list>        
       </ion-col>
     </ion-row>
   </ion-grid>
