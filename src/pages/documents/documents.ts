@@ -173,27 +173,37 @@ checkFocus(){
     this.eventInstance           = $event;
     this.dsearch                 = $event.srcElement.value;
 
-    var url   = Constants.apiUrl+"api/documents/"+localApiKey+"/"+documentSystemUserID1+"/"+documentSystemProjectID1+"/"+searchTerm+"/xxx";
-    this.http.get(url).map(res => res.json()).subscribe(data => {
-          this._sanitizer.bypassSecurityTrustStyle(data);
-          this.userdocuments = data;
-          if ( this.userdocuments.length == 0 ) {
-            this.hasdocs = false;
-          } else {
-            this.hasdocs = true;
-
-
-
-
-
-          }
-          console.log(this.userdocuments);
-          this.keyboard.hide();
-      },
-      err => {
-          console.log("Oops!");
-      }
-    ); 
+    if(typeof searchTerm  !== "undefined"){
+      if(searchTerm.length > 1 ){
+      var url   = Constants.apiUrl+"api/documents/"+localApiKey+"/"+documentSystemUserID1+"/"+documentSystemProjectID1+"/"+searchTerm+"/xxx";
+      this.http.get(url).map(res => res.json()).subscribe(data => {
+            this._sanitizer.bypassSecurityTrustStyle(data);
+            this.userdocuments = data;
+            if ( this.userdocuments.length == 0 ) {
+              this.hasdocs = false;
+            } else {
+              this.hasdocs = true;
+            }
+            console.log(this.userdocuments);
+            this.keyboard.hide();
+        },
+        err => {
+            console.log("Oops!");
+        }
+      ); 
+    }} else {
+      var oldurl1 = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxxxxxxxxxxxxxxx/xxx";
+      this.http.get(oldurl1).map(res => res.json()).subscribe(data => {
+            this._sanitizer.bypassSecurityTrustStyle(data);
+            this.userdocuments = data;
+            document.getElementById("maindiv").style.display="block";
+            console.log(this.userdocuments);
+        },
+        err => {
+            console.log("Oops!");
+        }
+      );      
+    }
 
   }
   
@@ -213,7 +223,7 @@ checkFocus(){
       var image = image.replace(pt2,rep);
     }
 
-    console.log("Image:",image);
+    console.log("Fixed Image: ",image);
     return image;    
   }
 

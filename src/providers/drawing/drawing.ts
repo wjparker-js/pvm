@@ -147,11 +147,13 @@ export class DrawingProvider {
     this.canvas.add(t);
   }
 
+
   addImage(imageSrc: string) {
 
     this.disableDrawing();
 
     let image = new Image();
+
     image.setAttribute('crossOrigin', 'anonymous');
 
     image.onload = () => {
@@ -162,9 +164,8 @@ export class DrawingProvider {
         transparentCorners: false,
         scaleX: this.canvas.width / image.width,
         scaleY: this.canvas.width / (image.height * (image.width / image.height))
-        //scaleX: 0.9,
-        //scaleY: 0.75
       });
+      
       this.canvas.add(imgInstance);
       this.canvas.renderAll();
       this.canvas.setActiveObject(imgInstance);
@@ -178,13 +179,20 @@ export class DrawingProvider {
     }
   }
 
-  addImageUrl(imageSrc: string) {
+  /*addImageUrl(imageSrc: string) {
     this.disableDrawing();
 
-    var imageSrc = "https://go.projectvaultuk.com/PublicPics/11fea696-ad7c-4d48-ace1-20b0612a79b5/7bc6a3ae-ada5-4bb4-916f-8cae42fdd027/LocationImages/4e2ef81a-04bc-4781-bd11-1abcb8f260cd.jpg?time=-8586335582865684863";
+    //var imageSrc = "https://go.projectvaultuk.com/PublicPics/11fea696-ad7c-4d48-ace1-20b0612a79b5/7bc6a3ae-ada5-4bb4-916f-8cae42fdd027/LocationImages/4e2ef81a-04bc-4781-bd11-1abcb8f260cd.jpg?time=-8586335582865684863";
 
     let image = new Image();
-    image.setAttribute('crossOrigin', 'anonymous');
+
+    fabric.Image.fromURL( imageSrc, 
+      function (img) {
+         this.canvas.add(img);
+         this.canvas.renderAll();
+         this.canvas.setActiveObject(imgInstance);
+      },{ crossOrigin: 'anonymous', ... }
+   );
 
     image.onload = () => {
       let imgInstance = new fabric.Image(image, {
@@ -195,10 +203,11 @@ export class DrawingProvider {
         scaleX: this.canvas.width / image.width,
         scaleY: this.canvas.width / (image.height * (image.width / image.height))
       });
-      this.canvas.add(imgInstance);
-      this.canvas.renderAll();
-      this.canvas.setActiveObject(imgInstance);
+      //this.canvas.add(imgInstance);
+      //this.canvas.renderAll();
+      //this.canvas.setActiveObject(imgInstance);
     };
+
     image.src = imageSrc;
 
     // make sure the load event fires for cached images too
@@ -206,7 +215,7 @@ export class DrawingProvider {
       image.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
       image.src = imageSrc;
     }
-  }
+  }*/
 
   addBackgroundImage(imageSrc: string) {
     let image = new Image();

@@ -29,5 +29,6 @@ export class MyApp {
     //this.menu.enable(false);
     setTimeout(()=> this.backToWelcome(), 500);    
   }
+
   
 }

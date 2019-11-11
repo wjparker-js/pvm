@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>    
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>       
-    <span style="font-size:14px;color:white;">{{selectedProjectName}} Defect Details</span> 
+    <span style="font-size:16px;color:white;">{{selectedProjectName}} Defect Details</span> 
     <ion-buttons end>
       <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
@@ -36,24 +36,28 @@
     </ion-card-content>
   </ion-card>
 
-    <ion-card  [hidden]="hasNotes !== 'hasNotes'">
-      <ion-card-content *ngFor="let defect1note of defect1snotes">
-          <span style="font-size:13px;font-weight:bold !important;width:100px;" >Note By: </span>
-          <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated  | date : 'dd/mm/yy' }}</B><br>{{defect1note.Note}}</span>
-          <br>
-      </ion-card-content>
-    </ion-card> 
+
+
+  <ion-card  [hidden]="hasNotes !== 'hasNotes'">
+    <ion-card-content *ngFor="let defect1note of defect1snotes">
+        <span style="font-size:13px;font-weight:bold !important;width:100px;" >Note By: </span>
+        <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated  | date : 'dd MMM yyyy' }}</B><br>{{defect1note.Note}}</span>
+        <br>
+    </ion-card-content>
+  </ion-card> 
+
 
   
   <ion-item style="position:relative;top:0px;padding-left:10px;height:100px;">  
     <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
-      <img [src]="image"  style="width:100px; border: 2px;border-color:black;"  (click)="viewloc()">
+      <img [src]="image"  style="width:100px; border: 2px;border-color:black;" imageViewer> 
     </ion-thumbnail>   
     &nbsp;
     <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
-      <img [src]="ImgUrl"  style="width:100px;  border: 2px;border-color:black;" (click)="viewpre()">
+      <img [src]="ImgUrl"  style="width:100px;  border: 2px;border-color:black;" imageViewer>
     </ion-thumbnail>  
   </ion-item>            
+
 
 
   <ion-item>
@@ -61,43 +65,56 @@
     <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter notes here..."  style="font-size:13px;"></ion-textarea>
   </ion-item>
 
-  <ion-card [hidden]="currentImage === null">
-      <ion-card-content>
-        <img [src]="currentImage" style="width: 100%">
-      </ion-card-content>
-  </ion-card> 
 
-  <div  style="width:100%;">
-    <ion-buttons  style="width:100%" >
-      <button style="width:100%;" ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
-        <ion-icon name="camera"></ion-icon>Take Picture
-      </button>
-    </ion-buttons>
-  </div>
+ 
+  <ion-card  [hidden]="image === null" style="margin-top: 0px;padding-bottom: 0px;margin-bottom: 0px;">
+      <ion-card-content>       
+        <ion-item style="padding-left:3px;padding-left:3px;height: 70px;">     
+  
+            <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 90px !Important;height: 90px !Important;margin-top: 0px;margin-bottom: 0px;">
+              <img [src]="this.currentImage" style="width: 90px; margin: 0; position: absolute;top: 50%;left: 0px;transform: translate(0%, -50%);" >
+            </ion-thumbnail>  
+  
+          <span>
+  
+           <div> 
+            <button [hidden]="currentImage !== null"  start style="width:100%;height:100%;" ion-button (click)="addimage('add')">
+              <br/><br/>Take Defect Picture<br/><br/><br/>
+            </button>
+           </div> 
+           
+            <ion-row [hidden]="currentImage === null"  >
+              <ion-col style="width:50%;padding-left:0px;">
+                <div style="width:100%;">  
+                  <button  start style="width:100%;height:100%;margin-left:0px;" ion-button (click)="addimage('add')">
+                    <br/>Take<br>Defect<br>Picture<br/><br/>
+                  </button>
+                </div> 
+              </ion-col>
+              <ion-col style="width:50%;padding-right:0px;">
+                <div style="width:100%;">  
+                  <button  end style="width:100%;height:100%;margin-right:0px;" ion-button (click)="addimage('edit')">
+                    <br/>Edit<br>Defect<br>Picture<br/><br/>
+                  </button> 
+                </div> 
+              </ion-col>
+            </ion-row>
+          
+  
+          </span>        
+        </ion-item>  
+      </ion-card-content>
+    </ion-card> 
+
 
   <div [hidden]="currentImage === null"  style="width:100%;">
     <ion-buttons  style="width:100%" >
       <button style="width:100%;" ion-button icon-left (click)="sendUploadData()" >
-        <ion-icon name="cloud-upload"></ion-icon>Upload Fix
+        <ion-icon name="cloud-upload"></ion-icon>Upload Fix Image
       </button>
     </ion-buttons>
   </div>
 
 </ion-content>
 
-<!--
-<ion-footer>
-    <div  style="width:100%;">
-      <ion-buttons  style="width:100%" >
-        <button style="width:48%;margin-left:2%;margin-right:auto;" ion-button icon-left (click)="takePicture(this.camera.PictureSourceType.CAMERA)">
-          <ion-icon name="camera"></ion-icon>Take Picture
-        </button>
-        <button style="width:48%;margin-left:auto;margin-right:1%;" ion-button icon-left [disabled]="lastImage === null" (click)="uploadImage()" ><!--[disabled]="lastImage === null"
-          <ion-icon name="cloud-upload"></ion-icon>Upload Snag
-        </button>
-      </ion-buttons>
-    </div>
-    <br><br>
-  </ion-footer>
--->
   

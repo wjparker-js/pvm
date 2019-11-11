@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import * as Constants from '../../providers/constants';
 import { IonicPage, NavController, AlertController, NavParams, ViewController, ActionSheetController, ToastController, Platform, LoadingController, Loading, Img } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
@@ -8,15 +7,16 @@ import { FilePath } from '@ionic-native/file-path';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { normalizeURL } from 'ionic-angular';
 import { Http } from '@angular/http';
-
 import { ImgEditPage } from '../imgedit/imgedit';
 import { ImgEditPagePre } from '../imgeditpre/imgeditpre';
+
 import { LocationmapPage } from '../locationmap/locationmap';
 import { DisciplinePage } from '../discipline/discipline';
 import { EffectsPage } from '../effects/effects';
 import { ReasonsPage } from '../reasons/reasons';
 import { SubtypesPage } from '../subtypes/subtypes';
 import { QrcodePage } from '../qrcode/qrcode';
+import * as Constants from '../../providers/constants';
 
 
 declare var cordova: any;
@@ -30,23 +30,26 @@ declare var cordova: any;
 
 export class SnaggingPage {
 
+	public pid: string = "";
+	public uid: string = "";
+	public cid: string = "";
+	public api: string = "";
+	public snagid: string;
+
 	public name: string = "";
 	public updata: string = null;
 	public image: string = null;
 	public currentImage:  string = null ;
 	public locationImg:  string = null;
+
 	public discipline: string = "";
 	public reason: string = "";
 	public effect: string = "";
 	public defecttype: string = "";
-	public pid: string = "";
-	public uid: string = "";
-	public cid: string = "";
-	public api: string = "";
+
 	public lastImage: string = null;
     public loading: Loading;
 	public imageUrl: any;
-	public snagid: string;
 
 	frmData = {reference:"", details: ""};
 
@@ -80,7 +83,7 @@ export class SnaggingPage {
 
 	}
 
-	public presentActionSheet() {
+/*	public presentActionSheet() {
 		let actionSheet = this.actionSheetCtrl.create({
 			title: 'Select Image Source',
 			buttons: [
@@ -103,7 +106,7 @@ export class SnaggingPage {
 			]
 		});
 		actionSheet.present();
-	}
+	}*/
 
 	private addimage(action){
 		if(action === "add"){
@@ -140,13 +143,13 @@ export class SnaggingPage {
 		};
 
 		this.camera.getPicture(options).then(
-			(image) => resolve( 'data:image/png;base64,' + image),
+			(image) => resolve( 'data:image/jpg;base64,' + image),
 			() => reject()
 		);
 		});
 	}
 
-
+/*
 	private createFileName() {
 		var d = new Date(),
 		n = d.getTime(),
@@ -163,15 +166,6 @@ export class SnaggingPage {
 		});
 	}
 	
-	private presentToast(text) {
-		let toast = this.toastCtrl.create({
-			message: text,
-			duration: 3000,
-			position: 'top'
-		});
-		toast.present();
-	}
-	
 	public pathForImage(img) {
 		if (img === null) {
 			return '';
@@ -180,6 +174,16 @@ export class SnaggingPage {
 			return cordova.file.dataDirectory + img;
 		}
 	}
+
+	private presentToast(text) {
+		let toast = this.toastCtrl.create({
+			message: text,
+			duration: 3000,
+			position: 'top'
+		});
+		toast.present();
+	}*/
+
 
 	public sendUploadData(){
 
@@ -211,6 +215,8 @@ export class SnaggingPage {
 	this.dismiss();
 
 	}
+
+
 /*
 	public uploadImage() {
 		// Destination URL
@@ -264,6 +270,8 @@ export class SnaggingPage {
 	}
 
 */
+
+
 	public openlocimg(){
 
 		var theLocation                     = localStorage.getItem('location');
@@ -310,14 +318,8 @@ export class SnaggingPage {
 		this.navCtrl.push(ImgEditPagePre, {callback:this.myCallbackFunction8});	
 	}
 
-	ionViewDidLoad() {
-	}
-
-	ionSelected() {;
-	}
-
 	openGetQRCode(){
-		this.navCtrl.push(QrcodePage, {callback:this.myCallbackFunction1});
+		this.navCtrl.push(QrcodePage, {"newsnag":"Y",callback:this.myCallbackFunction1});
 	}
 
 	openList(){		
@@ -393,7 +395,6 @@ export class SnaggingPage {
 
 	 myCallbackFunction8 = (_params) => {
 		return new Promise((resolve, reject) => {
-			//this.image = _params;
 			this.currentImage = _params;
 			resolve();
 			console.log("In 8");	

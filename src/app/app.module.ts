@@ -45,11 +45,12 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { ImgViewPage } from '../pages/imgview/imgview';
 import { ImgEditPage } from '../pages/imgedit/imgedit';
 import { ImgEditPagePre } from '../pages/imgeditpre/imgeditpre';
-//import { ImgEditPagePostPost } from '../pages/imgeditpostpost/imgeditpostpost';
-//import { ImgEditPagePost } from '../pages/imgeditpost/imgeditpost';
+import { ImgEditPagePostPost } from '../pages/imgeditpostpost/imgeditpostpost';
+import { ImgEditPagePost } from '../pages/imgeditpost/imgeditpost';
 import { ColorsPopoverPage } from '../pages/colors-popover/colors-popover';
 import { WidthPopoverPage } from '../pages/width-popover/width-popover';
 import { BrushTypePopoverPage } from '../pages/brush-type-popover/brush-type-popover';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 @NgModule({
   declarations: [
@@ -80,20 +81,23 @@ import { BrushTypePopoverPage } from '../pages/brush-type-popover/brush-type-pop
     ImgViewPage,
     ImgEditPage,
     ImgEditPagePre,
-    //ImgEditPagePostPost,
-    //ImgEditPagePost,
+    ImgEditPagePostPost,
+    ImgEditPagePost,
     ColorsPopoverPage,
     WidthPopoverPage,
     BrushTypePopoverPage
   ],
   imports: [
-    BrowserModule,HttpModule,NgxQRCodeModule,
+    BrowserModule,HttpModule,NgxQRCodeModule,IonicImageViewerModule,
     IonicModule.forRoot(MyApp, {
       platforms: {
           ios: {
             statusbarPadding: true,
             tabsHideOnSubPages: true
-          }
+          },
+          android: {
+            tabsHideOnSubPages: true
+          }          
         }
     })
   ],
@@ -126,8 +130,8 @@ import { BrushTypePopoverPage } from '../pages/brush-type-popover/brush-type-pop
     ImgViewPage,
     ImgEditPage,
     ImgEditPagePre,
-    //ImgEditPagePostPost,
-    //ImgEditPagePost,
+    ImgEditPagePostPost,
+    ImgEditPagePost,
     ColorsPopoverPage,
     WidthPopoverPage,
     BrushTypePopoverPage   

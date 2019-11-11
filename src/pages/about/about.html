@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>   
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>    
-    <span style="font-size:14px;color:white;">{{selectedProjectName}} Email: 
+    <span style="font-size:16px;color:white;">{{selectedProjectName}} Email: 
       <span style="font-size:12px;color:white;padding-left:5px;">{{docno1}}</span>
     </span>
     <ion-buttons end>
@@ -13,7 +13,7 @@
 <ion-content padding id="about">
   <ion-list>
      <ion-item>
-       <ion-label class="mylabel" style="width:20%">User or Group</ion-label>
+       <ion-label class="mylabel" style="width:20%">Select Group</ion-label>
        <ion-select class="myCustomSelect" (ionChange)="setUserType(projectGroup)" [(ngModel)]="projectGroup" name="group"  style="text-align:left;" >
           <ion-option class="myCustomSelect" [value] = "Users">Users</ion-option>
           <ion-option  *ngFor="let projectGroup of projectGroups" [value] = "projectGroup">{{projectGroup.GroupName}}</ion-option>

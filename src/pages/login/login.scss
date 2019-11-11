@@ -1,8 +1,14 @@
 page-login {
+
+
+
     #login{
 
-        background: #fff;
+        background: #201547;
+        color:#000000;
+
         background-image: url("../assets/imgs/background.jpg");
+
         h1{
             font-size: 25px;
             margin-top:20px
@@ -12,6 +18,7 @@ page-login {
         } 
         ion-button{
             margin-top:20px;
+            background-color:#f4f4f4;
         }       
         ion-list{
             margin-top:20px;

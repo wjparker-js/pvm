@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>   
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>    
-    <span style="font-size:14px;color:white;">{{selectedProjectName}} Summary: 
-      <span style="font-size:12px;color:white;padding-left:5px;" [innerHTML]="docdays"> Days</span>
+    <span style="font-size:16px;color:white;">{{selectedProjectName}} Summary: 
+      <span style="font-size:12px;color:white;padding-left:5px;" [innerHTML]="docdays + ' Days'"></span>
     </span>
     <ion-buttons end>
       <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>

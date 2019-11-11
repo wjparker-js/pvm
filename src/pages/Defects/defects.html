@@ -5,15 +5,15 @@
             <ion-icon name="menu"></ion-icon>
         </button>
     </ion-buttons>
-    <span style="font-size:14px;color:white;">{{selectedProjectName}}</span>
+    <span style="font-size:16px;color:white;">{{selectedProjectName}}</span>
     
     
-    <ion-buttons right>
-        <button ion-button  color="light" type="button" item-right style="font-size:19x;" (click)="openLocationQRCode()"> 
+    <ion-buttons [hidden]="showDefects != 1" right>
+        <button ion-button  color="light" type="button" item-right style="font-size:24px;" (click)="openLocationQRCode()"> 
          <ion-icon name="qr-scanner"> </ion-icon>
         </button>  
         &nbsp;
-        <button ion-button  color="light" type="button" item-right style="font-size:19x;" (click)="newSnag('new')"> 
+        <button [hidden] = "createdefect != 1"  ion-button  color="light" type="button" item-right style="font-size:24px;" (click)="newSnag('new')"> 
          <ion-icon strong name="add"> </ion-icon>
         </button>  
         &nbsp;
@@ -21,7 +21,7 @@
 
  </ion-navbar>   
     
- <div> 
+ <div [hidden]="showDefects != 1" > 
   <ion-searchbar
   #myDefectsSearchbar 
   name = "defectsSearchBar" 
@@ -35,7 +35,7 @@
 
 
 
-<div style='padding: 10px;'>   
+<div [hidden]="showDefects != 1" style='padding: 10px;'>   
   <ion-segment color="primary"  mode='ios' [(ngModel)]="defectslist" (ionChange)="segmentChanged(defectslist)">
     <ion-segment-button selected value="all">
       Issued
@@ -53,15 +53,15 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col  *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
+    <ion-row [hidden]="showDefects != 1" > 
+      <ion-col [hidden]= "showDefects != 1" *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
        
         <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
          <ion-card style=" padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;"> <!--margin-left: 2px;margin-right: 2px;-->
           <ion-item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name)" style="padding-left:3px;">            
             
             <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin-top: 10px;margin-bottom: 0px;">
-              <img src="{{'data:image/jpeg;base64,' +  this.hexToBase64(defect.LocationImage)}}" border="1" style="width:100px;height:71px;border-color:black;border:2px;"/>
+              <img src="{{'data:image/jpeg;base64,' +  this.hexToBase64(defect.LocationImage)}}" border="1" style="width:100px;height:71px;border-color:black;border:2px;" imageViewer/>
             </ion-thumbnail> 
 <!--            
             <span *ngIf="imageUrl + defect.OrderId + '.png'">

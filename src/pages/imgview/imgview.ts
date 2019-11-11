@@ -60,14 +60,21 @@ export class ImgViewPage {
 
     if(this.imgType === "location"){
       imageToView = localStorage.getItem('locationimage');
-      this.imageName   = localStorage.getItem('location');
-    } else {
+      //this.imageName   = localStorage.getItem('location');
+      this.drawing.addImage(imageToView);
+    } 
+    if(this.imgType === "preimage"){
       imageToView = localStorage.getItem('preimage');
-      this.imageName   = "Defect in "+localStorage.getItem('location');
+      //this.imageName   = "Defect in "+localStorage.getItem('location');
+      this.drawing.addImage(imageToView);
+    }
+    if(this.imgType === "postimage"){
+      imageToView = localStorage.getItem('postimage');
+      //this.imageName   = "Defect in "+localStorage.getItem('location');
+      this.drawing.addImage(imageToView);
     }
 
-
-    this.drawing.addImage(imageToView);
+    //this.drawing.addImage(imageToView);
 
   }
 

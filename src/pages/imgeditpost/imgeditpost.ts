@@ -8,10 +8,10 @@ import { BrushTypePopoverPage } from '../brush-type-popover/brush-type-popover';
 import { TitleCasePipe } from '@angular/common';
 
 @Component({
-  selector: 'page-imgedit',
-  templateUrl: 'imgedit.html'
+  selector: 'page-imgeditpost',
+  templateUrl: 'imgeditpost.html'
 })
-export class ImgEditPage {
+export class ImgEditPagePost {
   @ViewChild(Content) content: Content;
   public drawingEnabled: boolean = true;
   imgwidth:any;
@@ -59,7 +59,7 @@ export class ImgEditPage {
     this.drawing.create(width, height);
     
     this.drawingEnabled = false;
-    var imageToView = localStorage.getItem('locationimage');
+    var imageToView = localStorage.getItem('postimage');
     this.drawing.addImage(imageToView);
   }
 
@@ -69,16 +69,7 @@ export class ImgEditPage {
   save() {
 
     // drawing variable is base64 image
-    let drawing = this.drawing.getAsImage();
-
-    localStorage.setItem('locationimage', this.drawing.getAsImage()); 
-
-    let alert = this.alertCtrl.create({
-      title: 'Location Image Updated',
-      subTitle: '',
-      buttons: ['OK']
-    });
-    alert.present();
+    localStorage.setItem('postimage', this.drawing.getAsImage()); 
     this.dismiss();
   }
 
@@ -262,7 +253,10 @@ export class ImgEditPage {
     this.drawing.undo();
   }
 
-
+  ionViewWillLeave() {
+		this.callback(this.drawing.getAsImage()).then(()=>{});
+  }
+  
   dismiss() {
 		this.viewCtrl.dismiss('') ;
 	 } 

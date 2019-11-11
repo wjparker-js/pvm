@@ -1,22 +1,17 @@
 <ion-header>
-    <ion-navbar>   
-      <button ion-button menuToggle start>
-        <ion-icon name="menu"></ion-icon>
-      </button>        
-      <span style="font-size:14px;color:white;">{{userPostData.ProjectName}}</span> 
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar>   
+    <button ion-button menuToggle start>
+      <ion-icon name="menu"></ion-icon>
+    </button>        
+    <span style="font-size:16px;color:white;">{{userPostData.ProjectName}}</span> 
+  </ion-navbar>
+</ion-header>
     
 <ion-content padding id="home">
 
+<!--<div #map id="map"></div>-->
 
-<!--<  
-  div #map id="map"></div>-->
-
-
-
-
-  <ion-row [hidden]="currentImage === null" >   
+  <ion-row  [hidden]="userPostData.ProjectName  === null" >   
     <ion-col width-25 offset-25>
       <h2 class="location" style="margin:0px;">{{weatherCity}}</h2>
       <h3 class="description" style="margin:0px;">{{weatherDes}}</h3>
@@ -28,11 +23,9 @@
       </div>
     </ion-col>     
   </ion-row>
-
- <br>
-
-  <div class="box blue">
-    <b><span  style="text-align:center;padding:4px;color:white;">Recent Documents Summary</span></b>
+  <br>
+  <div class="box blue"  [hidden]="userPostData.ProjectName  === null">
+    <b><span  style="color:white;position:relative;top:-2px;left:5px;">Recent Documents Summary</span></b>
     <ion-list  *ngFor="let item of dataSet" style="margin-bottom: 1px;">
       <ion-item>
         <table style="width:100%;">
@@ -50,8 +43,15 @@
       </ion-item>
     </ion-list> 
   </div>
-  
-  <!--
+
+  <div [hidden]="userPostData.ProjectName  !== null">
+    <br>
+    <h3>Please select a project.</h3>
+  </div>
+
+</ion-content>
+
+<!--
   <div class="box blue">
     <b><span  style="text-align:center;padding:4px;">Approvals Summary</span></b>
     <ion-list  >
@@ -74,7 +74,7 @@
       </ion-item>
     </ion-list>
   </div>
--->
+
 
   <br>
   <div class="box blue">
@@ -101,6 +101,5 @@
       </ion-item>
     </ion-list> 
   </div>
+-->
 
-
-</ion-content>

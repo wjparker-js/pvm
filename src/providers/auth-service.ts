@@ -7,9 +7,7 @@ import * as Constants from './constants';
 
 export class AuthService {
 
-  constructor(public http: Http) {
-    console.log('Hello AuthService Provider');
-  }
+  constructor(public http: Http) {}
 
   getData(credentials){
     var creds = "api/users/"+credentials.id+"/"+credentials.password;

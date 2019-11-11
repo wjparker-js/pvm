@@ -1,3 +1,16 @@
 page-snagging52 {
+    .imgcontainer {
+        width: 150px; /*any size*/
+        height: 150px; /*any size*/
+      }
+      
+      .object-fit-cover {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /*magic*/
+      }
 
+      .text{
+        font-size:14px;
+      }
 }

@@ -5,7 +5,7 @@ import { DocumentTabs } from '../documenttabs/documenttabs';
 import { AuthService } from "../../providers/auth-service";
 import { Http } from '@angular/http';
 import * as Constants from '../../providers/constants';
-//import {Md5} from '../../../node_modules/ts-md5/dist/md5';
+import {Md5} from 'ts-md5/dist/md5';
 
 @IonicPage()
 
@@ -15,10 +15,14 @@ import * as Constants from '../../providers/constants';
 })
 
 export class Login {
+
+  public defectsEnabled : boolean;
   
   public responseData : any;
   public userLoginData: any;
-
+  public showLogin: boolean = false;
+  public PIN:any;
+  public md5:any;
   userSystemData = {"id":"","password":"","sysuserid":"","currentproject":"","apiKey":""};  
 
   constructor(
@@ -33,13 +37,43 @@ export class Login {
   ionViewWillEnter() {
 
     if (localStorage.getItem('login_password') !== null) {
-      this.userSystemData.password       = localStorage.getItem('login_password');
-      this.userSystemData.id             = localStorage.getItem('login_id');
-      this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');
+      this.showLogin = true;
       var userData                       = JSON.parse(localStorage.getItem('userSystemData'));
       this.userSystemData.sysuserid      = userData[0].SystemUserID;
       this.userSystemData.apiKey         = userData[0].apiKey;
+      this.userSystemData.password       = localStorage.getItem('login_password');
+      this.userSystemData.id             = localStorage.getItem('login_id');
+      this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');
     }
+
+    if (localStorage.getItem('login_password') === null && localStorage.getItem('login_id') === null) {
+      this.showLogin = false;
+      this.userSystemData.password ="xxx-xxx";
+      console.log("New User.")
+    }
+
+  }
+
+
+  newuser(){    
+    this.userSystemData.password = "xxx-xxx";
+    this.authService.getData(this.userSystemData).then((result) =>{
+      this.responseData = result;
+
+      if(this.responseData[0].SystemUserID === "Not Found") {
+          var msgUser = this.userSystemData.id+" not a ProjectVault user.";
+          this.presentNewUserToast(msgUser);
+        } else {
+          localStorage.setItem('login_id',       this.responseData["0"].Email .toLowerCase());
+          localStorage.setItem('login_password', this.responseData["0"].PIN); 
+          this.presentToast("An email has been sent.");
+          this.userSystemData.id = this.responseData["0"].Email;
+          this.userSystemData.password = "";
+          this.showLogin = true;
+        }
+      },(err) => {
+        this.presentToast("There was an Email Send error.");
+      });
   }
 
 
@@ -49,28 +83,24 @@ export class Login {
     if(this.userSystemData.id && this.userSystemData.password){
 
         this.authService.getData(this.userSystemData).then((result) =>{
+        this.responseData = result;     
 
-        this.responseData = result;
+        if(this.responseData[0].Email.trim().toLowerCase() == this.userSystemData.id.trim().toLowerCase()) {
 
-        console.log(this.responseData);
-        
-        if(this.responseData[0].Email.trim().toLowerCase() == this.userSystemData.id.trim().toLowerCase())
-          {
+            this.md5 = Md5.hashStr(this.userSystemData.password);
+            console.log(this.md5);
+
             localStorage.setItem('login_id',       this.userSystemData.id.toLowerCase());
             localStorage.setItem('login_password', this.userSystemData.password); 
             localStorage.setItem('userSystemData', JSON.stringify(this.responseData));  
 
             this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+'00000000-0000-0000-0000-000000000000'+'/'+'96'+'/'+'Mobile+-+Logged+In').map(res => res.json()).subscribe(data => {
-                this.userLoginData = data;
-                console.log(this.userLoginData);
-              },
-              err => {
-                  console.log("Oops!");
+              this.userLoginData = data;
+              },err => {
+                  console.log("Oops! - Write Audit");
               }
             ); 
-
             this.navCtrl.push(TabsPage);
-
           } else {
             this.presentToast("Please enter a valid username and password");
           }
@@ -85,8 +115,18 @@ export class Login {
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 1000,
+      duration: 5000,
       position: 'top'
+    });
+    toast.present();
+  }
+
+  presentNewUserToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 5000,
+      cssClass: 'toast',
+      position: 'middle'
     });
     toast.present();
   }

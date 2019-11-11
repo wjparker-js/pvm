@@ -7,15 +7,12 @@ import {Http} from '@angular/http';
 import {DocumentSummary} from '../documentsummary/documentsummary';
 import {WeatherProvider} from '../../providers/weather/weather';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
 import * as Constants from '../../providers/constants';
-
 
 @Component({
   selector: 'page-home', 
   templateUrl: 'home.html'
 })
-
 
 export class HomePage {
 
@@ -35,7 +32,6 @@ export class HomePage {
   public weatherTemp_Max: any;
   public weatherTemp_Min: any;
 
-
   userPostData = {
     "UserName": "",
     "SystemClientID": "",
@@ -46,7 +42,6 @@ export class HomePage {
     "ProjectID":"",
     "ProjectName":""
   };
-
 
   constructor(
     public common: Common, 
@@ -60,7 +55,6 @@ export class HomePage {
     public authService : AuthService) {
   }
 
-
   ionViewWillEnter() {
 
     var data = JSON.parse(localStorage.getItem('userSystemData'));
@@ -71,7 +65,6 @@ export class HomePage {
     this.userPostData.Company        = data[0].Company;
     this.userPostData.SystemClientID = data[0].SystemClientID;
     this.userPostData.Email          = data[0].Email;  
-
     this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID'); 
     this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName'); 
 
@@ -79,22 +72,16 @@ export class HomePage {
     var uid     = this.userPostData.SystemUserID;  
     var pid     = this.userPostData.ProjectID;  
     var pname   = this.userPostData.ProjectName;
-
     var urld    = Constants.apiUrl+"api/dashboard/"+uid+"/"+pid;
     var urlt3   = Constants.apiUrl+"api/t3/"+apiKey+"/"+uid+"/"+pid;
     var urlt4   = Constants.apiUrl+"api/t4/"+apiKey+"/"+uid+"/"+pid;
     var urlcity = Constants.apiUrl+"api/locationcity/"+pid;
 
-
-    this.city = "London";
-    
     this.http.get(urlcity).map(res => res.json()).subscribe(data => {
-
-      if(data.length > 0 ) {
-                                                                                                              
+      if(data.length > 0 ) {                                                                                                              
         this.citydataSet = data;
         var temptown = this.citydataSet[0].town;
-        if(temptown === null || temptown === undefined){
+        if(temptown === null || temptown === 'undefined'){
           this.city = "London";
         } else {
           this.city = temptown;
@@ -107,38 +94,35 @@ export class HomePage {
         this.weatherTemp = data.list[0].main.temp - 273;
         this.weatherTemp = Math.round(this.weatherTemp);
       }); 
-    },
-    err => {
-        console.log("Oops! - No Weather Data");
-    }
-  ); 
+      },err => {
+          console.log("Oops! - No Weather Data");
+      }
+    ); 
 
 
     this.http.get(urld).map(res => res.json()).subscribe(data => {
-        this.dataSet = data;
-        console.log(this.dataSet);
-    },
-    err => {
-        console.log("Oops! - No Dashboard Data");
-    }); 
+      this.dataSet = data;
+      },err => {
+          console.log("Oops! - No Dashboard Data");
+      }
+    ); 
 
 
     this.http.get(urlt3).map(res => res.json()).subscribe(data => {
-        this.dataSet1 = data;
-        console.log(this.dataSet1);
-    },
-    err => {
+      this.dataSet1 = data;
+      },err => {
         console.log("Oops! - No T3 Data");
-    }); 
+      }
+    ); 
 
 
     this.http.get(urlt4).map(res => res.json()).subscribe(data => {
-        this.dataSet2 = data;
-        console.log(this.dataSet2);
-    },
-    err => {
-        console.log("Oops! - No T4 Data");
-    });   
+      this.dataSet2 = data;
+      },
+      err => {
+          console.log("Oops! - No T4 Data");
+      }
+    );   
 
   }
 

@@ -1,19 +1,26 @@
-<ion-content id="login">
+<ion-content id="login" color="primary">
   <ion-grid style="height: 100%">
-    <ion-row justify-content-center align-items-center style="height: 100%">
-      <ion-card padding style="max-width:350px;margin-top: 0px;margin-bottom: 0px;">
-        <img src="http://pvmobile.online/splogonew.png" style="height:25px;width:120px;"/>
+    <ion-row justify-content-center align-items-center style="height: 50%;">
+      <ion-card padding style="position:relative;max-width:350px;top:150px;margin-top: 40px;margin-bottom: 0px;background: #fff;">
+        <img src="assets/imgs/Sys_Logo_PV4_SG-White.png" style="height:53px;width:318px;"/>
         <ion-list>
             <ion-item>
-              <ion-label stacked>Username</ion-label>
-              <ion-input type="email"  [(ngModel)]="userSystemData.id" ></ion-input>
+              <ion-input type="email"  placeholder="Enter Username" [(ngModel)]="userSystemData.id" ></ion-input>
             </ion-item>
-            <ion-item>
-              <ion-label stacked>Password</ion-label>
-              <ion-input type="password"  [(ngModel)]="userSystemData.password"></ion-input>
+            <ion-item [hidden]="showLogin === false">
+              <ion-input type="password"  placeholder="Enter PIN" [(ngModel)]="userSystemData.password"></ion-input>
             </ion-item>
-        </ion-list>
-        <button ion-button block color="primary" (click)="login()">Login</button>
+          </ion-list>
+        <button [hidden]="showLogin === false" ion-button  block color="primary" (click)="login()">Login</button>
+        <button [hidden]="showLogin !== false" ion-button  block color="primary" (click)="newuser()">Get PIN</button>
+        <br><span [hidden]="showLogin === false" style="display: block;text-align:end;" (click)="newuser()">Request a new PIN.</span>
+      </ion-card>
+      <ion-card  [hidden]="showLogin === true" padding style="position:relative;color:white;border:0px;max-width:350px;top:0px;margin-top: 200px;margin-bottom: 0px;background: #201547;">
+        <div style="text-align:center;">
+        Enter a valid ProjectVault user email.
+        <br><br>
+        A temporary PIN will be emailled to you.
+        </div>
       </ion-card>
     </ion-row>
   </ion-grid>

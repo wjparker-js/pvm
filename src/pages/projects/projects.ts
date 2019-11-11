@@ -1,3 +1,5 @@
+import { ReasonsPage } from './../reasons/reasons';
+import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController  } from 'ionic-angular';
 import { Http } from '@angular/http';
@@ -16,6 +18,7 @@ import * as Constants from '../../providers/constants';
 export class ProjectsPage {
 
   userProjects: any;  
+  userProject: any;
   userApiKey : any;
   selectedProjectName: any;
   avatardata: any;
@@ -58,12 +61,39 @@ export class ProjectsPage {
   }
 
   saveProject(name,id,scid){
+
     localStorage.setItem('CurrentProjectName', name);
     localStorage.setItem('CurrentProjectID', id);
     localStorage.setItem('CurrentProjectClientID', scid);
     this.userProjectData.ProjectName = localStorage.getItem('CurrentProjectName');
     this.presentProjectToast("Project changed to: "+name);
     this.selectedProjectName = name;
+
+    var userApiKey1 = this.userProjectData.apiKey;  
+ 
+    this.http.get(Constants.apiUrl+'api/project/'+userApiKey1+"/"+this.userProjectData.SystemUserID+"/"+id).map(res => res.json()).subscribe(data => {
+          this.userProject = data;
+  console.log("Selected Project: ",this.userProject);
+
+          var RoleName = this.userProject["0"].RoleName;
+          var RoleDescription = this.userProject["0"].RoleDescription;
+          var PA5038 = this.userProject["0"].PA5038;
+          var PA5039 = this.userProject["0"].PA5039;
+
+          localStorage.setItem('Role-Name', RoleName);
+          localStorage.setItem('Role-Description', RoleDescription);
+          localStorage.setItem('Role-PA5038', PA5038);
+          localStorage.setItem('Role-PA5039', PA5039);  
+          console.log(this.navCtrl.parent.select(0));         
+          this.navCtrl.parent.select(0);
+          this.navCtrl.parent.select(1);
+      },
+      err => {
+          console.log("Oops!");
+      }
+    );  
+
+
   }
 
   presentProjectToast(msg) {
