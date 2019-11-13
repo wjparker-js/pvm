@@ -9,13 +9,38 @@
     
 <ion-content padding id="home">
 
-<!--<div #map id="map"></div>-->
+<!--<div #map id="map"></div>
+
+
+ 
+<button ion-button (click)="getGeolocation()">Get Location</button>
+<button ion-button (click)="watchLocation()">Watch</button>
+<button ion-button (click)="stopLocationWatch()">Stop Watch</button>
+
+<div *ngIf="geoLatitude">
+  <p>Latitude : {{geoLatitude}}</p>
+  <p>Longitude : {{geoLongitude}}</p>
+  <p>Accuracy : {{geoAccuracy}}</p>
+  <p class="address-text">
+
+    <span class="watch-text" *ngIf="isWatching; else notWatching">
+      Watching Location
+    </span>
+    <ng-template #notWatching>
+      Location Watch Stopped
+    </ng-template>
+
+    <br>Address : {{geoAddress }}
+  </p>
+</div>-->
+
+
 
   <ion-row  [hidden]="userPostData.ProjectName  === null" >   
     <ion-col width-25 offset-25>
       <h2 class="location" style="margin:0px;">{{weatherCity}}</h2>
-      <h3 class="description" style="margin:0px;">{{weatherDes}}</h3>
-      <h1 class="temp" style="margin-top:0px;">{{weatherTemp}}&deg;</h1>
+      <h2 class="description" style="margin:0px;">{{weatherDes}}</h2>
+      <h2 class="temp" style="margin-top:0px;">{{weatherTemp}}&deg;&nbsp;C</h2>
     </ion-col>  
     <ion-col width-25>
       <div class="icon">        

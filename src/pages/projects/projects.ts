@@ -73,7 +73,7 @@ export class ProjectsPage {
  
     this.http.get(Constants.apiUrl+'api/project/'+userApiKey1+"/"+this.userProjectData.SystemUserID+"/"+id).map(res => res.json()).subscribe(data => {
           this.userProject = data;
-  console.log("Selected Project: ",this.userProject);
+          console.log("Selected Project: ",this.userProject);
 
           var RoleName = this.userProject["0"].RoleName;
           var RoleDescription = this.userProject["0"].RoleDescription;
@@ -84,22 +84,27 @@ export class ProjectsPage {
           localStorage.setItem('Role-Description', RoleDescription);
           localStorage.setItem('Role-PA5038', PA5038);
           localStorage.setItem('Role-PA5039', PA5039);  
-          console.log(this.navCtrl.parent.select(0));         
-          this.navCtrl.parent.select(0);
-          this.navCtrl.parent.select(1);
+          localStorage.setItem('postimage', ""); 
+          localStorage.setItem('image', ""); 
+          localStorage.setItem('preimage', ""); 
+          localStorage.setItem('locationimage', ""); 
+          localStorage.setItem('location', ""); 
+          //localStorage.setItem('CurrentProjectClientID', "");
+          
+          
+
+          console.log(this.navCtrl.parent.select(0));  
       },
       err => {
           console.log("Oops!");
       }
     );  
-
-
   }
 
   presentProjectToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 1000,
+      duration: 3000,
       position: 'middle'
     });
     toast.present();

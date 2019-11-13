@@ -89,37 +89,31 @@
     <ion-card-content>       
       <ion-item style="padding-left:3px;padding-left:3px;height: 70px;">     
 
-          <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 90px !Important;height: 90px !Important;margin-top: 0px;margin-bottom: 0px;">
-            <img [src]="this.currentImage" style="width: 90px; margin: 0; position: absolute;top: 50%;left: 0px;transform: translate(0%, -50%);" >
-          </ion-thumbnail>  
+        <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 90px !Important;height: 90px !Important;margin-top: 0px;margin-bottom: 0px;">
+          <img [src]="this.currentImage" style="width: 90px; margin: 0; position: absolute;top: 50%;left: 0px;transform: translate(0%, -50%);" >
+        </ion-thumbnail>  
 
         <span>
+            <div> 
+                <ion-row [hidden]="currentImage === null"  >
+                  <ion-col style="width:50%;padding-left:0px;">
+                    <div style="width:100%;">  
+                      <button  start style="width:100%;height:100%;margin-left:0px;" ion-button (click)="addimage('add')">
+                        <br/>Take<br>Defect<br>Picture<br/><br/>
+                      </button>
+                    </div> 
+                  </ion-col>
+                  <ion-col style="width:50%;padding-right:0px;">
+                    <div style="width:100%;">  
+                      <button  end style="width:100%;height:100%;margin-right:0px;" ion-button (click)="addimage('edit')">
+                        <br/>Edit<br>Defect<br>Picture<br/><br/>
+                      </button> 
+                    </div> 
+                  </ion-col>
+                </ion-row>
+            </div>
+        </span>    
 
-         <div> 
-          <button [hidden]="currentImage !== null"  start style="width:100%;height:100%;" ion-button (click)="addimage('add')">
-            <br/><br/>Take Defect Picture<br/><br/><br/>
-          </button>
-         </div> 
-         
-          <ion-row [hidden]="currentImage === null"  >
-            <ion-col style="width:50%;padding-left:0px;">
-              <div style="width:100%;">  
-                <button  start style="width:100%;height:100%;margin-left:0px;" ion-button (click)="addimage('add')">
-                  <br/>Re-Take<br>Defect<br>Picture<br/><br/>
-                </button>
-              </div> 
-            </ion-col>
-            <ion-col style="width:50%;padding-right:0px;">
-              <div style="width:100%;">  
-                <button  end style="width:100%;height:100%;margin-right:0px;" ion-button (click)="addimage('edit')">
-                  <br/>Edit<br>Defect<br>Picture<br/><br/>
-                </button> 
-              </div> 
-            </ion-col>
-          </ion-row>
-        
-
-        </span>        
       </ion-item>  
     </ion-card-content>
   </ion-card> 

@@ -49,7 +49,8 @@ export class AboutPage {
     this.docSystemData.scid    = documentData[0].SystemClientID;
     this.docSystemData.uid     = documentData[0].SystemUserID;
     this.docSystemData.apiKey  = documentData[0].apiKey;     
-  	this.docSystemData.from    =  localStorage.getItem('login_id');
+    this.docSystemData.from    = localStorage.getItem('login_id');
+    this.docSystemData.from    = localStorage.getItem('login_id').replace(" ","");
   	this.docSystemData.subject = "Document: "+this.docno1;
   	this.docSystemData.img     = this.docimg;
   	this.docSystemData.docid   = this.docid;
@@ -73,7 +74,7 @@ export class AboutPage {
 
   setUserType(sGroup) {
 
-    if(sGroup.GroupName == "Users" || sGroup == "Users" ){
+    if(sGroup == "Users" ){
 
       var contacturl = Constants.apiUrl+"api/contacts/"+this.docSystemData.apiKey+"/"+this.docSystemData.pid+"/"+this.docSystemData.from+"/1";
 
@@ -87,9 +88,7 @@ export class AboutPage {
         }
       ); 
 
-    } 
-
-    if(sGroup.GroupName != "Users"){
+    } else {
 
       var groupcontacturl = Constants.apiUrl+"api/groups/"+this.docSystemData.apiKey+"/"+this.docSystemData.pid+"/"+sGroup.GroupName;
 

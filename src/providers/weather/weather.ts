@@ -12,7 +12,7 @@ export class WeatherProvider {
 
   constructor(public http: Http) {
     this.apiKey = "c6ef55c91cd0eb97383abf69248d2b7f";
-    this.url    = "https://api.openweathermap.org/data/2.5/forecast?APPID="+this.apiKey+"&q="; 
+    this.url    = "https://api.openweathermap.org/data/2.5/weather?APPID="+this.apiKey; 
     console.log('Hello WeatherProvider Provider');
   }
 
@@ -22,5 +22,9 @@ export class WeatherProvider {
   	return  this.http.get(this.url+city+",uk").map(res => res.json());
   }
 
+  getWeathercoords(lat,long){
+  	console.log('Getting Weather');
+  	return  this.http.get(this.url+"&lat="+lat+"&lon="+long).map(res => res.json());
+  }
 }
 

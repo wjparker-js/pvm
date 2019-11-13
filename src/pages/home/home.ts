@@ -6,8 +6,10 @@ import {Common} from "../../providers/common";
 import {Http} from '@angular/http';
 import {DocumentSummary} from '../documentsummary/documentsummary';
 import {WeatherProvider} from '../../providers/weather/weather';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation } from '@ionic-native/geolocation';
 import * as Constants from '../../providers/constants';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+ 
 
 @Component({
   selector: 'page-home', 
@@ -43,9 +45,25 @@ export class HomePage {
     "ProjectName":""
   };
 
+  geoLatitude: number;
+  geoLongitude: number;
+  geoAccuracy:number;
+  geoAddress: string;
+ 
+  watchLocationUpdates:any; 
+  loading:any;
+  isWatching:boolean;
+ 
+  //Geocoder configuration
+  geoencoderOptions: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 5
+  };
+
   constructor(
     public common: Common, 
-    private geolocation: Geolocation, 
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder,
     private alertCtrl: AlertController, 
     public weatherProvider:WeatherProvider, 
     public http: Http, 
@@ -68,6 +86,8 @@ export class HomePage {
     this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID'); 
     this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName'); 
 
+    this.getGeolocation();
+
     var apiKey  = this.userPostData.apiKey;
     var uid     = this.userPostData.SystemUserID;  
     var pid     = this.userPostData.ProjectID;  
@@ -77,27 +97,36 @@ export class HomePage {
     var urlt4   = Constants.apiUrl+"api/t4/"+apiKey+"/"+uid+"/"+pid;
     var urlcity = Constants.apiUrl+"api/locationcity/"+pid;
 
+    //this.watchLocation();
+
     this.http.get(urlcity).map(res => res.json()).subscribe(data => {
-      if(data.length > 0 ) {                                                                                                              
-        this.citydataSet = data;
-        var temptown = this.citydataSet[0].town;
-        if(temptown === null || temptown === 'undefined'){
-          this.city = "London";
-        } else {
-          this.city = temptown;
-        }
+    if(data.length > 0 ) {                                                                                                              
+      this.citydataSet = data;
+      var temptown = this.citydataSet[0].town;
+      if(temptown === null || temptown === 'undefined'){
+        this.city = "London";
+      } else {
+        this.city = temptown;
       }
-      this.weatherProvider.getWeather(this.city).subscribe(data => {
-        this.weatherCity = data.city.name;
-        this.weatherDes  = data.list[0].weather[0].description;
-        this.weatherIcon = "https://openweathermap.org/img/w/"+data.list[0].weather[0].icon+".png";
-        this.weatherTemp = data.list[0].main.temp - 273;
-        this.weatherTemp = Math.round(this.weatherTemp);
-      }); 
-      },err => {
-          console.log("Oops! - No Weather Data");
-      }
-    ); 
+    }
+      
+    this.weatherProvider.getWeathercoords(this.geoLatitude,this.geoLongitude).subscribe(data => {
+      this.weatherCity = data.name;
+      this.weatherDes  = data.weather[0].description;
+      this.weatherIcon = "https://openweathermap.org/img/w/"+data.weather[0].icon+".png";
+      this.weatherTemp = data.main.temp - 273;
+      this.weatherTemp = Math.round(this.weatherTemp);
+    //this.weatherProvider.getWeather(this.city).subscribe(data => {
+      //this.weatherCity = data.city.name;
+      //this.weatherDes  = data.list[0].weather[0].description;
+      //this.weatherIcon = "https://openweathermap.org/img/w/"+data.list[0].weather[0].icon+".png";
+      //his.weatherTemp = data.list[0].main.temp - 273;
+      //his.weatherTemp = Math.round(this.weatherTemp);
+    }); 
+    },err => {
+        console.log("Oops! - No Weather Data");
+    }
+  ); 
 
 
     this.http.get(urld).map(res => res.json()).subscribe(data => {
@@ -115,7 +144,6 @@ export class HomePage {
       }
     ); 
 
-
     this.http.get(urlt4).map(res => res.json()).subscribe(data => {
       this.dataSet2 = data;
       },
@@ -129,6 +157,68 @@ export class HomePage {
   openDocumentSummary(days){ 
     this.navCtrl.push(DocumentSummary,{days});
   }
+
+
+
+   //Get current coordinates of device
+   public getGeolocation(){
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.geoLatitude = resp.coords.latitude;
+      this.geoLongitude = resp.coords.longitude; 
+      this.geoAccuracy = resp.coords.accuracy; 
+      this.getGeoencoder(this.geoLatitude,this.geoLongitude);
+     }).catch((error) => {
+       alert('Error getting location'+ JSON.stringify(error));
+     });
+  }
+
+  //geocoder method to fetch address from coordinates passed as arguments
+  public getGeoencoder(latitude,longitude){
+    this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
+    .then((result: NativeGeocoderReverseResult[]) => {
+      this.geoAddress = this.generateAddress(result[0]);
+      console.log(this.geoAddress);
+    })
+    .catch((error: any) => {
+      alert('Error getting location'+ JSON.stringify(error));
+    });
+  }
+
+  //Return Comma saperated address
+  public generateAddress(addressObj){
+      let obj = [];
+      let address = "";
+      for (let key in addressObj) {
+        obj.push(addressObj[key]);
+      }
+      obj.reverse();
+      for (let val in obj) {
+        if(obj[val].length)
+        address += obj[val]+', ';
+      }
+    return address.slice(0, -2);
+  }
+
+
+  //Start location update watch
+  public watchLocation(){
+    this.isWatching = true;
+    this.watchLocationUpdates = this.geolocation.watchPosition();
+    this.watchLocationUpdates.subscribe((resp) => {
+      this.geoLatitude = resp.coords.latitude;
+      this.geoLongitude = resp.coords.longitude; 
+      this.getGeoencoder(this.geoLatitude,this.geoLongitude);
+    });
+  }
+
+
+  //Stop location update watch
+  public stopLocationWatch(){
+    this.isWatching = false;
+    this.watchLocationUpdates.unsubscribe();
+  }
+
+
 
 };
 

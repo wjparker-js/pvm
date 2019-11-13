@@ -34,19 +34,17 @@
               </ion-thumbnail>
 
               <h3><b>{{contact.PFirstName}}&nbsp;{{contact.PLastName}}&nbsp;-&nbsp;{{contact.PCompanyName}}</b></h3>
-              <h3>{{contact.Email}}</h3> 
+              <h3>{{contact.Email}}&nbsp;&nbsp;<a href="mailto:{{contact.Email}}?subject=Email%20from%20ProjectVault"><ion-icon style = "color:blue;font-size: 20px;padding-top: 0px;"  name="send"></ion-icon></a></h3> 
 
               <h3>  
-                <span *ngIf="contact.PMobile; else nomob">
-                  <ion-icon style = "font-size: 15px;" name="call" color="primary" class="flex-right" (click)="callJoint(contact.PMobile)">
-                      <span style="font-family:arial;font-size: 12px;">{{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;</span>
-                  </ion-icon>
-                </span>
                 <span *ngIf="contact.PTelephone; else nomob">
-                  <ion-icon style = "font-size: 15px;" name="call" color="bold" class="flex-right" (click)="callJoint(contact.PTelephone)">
-                      <span style="font-family:arial;font-size: 12px;">{{contact.PTelephone}}</span>
-                  </ion-icon>
+                  <span style="font-family:arial;font-size: 14px;">{{contact.PTelephone}}&nbsp;&nbsp;<ion-icon style = "font-size: 20px;" name="call" color="bold" (click)="callJoint(contact.PTelephone)"></ion-icon> </span>
                 </span>
+                <br>
+                <span *ngIf="contact.PMobile; else nomob">                    
+                  <span style="font-family:arial;font-size: 14px;">{{contact.PMobile}}&nbsp;(Mob)&nbsp;&nbsp;<ion-icon style = "font-size: 20px;" name="call" color="primary" (click)="callJoint(contact.PMobile)"></ion-icon></span>
+                </span>             
+
                 <ng-template #nomob>
                   <span>
                         <span style="font-family:arial;font-size: 12px;"> </span>

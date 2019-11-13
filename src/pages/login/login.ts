@@ -92,9 +92,11 @@ export class Login {
 
             localStorage.setItem('login_id',       this.userSystemData.id.toLowerCase());
             localStorage.setItem('login_password', this.userSystemData.password); 
-            localStorage.setItem('userSystemData', JSON.stringify(this.responseData));  
+            localStorage.setItem('userSystemData', JSON.stringify(this.responseData)); 
+            
+            var actiontext = "Mobile+-+Logged+In+-+"+this.userSystemData.id.toLowerCase().trim();
 
-            this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+'00000000-0000-0000-0000-000000000000'+'/'+'96'+'/'+'Mobile+-+Logged+In').map(res => res.json()).subscribe(data => {
+            this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+'00000000-0000-0000-0000-000000000000'+'/'+'96'+'/'+actiontext).map(res => res.json()).subscribe(data => {
               this.userLoginData = data;
               },err => {
                   console.log("Oops! - Write Audit");

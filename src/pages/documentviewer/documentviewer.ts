@@ -70,8 +70,10 @@ export class DocumentViewer {
             }
         );
 
+        
+        var actiontext = "Mobile+-+Viewed+Document+-+"+this.userSystemData.id.toLowerCase().trim();
 
-        this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+this.docid+'/'+'91'+'/'+'Mobile+-+Viewed+Drawing').map(res => res.json()).subscribe(data => {
+        this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+this.docid+'/'+'91'+'/'+actiontext).map(res => res.json()).subscribe(data => {
               this.userViewDocData = data;
               console.log(this.userViewDocData);
           },
