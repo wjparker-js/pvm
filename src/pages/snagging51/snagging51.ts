@@ -246,7 +246,7 @@ export class Snagging51Page {
 		let options = {
 			quality           : 50,
 			allowEdit         : true,
-			saveToPhotoAlbum  : true,
+			saveToPhotoAlbum  : false,
 			cameraDirection   : 0,
 			correctOrientation: true,
 			targetWidth       : 800,
