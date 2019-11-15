@@ -26,8 +26,9 @@ export class MyApp {
   }
 
   logout(){
-    //this.menu.enable(false);
-    setTimeout(()=> this.backToWelcome(), 500);    
+    this.menu.enable(false); 
+    setTimeout(()=> this.backToWelcome(), 200); 
+      
   }
 
   

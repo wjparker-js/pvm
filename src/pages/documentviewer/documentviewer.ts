@@ -54,10 +54,10 @@ export class DocumentViewer {
         this.ext = this.params.get('ext');
 
         var url = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext+"/view";
-        var url = url.toLowerCase();
+        //var url = url.toLowerCase();
 
-        this.delfileUrl = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext+"/delete";
-        this.delfileUrl = this.delfileUrl.toLowerCase();
+        //this.delfileUrl = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext+"/delete";
+        //this.delfileUrl = this.delfileUrl.toLowerCase();
 
 
         this.http.get(url).map(res => res.json()).subscribe(data => {
@@ -70,7 +70,13 @@ export class DocumentViewer {
             }
         );
 
+        this.sleep(3000);
+      
+        this.fileUrl = Constants.fileUrl+this.docid+this.ext;
         
+        this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileUrl);  
+
+
         var actiontext = "Mobile+-+Viewed+Document+-+"+this.userSystemData.id.toLowerCase().trim();
 
         this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+this.docid+'/'+'91'+'/'+actiontext).map(res => res.json()).subscribe(data => {
@@ -83,13 +89,7 @@ export class DocumentViewer {
         ); 
 
         
-        this.sleep(3000);
-      
-        this.fileUrl = Constants.fileUrl+this.docid+this.ext;
-
-        console.log(this.fileUrl);
-        
-        this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileUrl);     
+   
 
 
 
