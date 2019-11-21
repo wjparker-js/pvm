@@ -12,10 +12,9 @@ export class WeatherProvider {
 
   constructor(public http: Http) {
     this.apiKey = "c6ef55c91cd0eb97383abf69248d2b7f";
-    this.url    = "https://api.openweathermap.org/data/2.5/weather?APPID="+this.apiKey; 
+    this.url    = "https://api.openweathermap.org/data/2.5/weather?appid="+this.apiKey+"&q="; 
     console.log('Hello WeatherProvider Provider');
   }
-
 
   getWeather(city){
   	console.log('Getting Weather');

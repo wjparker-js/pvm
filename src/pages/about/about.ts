@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams, ViewController, ToastController } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { DomSanitizer } from '@angular/platform-browser'
+import * as Constants from '../../providers/constants';;
 import 'rxjs/add/operator/map';
-import * as Constants from '../../providers/constants';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({selector: 'page-about', templateUrl: 'about.html'})
 
 export class AboutPage {
-
+  
   avatardata: any;
   userdata: any;
   mailsubject: any;
@@ -125,28 +125,8 @@ export class AboutPage {
 
 
   sendEmail(){
-/*
-  	console.log(this.docSystemData.from);
-  	console.log(this.docSystemData.to);
-  	console.log(this.docSystemData.subject);
-  	console.log(this.docSystemData.message);
-  	console.log(this.docSystemData.img);
 
-    var url = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext;
-    var url = url.toLowerCase();
-
-    this.http.get(url).map(res => res.json()).subscribe(data => {
-          this.sanitizer.bypassSecurityTrustStyle(data);
-          this.viewdoc = data;          
-          console.log("ViewerURL="+this.viewdoc);
-        },
-        err => {
-            console.log("File not available.");
-        }
-    );
-
-*/
-
+    //Send email - from pvonline so no audit
     this.http.get(Constants.apiUrl+'api/sendemail/'+this.docSystemData.apiKey+'/'+this.docSystemData.uid+'/'+this.docSystemData.pid+'/'+this.docSystemData.from+'/'+this.docSystemData.to+'/'+this.docSystemData.subject+'/'+this.docSystemData.message+'/'+this.docSystemData.docid+'/'+this.docno1).map(res => res.json()).subscribe(data => {
           this.useremaildata = data;
           console.log(this.useremaildata);
@@ -158,16 +138,7 @@ export class AboutPage {
 
     this.presentProjectToast("Email Sent");
 
-    
-
-    
-
-
-
-
-
   }
-
 
   dismiss() {
     this.viewCtrl.dismiss();

@@ -5,14 +5,14 @@
         <img src="assets/imgs/Sys_Logo_PV4_SG-White.png" style="height:53px;width:318px;"/>
         <ion-list>
             <ion-item>
-              <ion-input type="email"  placeholder="Enter Username" [(ngModel)]="userSystemData.id" ></ion-input>
+              <ion-input #input type="email"  placeholder="Enter Username" [(ngModel)]="userSystemData.id" ></ion-input>
             </ion-item>
             <ion-item [hidden]="showLogin === false">
               <ion-input type="password"  placeholder="Enter PIN" [(ngModel)]="userSystemData.password"></ion-input>
             </ion-item>
           </ion-list>
         <button [hidden]="showLogin === false" ion-button  block color="primary" (click)="login()">Login</button>
-        <button [hidden]="showLogin !== false" ion-button  block color="primary" (click)="newuser()">Get PIN</button>
+        <button [hidden]="showLogin !== false" ion-button  block color="primary" (click)="newuser()">Get PIN or Login</button>
         <br><span [hidden]="showLogin === false" style="display: block;text-align:end;" (click)="newuser()">Request a new PIN.</span>
       </ion-card>
       <ion-card  [hidden]="showLogin === true" padding style="position:relative;color:white;border:0px;max-width:350px;top:0px;margin-top: 200px;margin-bottom: 0px;background: #201547;">

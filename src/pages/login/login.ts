@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { DocumentTabs } from '../documenttabs/documenttabs';
@@ -15,6 +15,8 @@ import {Md5} from 'ts-md5/dist/md5';
 })
 
 export class Login {
+
+  @ViewChild('input') myInput ;
 
   public defectsEnabled : boolean;
   
@@ -36,7 +38,7 @@ export class Login {
 
   ionViewWillEnter() {
 
-    if (localStorage.getItem('login_password') !== null) {
+    if ((localStorage.getItem('login_password') !== null) && (localStorage.getItem('login_password') !== "xxx-xxx")) {
       this.showLogin = true;
       var userData                       = JSON.parse(localStorage.getItem('userSystemData'));
       this.userSystemData.sysuserid      = userData[0].SystemUserID;
@@ -46,7 +48,7 @@ export class Login {
       this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');
     }
 
-    if (localStorage.getItem('login_password') === null && localStorage.getItem('login_id') === null) {
+    if ((localStorage.getItem('login_password') == "null" && localStorage.getItem('login_id') == null) || (localStorage.getItem('login_password') == "xxx-xxx" && localStorage.getItem('login_id') == "xxx-xxx") ) {
       this.showLogin = false;
       this.userSystemData.password ="xxx-xxx";
       console.log("New User.")
@@ -54,23 +56,44 @@ export class Login {
 
   }
 
+  ionViewLoaded() {
+
+    setTimeout(() => {
+      this.myInput.setFocus();
+    },150);
+ }
+
 
   newuser(){    
     this.userSystemData.password = "xxx-xxx";
+
     this.authService.getData(this.userSystemData).then((result) =>{
+
       this.responseData = result;
 
       if(this.responseData[0].SystemUserID === "Not Found") {
-          var msgUser = this.userSystemData.id+" not a ProjectVault user.";
-          this.presentNewUserToast(msgUser);
-        } else {
-          localStorage.setItem('login_id',       this.responseData["0"].Email .toLowerCase());
+        var msgUser = this.userSystemData.id+" is not a ProjectVault user.";
+        this.presentNewUserToast(msgUser);
+      } 
+
+      if(this.responseData[0].SystemUserID != "Not Found")  {
+        localStorage.setItem('login_id',       this.responseData["0"].Email .toLowerCase());
+        var haspin = this.responseData["0"].PIN;
+
+        if(haspin == "" || haspin =="spuk" || haspin == null){
           localStorage.setItem('login_password', this.responseData["0"].PIN); 
           this.presentToast("An email has been sent.");
           this.userSystemData.id = this.responseData["0"].Email;
           this.userSystemData.password = "";
           this.showLogin = true;
+        } 
+        
+        if(haspin != "" || haspin !="spuk" || haspin != null){
+          this.userSystemData.id = this.responseData["0"].Email;
+          this.userSystemData.password = "";
+          this.showLogin = true;}
         }
+        
       },(err) => {
         this.presentToast("There was an Email Send error.");
       });

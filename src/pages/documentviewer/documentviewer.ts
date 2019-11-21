@@ -24,16 +24,15 @@ export class DocumentViewer {
 
     userSystemData = {"id":"","password":"","sysuserid":"","currentproject":"","apiKey":""}; 
 
-    ionViewWillEnter() {}
-
     constructor(public platform: Platform, 
                 public params: NavParams, 
                 public http: Http, 
                 private sanitizer: DomSanitizer, 
                 public modalCtrl: ModalController, 
                 public viewCtrl: ViewController
-              ) {
+              ) {}
 
+    ionViewWillEnter() {
 
         this.userSystemData.id             = localStorage.getItem('login_id');
         this.userSystemData.password       = localStorage.getItem('login_password');
@@ -43,38 +42,31 @@ export class DocumentViewer {
         this.userSystemData.sysuserid  = userData[0].SystemUserID;
         this.userSystemData.apiKey    = userData[0].apiKey;
 
-
-        var clientid="";
         this.clientid = this.params.get('clientid');
-        var projectid="";
         this.projectid = this.params.get('projectid');
-        var docid="";
         this.docid = this.params.get('docid');
-        var ext="";
         this.ext = this.params.get('ext');
 
         var url = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext+"/view";
-        //var url = url.toLowerCase();
 
         //this.delfileUrl = Constants.apiUrl+"api/documentview/"+this.clientid+"/"+this.projectid+"/"+this.docid+"/"+this.ext+"/delete";
         //this.delfileUrl = this.delfileUrl.toLowerCase();
 
-
         this.http.get(url).map(res => res.json()).subscribe(data => {
               this.sanitizer.bypassSecurityTrustStyle(data);
               this.viewdoc = data;          
-              console.log("ViewerURL="+this.viewdoc);
+              console.log("ViewerURL="+this.viewdoc); 
             },
             err => {
                 console.log("File not available.");
             }
         );
 
-        this.sleep(3000);
+        this.sleep(2000);
+        this.fileUrl = Constants.fileUrl+this.docid+this.ext;        
+        this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileUrl);
       
-        this.fileUrl = Constants.fileUrl+this.docid+this.ext;
-        
-        this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileUrl);  
+ 
 
 
         var actiontext = "Mobile+-+Viewed+Document+-+"+this.userSystemData.id.toLowerCase().trim();

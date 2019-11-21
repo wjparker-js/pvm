@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { Http } from '@angular/http';
-import * as Constants from '../../providers/constants';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SnaggingPage } from '../snagging/snagging';
 import { Snagging51Page } from '../snagging51/snagging51';
 import { Snagging52Page } from '../snagging52/snagging52';
 import { QrcodePage } from '../qrcode/qrcode';
-
+import * as Constants from '../../providers/constants';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -25,6 +24,7 @@ export class DefectsPage {
 	SystemCID: any;
 	SystemProjectID: any;
 	selectedProjectName:any;
+	SystemUserID:any;
 	eventInstance : any;
 	dsearch : any;
 	apiKey: any;
@@ -43,6 +43,7 @@ export class DefectsPage {
 		this.SystemCID           = localStorage.getItem('CurrentProjectClientID');
 		this.SystemProjectID     = localStorage.getItem('CurrentProjectID');
 		this.selectedProjectName = localStorage.getItem('CurrentProjectName');
+		this.SystemUserID        = localStorage.getItem('login_id');
 		this.apiKey              = defectData[0].apiKey; 
 		this.defectslist         = "all";
 		this.createdefect        = localStorage.getItem('Role-PA5038');
@@ -54,9 +55,9 @@ export class DefectsPage {
 		this.imageUrl = Constants.publicUploadPath+this.SystemCID+'/'+this.SystemProjectID+'/LocationImages/';
 
 		if(this.location === ""){
-			url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/nosearch/1";
+			url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/nosearch/1";
 		} else {
-			url = Constants.apiUrl+"api/defectsqr/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.location;
+			url = Constants.apiUrl+"api/defectsqr/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+this.location;
 		}
 
     this.http.get(url).map(res => res.json()).subscribe(data => {
@@ -122,7 +123,7 @@ export class DefectsPage {
 		this.dsearch             = $event.srcElement.value;
 		this.defectslist         = "";
 
-		var url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+searchTerm+"/xxx";
+		var url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/xxx";
 
 	    this.http.get(url).map(res => res.json()).subscribe(data => {
 	        this._sanitizer.bypassSecurityTrustStyle(data);
@@ -171,13 +172,16 @@ export class DefectsPage {
 		if(orderstatus == 50){this.navCtrl.push(Snagging51Page,{snagid,orderstatus});}
 		if(orderstatus == 51){this.navCtrl.push(Snagging51Page,{snagid,orderstatus});}
 		if(orderstatus == 52){this.navCtrl.push(Snagging52Page,{snagid,orderstatus});}
+		if(orderstatus == 53){this.navCtrl.push(Snagging52Page,{snagid,orderstatus});}
 	}
 
   segmentChanged(segment){ 
 
+		var searchTerm = "";
+
 		var htmlElement = document.getElementsByClassName("searchbar-input");
-		if(htmlElement.length == 1){var searchTerm = htmlElement["0"].value;}
-		if(htmlElement.length == 2){var searchTerm = htmlElement["1"].value;}		
+		if(htmlElement.length == 1){ searchTerm = htmlElement["0"].value;}
+		if(htmlElement.length == 2){ searchTerm = htmlElement["1"].value;}		
 
 		console.log(htmlElement);
 		console.log(searchTerm);
@@ -186,7 +190,7 @@ export class DefectsPage {
 
     	if(segment == "all"){
 
-			var urls1 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+searchTerm+"/1";
+			var urls1 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/1";
 			console.log(urls1);
 
 	    this.http.get(urls1).map(res => res.json()).subscribe(data => {
@@ -202,7 +206,7 @@ export class DefectsPage {
 
     if(segment == "new"){
 
-			var urls2 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+searchTerm+"/2";
+			var urls2 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/2";
 			console.log(urls2);
 
 			    this.http.get(urls2).map(res => res.json()).subscribe(data => {
@@ -219,7 +223,7 @@ export class DefectsPage {
 		
     if(segment == "open"){
 
-			var urls3 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+searchTerm+"/3";
+			var urls3 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/3";
 			console.log(urls3);
 
 			    this.http.get(urls3).map(res => res.json()).subscribe(data => {

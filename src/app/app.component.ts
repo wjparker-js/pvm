@@ -23,10 +23,31 @@ export class MyApp {
    backToWelcome(){
     const root = this.app.getRootNav();
     root.popToRoot();
+    //this.menu.enable(true); 
   }
 
   logout(){
     this.menu.enable(false); 
+
+    // Clear local storage
+    localStorage.setItem('login_id', "xxx-xxx");
+    localStorage.setItem('login_password', "xxx-xxx");
+    localStorage.setItem('userSystemData', "");
+    localStorage.setItem('CurrentProjectName', "");
+    localStorage.setItem('CurrentProjectID', "");
+    localStorage.setItem('CurrentProjectClientID', "");
+    localStorage.setItem('Role-Name', "");
+    localStorage.setItem('Role-Description', "");
+    localStorage.setItem('Role-PA5038', "");
+    localStorage.setItem('Role-PA5039', "");
+    localStorage.setItem('postimage', "");
+    localStorage.setItem('image', "");
+    localStorage.setItem('preimage', "");
+    localStorage.setItem('locationimage', "");
+    localStorage.setItem('location', "");
+    localStorage.setItem('OldProjectName', "");
+    
+
     setTimeout(()=> this.backToWelcome(), 200); 
       
   }

@@ -12,7 +12,7 @@
   <!--<div #map id="map"></div>--> 
 
   <ion-row  [hidden]="userPostData.ProjectName  === null" >   
-    <ion-col width-25 offset-25>
+    <ion-col width-25 offset-25 [hidden]="userPostData.ProjectID === null">
       <h2 class="location" style="margin:0px;">{{weatherCity}}</h2>
       <h2 class="description" style="margin:0px;">{{weatherDes}}</h2>
       <h2 class="temp" style="margin-top:0px;">{{weatherTemp}}&deg;&nbsp;C<br><img [src]="weatherIcon" style="width: 90px;height: 70px;margin:0px;" /></h2>

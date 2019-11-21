@@ -25,6 +25,7 @@ export class Snagging51Page {
 
 	public pid: string = "";
 	public uid: string = "";
+	public uguid: string = "";
 	public cid: string = "";
 	public api: string = "";
 	public snagid: string;
@@ -72,6 +73,7 @@ export class Snagging51Page {
 		var snagData = JSON.parse(localStorage.getItem('userSystemData'));
 				
 		this.pid          = localStorage.getItem('CurrentProjectID');
+		this.uguid        = localStorage.getItem('SystemUserID');
 		this.api          = snagData[0].apiKey;
 		this.cid          = localStorage.getItem('CurrentProjectClientID');
 		this.uid          = snagData[0].SystemUserID;
@@ -80,7 +82,7 @@ export class Snagging51Page {
 
 		this.openlocimg();
 
-		var url = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/nosearch/"+this.snagid;
+		var url = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/"+this.uguid+"/nosearch/"+this.snagid;
 
 	      this.http.get(url).map(res => res.json()).subscribe(data => {
 	        this._sanitizer.bypassSecurityTrustStyle(data);

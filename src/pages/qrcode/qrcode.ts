@@ -41,9 +41,6 @@ export class QrcodePage {
 			this.scannedCode = barcodedata.text;			
 			var index = this.scannedCode.indexOf( "-" )+1;
 
-			//url should be http://projectvaultuk.com/qr.aspx?12345-d533aedf-1511-4fd8-8692-9f46dd7b3e9c = 76
-			//d533aedf-1511-4fd8-8692-9f46dd7b3e9c = 36
-
 			// QR Code - Return RoomID
 			if(index != 7 && this.calledbysnag == "Y"){
 				this.isroom = "N";
@@ -63,8 +60,8 @@ export class QrcodePage {
 			if(index != 7 && this.calledbysnag == "N"){
 				this.isroom = "N";
 				localStorage.setItem('QRDefect',this.scannedCode);
-				var defecturl = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.scannedCode+"/defect";	
-		    this.http.get(defecturl).map(res => res.json()).subscribe(data => {
+				var defecturl1 = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.scannedCode+"/defect";	
+		    this.http.get(defecturl1).map(res => res.json()).subscribe(data => {
 		      this._sanitizer.bypassSecurityTrustStyle(data);
 					this.defects = data;         
 					this.scannedCode = this.defects["0"].name;
@@ -74,9 +71,6 @@ export class QrcodePage {
 			  });				
 			}		
 
-
-			//url should be http://projectvaultuk.com/qr.aspx?12345-d533aedf-1511-4fd8-8692-9f46dd7b3e9c = 76
-			//d533aedf-1511-4fd8-8692-9f46dd7b3e9c = 36
 			// Return RoomID
 			if(index == 7 && this.calledbysnag == "Y"){
 				this.isroom = "Y";
@@ -98,8 +92,8 @@ export class QrcodePage {
 				this.isroom = "Y";
 				this.scannedCode = this.scannedCode.substring(index);
 				localStorage.setItem('QRDefect',this.scannedCode);
-				var roomurl = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.scannedCode+"/room";	
-		    this.http.get(roomurl).map(res => res.json()).subscribe(data => {
+				var roomurl1 = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.scannedCode+"/room";	
+		    this.http.get(roomurl1).map(res => res.json()).subscribe(data => {
 		      this._sanitizer.bypassSecurityTrustStyle(data);
 					this.defects = data;          
 					this.scannedCode = this.defects;
@@ -112,7 +106,6 @@ export class QrcodePage {
 		});
 
 	}
-
 
 	dismiss() {
 		this.viewCtrl.dismiss();

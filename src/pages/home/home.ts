@@ -1,5 +1,6 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+import {IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import {App, AlertController} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
 import {Common} from "../../providers/common";
@@ -8,8 +9,6 @@ import {DocumentSummary} from '../documentsummary/documentsummary';
 import {WeatherProvider} from '../../providers/weather/weather';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as Constants from '../../providers/constants';
-import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
- 
 
 @Component({
   selector: 'page-home', 
@@ -68,12 +67,17 @@ export class HomePage {
     public weatherProvider:WeatherProvider, 
     public http: Http, 
     public navCtrl : NavController, 
+    public menu: MenuController,
     public navParams: NavParams, 
     public app : App, 
     public authService : AuthService) {
   }
 
   ionViewWillEnter() {
+
+    this.menu.enable(true); 
+    //this.getGeolocation();
+    this.sleep(1000);
 
     var data = JSON.parse(localStorage.getItem('userSystemData'));
 
@@ -84,9 +88,7 @@ export class HomePage {
     this.userPostData.SystemClientID = data[0].SystemClientID;
     this.userPostData.Email          = data[0].Email;  
     this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID'); 
-    this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName'); 
-
-    this.getGeolocation();
+    this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName');     
 
     var apiKey  = this.userPostData.apiKey;
     var uid     = this.userPostData.SystemUserID;  
@@ -102,26 +104,29 @@ export class HomePage {
     this.http.get(urlcity).map(res => res.json()).subscribe(data => {
     if(data.length > 0 ) {                                                                                                              
       this.citydataSet = data;
-      var temptown = this.citydataSet[0].town;
+      var temptown = this.citydataSet["0"].Town;
+
       if(temptown === null || temptown === 'undefined'){
         this.city = "London";
-      } else {
+      } 
+      if(temptown != null || temptown != 'undefined'){
         this.city = temptown;
       }
     }
       
-    this.weatherProvider.getWeathercoords(this.geoLatitude,this.geoLongitude).subscribe(data => {
+    /*this.weatherProvider.getWeathercoords(this.geoLatitude,this.geoLongitude).subscribe(data => {
       this.weatherCity = data.name;
       this.weatherDes  = data.weather[0].description;
       this.weatherIcon = "https://openweathermap.org/img/w/"+data.weather[0].icon+".png";
       this.weatherTemp = data.main.temp - 273;
       this.weatherTemp = Math.round(this.weatherTemp);
-    //this.weatherProvider.getWeather(this.city).subscribe(data => {
-      //this.weatherCity = data.city.name;
-      //this.weatherDes  = data.list[0].weather[0].description;
-      //this.weatherIcon = "https://openweathermap.org/img/w/"+data.list[0].weather[0].icon+".png";
-      //his.weatherTemp = data.list[0].main.temp - 273;
-      //his.weatherTemp = Math.round(this.weatherTemp);
+      */
+    this.weatherProvider.getWeather(this.city).subscribe(data => {
+      this.weatherCity = data.name;
+      this.weatherDes  = data.weather[0].description;
+      this.weatherIcon = "https://openweathermap.org/img/w/"+data.weather[0].icon+".png";
+      this.weatherTemp = data.main.temp - 273;
+      this.weatherTemp = Math.round(this.weatherTemp);
     }); 
     },err => {
         console.log("Oops! - No Weather Data");
@@ -219,6 +224,11 @@ export class HomePage {
   }
 
 
+  sleep(miliseconds) {
+    var currentTime = new Date().getTime(); 
+    while (currentTime + miliseconds >= new Date().getTime()) {
+    }
+  }  
 
 };
 

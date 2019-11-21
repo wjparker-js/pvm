@@ -91,11 +91,12 @@ export class DocumentsPage {
     this.scid = localStorage.getItem('CurrentProjectClientID');
 
     setTimeout(() => {
-      //this.myInput.setFocus();
+      //this.mySearchbar.setFocus();
       this.myInput.nativeElement.focus();
       if(currentProjectName != oldProjectName ){
       this.myInput.nativeElement.value = "";}
       this.myInput.nativeElement.blur();
+      this.myInput.nativeElement.focus();
       //this.myInput.setBlur();
     },150);
   
@@ -103,7 +104,7 @@ export class DocumentsPage {
     //this.hasdocs = false;
     //this.searchbar.clearInput(null);
     if(currentProjectName != oldProjectName ){
-
+      
       document.getElementsByClassName("searchbar-input")["0"].value = "";
       document.getElementById("maindiv").style.display="none";
 

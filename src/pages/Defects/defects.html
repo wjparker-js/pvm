@@ -5,8 +5,8 @@
             <ion-icon name="menu"></ion-icon>
         </button>
     </ion-buttons>
-    <span style="font-size:16px;color:white;">{{selectedProjectName}}</span>
-    
+
+    <span style="font-size:16px;color:white;">{{selectedProjectName}}</span>    
     
     <ion-buttons [hidden]="showDefects != 1" right>
         <button ion-button  color="light" type="button" item-right style="font-size:24px;" (click)="openLocationQRCode()"> 
@@ -18,36 +18,33 @@
         </button>  
         &nbsp;
     </ion-buttons>
-
- </ion-navbar>   
+  </ion-navbar>   
     
- <div [hidden]="showDefects != 1" > 
-  <ion-searchbar
-  #myDefectsSearchbar 
-  name = "defectsSearchBar" 
-  value= "" 
-  placeholder="Defect Search..." 
-  (ionInput)="searchDefectsByKeyword($event)" 
-  [debounce]="500" 
-  class="android"  >
-  </ion-searchbar> 
- </div> 
+  <div [hidden]="showDefects != 1" > 
+    <ion-searchbar
+      #myDefectsSearchbar 
+      name = "defectsSearchBar" 
+      value= "" 
+      placeholder="Defect Search..." 
+      (ionInput)="searchDefectsByKeyword($event)" 
+      [debounce]="500" 
+      class="android"  >
+    </ion-searchbar> 
+  </div> 
 
-
-
-<div [hidden]="showDefects != 1" style='padding: 10px;'>   
-  <ion-segment color="primary"  mode='ios' [(ngModel)]="defectslist" (ionChange)="segmentChanged(defectslist)">
-    <ion-segment-button selected value="all">
-      Issued
-    </ion-segment-button>
-    <ion-segment-button value="new">
-      Scheduled
-    </ion-segment-button>
-    <ion-segment-button value="open">
-      Reinspect
-    </ion-segment-button>
-  </ion-segment>
-</div>
+  <div [hidden]="showDefects != 1" style='padding: 10px;'>   
+    <ion-segment color="primary"  mode='ios' [(ngModel)]="defectslist" (ionChange)="segmentChanged(defectslist)">
+      <ion-segment-button selected value="all">
+        Issued
+      </ion-segment-button>
+      <ion-segment-button value="new">
+        Fix Scheduled
+      </ion-segment-button>
+      <ion-segment-button value="open">
+        Fixed Re-inspect
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
 </ion-header>
 
@@ -92,7 +89,6 @@
           </ion-item>
          </ion-card>
         </ion-list>
-
       </ion-col>
     </ion-row>
   </ion-grid>

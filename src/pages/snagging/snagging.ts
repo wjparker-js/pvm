@@ -32,6 +32,7 @@ export class SnaggingPage {
 
 	public pid: string = "";
 	public uid: string = "";
+	public uguid: string = "";
 	public cid: string = "";
 	public api: string = "";
 	public snagid: string;
@@ -78,7 +79,9 @@ export class SnaggingPage {
 
 		this.pid     = localStorage.getItem('CurrentProjectID');
     	this.api     = snagData[0].apiKey;
-    	this.cid     = localStorage.getItem('CurrentProjectClientID');
+		this.cid     = localStorage.getItem('CurrentProjectClientID');
+		
+    	this.uguid     = localStorage.getItem('SystemUserID');
 		this.uid     = snagData[0].SystemUserID;		
 		this.snagid  = this.navParams.get('snagid');
 
