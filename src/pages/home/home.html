@@ -29,6 +29,7 @@
             <td style="text-align:center;"><h3>7 Days</h3></td>
             <td style="text-align:center;"><h3>30 Days</h3></td>
           </tr>
+          <tr></tr>
           <tr>  
             <td style="text-align:center;"><h2><span (click)="openDocumentSummary(1)" >{{item.Last24Hours}}</span></h2></td>
             <td style="text-align:center;"><h2><span (click)="openDocumentSummary(7)" >{{item.Last7Days}}</span></h2></td>
@@ -37,6 +38,44 @@
         </table>
       </ion-item>
     </ion-list> 
+  </div>
+  <br>
+  <div class="box blue"  [hidden]="userPostData.ProjectName  === null">
+    <b><span  style="color:white;position:relative;top:-2px;left:5px;">Snagging Defects Summary</span></b>
+
+    <ion-list  *ngFor="let defect of dataSetT5" style="margin-bottom: 1px;">
+      <ion-item *ngIf="defect.OrderStatus == 50">
+        <h3 style="color:black;">  
+        Issued:&nbsp;{{defect.OrderReference}}&nbsp;Due:&nbsp;{{defect.DeliverBy}}
+        </h3> 
+      </ion-item>
+      <ion-item *ngIf="defect.OrderStatus == 51">
+        <h3  style="color:blue;">  
+        Planned:&nbsp;{{defect.OrderReference}}&nbsp;Due:&nbsp;{{defect.DeliverBy}}
+        </h3>
+      </ion-item>
+      <ion-item *ngIf="defect.OrderStatus == 52">
+          <h3  style="color:green;">  
+          Fixed:&nbsp;{{defect.OrderReference}}&nbsp;Due:&nbsp;{{defect.DeliverBy}}
+          </h3>
+        </ion-item>       
+      <ion-item *ngIf="defect.OrderStatus == 53">
+        <h3  style="color: hotpink;">  
+        Disputed:&nbsp;{{defect.OrderReference}}&nbsp;Due:&nbsp;{{defect.DeliverBy}}
+        </h3>
+      </ion-item>   
+      <ion-item *ngIf="defect.OrderStatus == 54">
+        <h3  style="color:rgb(5, 92, 121);">  
+        Re-Inspect:&nbsp;{{defect.OrderReference}}&nbsp;Due:&nbsp;{{defect.DeliverBy}}
+        </h3>
+      </ion-item>    
+      <ion-item *ngIf="defect.OrderStatus == 55">
+        <h3  style="color:red;">  
+        Rejected:&nbsp;{{defect.OrderReference}}&nbsp;Due:&nbsp;{{defect.DeliverBy}}
+        </h3>
+      </ion-item>                  
+    </ion-list>
+
   </div>
 
   <div [hidden]="userPostData.ProjectName  !== null">

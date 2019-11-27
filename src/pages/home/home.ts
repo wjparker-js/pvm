@@ -21,6 +21,7 @@ export class HomePage {
   public resposeData : any;
   public avatardata: any;
   public dataSet : any;
+  public dataSetT5 : any;
   public dataSet1 : any;
   public dataSet2 : any;
   public citydataSet: any;
@@ -97,6 +98,7 @@ export class HomePage {
     var urld    = Constants.apiUrl+"api/dashboard/"+uid+"/"+pid;
     var urlt3   = Constants.apiUrl+"api/t3/"+apiKey+"/"+uid+"/"+pid;
     var urlt4   = Constants.apiUrl+"api/t4/"+apiKey+"/"+uid+"/"+pid;
+    var urlt5   = Constants.apiUrl+"api/t5/"+apiKey+"/"+uid+"/"+pid;
     var urlcity = Constants.apiUrl+"api/locationcity/"+pid;
 
     //this.watchLocation();
@@ -142,6 +144,14 @@ export class HomePage {
     ); 
 
 
+    this.http.get(urlt5).map(res => res.json()).subscribe(data => {
+        this.dataSetT5 = data;
+        },err => {
+            console.log("Oops! - T5 Data");
+        }
+      ); 
+      
+      
     this.http.get(urlt3).map(res => res.json()).subscribe(data => {
       this.dataSet1 = data;
       },err => {

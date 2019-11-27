@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, MenuController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { DocumentTabs } from '../documenttabs/documenttabs';
 import { AuthService } from "../../providers/auth-service";
@@ -30,7 +30,8 @@ export class Login {
   constructor(
     public navCtrl: NavController, 
     public authService: AuthService, 
-    private toastCtrl:ToastController, 
+    private toastCtrl:ToastController,
+    public  menu: MenuController,
     public http: Http) 
   {}  
   
@@ -135,6 +136,7 @@ export class Login {
     } else {
       this.presentToast("Please enter a valid username and password");
     }  
+    this.menu.enable(true);
   }
 
   presentToast(msg) {

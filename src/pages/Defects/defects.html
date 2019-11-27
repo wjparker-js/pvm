@@ -9,11 +9,11 @@
     <span style="font-size:16px;color:white;">{{selectedProjectName}}</span>    
     
     <ion-buttons [hidden]="showDefects != 1" right>
-        <button ion-button  color="light" type="button" item-right style="font-size:24px;" (click)="openLocationQRCode()"> 
+        <button ion-button  color="light" type="button" item-right style="font-size:24px;" (click)="scanQRCode()"> 
          <ion-icon name="qr-scanner"> </ion-icon>
         </button>  
         &nbsp;
-        <button [hidden] = "createdefect != 1"  ion-button  color="light" type="button" item-right style="font-size:24px;" (click)="newSnag('new')"> 
+        <button [hidden] = "createdefect != 1"  ion-button  color="light" type="button" item-right style="font-size:30px;" (click)="newSnag('new')"> 
          <ion-icon strong name="add"> </ion-icon>
         </button>  
         &nbsp;
@@ -58,21 +58,9 @@
           <ion-item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name)" style="padding-left:3px;">            
             
             <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin-top: 10px;margin-bottom: 0px;">
-              <img src="{{'data:image/jpeg;base64,' +  this.hexToBase64(defect.LocationImage)}}" border="1" style="width:100px;height:71px;border-color:black;border:2px;" imageViewer/>
+              <img [src]="image+defect.OrderId+'.jpg'" border="1" style="width:100px;height:71px;border-color:black;border:2px;" imageViewer/>
             </ion-thumbnail> 
-<!--            
-            <span *ngIf="imageUrl + defect.OrderId + '.png'">
-                <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin-top: 10px;margin-bottom: 0px;">
-                  <img [src]="imageUrl + defect.OrderId + '.png'" border="1" style="width:100px;height:71px;border-color:black;border:2px;"/>
-                </ion-thumbnail> 
-            </span>
-  
-            <span *ngIf="!imageUrl + defect.Order + '.png'">
-              <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin-top: 10px;margin-bottom: 0px;">
-                <img src="{{'data:image/jpeg;base64,' +  this.hexToBase64(defect.LocationImage)}}" border="1" style="width:100px;height:71px;border-color:black;border:2px;"/>
-              </ion-thumbnail> 
-            </span>    
--->
+  <!--          <img src="{{'data:image/jpeg;base64,' +  this.hexToBase64(defect.LocationImage)}}" border="1" style="width:100px;height:71px;border-color:black;border:2px;" imageViewer/>-->
             <div id="defectdetails">
               <b>{{defect.OrderReference}}</b><br>
               <span *ngIf="defect.statustext">{{defect.statustext}}<br></span>

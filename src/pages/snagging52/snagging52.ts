@@ -29,6 +29,7 @@ export class Snagging52Page {
 	public cid: string = "";
 	public api: string = "";
 	public snagid: string;
+	public showUpload: string = null;
 
 	public details: string;
 	public approval:  any;
@@ -244,6 +245,9 @@ export class Snagging52Page {
 			(image) => resolve( 'data:image/jpg;base64,' + image),
 			() => reject()
 		);
+
+		this.showUpload = "ok";
+		
 		});
 	}
 

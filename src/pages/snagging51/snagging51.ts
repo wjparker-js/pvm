@@ -35,6 +35,7 @@ export class Snagging51Page {
 	public defect1snotes:  any;
 	public defect1snotesid:  any;	
 	public ImgUrl:any;
+	public showUpload: string = null;
 
 	public thumbbase64:any;
 	public hasNotes: any;
@@ -46,6 +47,10 @@ export class Snagging51Page {
 	public locationImg: any;
 	public image: any;
 	public updata: any;
+	
+	public ProposedCompletionDate:any;
+	public ProposedCompletionDateTxt:any;
+	public DisputeTxt:any;
 
 	frmData = {details: ""};
 
@@ -89,6 +94,15 @@ export class Snagging51Page {
 			this.defect1s = data;         
 			
 			this.defect1snotesid = 	this.defect1s[0].OrderId;
+
+			if(this.defect1s[0].ProposedCompletionDate === null){
+				let date: Date = new Date();
+				this.ProposedCompletionDate = date;   
+				this.ProposedCompletionDateTxt = "(Not scheduled)";
+			} else {
+				this.ProposedCompletionDate = this.defect1s[0].ProposedCompletionDate; 	
+				this.ProposedCompletionDateTxt = this.defect1s[0].ProposedCompletionDateTxt; 		
+			}
 
 			console.log("Hello Main Defects Details: ",this.defect1s);
 
@@ -262,7 +276,10 @@ export class Snagging51Page {
 			(image) => resolve( 'data:image/jpg;base64,' + image),
 			() => reject()
 		);
-		});
+
+		this.showUpload = "ok";
+
+		});		
 	}
 
 	sendUploadData(){

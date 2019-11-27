@@ -18,7 +18,7 @@
 
   <ion-item>
     <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Defect Type</ion-label>
-      <ion-input class="text" type="text" id = "Defecttype" name="defecttype" value="{{defecttype}}" style="font-size:13px;"></ion-input>  
+      <ion-input class="text" readonly type="text" id = "Defecttype" name="defecttype" value="{{defecttype}}" style="font-size:13px;"></ion-input>  
       <button ion-button color="light" type="button" item-right (click)="openDTList()"> 
         <ion-icon name="list"> </ion-icon> 
       </button>       
@@ -26,7 +26,7 @@
 
   <ion-item  [hidden]="defecttype == '' || defecttype == undefined ">
       <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Discipline</ion-label>
-        <ion-input class="text" type="text" id = "Discipline" name="discipline" value="{{discipline}}" style="font-size:13px;"></ion-input>  
+        <ion-input class="text" readonly type="text" id = "Discipline" name="discipline" value="{{discipline}}" style="font-size:13px;"></ion-input>  
         <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openDList(defecttype)"> 
           <ion-icon name="list"> </ion-icon> 
         </button>          
@@ -35,9 +35,9 @@
 	<ion-item>
     <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Location</ion-label>
     
-      <ion-input class="text" type="text"   id = "Location" name="location" value="{{name}}" (ionChange)="openlocimg()" style="font-size:13px;"></ion-input>
+      <ion-input class="text" readonly type="text"   id = "Location" name="location" value="{{name}}" (ionChange)="openlocimg()" style="font-size:13px;"></ion-input>
 	
-      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openGetQRCode()" > 
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="scanQRCode()" > 
       	<ion-icon name="qr-scanner"> </ion-icon> 
       </button>    
       <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openList()"> 
@@ -47,7 +47,7 @@
   
   <ion-item>
     <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Reason</ion-label>
-      <ion-input class="text" type="text" id = "Reason" name="reason" value="{{reason}}" style="font-size:13px;"></ion-input>  
+      <ion-input class="text" readonly type="text" id = "Reason" name="reason" value="{{reason}}" style="font-size:13px;"></ion-input>  
       <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openRList()"> 
         <ion-icon name="list"> </ion-icon> 
       </button>          
@@ -55,11 +55,19 @@
 
   <ion-item>
     <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Effect</ion-label>
-      <ion-input class="text" type="text" id = "Effect" name="effect" value="{{effect}}" style="font-size:13px;"></ion-input>  
+      <ion-input class="text" readonly type="text" id = "Effect" name="effect" value="{{effect}}" style="font-size:13px;"></ion-input>  
       <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openEList()"> 
         <ion-icon name="list"> </ion-icon> 
       </button>          
   </ion-item>  
+
+  <ion-item>
+    <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;">Sticker Code</ion-label>    
+      <ion-input class="text" readonly type="text"   id = "Location" name="location" value="{{associatedcode}}"  style="font-size:13px;"></ion-input>	
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="associateQRCode()" > 
+      	<ion-icon name="qr-scanner"> </ion-icon> 
+      </button>    
+  </ion-item>
   
   <ion-item>
       <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;" >Details</ion-label>
@@ -82,7 +90,6 @@
       </ion-item>  
     </ion-card-content>   
   </ion-card> 
-
 
   
   <ion-card  [hidden]="image === null" style="margin-top: 0px;padding-bottom: 0px;margin-bottom: 0px;">
@@ -118,16 +125,6 @@
     </ion-card-content>
   </ion-card> 
 
-  <br><br>
-
-  <div [hidden]="currentImage === null"  style="width:100%;">
-    <ion-buttons  style="width:100%" >
-      <button style="width:100%;" ion-button icon-left (click)="sendUploadData()" >
-        <ion-icon name="cloud-upload"></ion-icon>Upload Snag
-      </button>
-    </ion-buttons>
-  </div>
- 
 
 </ion-list>
 
@@ -136,6 +133,12 @@
 
 
 <ion-footer  >
-<!--  [hidden]="currentImage === null" -->
+  <div>
+    <ion-buttons >
+      <button full [disabled]="showUpload === null" ion-button icon-left (click)="sendUploadData()" >
+        <ion-icon name="cloud-upload"></ion-icon>Upload Snag Image
+      </button>
+    </ion-buttons>
+  </div>
 </ion-footer>
   

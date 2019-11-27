@@ -16,6 +16,8 @@ export class QrcodePage {
 
 	scannedCode:string;
 	isroom:any;
+	location:any;
+	snag:any;
 	defects:any;
 	apiKey:string;
 	callback: any;
@@ -29,8 +31,9 @@ export class QrcodePage {
 		this.callback  = this.navParams.get("callback")
 		var defectData = JSON.parse(localStorage.getItem('userSystemData'));
 		this.apiKey    = defectData[0].apiKey; 			
+
 		this.calledbysnag  = this.navParams.get('newsnag');
-		console.log("Newsnag = ",this.calledbysnag);
+		//console.log("Newsnag = ",this.calledbysnag);
 	}
 
 	scanQRCode(){
@@ -38,70 +41,81 @@ export class QrcodePage {
 		this.options = {prompt : "Scan your barcode"}
 
 		this.barcodeScanner.scan(this.options).then(barcodedata => {
-			this.scannedCode = barcodedata.text;			
-			var index = this.scannedCode.indexOf( "-" )+1;
+			this.scannedCode = barcodedata.text;		
+			
+			//console.log("this.scannedCode    ",this.scannedCode);
 
-			// QR Code - Return RoomID
-			if(index != 7 && this.calledbysnag == "Y"){
-				this.isroom = "N";
-				localStorage.setItem('QRDefect',this.scannedCode);
-				var defecturl = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.scannedCode+"/newdefect";	
-		    this.http.get(defecturl).map(res => res.json()).subscribe(data => {
-		      this._sanitizer.bypassSecurityTrustStyle(data);
-					this.defects = data;         
-					this.scannedCode = this.defects["0"].name;
-					console.log(this.scannedCode);
-				},err => {
-				  console.log("Oops!");
-			  });				
+			var index = this.scannedCode.indexOf( "-" );
+			//console.log("index     ",index);
+
+
+			// get location
+			// QR Code on Page - Return Location from LocationMap
+			if(index == 5 && this.calledbysnag == "Y"){
+				var res = this.scannedCode.split("-");
+				//console.log("res    ",res);
+				this.location = res[1]+"-"+res[2]+"-"+res[3]+"-"+res[4]+"-"+res[5]; 
+				//console.log("page this.location  ",this.location);
+				localStorage.setItem('QRLocationMapID',this.scannedCode);
+				var pagelocationurl = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.location+"/snaglocationpage";	
+			    this.http.get(pagelocationurl).map(res => res.json()).subscribe(data => {
+			      this._sanitizer.bypassSecurityTrustStyle(data);
+						this.defects = data;         
+						//console.log(this.defects);
+						this.location = this.defects["0"].Name;
+						//console.log(this.location);
+					},err => {
+					  //console.log("Oops!");
+				  });				
 			}
-	
-			// QR Code - Return Defect details
-			if(index != 7 && this.calledbysnag == "N"){
-				this.isroom = "N";
-				localStorage.setItem('QRDefect',this.scannedCode);
-				var defecturl1 = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.scannedCode+"/defect";	
-		    this.http.get(defecturl1).map(res => res.json()).subscribe(data => {
-		      this._sanitizer.bypassSecurityTrustStyle(data);
-					this.defects = data;         
-					this.scannedCode = this.defects["0"].name;
-					console.log(this.scannedCode);
-				},err => {
-				  console.log("Oops!");
-			  });				
-			}		
-
-			// Return RoomID
-			if(index == 7 && this.calledbysnag == "Y"){
-				this.isroom = "Y";
-				this.scannedCode = this.scannedCode.substring(index);
-				localStorage.setItem('QRDefect',this.scannedCode);
-				var roomurl = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.scannedCode+"/newdefect";	
-		    this.http.get(roomurl).map(res => res.json()).subscribe(data => {
-		      this._sanitizer.bypassSecurityTrustStyle(data);
-					this.defects = data;          
-					this.scannedCode = this.defects;
-					console.log(this.scannedCode);
-				},err => {
-				  console.log("Oops!");
-			  });
+			
+			// QR Code on Sticker - Return Location from BranchOrder
+			if(index == 8 && this.calledbysnag == "Y"){
+				this.location = this.scannedCode; 
+				//console.log("sticker this.location  ",this.location);
+				localStorage.setItem('QRBranchOrderID',this.scannedCode);
+				var stickerlocationurl = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.location+"/snaglocationsticker";	
+			    this.http.get(stickerlocationurl).map(res => res.json()).subscribe(data => {
+			      this._sanitizer.bypassSecurityTrustStyle(data);
+						this.defects = data;     
+						//console.log(this.defects);     
+						this.location = this.defects["0"].Name;
+						//console.log(this.location);
+					},err => {
+					  //console.log("Oops!");
+				  });
 			}
 
-			// Return Defect details
-			if(index == 7 && this.calledbysnag != "Y"){
-				this.isroom = "Y";
-				this.scannedCode = this.scannedCode.substring(index);
-				localStorage.setItem('QRDefect',this.scannedCode);
-				var roomurl1 = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.scannedCode+"/room";	
-		    this.http.get(roomurl1).map(res => res.json()).subscribe(data => {
-		      this._sanitizer.bypassSecurityTrustStyle(data);
-					this.defects = data;          
-					this.scannedCode = this.defects;
-					console.log(this.scannedCode);
-				},err => {
-				  console.log("Oops!");
-			  });
+			// Called from Defects page
+			// QR Code - Return Defects in this room
+			if(index == 5 && this.calledbysnag == "N"){
+				this.location = this.scannedCode; 
+				localStorage.setItem('QRLocationMapID',this.scannedCode);
+				var pagedefecturl = Constants.apiUrl+"api/qrdefects/"+this.apiKey+"/"+this.location+"/defectspage";	
+			    this.http.get(pagedefecturl).map(res => res.json()).subscribe(data => {
+			      this._sanitizer.bypassSecurityTrustStyle(data);
+						this.defects = data;  
+						//console.log(this.defects);
+					},err => {
+					  //console.log("Oops!");
+				  });				
 			}
+			
+			// QR Code on Sticker - Return single defect
+			if(index == 8 && this.calledbysnag == "N"){
+				this.location = this.scannedCode; 
+				localStorage.setItem('QRBranchOrderID',this.scannedCode);
+				var stickerdefectsurl = Constants.apiUrl+"api/qrdefects/"+this.apiKey+"/"+this.defects+"/defectssticker";	
+			    this.http.get(stickerdefectsurl).map(res => res.json()).subscribe(data => {
+			      this._sanitizer.bypassSecurityTrustStyle(data);
+						this.defects = data;          
+						//this.location = this.defects["0"].name;
+						//console.log(this.defects);
+					},err => {
+					  //console.log("Oops!");
+				  });
+			}
+			
 
 		});
 
@@ -112,8 +126,8 @@ export class QrcodePage {
 	} 
 
 	ionViewWillLeave() {
-		this.callback(this.scannedCode).then(()=>{
-			console.log(this.scannedCode);
+		this.callback(this.location).then(()=>{
+			//console.log(this.location);
 		   //this.navController.pop();
 		   //this.viewCtrl.dismiss();
 		});

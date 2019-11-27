@@ -31,7 +31,7 @@
       <span class="text">{{defect1.DeliverBy  | date : 'dd MMM yyyy' }}</span>
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed: </span>
-      <span class="text">{{defect1.ProposedCompletionDate  | date : 'dd MMM yyyy' }}</span>
+      <span class="text">{{this.ProposedCompletionDate | date : 'dd MMM yyyy' }}&nbsp;{{this.ProposedCompletionDateTxt}}{{defect1.DisputeTxt }}</span>
       <br>
     </ion-card-content>
   </ion-card>
@@ -105,16 +105,14 @@
         </ion-item>  
       </ion-card-content>
     </ion-card> 
+</ion-content>
 
-
-  <div [hidden]="currentImage === null"  style="width:100%;">
-    <ion-buttons  style="width:100%" >
-      <button style="width:100%;" ion-button icon-left (click)="sendUploadData()" >
+<ion-footer  >
+  <div>
+    <ion-buttons >
+      <button full [disabled]="showUpload === null" ion-button icon-left (click)="sendUploadData()" >
         <ion-icon name="cloud-upload"></ion-icon>Upload Fix Image
       </button>
     </ion-buttons>
   </div>
-
-</ion-content>
-
-  
+</ion-footer>  
