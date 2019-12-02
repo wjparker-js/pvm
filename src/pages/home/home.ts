@@ -146,6 +146,7 @@ export class HomePage {
 
     this.http.get(urlt5).map(res => res.json()).subscribe(data => {
         this.dataSetT5 = data;
+        console.log("T5 Data",this.dataSetT5);
         },err => {
             console.log("Oops! - T5 Data");
         }
