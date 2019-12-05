@@ -20,6 +20,7 @@ export class HomePage {
 
   public userDetails : any;
   public resposeData : any;
+  public PA5039 : any;
   public avatardata: any;
   public dataSet : any;
   public dataSetT5 : any;
@@ -90,7 +91,11 @@ export class HomePage {
     this.userPostData.SystemClientID = data[0].SystemClientID;
     this.userPostData.Email          = data[0].Email;  
     this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID'); 
-    this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName');     
+    this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName'); 
+    
+    this.PA5039                      = localStorage.getItem('Role-PA5039');   
+
+    console.log("PA5039=",this.PA5039 );  
 
     var apiKey  = this.userPostData.apiKey;
     var uid     = this.userPostData.SystemUserID;  
@@ -177,8 +182,9 @@ export class HomePage {
     this.navCtrl.push(DocumentSummary,{days});
   }
 
-  openDefectsSummary(){
-    this.navCtrl.push(DefectsviewPage);
+  openDefectsSummary(status){
+    console.log("Status:",status);
+    this.navCtrl.push(DefectsviewPage,{status});
   }
 
    //Get current coordinates of device

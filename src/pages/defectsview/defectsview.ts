@@ -18,6 +18,7 @@ import 'rxjs/add/operator/map';
 export class DefectsviewPage {
 
 	defects: any;
+	defectstatus: any;
 	defectslist: any;
 	scannedCode: any;
 	associatedcode: any;
@@ -54,6 +55,8 @@ export class DefectsviewPage {
 		this.defectslist         = "all";
 		this.createdefect        = localStorage.getItem('Role-PA5038');
 		this.showDefects         = localStorage.getItem('Role-PA5039');
+		this.defectstatus        = this.params.get('status');
+		console.log("Defect Status:",this.defectstatus);
 		var url = "";
 
 		this.image = "https://projectvaultuk.com/PublicPics/"+this.SystemCID+"/"+this.SystemProjectID+"/LocationImages/";
@@ -62,7 +65,7 @@ export class DefectsviewPage {
 
 		this.imageUrl = Constants.publicUploadPath+this.SystemCID+'/'+this.SystemProjectID+'/LocationImages/';
 		
-		url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/nosearchsummary/y";
+		url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/nosearchsummary/"+this.defectstatus;
 
 
 	    this.http.get(url).map(res => res.json()).subscribe(data => {

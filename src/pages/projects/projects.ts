@@ -79,11 +79,13 @@ export class ProjectsPage {
           var RoleDescription = this.userProject["0"].RoleDescription;
           var PA5038 = this.userProject["0"].PA5038;
           var PA5039 = this.userProject["0"].PA5039;
+          var PA5073 = this.userProject["0"].PA5073;
 
           localStorage.setItem('Role-Name', RoleName);
           localStorage.setItem('Role-Description', RoleDescription);
           localStorage.setItem('Role-PA5038', PA5038);
-          localStorage.setItem('Role-PA5039', PA5039);  
+          localStorage.setItem('Role-PA5039', PA5039); 
+          localStorage.setItem('Role-PA5073', PA5073);  
           localStorage.setItem('postimage', ""); 
           localStorage.setItem('image', ""); 
           localStorage.setItem('preimage', ""); 
@@ -104,8 +106,8 @@ export class ProjectsPage {
   presentProjectToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 3000,
-      position: 'middle'
+      duration: 2000,
+      position: 'bottom'
     });
     toast.present();
     this.navCtrl.parent.select(0);

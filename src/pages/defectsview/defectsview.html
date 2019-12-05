@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>   
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>    
-    <span style="font-size:16px;color:white;">Defects Summary</span>
+    <span style="font-size:16px;color:white;" >Defects Summary </span>
     <ion-buttons end>
       <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
@@ -18,7 +18,7 @@
  
           <ion-item  style="padding-left:3px;" >            
             
-            <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin-top: 10px;margin-bottom: 0px;">
+            <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin-top: 0px;margin-bottom: 0px;">
               <img [src]="image+defect.OrderId+'.jpg'" border="1" style="width:100px;height:71px;border-color:black;border:2px;" imageViewer/>
             </ion-thumbnail> 
   <!--          
@@ -31,15 +31,14 @@
               <span *ngIf="defect.OrderStatus == '52'" style="color:blue;"><b>Status:&nbsp;Re-Inspect</b></span>
               <br>
               <b>{{defect.OrderReference}}</b><br>
-              <span *ngIf="defect.statustext">{{defect.statustext}}<br></span>
-              <span *ngIf="defect.name">{{defect.name}}<br></span>
-              {{defect.OrderSubject}}<br>
-              <span text-wrap>{{defect.SpecialInstructions}}<br></span>           
+              {{defect.OrderSubject}}<br>           
               <span  text-wrap>              
                 <span *ngIf="defect.DateIsssued">Issued:&nbsp;{{defect.DateIsssued  | date : 'dd MMM yyyy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <span *ngIf="defect.ProposedDate">Scheduled:&nbsp;{{defect.ProposedDate  | date : 'dd MMM yyyy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <span *ngIf="defect.DeliverBy">Required:&nbsp;{{defect.DeliverBy  | date : 'dd MMM yyyy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span *ngIf="defect.oklate > 0" style="color:red;" ><ion-icon name="alert" style="font-size:20px;position:relative;top:3px;color:red;"></ion-icon>&nbsp;&nbsp;{{defect.oklate}} days late</span>
+                <span *ngIf="defect.oklate > 0" style="color:red;" ><ion-icon name="alert" style="font-size:16px;position:relative;top:3px;color:red;"></ion-icon><br>Resolution is {{defect.oklate}} days late</span>
+                <span *ngIf="defect.oklate < 0" style="color:green;" ><br>Resolution required in {{defect.oklate}} days.</span>
+                <span *ngIf="defect.oklate == 0" style="color:green;" ><br>Resolution required today.</span>
               </span>   
             </div>     
 

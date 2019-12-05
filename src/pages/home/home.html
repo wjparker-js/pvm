@@ -47,7 +47,7 @@
     </ion-list> 
   </div>
   <br>
-  <div class="box blue"  [hidden]="userPostData.ProjectName  === null">
+  <div class="box blue"  [hidden]="this.PA5039 == 'null' || this.PA5039 == 0">
     <b><span  style="color:white;position:relative;top:-2px;left:5px;">Snagging Defects</span></b>
     <ion-list  style="margin-bottom: 1px;">
       <ion-item>
@@ -61,7 +61,7 @@
           <tr> 
             <td  *ngFor="let defect of dataSetT5"  style="text-align:center;">
               <h2>
-                <span  (click)="openDefectsSummary()" title="ON-TIME">{{defect.OK}}</span> / <span  (click)="openDefectsSummary()" style="color:red;" title="LATE">{{defect.Late}}</span>
+                <span  (click)="openDefectsSummary(defect.OrderStatus)" title="ON-TIME">{{defect.OK}}</span> / <span  (click)="openDefectsSummary(defect.OrderStatus)" style="color:red;">{{defect.Late}}</span>
               </h2>
             </td> 
           </tr>
