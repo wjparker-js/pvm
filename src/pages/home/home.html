@@ -61,7 +61,7 @@
           <tr> 
             <td  *ngFor="let defect of dataSetT5"  style="text-align:center;">
               <h2>
-                <span  (click)="openDefectSummary()" title="ON-TIME">{{defect.OK}}</span> / <span style="color:red;" title="LATE">{{defect.Late}}</span>
+                <span  (click)="openDefectsSummary()" title="ON-TIME">{{defect.OK}}</span> / <span  (click)="openDefectsSummary()" style="color:red;" title="LATE">{{defect.Late}}</span>
               </h2>
             </td> 
           </tr>

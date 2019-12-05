@@ -6,6 +6,7 @@ import {AuthService} from "../../providers/auth-service";
 import {Common} from "../../providers/common";
 import {Http} from '@angular/http';
 import {DocumentSummary} from '../documentsummary/documentsummary';
+import {DefectsviewPage} from '../defectsview/defectsview';
 import {WeatherProvider} from '../../providers/weather/weather';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as Constants from '../../providers/constants';
@@ -26,7 +27,7 @@ export class HomePage {
   public dataSet2 : any;
   public citydataSet: any;
   public weather:any;
-  public city:any;
+  public city: string = "";
   public weatherCity: any;
   public weatherIcon: any;
   public weatherDes: any;
@@ -99,21 +100,21 @@ export class HomePage {
     var urlt3   = Constants.apiUrl+"api/t3/"+apiKey+"/"+uid+"/"+pid;
     var urlt4   = Constants.apiUrl+"api/t4/"+apiKey+"/"+uid+"/"+pid;
     var urlt5   = Constants.apiUrl+"api/t5/"+apiKey+"/"+uid+"/"+pid;
+
     var urlcity = Constants.apiUrl+"api/locationcity/"+pid;
 
     //this.watchLocation();
 
-    this.http.get(urlcity).map(res => res.json()).subscribe(data => {
-    if(data.length > 0 ) {                                                                                                              
-      this.citydataSet = data;
-      var temptown = this.citydataSet["0"].Town;
+    this.city = "London";
 
-      if(temptown === null || temptown === 'undefined'){
-        this.city = "London";
-      } 
-      if(temptown != null || temptown != 'undefined'){
-        this.city = temptown;
-      }
+    this.http.get(urlcity).map(res => res.json()).subscribe(data => {
+
+    if(data.length > 0 ) {     
+
+      this.citydataSet = data;
+      console.log("City Data: ",this.citydataSet);
+      this.city = this.citydataSet["0"].Town;
+
     }
       
     /*this.weatherProvider.getWeathercoords(this.geoLatitude,this.geoLongitude).subscribe(data => {
@@ -123,6 +124,8 @@ export class HomePage {
       this.weatherTemp = data.main.temp - 273;
       this.weatherTemp = Math.round(this.weatherTemp);
       */
+
+
     this.weatherProvider.getWeather(this.city).subscribe(data => {
       this.weatherCity = data.name;
       this.weatherDes  = data.weather[0].description;
@@ -174,7 +177,9 @@ export class HomePage {
     this.navCtrl.push(DocumentSummary,{days});
   }
 
-
+  openDefectsSummary(){
+    this.navCtrl.push(DefectsviewPage);
+  }
 
    //Get current coordinates of device
    public getGeolocation(){

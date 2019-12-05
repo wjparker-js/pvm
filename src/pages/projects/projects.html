@@ -14,9 +14,10 @@
         <ion-list  style="margin-bottom: 0px;">  
           <ion-card style=" padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;">
             <ion-item style="padding-left:3px;" (click)="saveProject(project.ProjectName,project.ProjectID,project.SystemClientID);">           
-              <ion-thumbnail item-left>
-                <img [src]="project.Thumbnail" style="height:60px;width:70px;border:1px;" />
+              <ion-thumbnail *ngIf="project.Thumbnail != null" item-left>
+                <img [src]="project.Thumbnail" style="height:60px;width:70px;border:1px;" onerror="this.src='assets/imgs/project.png';"/>
               </ion-thumbnail>
+             
               <h2><b>{{project.ProjectName}}</b></h2>
               <h3>{{project.Client}}</h3>
             </ion-item>

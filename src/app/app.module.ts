@@ -21,6 +21,7 @@ import { SnaggingPage } from '../pages/snagging/snagging';
 import { Snagging51Page } from '../pages/snagging51/snagging51';
 import { Snagging52Page } from '../pages/snagging52/snagging52';
 import { DefectsPage }  from '../pages/Defects/defects';
+import { DefectsviewPage }  from '../pages/defectsview/defectsview';
 import { SubtypesPage } from '../pages/subtypes/subtypes';
 import { QrcodePage } from '../pages/qrcode/qrcode';
 import { LocationmapPage } from '../pages/locationmap/locationmap';
@@ -69,6 +70,7 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     Snagging51Page,
     Snagging52Page,
     DefectsPage,
+    DefectsviewPage,
     SubtypesPage,
     QrcodePage,
     LocationmapPage,
@@ -117,6 +119,7 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     Snagging51Page,
     Snagging52Page,
     DefectsPage,
+    DefectsviewPage,
     SubtypesPage,
     QrcodePage,
     LocationmapPage,
