@@ -19,9 +19,11 @@ export class Login {
   @ViewChild('input') myInput ;
 
   public defectsEnabled : boolean;
+  public loginprojectuserdetails: any;
   
   public responseData : any;
   public userLoginData: any;
+  public apikey: any;
   public showLogin: boolean = false;
   public PIN:any;
   public md5:any;
@@ -44,6 +46,7 @@ export class Login {
       var userData                       = JSON.parse(localStorage.getItem('userSystemData'));
       this.userSystemData.sysuserid      = userData[0].SystemUserID;
       this.userSystemData.apiKey         = userData[0].apiKey;
+      this.apikey                        = userData[0].apiKey;
       this.userSystemData.password       = localStorage.getItem('login_password');
       this.userSystemData.id             = localStorage.getItem('login_id');
       this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');
@@ -54,7 +57,7 @@ export class Login {
       this.userSystemData.password ="xxx-xxx";
       console.log("New User.")
     }
-
+    
   }
 
   ionViewLoaded() {
@@ -111,33 +114,51 @@ export class Login {
 
         if(this.responseData[0].Email.trim().toLowerCase() == this.userSystemData.id.trim().toLowerCase()) {
 
-            this.md5 = Md5.hashStr(this.userSystemData.password);
-            console.log(this.md5);
+          this.md5 = Md5.hashStr(this.userSystemData.password);
+          console.log(this.md5);
 
-            localStorage.setItem('login_id',       this.userSystemData.id.toLowerCase());
-            localStorage.setItem('login_password', this.userSystemData.password); 
-            localStorage.setItem('userSystemData', JSON.stringify(this.responseData)); 
-            
-            var actiontext = "Mobile+-+Logged+In+-+"+this.userSystemData.id.toLowerCase().trim();
+          localStorage.setItem('login_id',       this.userSystemData.id.toLowerCase());
+          localStorage.setItem('login_password', this.userSystemData.password); 
+          localStorage.setItem('userSystemData', JSON.stringify(this.responseData)); 
 
-            this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+'00000000-0000-0000-0000-000000000000'+'/'+'96'+'/'+actiontext).map(res => res.json()).subscribe(data => {
-              this.userLoginData = data;
-              },err => {
-                  console.log("Oops! - Write Audit");
-              }
-            ); 
+          var thekey = localStorage.getItem('apikey');
+          this.http.get(Constants.apiUrl+'api/loginprojectuserdetails/'+this.apikey +'/'+this.userSystemData.id.trim().toLowerCase()).map(res => res.json()).subscribe(data => {
+            this.loginprojectuserdetails = data;
+            localStorage.setItem('Role-Name',       	    this.loginprojectuserdetails["0"].RoleName);
+            localStorage.setItem('Role-PA5038',         	this.loginprojectuserdetails["0"].PA5038);
+            localStorage.setItem('Role-Description',      this.loginprojectuserdetails["0"].RoleDescription);
+            localStorage.setItem('Role-PA5039',       	  this.loginprojectuserdetails["0"].PA5039);
+            localStorage.setItem('CurrentProjectName',    this.loginprojectuserdetails["0"].Name);
+            localStorage.setItem('CurrentProjectID',      this.loginprojectuserdetails["0"].ProjectID);            
+            localStorage.setItem('CurrentProjectRoleID',  this.loginprojectuserdetails["0"].ProjectRoleID);
+            localStorage.setItem('Role-PA5073',         	this.loginprojectuserdetails["0"].PA5073);
+            localStorage.setItem('CurrentProjectClientID',this.loginprojectuserdetails["0"].SystemClientID);    
+            },err => {console.log("Oops! - Write Audit");}
+          );     
+           
+          var actiontext = "Mobile+-+Logged+In+-+"+this.userSystemData.id.toLowerCase().trim();
+          this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+'00000000-0000-0000-0000-000000000000'+'/'+'96'+'/'+actiontext).map(res => res.json()).subscribe(data => {
+            this.userLoginData = data;
+            },err => {console.log("Oops! - Write Audit");}
+          ); 
+
+          setTimeout(() => {
             this.navCtrl.push(TabsPage);
-          } else {
-            this.presentToast("Please enter a valid username and password");
-          }
-        }, (err) => {
-          this.presentToast("There was a connection error.");
-        });
-    } else {
-      this.presentToast("Please enter a valid username and password");
-    }  
-    this.menu.enable(true);
-  }
+          },1000);
+          
+        } else {
+          this.presentToast("Please enter a valid username and password");
+        }
+      }, (err) => {
+        this.presentToast("There was a connection error.");
+      });
+  } else {
+    this.presentToast("Please enter a valid username and password");
+  }  
+  this.menu.enable(true);
+}
+
+
 
   presentToast(msg) {
     let toast = this.toastCtrl.create({

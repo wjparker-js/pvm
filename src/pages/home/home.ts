@@ -91,21 +91,18 @@ export class HomePage {
     this.userPostData.SystemClientID = data[0].SystemClientID;
     this.userPostData.Email          = data[0].Email;  
     this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID'); 
-    this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName'); 
-    
-    this.PA5039                      = localStorage.getItem('Role-PA5039');   
-
-    console.log("PA5039=",this.PA5039 );  
+    this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName');     
+    this.PA5039                      = localStorage.getItem('Role-PA5039');  
 
     var apiKey  = this.userPostData.apiKey;
     var uid     = this.userPostData.SystemUserID;  
     var pid     = this.userPostData.ProjectID;  
     var pname   = this.userPostData.ProjectName;
+
     var urld    = Constants.apiUrl+"api/dashboard/"+uid+"/"+pid;
     var urlt3   = Constants.apiUrl+"api/t3/"+apiKey+"/"+uid+"/"+pid;
     var urlt4   = Constants.apiUrl+"api/t4/"+apiKey+"/"+uid+"/"+pid;
     var urlt5   = Constants.apiUrl+"api/t5/"+apiKey+"/"+uid+"/"+pid;
-
     var urlcity = Constants.apiUrl+"api/locationcity/"+pid;
 
     //this.watchLocation();
@@ -128,7 +125,7 @@ export class HomePage {
       this.weatherIcon = "https://openweathermap.org/img/w/"+data.weather[0].icon+".png";
       this.weatherTemp = data.main.temp - 273;
       this.weatherTemp = Math.round(this.weatherTemp);
-      */
+    */
 
 
     this.weatherProvider.getWeather(this.city).subscribe(data => {
@@ -177,6 +174,7 @@ export class HomePage {
     );   
 
   }
+  
 
   openDocumentSummary(days){ 
     this.navCtrl.push(DocumentSummary,{days});

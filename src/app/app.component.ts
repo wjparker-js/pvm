@@ -40,12 +40,14 @@ export class MyApp {
     localStorage.setItem('Role-Description', "");
     localStorage.setItem('Role-PA5038', "");
     localStorage.setItem('Role-PA5039', "");
+    localStorage.setItem('Role-PA5073', "");
     localStorage.setItem('postimage', "");
     localStorage.setItem('image', "");
     localStorage.setItem('preimage', "");
     localStorage.setItem('locationimage', "");
     localStorage.setItem('location', "");
     localStorage.setItem('OldProjectName', "");
+    localStorage.setItem('CurrentProjectRoleID', "");
     
 
     setTimeout(()=> this.backToWelcome(), 200); 
