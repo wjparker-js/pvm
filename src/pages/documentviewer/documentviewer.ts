@@ -62,7 +62,7 @@ export class DocumentViewer {
             }
         );
 
-        this.sleep(2000);
+        this.sleep(3000);
         this.fileUrl = Constants.fileUrl+this.docid+this.ext;        
         this.pdfLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileUrl);
       
