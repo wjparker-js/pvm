@@ -14,7 +14,13 @@
       <ion-col [hidden]= "showDefects != 1" *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
        
         <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
-         <ion-card style="padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;" > 
+         <ion-card style="padding-bottom: 0px; margin-bottom: 0px;margin-top: 10px;" > 
+
+         <!-- 
+          <ion-card-title *ngIf="defect.OrderStatus == '50'" style="color:black;font-size:12px;"><b>Status:&nbsp;Issued</b></ion-card-title>
+          <ion-card-title *ngIf="defect.OrderStatus == '51'" style="color:black;font-size:12px;"><b>Status:&nbsp;Fix Scheduled</b></ion-card-title>
+          <ion-card-title *ngIf="defect.OrderStatus == '52'" style="color:black;font-size:12px;"><b>Status:&nbsp;Re-Inspect</b></ion-card-title>
+         -->        
  
           <ion-item  style="padding-left:3px;" >            
             
