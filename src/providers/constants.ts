@@ -1,8 +1,8 @@
-export const apiUrl = 'http://pvmobile.online/'; 
+export const apiUrl = 'https://pvmobile.online/'; 
 //export const apiUrl = 'http://79.174.171.174/'; 
 //export const apiUrl = 'http://172.16.44.28/'; 
 
-//export const publicpicsUrl = 'https://projectvaultuk.com/'; 
+export const publicpicsUrl = 'https://projectvaultuk.com/'; 
 //export const publicpicsUrl = 'https://dev.wowow.es/';  
 
 export const fileUrl = 'https://drive.google.com/viewerng/viewer?embedded=true&url=https://pvmobile.online/docs/';

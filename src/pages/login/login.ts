@@ -52,7 +52,7 @@ export class Login {
       this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');
     }
 
-    if ((localStorage.getItem('login_password') == "null" && localStorage.getItem('login_id') == null) || (localStorage.getItem('login_password') == "xxx-xxx" && localStorage.getItem('login_id') == "xxx-xxx") ) {
+    if ((localStorage.getItem('login_password') == null && localStorage.getItem('login_id') == null) || (localStorage.getItem('login_password') == "xxx-xxx" && localStorage.getItem('login_id') == "xxx-xxx") ) {
       this.showLogin = false;
       this.userSystemData.password ="xxx-xxx";
       console.log("New User.")
@@ -73,34 +73,34 @@ export class Login {
 
     this.authService.getData(this.userSystemData).then((result) =>{
 
-      this.responseData = result;
+    this.responseData = result;
 
-      if(this.responseData[0].SystemUserID === "Not Found") {
-        var msgUser = this.userSystemData.id+" is not a ProjectVault user.";
-        this.presentNewUserToast(msgUser);
+    if(this.responseData[0].SystemUserID === "Not Found") {
+      var msgUser = this.userSystemData.id+" is not a ProjectVault user.";
+      this.presentToast(msgUser);
+    } 
+
+    if(this.responseData[0].SystemUserID != "Not Found")  {
+      localStorage.setItem('login_id', this.responseData["0"].Email.toLowerCase());
+      var haspin = this.responseData["0"].PIN;
+
+      if(haspin == "" || haspin =="spuk" || haspin == null){
+        localStorage.setItem('login_password', this.responseData["0"].PIN); 
+        this.presentToast("An email has been sent.");
+        this.userSystemData.id = this.responseData["0"].Email;
+        this.userSystemData.password = "";
+        this.showLogin = true;
       } 
-
-      if(this.responseData[0].SystemUserID != "Not Found")  {
-        localStorage.setItem('login_id',       this.responseData["0"].Email .toLowerCase());
-        var haspin = this.responseData["0"].PIN;
-
-        if(haspin == "" || haspin =="spuk" || haspin == null){
-          localStorage.setItem('login_password', this.responseData["0"].PIN); 
-          this.presentToast("An email has been sent.");
-          this.userSystemData.id = this.responseData["0"].Email;
-          this.userSystemData.password = "";
-          this.showLogin = true;
-        } 
-        
-        if(haspin != "" || haspin !="spuk" || haspin != null){
-          this.userSystemData.id = this.responseData["0"].Email;
-          this.userSystemData.password = "";
-          this.showLogin = true;}
-        }
-        
-      },(err) => {
-        this.presentToast("There was an Email Send error.");
-      });
+      
+      if(haspin != "" || haspin !="spuk" || haspin != null){
+        this.userSystemData.id = this.responseData["0"].Email;
+        this.userSystemData.password = "";
+        this.showLogin = true;}
+      }
+      
+    },(err) => {
+      this.presentToast("There was an Email Send error.");
+    });
   }
 
 
