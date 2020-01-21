@@ -79,7 +79,7 @@ export class DocumentInfo {
         this.http.get(url).map(res => res.json()).subscribe(data => {
               this._sanitizer.bypassSecurityTrustStyle(data);
               this.userdocumentsinfo = data;          
-              console.log(this.userdocumentsinfo);
+              console.log("userdocumentsinfo: ",this.userdocumentsinfo);
           },
           err => {
               console.log("Document info not found.");

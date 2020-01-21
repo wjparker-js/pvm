@@ -10,8 +10,6 @@
   </ion-toolbar>
 </ion-header>
 
-
-
 <ion-content >
   <ion-grid>
     <ion-row>
@@ -27,7 +25,7 @@
           <ion-card-content  style="top-margin:-80px;" >
 
             <ion-item *ngFor="let key of keys(document)" style = "margin-top: -15px;font-size:13px;">
-              <ion-label *ngIf="key != 'PhotoTiny' && key != 'DNREV' && key != 'TI'">
+              <ion-label *ngIf="key != 'PhotoTiny'">
                 <b><span  [innerHTML]="key"></span></b>&nbsp;&nbsp;
                 <span  [innerHTML]="document[key]"></span>
               </ion-label>

@@ -36,7 +36,7 @@
           <ion-card style="padding-bottom: 0px;padding-top:5px;margin:5px;margin-right:0px;">         
             <ion-item no-padding style="margin-top:0px;">
           
-              <ion-thumbnail item-left no-padding style="height: 70px;width: 100px;margin-top: 5px;margin-left:5px;margin-right:15px;">
+              <ion-thumbnail item-left no-padding style="height: 70px;width: 100px;margin-top: 0px;margin-left:5px;margin-right:15px;">
                 <img 
                   src="{{document.PhotoTiny}}"    
                                  
@@ -45,12 +45,13 @@
                   />
               </ion-thumbnail>          
               
-              <div   style="position:relative;top:0px;">
+              <div   style="position:relative;top:6px;">
+                <h4><b><span [innerHtml]="document.FolderName"></span></b></h4>
                 <h4><b><span [innerHtml]="document.DNREV"></span></b></h4>
                 <h4><span style="top:-3px;" [innerHtml]="document.Title"></span></h4>
               </div> <!--(click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"-->
 
-              <div style="position:relative;top:-3px;">
+              <div style="position:relative;top:0px;">
                 <h2>                       
                   <ion-icon style = "font-size: 13px;padding-top: 0px;" name="refresh-circle"  class="flex-right hilite1" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
                   <label class="bodytext" color="primary" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber,dsearch)">Details</label>&nbsp;
