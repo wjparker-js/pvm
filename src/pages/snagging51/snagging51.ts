@@ -331,6 +331,11 @@ export class Snagging51Page {
 		this.viewCtrl.dismiss('') ;
 	} 
 
+
+	sendreminder(){
+		console.log("Reminder");
+	}
+
 			 
 }
 

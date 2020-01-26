@@ -29,13 +29,17 @@
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Required: </span>
       <span class="text">{{defect1.DeliverBy  | date : 'dd MMM yyyy' }}</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button end style="font-size:13px;font-weight:bold !important;width:130px;height:17px;position:relative;top:-3px;" ion-button (click)="sendreminder()">
+        Send Reminder
+      </button>
+
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed: </span>
       <span class="text">{{this.ProposedCompletionDate | date : 'dd MMM yyyy' }}&nbsp;{{this.ProposedCompletionDateTxt}}{{defect1.DisputeTxt }}</span>
       <br>
     </ion-card-content>
   </ion-card>
-
 
 
   <ion-card  [hidden]="hasNotes !== 'hasNotes'">
