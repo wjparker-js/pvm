@@ -122,7 +122,7 @@ export class DefectsPage {
 	}
 
 
-	scanQRCode(){
+/*	scanQRCode(){
 
 		this.options = {prompt : "Scan your barcode"}
 
@@ -130,6 +130,7 @@ export class DefectsPage {
 
 			this.scannedCode = barcodedata.text;			
 			console.log("QR Code: ", this.scannedCode);
+
 			var index = this.scannedCode.split( "=" );
 			this.location = index[1];
 
@@ -158,7 +159,48 @@ export class DefectsPage {
 			}			
 		});
 	}
+*/
 
+
+scanQRCode(){
+		
+	this.options = {prompt : "Scan your barcode"}
+
+	this.barcodeScanner.scan(this.options).then(barcodedata => {
+
+		this.scannedCode = barcodedata.text;			
+		console.log("QR Code: ", this.scannedCode);
+
+		if(this.scannedCode.indexOf("=") > 0){
+			var index = this.scannedCode.split( "=" );
+			this.location = index[1];
+			// QR Code on Sticker - defects from BranchOrder
+			var stickerdefectsurl = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+this.location+"/sticker";
+			this.http.get(stickerdefectsurl).map(res => res.json()).subscribe(data => {
+		      this._sanitizer.bypassSecurityTrustStyle(data);
+					this.defects = data; 
+					console.log(this.defects);
+				},err => {
+				  console.log("Get defects from sticker code failed.");
+			  });
+		} 
+		
+		if(this.scannedCode.indexOf("=") == -1) {
+			var index1 = this.scannedCode.split( "-" );
+			this.location = index1[1]+"-"+index1[2]+"-"+index1[3]+"-"+index1[4]+"-"+index1[5];
+			// QR Code on Page - Return defects from BranchOrder
+			var pagedefecturl = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+this.location+"/room";	    
+			this.http.get(pagedefecturl).map(res => res.json()).subscribe(data => {
+				this._sanitizer.bypassSecurityTrustStyle(data);
+				this.defects = data;         
+				console.log(this.defects);
+			},err => {
+			  console.log("Get defects from door code failed.");
+			});		
+		}
+
+	});
+}
 
 	searchDefectsByKeyword($event){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 		

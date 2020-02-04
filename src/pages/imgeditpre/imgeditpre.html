@@ -3,9 +3,10 @@
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>     
     <span style="font-size:16px;color:white;">{{selectedProjectName}} Defect Image</span> 
     <ion-buttons end>
-      <button ion-button style="font-size:24px;" (click)="save()" ><ion-icon name="checkmark"></ion-icon></button>
+      <button ion-button style="font-size:26px;" (click)="save()" ><ion-icon name="checkmark"></ion-icon></button>
       &nbsp;
-      <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
+      <button ion-button style="font-size:26px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
+      &nbsp;
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -44,8 +45,7 @@
       </div>
 
       <div *ngIf="!drawingEnabled">
-        <button ion-button (click)="ok()">
-          <ion-icon name="checkmark"></ion-icon>
+        <button ion-button (click)="ok()">Edit
         </button>        
       </div>
 

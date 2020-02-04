@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>    
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>       
-    <span style="font-size:16px;color:white;">{{selectedProjectName}} Defect Details</span> 
+    <span style="font-size:16px;color:white;">{{selectedProjectName}} Fixed Details</span> 
     <ion-buttons end>
       <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
@@ -29,9 +29,9 @@
       <br>
       <span style="font-size:13px;font-weight:bold !important;width:100px;" >Required: </span>
       <span class="text">{{defect1.DeliverBy  | date : 'dd MMM yyyy' }}</span>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button end style="font-size:13px;font-weight:bold !important;width:130px;height:17px;position:relative;top:-3px;" ion-button (click)="sendreminder()">
-        Send Reminder
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button end style="font-size:13px;font-weight:bold !important;width:100px;height:17px;position:relative;top:-3px;" ion-button (click)="sendreminder()">
+        Reminder
       </button>
 
       <br>
@@ -54,11 +54,11 @@
   
   <ion-item style="position:relative;top:0px;padding-left:10px;height:100px;">  
     <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
-      <img [src]="image"  style="width:100px; border: 2px;border-color:black;" imageViewer> 
+      <img [src]="image"  style="width:100px; height:50px; border: 1px solid #000;" imageViewer> 
     </ion-thumbnail>   
     &nbsp;
     <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
-      <img [src]="ImgUrl"  style="width:100px;  border: 2px;border-color:black;" imageViewer>
+      <img [src]="ImgUrl"  style="width:100px; height:50px; border: 1px solid #000;" imageViewer>
     </ion-thumbnail>  
   </ion-item>            
 
@@ -83,7 +83,7 @@
   
            <div> 
             <button [hidden]="currentImage !== null"  start style="width:100%;height:100%;" ion-button (click)="addimage('add')">
-              <br/><br/>Take Defect Picture<br/><br/><br/>
+              <br/><br/>Take Fixed Picture<br/><br/><br/>
             </button>
            </div> 
            
@@ -91,14 +91,14 @@
               <ion-col style="width:50%;padding-left:0px;">
                 <div style="width:100%;">  
                   <button  start style="width:100%;height:100%;margin-left:0px;" ion-button (click)="addimage('add')">
-                    <br/>Take<br>Defect<br>Picture<br/><br/>
+                    <br/>Take<br>Fixed<br>Picture<br/><br/>
                   </button>
                 </div> 
               </ion-col>
               <ion-col style="width:50%;padding-right:0px;">
                 <div style="width:100%;">  
                   <button  end style="width:100%;height:100%;margin-right:0px;" ion-button (click)="addimage('edit')">
-                    <br/>Edit<br>Defect<br>Picture<br/><br/>
+                    <br/>Edit<br>Fixed<br>Picture<br/><br/>
                   </button> 
                 </div> 
               </ion-col>
@@ -115,7 +115,7 @@
   <div>
     <ion-buttons >
       <button full [disabled]="showUpload === null" ion-button icon-left (click)="sendUploadData()" >
-        <ion-icon name="cloud-upload"></ion-icon>Upload Fix Image
+        <ion-icon name="cloud-upload"></ion-icon>Upload Fixed Image
       </button>
     </ion-buttons>
   </div>

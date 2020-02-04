@@ -55,6 +55,9 @@ export class ImgEditPagePre {
     this.drawingEnabled = false;
     var preimageToView = localStorage.getItem('preimage');
     this.drawing.addImage(preimageToView);  
+
+    this.drawingEnabled = true;
+    this.drawing.enableDrawing();
   }
 
   save() {

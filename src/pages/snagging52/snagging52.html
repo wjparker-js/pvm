@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>    
       <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>       
-      <span style="font-size:16px;color:white;">{{selectedProjectName}} Defect Details</span> 
+      <span style="font-size:16px;color:white;">{{selectedProjectName}} inspect Details</span> 
       <ion-buttons end>
         <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
       </ion-buttons>
@@ -69,7 +69,7 @@
 
       <div> 
         <button [hidden]="currentImage !== null"  start style="width:100%;height:100%;" ion-button (click)="addimage('add')">
-          <br/><br/>Take Defect Picture<br/><br/><br/>
+          <br/><br/>Take inspect Picture<br/><br/><br/>
         </button>
       </div> 
         
@@ -77,14 +77,14 @@
         <ion-col style="width:50%;padding-left:0px;">
           <div style="width:100%;">  
             <button  start style="width:100%;height:100%;margin-left:0px;" ion-button (click)="addimage('add')">
-              <br/>Take<br>Defect<br>Picture<br/><br/>
+              <br/>Take<br>inspect<br>Picture<br/><br/>
             </button>
           </div> 
         </ion-col>
         <ion-col style="width:50%;padding-right:0px;">
           <div style="width:100%;">  
             <button  end style="width:100%;height:100%;margin-right:0px;" ion-button (click)="addimage('edit')">
-              <br/>Edit<br>Defect<br>Picture<br/><br/>
+              <br/>Edit<br>inspect<br>Picture<br/><br/>
             </button> 
           </div> 
         </ion-col>
@@ -98,7 +98,7 @@
   <div>
     <ion-buttons >
       <button full [disabled]="showUpload === null" ion-button icon-left (click)="sendUploadData()" >
-        <ion-icon name="cloud-upload"></ion-icon>Upload Review Image
+        <ion-icon name="cloud-upload"></ion-icon>Upload Inspected Image
       </button>
     </ion-buttons>
   </div>

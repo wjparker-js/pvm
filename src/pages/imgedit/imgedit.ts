@@ -53,9 +53,10 @@ export class ImgEditPage {
     this.imgwidth  = width;
     this.drawing.create(width, height);   
 
-    this.drawingEnabled = false;
+    this.drawingEnabled = true;
     var imageToView = localStorage.getItem('locationimage');    
     this.drawing.addImage(imageToView);
+    this.drawing.enableDrawing();
    }
 
   save() {

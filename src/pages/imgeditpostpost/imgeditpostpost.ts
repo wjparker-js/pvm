@@ -64,6 +64,9 @@ export class ImgEditPagePostPost {
     this.drawingEnabled = false;
     var imageToView = localStorage.getItem('postpostimage');
     this.drawing.addImage(imageToView);
+
+    this.drawingEnabled = true;
+    this.drawing.enableDrawing();
   }
 
   /**

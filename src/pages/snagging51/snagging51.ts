@@ -166,7 +166,7 @@ export class Snagging51Page {
 
 
 	openlocimg(){
-
+/*
 		var theLocation                     = localStorage.getItem('location');
 		var locationmapImageData            = JSON.parse(localStorage.getItem('userSystemData'));
 		var locationmapImageSystemProjectID = localStorage.getItem('CurrentProjectID');
@@ -196,6 +196,7 @@ export class Snagging51Page {
 		    err => {
 		        console.log("Oops! - Error getting location image");
 		    }); 
+*/		
 	}
 
 

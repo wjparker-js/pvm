@@ -41,7 +41,10 @@ export class SnaggingPage {
 	public associatedcode = "";
 	public details: string =  "";
 	public scannedCode: string = "";
+
 	public location: string = "";
+	public locationsplit: string = "";
+
 	public defects: string = "";
 
 	public options:any;
@@ -150,34 +153,41 @@ export class SnaggingPage {
 
 			this.scannedCode = barcodedata.text;			
 			console.log("QR Code: ", this.scannedCode);
-			var index = this.scannedCode.split( "=" );
-			this.location = index[1];
 
-			// QR Code on Page - Return Location from LocationMap
-			if (typeof this.location === "string" && !Number.isNaN(Number(this.location))) {
-				var pagelocationurl = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/"+this.usr+"/"+this.location+"/snaglocationpage";	
-			    this.http.get(pagelocationurl).map(res => res.json()).subscribe(data => {
-			      this._sanitizer.bypassSecurityTrustStyle(data);
-						this.defects = data;         
-						this.name = this.defects["0"].Name;
-						console.log("Location: ", this.name);
-					},err => {
-					  console.log("Get locatioo from door code failed.");
-				  });				
-			}
-
-			// QR Code on Sticker - Return Location from BranchOrder
-			if (typeof this.location === "string" && Number.isNaN(Number(this.location))) {
+			if(this.scannedCode.indexOf("=") > 0){
+				var index = this.scannedCode.split( "=" );
+				this.location = index[1];
+				// QR Code on Sticker - Return Location from BranchOrder
 				var stickerlocationurl = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/"+this.usr+"/"+this.location+"/snaglocationsticker";	
 			    this.http.get(stickerlocationurl).map(res => res.json()).subscribe(data => {
 			      this._sanitizer.bypassSecurityTrustStyle(data);
 						this.defects = data; 
 						this.name = this.defects["0"].Name;
+						localStorage.setItem('location',this.name);
+						//this.location = this.name;
 						console.log("Location: ", this.name);
 					},err => {
 					  console.log("Get locatioo from sticker code failed.");
 				  });
-			}			
+			} 
+			
+			if(this.scannedCode.indexOf("=") == -1) {
+				var index1 = this.scannedCode.split( "-" );
+				this.location = index1[1]+"-"+index1[2]+"-"+index1[3]+"-"+index1[4]+"-"+index1[5];
+				// QR Code on Page - Return Location from LocationMap
+				var pagelocationurl = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/"+this.usr+"/"+this.location+"/snaglocationpage";	
+			    this.http.get(pagelocationurl).map(res => res.json()).subscribe(data => {
+					this._sanitizer.bypassSecurityTrustStyle(data);
+					this.defects = data;         
+					this.name = this.defects["0"].Name;
+					localStorage.setItem('location',this.name);
+					//this.location = this.name;
+					console.log("Location: ", this.name);
+				},err => {
+				  console.log("Get locatioo from door code failed.");
+				});		
+			}
+
 		});
 	}
 
@@ -347,7 +357,7 @@ export class SnaggingPage {
 
 
 	public openlocimg(){
-
+		console.log("In openLoc");
 		var theLocation                     = localStorage.getItem('location');
 		var locationmapImageData            = JSON.parse(localStorage.getItem('userSystemData'));
 		var locationmapImageSystemProjectID = localStorage.getItem('CurrentProjectID');
@@ -361,7 +371,8 @@ export class SnaggingPage {
 			this.locationImg = data; 
 			
 			if(this.locationImg["0"].locationimage !== null){
-				this.image = "data:image/jpeg;base64," +  this.hexToBase64(this.locationImg["0"].locationimage);			
+				//this.image = "data:image/jpeg;base64," +  this.hexToBase64(this.locationImg["0"].locationimage);				
+				this.image = "data:image/jpeg;base64," +  this.locationImg["0"].locationimage;			
 				localStorage.setItem('locationimage', this.image); 
 			} else {
 				this.image = "data:image/jpeg;base64," +  "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";	
@@ -369,7 +380,7 @@ export class SnaggingPage {
 			}	
 		    },
 		    err => {
-		        console.log("Oops!");
+		        console.log("Oops! - no location image");
 		    }); 
 	}
 

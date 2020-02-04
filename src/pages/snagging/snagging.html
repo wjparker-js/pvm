@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>    
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>       
-    <span style="font-size:16px;color:white;">{{selectedProjectName}} Add Defect Details</span> 
+    <span style="font-size:16px;color:white;">{{selectedProjectName}} Add Defect</span> 
     <ion-buttons end>
       <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
@@ -136,9 +136,10 @@
   <div>
     <ion-buttons >
       <button full [disabled]="showUpload === null" ion-button icon-left (click)="sendUploadData()" >
-        <ion-icon name="cloud-upload"></ion-icon>Upload Snag Image
+        <ion-icon name="cloud-upload"></ion-icon>Upload Defect Image
       </button>
     </ion-buttons>
   </div>
+  <br>
 </ion-footer>
   
