@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ViewChild, ElementRef } from '@angular/core';
+import { ViewChild, ElementRef, Renderer } from '@angular/core';
 import { IonicPage, ModalController, NavController, NavParams, Searchbar} from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -18,9 +18,11 @@ import * as Constants from '../../providers/constants';
 
 export class DocumentsPage {  
 
-  //@ViewChild('mySearchbar') myInput;
 
   @ViewChild('mySearchbar', { read: ElementRef }) myInput: ElementRef;
+  //@ViewChild('mySearchbar') searchbar: Searchbar;
+
+ 
 
   userdocuments: any;
   customfieldnames: any;
@@ -32,7 +34,9 @@ export class DocumentsPage {
   hasdocs : any;
   cpid : any;
   scid : any;
-
+  mySearchTerm:any;
+  searchbar: Searchbar;
+  
   userdocumentData = {
     "SystemProjectID":"",
     "SystemProjectName":"",
@@ -49,6 +53,7 @@ export class DocumentsPage {
               public http: Http,
               private _sanitizer: DomSanitizer, 
               private keyboard : Keyboard,
+              private renderer:Renderer,
               public modalCtrl: ModalController) {}
 
   ionViewDidLeave(){
@@ -61,14 +66,16 @@ export class DocumentsPage {
   
   ionViewDidEnter() {
 
+    console.log("myInput = ", this.myInput);
+
+    this.myInput.nativeElement.value = "Hello";
+
     //https://www.sky-vault.co.uk/PublicPics/"+this.scid+"/"+cpid+"/' + 
 
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
     this.userdocumentData.SystemProjectID   = localStorage.getItem('CurrentProjectID');
-
     this.userdocumentData.SystemProjectName = localStorage.getItem('CurrentProjectName'); 
-
     this.userdocumentData.SystemClientID    = documentData[0].SystemClientID;
     this.userdocumentData.SystemUserID      = documentData[0].SystemUserID;
     this.userdocumentData.apiKey            = documentData[0].apiKey;    
@@ -86,25 +93,37 @@ export class DocumentsPage {
     var documentFileExtension   = this.userdocumentData.FileExtension;
 
     var currentProjectName      = localStorage.getItem('CurrentProjectName');
+    console.log("Current Proj = ", currentProjectName);
+
     var oldProjectName          = localStorage.getItem('OldProjectName');
+    console.log("Old Proj = ", oldProjectName);
+
     this.cpid = localStorage.getItem('CurrentProjectID');
     this.scid = localStorage.getItem('CurrentProjectClientID');
 
+
     setTimeout(() => {
-      //this.mySearchbar.setFocus();
+      console.log("setTimeout");
       this.myInput.nativeElement.focus();
-      if(currentProjectName != oldProjectName ){
-      this.myInput.nativeElement.value = "";}
+      
+     // if(currentProjectName != oldProjectName ){
+        //this.myInput.nativeElement.innerText = "Hello";
+      //}
+
       this.myInput.nativeElement.blur();
       this.myInput.nativeElement.focus();
-      //this.myInput.setBlur();
     },150);
+
   
 
     //this.hasdocs = false;
     //this.searchbar.clearInput(null);
     if(currentProjectName != oldProjectName ){
       
+      console.log("Current Proj 1 = ", currentProjectName);
+      console.log("Old Proj 1 = ", oldProjectName);
+
+
       document.getElementsByClassName("searchbar-input")["0"].value = "";
       document.getElementById("maindiv").style.display="none";
 
@@ -112,10 +131,12 @@ export class DocumentsPage {
       this.http.get(oldurl).map(res => res.json()).subscribe(data => {
             this._sanitizer.bypassSecurityTrustStyle(data);
             this.userdocuments = data;
+            console.log(this.userdocuments);
             localStorage.setItem('OldProjectName', this.userdocumentData.SystemProjectName);
+            console.log("Old Proj 2 = ", oldProjectName);
+
             document.getElementById("maindiv").style.display="block";
             //document.getElementsByClassName("searchbar-input")["0"].value = "";
-            console.log(this.userdocuments);
         },
         err => {
             console.log("Oops!");
@@ -153,26 +174,42 @@ export class DocumentsPage {
       return Object.keys(obj);
   }
 
-checkFocus(){
+  
+
+  checkBlur($event){
+    console.log("Got Blur");
+    console.log("Value ",$event._value);
+    $event._value = "";
+    console.log("Value ",$event._value);
+  }
+
+checkFocus($event){
   console.log("Got Focus");
-  //document.getElementsByClassName("searchbar-input")["0"].value = "";
+  console.log("Value ",$event._value);
+  $event._value = "";
+  console.log("Value ",$event._value);
 }
+
+//onSearch(event) { this.renderer.invokeElementMethod(event.target, 'blur'); }
 
 
   searchByKeyword($event){
 
-    //var searchvalue = document.getElementsByClassName("searchbar-input")["0"].value;
-    //console.log(searchvalue);
+    var searchvalue = document.getElementsByClassName("searchbar-input")["0"].value;
+    console.log("Event ",$event);
 
 
     this.selectedProjectName     = localStorage.getItem('CurrentProjectName');    
     var documentSystemUserID1    = this.userdocumentData.SystemUserID;
     var documentSystemProjectID1 = localStorage.getItem('CurrentProjectID');    
     var searchTerm               = $event.srcElement.value;
+    console.log("Search term ",searchTerm);
     var localDocumentData        = JSON.parse(localStorage.getItem('userSystemData'));
     var localApiKey              = localDocumentData[0].apiKey;
     this.eventInstance           = $event;
     this.dsearch                 = $event.srcElement.value;
+
+    console.log("myInput: ",this.myInput);
 
     if(typeof searchTerm  !== "undefined"){
       if(searchTerm.length > 1 ){
@@ -186,13 +223,18 @@ checkFocus(){
               this.hasdocs = true;
             }
             console.log(this.userdocuments);
-            this.keyboard.hide();
+            //this.searchbar._elementRef.nativeElement.blur;
+           // $event.srcElement.value       = "";
+            //console.log("Search term ",$event.srcElement.value );
+            this.renderer.invokeElementMethod($event.target, 'blur');
         },
         err => {
             console.log("Oops!");
         }
       ); 
-    }} else {
+    }
+    
+  } else {
       var oldurl1 = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxxxxxxxxxxxxxxx/xxx";
       this.http.get(oldurl1).map(res => res.json()).subscribe(data => {
             this._sanitizer.bypassSecurityTrustStyle(data);
@@ -205,7 +247,7 @@ checkFocus(){
         }
       );      
     }
-
+    
   }
   
 

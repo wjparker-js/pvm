@@ -59,8 +59,8 @@
           
           <ion-item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name)" style="padding-left:3px;" >            
             
-            <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin-top: 10px;margin-bottom: 0px;">
-              <img [src]="image+defect.OrderId+'.jpg'" border="1" style="width:100px;height:71px;border-color:black;border:2px;" imageViewer/>
+            <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin: 0px;margin-right:10px;">
+              <img [src]="image+defect.OrderId+'.jpg'" style="border: 1px solid #000;width:100px;height:71px;border-color:black;border:2px;" imageViewer/>
             </ion-thumbnail> 
   <!--          <img src="{{'data:image/jpeg;base64,' +  this.hexToBase64(defect.LocationImage)}}" border="1" style="width:100px;height:71px;border-color:black;border:2px;" imageViewer/>-->
             <div id="defectdetails">

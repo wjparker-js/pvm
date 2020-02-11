@@ -126,7 +126,7 @@ export class AboutPage {
 
   sendEmail(){
 
-    //Send email - from pvonline so no audit
+    //Send email - written to audit
     this.http.get(Constants.apiUrl+'api/sendemail/'+this.docSystemData.apiKey+'/'+this.docSystemData.uid+'/'+this.docSystemData.pid+'/'+this.docSystemData.from+'/'+this.docSystemData.to+'/'+this.docSystemData.subject+'/'+this.docSystemData.message+'/'+this.docSystemData.docid+'/'+this.docno1).map(res => res.json()).subscribe(data => {
           this.useremaildata = data;
           console.log(this.useremaildata);
