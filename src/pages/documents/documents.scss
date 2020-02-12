@@ -9,8 +9,19 @@ ion-card { border-top: 3px solid #322171; border-bottom: 0px solid #e8e8e8; padd
 
 //ion-list {height:70px;}
 
-.label-md {
-    margin: 0px 3.5px 13px 0;
+
+
+page-documents .label-md {
+    margin: 0px 3.5px 3px 0;
+  }
+
+  .label-md {
+    margin: 0px 3.5px 3px 0;
+}
+
+.item-md.item-block .item-inner {
+    padding-right: 3.5px;
+    border-bottom: 1px solid #ffffff;
 }
 
 .searchbar-input {background-color: #ffffff;}
