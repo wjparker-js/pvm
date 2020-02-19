@@ -46,7 +46,7 @@
           <ion-col  col-12 col-md-6 col-lg-4 col-xl-3 style="margin-top:15px;padding-top: 0px;padding-bottom: 0px;margin-left:0px;margin-right:0px;height: 80px;">
             <ion-list >
               <ion-item *ngFor="let document of userdocuments" style="border-bottom-color:white;padding-left: 0px;padding-right: 0px;height:90px;">                
-                <ion-card style="bottom-border-color:white;margin:0px;margin-top:6px;padding:0px;width:100%;height:90px;" >                     
+                <ion-card *ngIf="document.Current == 'Current'" style="bottom-border-color:white;margin:0px;margin-top:6px;padding:0px;width:100%;height:90px;" >                     
                   <ion-item padding style="padding:0px;margin:0px;width:100%;height:90px;border-bottom-color:white;" class="card card-md" class="item item-block item-md">
                 
                     <ion-thumbnail item-left no-padding style="margin-left:5px;margin-top:20px;">
@@ -80,9 +80,11 @@
                 </ion-card>
               </ion-item>
             </ion-list>
+            <br> <br>
           </ion-col>
         </ion-row>
       </ion-grid>
+     
     </div>
   </div>
 

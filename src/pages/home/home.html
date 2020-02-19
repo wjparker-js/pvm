@@ -38,7 +38,14 @@
           </tr>
           <tr></tr>
           <tr>  
-            <td style="text-align:center;"><h2><span (click)="openDocumentSummary(1)" >{{item.Last24Hours}}</span></h2></td>
+
+            <td style="text-align:center;">
+              <h2>
+              <span [hidden]="item.Last24Hours == 0"  (click)="openDocumentSummary(1)" >{{item.Last24Hours}}</span>
+              <span [hidden]="item.Last24Hours != 0">0</span>
+              </h2>
+            </td>
+
             <td style="text-align:center;"><h2><span (click)="openDocumentSummary(7)" >{{item.Last7Days}}</span></h2></td>
             <td style="text-align:center;"><h2><span (click)="openDocumentSummary(30)" >{{item.Last30Days}}</span></h2></td>
           </tr>

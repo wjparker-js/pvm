@@ -124,6 +124,7 @@ export class Login {
           var thekey = localStorage.getItem('apikey');
           this.http.get(Constants.apiUrl+'api/loginprojectuserdetails/'+this.apikey +'/'+this.userSystemData.id.trim().toLowerCase()).map(res => res.json()).subscribe(data => {
             this.loginprojectuserdetails = data;
+      console.log(this.loginprojectuserdetails);
             localStorage.setItem('Role-Name',       	    this.loginprojectuserdetails["0"].RoleName);
             localStorage.setItem('Role-PA5038',         	this.loginprojectuserdetails["0"].PA5038);
             localStorage.setItem('Role-Description',      this.loginprojectuserdetails["0"].RoleDescription);

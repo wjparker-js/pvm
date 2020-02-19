@@ -6,7 +6,7 @@ export const publicpicsUrl = 'https://projectvaultuk.com/';
 //export const publicpicsUrl = 'https://dev.wowow.es/';  
 
 //export const fileUrl = 'https://drive.google.com/viewerng/viewer?embedded=true&url=https://pvmobile.online/docs/';
-export const fileUrl = 'http://docs.google.com/gview?embedded=true&url=https://pvmobile.online/docs/';
+export const fileUrl = 'https://docs.google.com/gview?embedded=true&url=https://pvmobile.online/docs/';
 //  export const fileUrl = 'http://docs.google.com/gview?embedded=true&url=http://79.174.171.174/docs/';
 
 //export const defectUploadPath = "//dev.wowow.es/PublicPics/";

@@ -25,6 +25,7 @@ export class DefectsPage {
 	details: any;
 	createdefect: any;
 	showdefects: any;
+	manageDefects: any;
 	userApiKey : any;
 	SystemCID: any;
 	SystemProjectID: any;
@@ -54,6 +55,7 @@ export class DefectsPage {
 		this.defectslist         = "all";
 		this.createdefect        = localStorage.getItem('Role-PA5038');
 		this.showDefects         = localStorage.getItem('Role-PA5039');
+		this.manageDefects       = localStorage.getItem('Role-PA5073');
 		var url = "";
 
 		this.image = "https://projectvaultuk.com/PublicPics/"+this.SystemCID+"/"+this.SystemProjectID+"/LocationImages/";

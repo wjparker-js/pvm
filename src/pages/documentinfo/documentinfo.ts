@@ -74,7 +74,7 @@ export class DocumentInfo {
     var documentThumbnail       = this.userdocumentInfoData.Thumbnail;
     var documentDocumentNumber  = this.userdocumentInfoData.DocumentNumber;
 
-    var url = Constants.apiUrl+"api/documents/xxx/"+this.userdocumentInfoData.SystemUserID+"/"+this.userdocumentInfoData.SystemProjectID+"/docno"+this.docno1+"/"+this.search;
+    var url = Constants.apiUrl+"api/documentinfo/xxx/"+this.userdocumentInfoData.SystemUserID+"/"+this.userdocumentInfoData.SystemProjectID+"/docno"+this.docno1+"/"+this.search;
     
         this.http.get(url).map(res => res.json()).subscribe(data => {
               this._sanitizer.bypassSecurityTrustStyle(data);

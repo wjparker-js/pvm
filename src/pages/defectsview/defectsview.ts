@@ -24,8 +24,9 @@ export class DefectsviewPage {
 	associatedcode: any;
 	options: any;
 	details: any;
-	createdefect: any;
+	createdefects: any;
 	showdefects: any;
+	managedefects: any;
 	userApiKey : any;
 	SystemCID: any;
 	SystemProjectID: any;
@@ -53,8 +54,9 @@ export class DefectsviewPage {
 		this.SystemUserID        = localStorage.getItem('login_id');
 		this.apiKey              = defectData[0].apiKey; 
 		this.defectslist         = "all";
-		this.createdefect        = localStorage.getItem('Role-PA5038');
-		this.showDefects         = localStorage.getItem('Role-PA5039');
+		this.createdefects       = localStorage.getItem('Role-PA5039');
+		this.managedefects       = localStorage.getItem('Role-PA5073');
+		this.showdefects         = localStorage.getItem('Role-PA5039');
 		this.defectstatus        = this.params.get('status');
 		console.log("Defect Status:",this.defectstatus);
 		var url = "";
