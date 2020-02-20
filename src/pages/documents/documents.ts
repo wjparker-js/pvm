@@ -252,11 +252,13 @@ checkFocus($event){
   
 
   openDocument(clientid,projectid,docid,ext){
-   // if(ext != "jpg" && ext != "png" && ext != "bmp" && ext != "tif"){
     this.navCtrl.push(DocumentViewer,{clientid,projectid,docid,ext});
-   // }
   }
+  
 
+  openRasterDocument(clientid,projectid,docid,ext){
+    this.navCtrl.push(DocumentViewer,{clientid,projectid,docid,ext});
+   }
 
   fixImage(image){
 
