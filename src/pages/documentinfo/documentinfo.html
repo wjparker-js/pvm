@@ -16,17 +16,15 @@
       <ion-col  *ngFor="let document of userdocumentsinfo" col-12 col-md-6 col-lg-4 col-xl-3>
         <ion-card  ><!-- *ngIf="document.Current == 'Current'"-->
         
-          <ion-card-header>
-              <ion-thumbnail item-left="" no-padding="" style="margin-top: 10px;margin-right:15px;">
-                  <img [src]="document.PhotoTiny"  style="width:100%;border:2px;" (click)= "openDocument(userdocumentInfoData.SystemClientID,userdocumentInfoData.SystemProjectID,document.DocumentID,document.FileExtension)"/>
-              </ion-thumbnail>
-          </ion-card-header>      
+     
 
-          <ion-card-content  style="margin-top:-80px;" >
-
+          <ion-card-content  style="margin-top:20px;" >
+            <div class="col">
+              <img [src]="document.PhotoTiny"  style="position:relative;top:-60px;border: 2px solid #000;transform: rotate(90deg);width: 214px;height: 304px;padding-left: 0px;margin-top: -50;margin-bottom:-80px;margin-left: 60px;"  /> <!--(click)= "openDocument(userdocumentInfoData.SystemClientID,userdocumentInfoData.SystemProjectID,document.DocumentID,document.FileExtension)"-->
+            </div>  
             <ion-item *ngFor="let key of keys(document)" style = "margin-top: -15px;font-size:11px;">
               
-              <ion-label *ngIf="key != 'Display' && key != 'PhotoTiny' && key != 'DocumentID' && key != 'DNREV' && key != 'TI'">
+              <ion-label style="margin-top: 0px; margin-bottom: 4px;" *ngIf="key != 'Display' && key != 'PhotoTiny' && key != 'DocumentID' && key != 'DNREV' && key != 'TI'!= 'DNREV' && key != 'FolderID'">
                 <b><span  [innerHTML]="key"></span></b>&nbsp;&nbsp;
                 <span  [innerHTML]="document[key]"></span>
               </ion-label>
