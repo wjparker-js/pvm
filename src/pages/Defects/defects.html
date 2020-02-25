@@ -8,19 +8,20 @@
 
     <span style="font-size:16px;color:white;">{{selectedProjectName}}</span>    
     
-    <ion-buttons [hidden]="showDefects != 1" right>
-        <button ion-button  color="light" type="button" item-right style="font-size:24px;" (click)="scanQRCode()"> 
-         <ion-icon name="qr-scanner"> </ion-icon>
-        </button>  
-        &nbsp;
-        <button [hidden] = "createdefects != 1"  ion-button  color="light" type="button" item-right style="font-size:30px;" (click)="newSnag('new')"> 
+    <ion-buttons right>        
+        <button [hidden] = "createDefects == 0"  ion-button  color="light" type="button" item-right style="font-size:30px;" (click)="newSnag('new')"> 
          <ion-icon strong name="add"> </ion-icon>
         </button>  
         &nbsp;
+        <button  [hidden]="showDefects == 0" ion-button  color="light" type="button" item-right style="font-size:24px;" (click)="scanQRCode()"> 
+         <ion-icon name="qr-scanner"> </ion-icon>
+        </button>  
+        &nbsp;
+
     </ion-buttons>
   </ion-navbar>   
     
-  <div [hidden]="showDefects != 1" > 
+  <div [hidden]="showDefects == 0" > 
     <ion-searchbar
       #myDefectsSearchbar 
       name = "defectsSearchBar" 
@@ -32,7 +33,7 @@
     </ion-searchbar> 
   </div> 
 
-  <div [hidden]="showDefects != 1" style='padding: 10px;'>   
+  <div [hidden]="showDefects == 0" style='padding: 10px;'>   
     <ion-segment color="primary"  mode='ios' [(ngModel)]="defectslist" (ionChange)="segmentChanged(defectslist)">
       <ion-segment-button selected value="all">
         Issued
@@ -50,8 +51,8 @@
 
 <ion-content>
   <ion-grid style="position:relative;top:4px;">
-    <ion-row [hidden]="showDefects != 1" > 
-      <ion-col [hidden]= "showDefects != 1" *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
+    <ion-row [hidden]="showDefects == 0" > 
+      <ion-col [hidden]= "showDefects == 0" *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
        
         <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
          <ion-card style="padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;" > 

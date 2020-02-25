@@ -45,9 +45,9 @@
         <ion-row>
           <ion-col  *ngFor="let document of userdocuments"  style="margin-top:8px;padding-top: 0px;padding-bottom: 0px;margin-left:0px;margin-right:0px;height: 80px;"  col-12 col-md-6 col-lg-4 col-xl-3>
             <ion-list >
-              <ion-item style="border-bottom-color:white;padding-left:0px;padding-right: 0px;height:90px;">                
-                <ion-card *ngIf="document.Latest == 'Current' || document.Current == 'Current'" style="max-width:320px;min-width:320px;border-bottom-color:white;margin:0px;margin-left:10px;margin-top:6px;padding:0px;width:100%;height:90px;" >                     
-                  <ion-item padding style="padding:0px;margin:0px;width:100%;height:90px;border-bottom-color:white;" class="card card-md" class="item item-block item-md">
+              <ion-item style="width: 99%;display: flex;align-items: center; justify-content: center;border-bottom-color:white;padding-left:0px;padding-right: 0px;height:90px;">                
+                <ion-card *ngIf="document.Latest == 'Current' || document.Current == 'Current'" style="width: 108%;display: flex;align-items: center; justify-content: center;border-bottom-color:white;margin:0px;margin-top:6px;padding:0px;" >                     
+                  <ion-item padding style="padding-left:5px;margin:0px;width:100%;height:90px;border-bottom-color:white;" class="card card-md" class="item item-block item-md">
                 
                     <ion-thumbnail *ngIf="document.FileExtension == '.jpg' || document.FileExtension == '.jpeg' || document.FileExtension == '.png' || document.FileExtension == '.tif' || document.FileExtension == '.tiff' || document.FileExtension == '.gif' || document.FileExtension == '.bmp'" item-left no-padding style="margin-left:5px;margin-top:20px;">
                       <img 
@@ -65,15 +65,16 @@
                     </ion-thumbnail> 
 
                     <div style="padding:0px;margin:0px;width:100%;margin-top:2px;">
-                      <b>
-                        <ion-icon style = "font-size: 15px; position:relative;top:2px;" name="folder" class="flex-left hilite" ></ion-icon>
-                        <span style="font-size: 11px;" [innerHtml]="document.FolderName "></span></b><br> 
-                        <span style="font-size: 10px;" [innerHtml]="document.DNREV"></span><br>  
-                        <span style="font-size: 11px;" [innerHtml]="document.Title"></span><br> 
+                      
+                        <ion-icon style = "font-size: 15px; position:relative;top:0px;" name="folder" class="flex-left hilite" >
+                         <b> <span style="font-size: 11px;color:black;font-family:arial;top:-1px;" [innerHtml]="document.FolderName "></span></b>
+                        </ion-icon>                         
+                        <div style="font-size: 10px;top:0px" [innerHtml]="document.DNREV"></div>  
+                        <div style="font-size: 11px;top:-3px;" [innerHtml]="document.Title"></div> 
 
                     </div> 
 
-                    <div style="position:relative;top:-1px;padding:0px;margin:0px;width:100%;">
+                    <div style="position:relative;top:-2px;padding:0px;margin:0px;width:100%;">
                                             
                         <ion-icon style = "font-size: 13px; padding-top: 0px;" name="refresh-circle"  class="flex-right hilite1" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
                         <label class="bodytext" color="primary" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber,dsearch)">Details</label>&nbsp;&nbsp;

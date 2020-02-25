@@ -86,6 +86,28 @@ page-documentsummary {
 .alert-wp .alert-radio-label{ white-space: pre-line;}
 .select-text { white-space: pre-line;}
 
+.xxxscroll-content {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 1;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    will-change: scroll-position;
+    contain: size style layout;
+    display: flex;             // added by me
+    flex-direction: column;    // added by me
+}
+
+.lower-content {
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
 ion-item {
   border-top: none;
   border-bottom: none;

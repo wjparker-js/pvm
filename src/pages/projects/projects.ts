@@ -53,11 +53,17 @@ export class ProjectsPage {
  
     this.http.get(Constants.apiUrl+'api/projects/'+userApiKey).map(res => res.json()).subscribe(data => {
           this.userProjects = data;
+    var thumb  = this.userProjects["0"].Thumbnail;
+    localStorage.setItem('ProjectThumb', thumb);   
       },
       err => {
           console.log("Oops!");
       }
     );      
+    
+ 
+
+
   }
 
   saveProject(name,id,scid){
@@ -85,7 +91,7 @@ export class ProjectsPage {
           localStorage.setItem('Role-Description', RoleDescription);
           localStorage.setItem('Role-PA5038', PA5038);
           localStorage.setItem('Role-PA5039', PA5039); 
-          localStorage.setItem('Role-PA5073', PA5073);  
+          localStorage.setItem('Role-PA5073', PA5073); 
           localStorage.setItem('postimage', ""); 
           localStorage.setItem('image', ""); 
           localStorage.setItem('preimage', ""); 

@@ -42,6 +42,7 @@ export class DefectsviewPage {
 	public imageUrl: any;
 	public thumbbase:any;
 	public showDefects:any;
+	public createDefects:any;
 
 	constructor(public alertController: AlertController, public params: NavParams, public viewCtrl: ViewController, public navCtrl: NavController, private barcodeScanner:BarcodeScanner, private _sanitizer: DomSanitizer, public http: Http) {}
 
@@ -54,16 +55,16 @@ export class DefectsviewPage {
 		this.SystemUserID        = localStorage.getItem('login_id');
 		this.apiKey              = defectData[0].apiKey; 
 		this.defectslist         = "all";
-		this.createdefects       = localStorage.getItem('Role-PA5039');
+		this.createDefects       = localStorage.getItem('Role-PA5038');
 		this.managedefects       = localStorage.getItem('Role-PA5073');
-		this.showdefects         = localStorage.getItem('Role-PA5039');
+		this.showDefects         = localStorage.getItem('Role-PA5039');
 		this.defectstatus        = this.params.get('status');
 		console.log("Defect Status:",this.defectstatus);
 		var url = "";
 
 		this.image = "https://projectvaultuk.com/PublicPics/"+this.SystemCID+"/"+this.SystemProjectID+"/LocationImages/";
 
-		if(this.showDefects != 1){this.presentAlert();}
+		if(this.showDefects == 0){this.presentAlert();}
 
 		this.imageUrl = Constants.publicUploadPath+this.SystemCID+'/'+this.SystemProjectID+'/LocationImages/';
 		

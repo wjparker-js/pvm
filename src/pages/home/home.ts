@@ -55,6 +55,7 @@ export class HomePage {
   watchLocationUpdates:any; 
   loading:any;
   isWatching:boolean;
+  thumb:any;
  
   //Geocoder configuration
   geoencoderOptions: NativeGeocoderOptions = {
@@ -94,6 +95,8 @@ export class HomePage {
     this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName');     
     this.PA5039                      = localStorage.getItem('Role-PA5039');  
 
+    this.thumb =  'https://go.projectvaultuk.com/publiclogos/'+this.userPostData.ProjectID+'.png'; 
+    
     var apiKey  = this.userPostData.apiKey;
     var uid     = this.userPostData.SystemUserID;  
     var pid     = this.userPostData.ProjectID;  

@@ -10,8 +10,8 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row [hidden]="showDefects != 1" > 
-      <ion-col [hidden]= "showDefects != 1" *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
+    <ion-row [hidden]="showDefects == 0" > 
+      <ion-col [hidden]= "showDefects == 0" *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
        
         <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
          <ion-card style="padding-bottom: 0px; margin-bottom: 0px;margin-top: 10px;" > 

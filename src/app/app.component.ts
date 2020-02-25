@@ -11,13 +11,20 @@ import { Login } from '../pages/login/login';
 
 export class MyApp {
 
-  rootPage:any = Login;  
+  rootPage:any = Login; 
+  SysUserID:any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public app: App, public splitPane: SplitPane, public menu: MenuController) {
     platform.ready().then(() => {
       //statusBar.styleDefault();
       //splashScreen.hide();
+      
     });
+  }
+
+  ionViewWillEnter() {
+    var userData  = JSON.parse(localStorage.getItem('userSystemData'));
+    this.SysUserID  = userData[0].Name;    
   }
 
    backToWelcome(){
