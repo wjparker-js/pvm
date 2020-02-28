@@ -23,8 +23,8 @@ export class MyApp {
   }
 
   ionViewWillEnter() {
-    var userData  = localStorage.getItem('userSystemData');
-    this.SysUserID  = userData[0].Name;    
+    //var userData  = localStorage.getItem('userSystemData');
+    //this.SysUserID  = userData[0].Name;    
   }
 
    backToWelcome(){
