@@ -17,8 +17,9 @@ export class WeatherProvider {
   }
 
   getWeather(city){
-  	console.log('Getting Weather');
-  	return  this.http.get(this.url+city+",uk").map(res => res.json());
+    console.log('Getting Weather');
+    var theCity = city.replace(" ", "-");
+  	return  this.http.get(this.url+city+",gb").map(res => res.json());
   }
 
   getWeathercoords(lat,long){

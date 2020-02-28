@@ -26,15 +26,16 @@
                 style="position:relative;top:-50px;left:20px; transform: rotate(90deg);width: 180px;height: 250px;padding-left: 0px;margin-top: -60;margin-bottom:-80px;margin-left: 10px;" (click)= "openDocument(userdocumentInfoData.SystemClientID,userdocumentInfoData.SystemProjectID,document.DocumentID,document.FileExtension)" /> <!---->
               </ion-label> 
             </ion-item> 
-            
             <ion-item *ngFor="let key of keys(document)" style = "margin-top: -15px;font-size:11px;">
-              
-              <ion-label style="margin-top: 0px; margin-bottom: 4px;" *ngIf="key != 'Display' && key != 'PhotoTiny' && key != 'DocumentID' && key != 'DNREV' && key != 'TI'!= 'DNREV' && key != 'FolderID'">
-                <b><span  [innerHTML]="key"></span></b>&nbsp;&nbsp;
-                <span  [innerHTML]="document[key]"></span>
+                <ion-label style="margin-top: 0px; margin-bottom: 4px;display: block;" *ngIf="key != 'Display' && key != 'PhotoTiny' && key != 'DocumentID' && key != 'DNREV' && key != 'TI'!= 'DNREV' && key != 'FolderID'">
+                <td>
+                   <b>{{key}}</b>&nbsp;
+                </td>
+                <td wrap>
+                  {{document[key]}}
+                </td>
               </ion-label>
             </ion-item>
-
           </ion-card-content>
 
         </ion-card>

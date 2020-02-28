@@ -10,12 +10,14 @@
         </ion-toolbar>
       </ion-header>
 
-      <ion-content>
+      <ion-content style="position:relative;">
             <ion-list>
-              <button ion-item (click)="logout()" style="top:450px;">
-                <ion-icon padding name="exit" item-start></ion-icon>
-                Log Out User
-              </button>
+              <ion-item style="position: absolute; bottom:   0;">
+                <button ion-item (click)="logout()">
+                  <ion-icon padding name="exit" item-start></ion-icon>
+                  Log Out User
+                </button>
+              </ion-item>
             </ion-list>
       </ion-content>
 
@@ -51,6 +53,7 @@
       </ion-content>
 -->      
       <ion-footer>
+        <span>{{this.SysUserID}}</span>
           <span>&nbsp;&nbsp;&nbsp;&nbsp;App: PVM ProjectVault Mobile</span><br>
           <span>&nbsp;&nbsp;&nbsp;&nbsp;Ver: 0.0.2</span><br>        
           <span> &nbsp;</span>

@@ -23,7 +23,7 @@ export class MyApp {
   }
 
   ionViewWillEnter() {
-    var userData  = JSON.parse(localStorage.getItem('userSystemData'));
+    var userData  = localStorage.getItem('userSystemData');
     this.SysUserID  = userData[0].Name;    
   }
 

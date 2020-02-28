@@ -22,10 +22,10 @@
             <h2 class="description" style="margin:0px;text-align:left;" start>{{weatherDes}}</h2>
             <h2 class="temp" style="margin-top:0px;text-align:left;" start>{{weatherTemp}}&deg;&nbsp;C</h2>
           </td>
-          <td>
-            <ion-thumbnail *ngIf="this.thumb != ''" item-right>
-              <img [src]="this.thumb" style="max-height:70px;max-width:150px;border:1px;" onerror="this.src='assets/imgs/project.png';"/>
-            </ion-thumbnail>            
+          <td IMG ALIGN=right>
+            <!--<ion-thumbnail *ngIf="this.thumb != ''" item-right>-->
+              <img [src]="this.thumb" style="max-height:70px;max-width:150px;border:1px;float: right;" onerror="this.src='assets/imgs/project.png';"/>
+            <!--</ion-thumbnail>-->            
           </td>
         </tr>
       </table>  
