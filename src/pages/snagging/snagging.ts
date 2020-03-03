@@ -37,16 +37,15 @@ export class SnaggingPage {
 	public usr: string = "";
 	public uguid: string = "";
 	public cid: string = "";
+
 	public api: string = "";
 	public associatedcode = "";
 	public details: string =  "";
 	public scannedCode: string = "";
-
 	public location: string = "";
+
 	public locationsplit: string = "";
-
 	public defects: string = "";
-
 	public options:any;
 	public snagid: string;
 	public showUpload: string = null;
@@ -126,8 +125,10 @@ export class SnaggingPage {
 			]
 		});
 		actionSheet.present();
-	}*/
+	}
+*/
 
+	
 	private addimage(action){
 		if(action === "add"){
 			this.takePicture(true)
@@ -221,8 +222,9 @@ export class SnaggingPage {
 		});		
 	}
 
-/*
-	private createFileName() {
+
+
+/*  private createFileName() {
 		var d = new Date(),
 		n = d.getTime(),
 		newFileName =  n + ".jpg";
@@ -254,7 +256,8 @@ export class SnaggingPage {
 			position: 'top'
 		});
 		toast.present();
-	}*/
+	}
+*/
 
 
 	associateQRCode(){
@@ -268,6 +271,7 @@ export class SnaggingPage {
 		});
 	}
 
+	
 	public sendUploadData(){
 
 		var upurl = "https://pvmobile.online/iuploadnofile.php";
@@ -301,8 +305,7 @@ export class SnaggingPage {
 	}
 
 
-/*
-	public uploadImage() {
+/*		public uploadImage() {
 		// Destination URL
 		//var url = "https://pvmobile.online/iupload.php";
 		var url = "https://pvmobile.online/iuploadnofile.php";
