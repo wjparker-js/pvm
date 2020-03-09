@@ -40,6 +40,7 @@ export class ProjectsPage {
     var projectData = JSON.parse(localStorage.getItem('userSystemData'));
 
     this.userProjectData.SystemUserID   = projectData[0].SystemUserID;
+    this.userProjectData.SystemUserID   = this.userProjectData.SystemUserID.trim();
     this.userProjectData.SystemClientID = projectData[0].SystemClientID;
     this.userProjectData.apiKey         = projectData[0].apiKey;
     this.userProjectData.UserName       = projectData[0].Name;
@@ -84,14 +85,14 @@ export class ProjectsPage {
           var RoleName = this.userProject["0"].RoleName;
           var RoleDescription = this.userProject["0"].RoleDescription;
           var PA5038 = this.userProject["0"].PA5038;
-          var PA5039 = this.userProject["0"].PA5039;
           var PA5073 = this.userProject["0"].PA5073;
+          var PA5039 = this.userProject["0"].PA5039;
 
           localStorage.setItem('Role-Name', RoleName);
           localStorage.setItem('Role-Description', RoleDescription);
           localStorage.setItem('Role-PA5038', PA5038);
-          localStorage.setItem('Role-PA5039', PA5039); 
           localStorage.setItem('Role-PA5073', PA5073); 
+          localStorage.setItem('Role-PA5039', PA5039); 
           localStorage.setItem('postimage', ""); 
           localStorage.setItem('image', ""); 
           localStorage.setItem('preimage', ""); 

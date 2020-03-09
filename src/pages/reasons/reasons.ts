@@ -33,6 +33,7 @@ constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, pub
 		this.reasonsSystemProjectID = localStorage.getItem('CurrentProjectID');
 		this.reasonsApiKey          = reasonsData[0].apiKey;
 		this.reasonsUserID          = reasonsData[0].SystemUserID;
+		this.reasonsUserID          = this.reasonsUserID.trim();
 
 		var url = Constants.apiUrl+"api/defectsreasons/"+this.reasonsApiKey+"/"+this.reasonsSystemProjectID;
 

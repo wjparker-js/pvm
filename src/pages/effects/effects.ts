@@ -33,6 +33,7 @@ constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, pub
 		this.effectsSystemProjectID = localStorage.getItem('CurrentProjectID');
 		this.effectsApiKey          = effectsData[0].apiKey;
 		this.effectsUserID          = effectsData[0].SystemUserID;
+		this.effectsUserID          = this.effectsUserID.trim();
 
 		var url = Constants.apiUrl+"api/defectseffects/"+this.effectsApiKey+"/"+this.effectsSystemProjectID;
 

@@ -68,7 +68,6 @@ export class DocumentsPage {
 
     console.log("myInput = ", this.myInput);
 
-    this.myInput.nativeElement.value = "Hello";
 
     //https://www.sky-vault.co.uk/PublicPics/"+this.scid+"/"+cpid+"/' + 
 
@@ -78,6 +77,7 @@ export class DocumentsPage {
     this.userdocumentData.SystemProjectName = localStorage.getItem('CurrentProjectName'); 
     this.userdocumentData.SystemClientID    = documentData[0].SystemClientID;
     this.userdocumentData.SystemUserID      = documentData[0].SystemUserID;
+    this.userdocumentData.SystemUserID      = this.userdocumentData.SystemUserID.trim();
     this.userdocumentData.apiKey            = documentData[0].apiKey;    
     this.userdocumentData.Thumbnail         = documentData[0].PhotoTiny;
     this.userdocumentData.DocumentNumber    = documentData[0].DocumentNumber; 
@@ -179,14 +179,16 @@ export class DocumentsPage {
   checkBlur($event){
     console.log("Got Blur");
     console.log("Value ",$event._value);
-    $event._value = "";
+    //$event._value = "";
     console.log("Value ",$event._value);
   }
 
 checkFocus($event){
   console.log("Got Focus");
   console.log("Value ",$event._value);
-  $event._value = "";
+  
+  //document.getElementsByClassName("searchbar-input")["0"].value = "for";
+  //$event._value = "what";
   console.log("Value ",$event._value);
 }
 

@@ -8,7 +8,7 @@ export class DrawingProvider {
   public width: number;
   public height: number;
   public brushColor: string = '#ff0000';
-  public brushWidth: number = 7;
+  public brushWidth: number = 40;
 
   public brushColors = [
     '#ff0000',
@@ -26,6 +26,7 @@ export class DrawingProvider {
     {value: 10, label: '10px'},
     {value: 20, label: '20px'},
     {value: 30, label: '30px'},
+    {value: 40, label: '40px'},
     {value: 50, label: '50px'},
   ];
 

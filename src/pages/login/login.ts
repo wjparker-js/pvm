@@ -45,6 +45,7 @@ export class Login {
       this.showLogin = true;
       var userData                       = JSON.parse(localStorage.getItem('userSystemData'));
       this.userSystemData.sysuserid      = userData[0].SystemUserID;
+      this.userSystemData.sysuserid      = this.userSystemData.sysuserid.trim();
       this.userSystemData.apiKey         = userData[0].apiKey;
       this.apikey                        = userData[0].apiKey;
       this.userSystemData.password       = localStorage.getItem('login_password');
@@ -127,12 +128,12 @@ export class Login {
       console.log(this.loginprojectuserdetails);
             localStorage.setItem('Role-Name',       	    this.loginprojectuserdetails["0"].RoleName);
             localStorage.setItem('Role-PA5038',         	this.loginprojectuserdetails["0"].PA5038);
+            localStorage.setItem('Role-PA5073',       	  this.loginprojectuserdetails["0"].PA5073);
+            localStorage.setItem('Role-PA5039',         	this.loginprojectuserdetails["0"].PA5039);
             localStorage.setItem('Role-Description',      this.loginprojectuserdetails["0"].RoleDescription);
-            localStorage.setItem('Role-PA5039',       	  this.loginprojectuserdetails["0"].PA5039);
             localStorage.setItem('CurrentProjectName',    this.loginprojectuserdetails["0"].Name);
             localStorage.setItem('CurrentProjectID',      this.loginprojectuserdetails["0"].ProjectID);            
             localStorage.setItem('CurrentProjectRoleID',  this.loginprojectuserdetails["0"].ProjectRoleID);
-            localStorage.setItem('Role-PA5073',         	this.loginprojectuserdetails["0"].PA5073);
             localStorage.setItem('CurrentProjectClientID',this.loginprojectuserdetails["0"].SystemClientID);    
             },err => {console.log("Oops! - Write Audit");}
           );     

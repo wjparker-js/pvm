@@ -24,14 +24,16 @@ export class QrcodePage {
 	scanData : {};
 	options :BarcodeScannerOptions;
 	calledbysnag:any;
+	SystemProjectID:any;
 
 	constructor(public navCtrl: NavController, public viewCtrl: ViewController, public navParams: NavParams, private barcodeScanner:BarcodeScanner, private _sanitizer: DomSanitizer, public http: Http) {}
 		
 	ionViewWillEnter() {
-		this.callback      = this.navParams.get("callback")
-		var defectData     = JSON.parse(localStorage.getItem('userSystemData'));
-		this.apiKey        = defectData[0].apiKey; 			
-		this.calledbysnag  = this.navParams.get('newsnag');
+		this.callback        = this.navParams.get("callback")
+		var defectData       = JSON.parse(localStorage.getItem('userSystemData'));
+		this.apiKey          = defectData[0].apiKey; 			
+		this.calledbysnag    = this.navParams.get('newsnag');		
+		this.SystemProjectID = localStorage.getItem('CurrentProjectID');
 	}
 
 	scanQRCode(){
@@ -48,7 +50,7 @@ export class QrcodePage {
 				var res = this.scannedCode.split("-");
 				this.location = res[1]+"-"+res[2]+"-"+res[3]+"-"+res[4]+"-"+res[5];
 				localStorage.setItem('QRLocationMapID',this.scannedCode);
-				var pagelocationurl = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.location+"/snaglocationpage";	
+				var pagelocationurl = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.location+"/"+this.SystemProjectID+"/snaglocationpage";	
 			    this.http.get(pagelocationurl).map(res => res.json()).subscribe(data => {
 			      this._sanitizer.bypassSecurityTrustStyle(data);
 						this.defects = data;         
@@ -63,7 +65,7 @@ export class QrcodePage {
 			if(index == 8 && this.calledbysnag == "Y"){
 				this.location = this.scannedCode; 
 				localStorage.setItem('QRBranchOrderID',this.scannedCode);
-				var stickerlocationurl = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.location+"/snaglocationsticker";	
+				var stickerlocationurl = Constants.apiUrl+"api/qrroom/"+this.apiKey+"/"+this.location+"/"+this.SystemProjectID+"/snaglocationsticker";	
 			    this.http.get(stickerlocationurl).map(res => res.json()).subscribe(data => {
 			      this._sanitizer.bypassSecurityTrustStyle(data);
 						this.defects = data; 
@@ -78,7 +80,7 @@ export class QrcodePage {
 			if(index == 5 && this.calledbysnag == "N"){
 				this.location = this.scannedCode; 
 				localStorage.setItem('QRLocationMapID',this.scannedCode);
-				var pagedefecturl = Constants.apiUrl+"api/qrdefects/"+this.apiKey+"/"+this.location+"/defectspage";	
+				var pagedefecturl = Constants.apiUrl+"api/qrdefects/"+this.apiKey+"/"+this.location+"/"+this.SystemProjectID+"/defectspage";	
 			    this.http.get(pagedefecturl).map(res => res.json()).subscribe(data => {
 			      this._sanitizer.bypassSecurityTrustStyle(data);
 						this.defects = data;  
@@ -92,7 +94,7 @@ export class QrcodePage {
 			if(index == 8 && this.calledbysnag == "N"){
 				this.location = this.scannedCode; 
 				localStorage.setItem('QRBranchOrderID',this.scannedCode);
-				var stickerdefectsurl = Constants.apiUrl+"api/qrdefects/"+this.apiKey+"/"+this.defects+"/defectssticker";	
+				var stickerdefectsurl = Constants.apiUrl+"api/qrdefects/"+this.apiKey+"/"+this.defects+"/"+this.SystemProjectID+"/defectssticker";	
 			    this.http.get(stickerdefectsurl).map(res => res.json()).subscribe(data => {
 			      this._sanitizer.bypassSecurityTrustStyle(data);
 						this.defects = data;        

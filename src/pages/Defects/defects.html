@@ -9,7 +9,7 @@
     <span style="font-size:16px;color:white;">{{selectedProjectName}}</span>    
     
     <ion-buttons right>        
-        <button [hidden] = "createDefects == 0"  ion-button  color="light" type="button" item-right style="font-size:30px;" (click)="newSnag('new')"> 
+        <button [hidden] = "createDefects == 0  || (createDefects == 0 && manageDefects == 0)"  ion-button  color="light" type="button" item-right style="font-size:30px;" (click)="newSnag('new')"> 
          <ion-icon strong name="add"> </ion-icon>
         </button>  
         &nbsp;
@@ -20,22 +20,21 @@
 
     </ion-buttons>
   </ion-navbar>   
-    
+  <!--(ionInput)="searchDefectsByKeyword($event)" -->
   <div [hidden]="showDefects == 0" > 
     <ion-searchbar
       #myDefectsSearchbar 
       name = "defectsSearchBar" 
       value= "" 
-      placeholder="Defect Search..." 
-      (ionInput)="searchDefectsByKeyword($event)" 
-      [debounce]="500" 
+      placeholder="Defect Search..."       
+      [debounce]="700" 
       class="android"  >
     </ion-searchbar> 
   </div> 
 
   <div [hidden]="showDefects == 0" style='padding: 10px;'>   
     <ion-segment color="primary"  mode='ios' [(ngModel)]="defectslist" (ionChange)="segmentChanged(defectslist)">
-      <ion-segment-button selected value="all">
+      <ion-segment-button value="all">
         Issued
       </ion-segment-button>
       <ion-segment-button value="new">
@@ -49,32 +48,39 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content class="bodytext">
   <ion-grid style="position:relative;top:4px;">
     <ion-row [hidden]="showDefects == 0" > 
-      <ion-col [hidden]= "showDefects == 0" *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
+      <ion-col *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
        
         <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
          <ion-card style="padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;" > 
-
-          
+                    
           <ion-item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name)" style="padding-left:3px;" >            
             
             <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin: 0px;margin-right:10px;">
-              <img [src]="image+defect.OrderId+'.jpg'" style="border: 1px solid #000;width:100px;height:71px;border-color:black;border:2px;" imageViewer/>
+              <img [src]="image+defect.OrderId+'.jpg'" style="border: 1px solid #000;max-width:100px;height:71px;border-color:black;border:2px;" imageViewer/>
             </ion-thumbnail> 
   <!--          <img src="{{'data:image/jpeg;base64,' +  this.hexToBase64(defect.LocationImage)}}" border="1" style="width:100px;height:71px;border-color:black;border:2px;" imageViewer/>-->
             <div id="defectdetails">
               <b>{{defect.OrderReference}}</b><br>
-              <span *ngIf="defect.statustext">{{defect.statustext}}<br></span>
+
+              <span [hidden]="defect.OrderStatusText != 'Not Sent Yet'"        class="notsent" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              <span [hidden]="defect.OrderStatusText != 'Sent'"                class="new" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              <span [hidden]="defect.OrderStatusText != 'Defect Fix Date Set'" class="fix" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              <span [hidden]="defect.OrderStatusText != 'Defect Fixed'"        class="fixed" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              <span [hidden]="defect.OrderStatusText != 'Inspection Date Set'" class="inspect" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              <span [hidden]="defect.OrderStatusText != 'Inspection Passed'"   class="pass" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              <span [hidden]="defect.OrderStatusText != 'Inspection Failed'"   class="fail" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              
               <span *ngIf="defect.name">{{defect.name}}<br></span>
               {{defect.OrderSubject}}<br>
-              <span text-wrap>{{defect.SpecialInstructions}}<br></span>           
+              <!--<span text-wrap>{{defect.SpecialInstructions}}<br></span>-->           
               <span  text-wrap>              
-                <span *ngIf="defect.DateIsssued">Issued:&nbsp;{{defect.DateIsssued  | date : 'dd MMM yyyy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span *ngIf="defect.ProposedDate">Scheduled:&nbsp;{{defect.ProposedDate  | date : 'dd MMM yyyy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span *ngIf="defect.DeliverBy">Required:&nbsp;{{defect.DeliverBy  | date : 'dd MMM yyyy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span  *ngIf="defect.date1 < 0"  class="defectlate"><ion-icon name="alert" style="position:relative;top:3px;"></ion-icon></span>
+                <span *ngIf="defect.DateIsssued">Issued:&nbsp;{{defect.DateIsssued  | date : 'dd MMM yy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span *ngIf="defect.ProposedDate">Scheduled:&nbsp;{{defect.ProposedDate  | date : 'dd MMM yy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span *ngIf="defect.DeliverBy"><b>Required:&nbsp;{{defect.DeliverBy  | date : 'dd MMM yy' }}</b>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span *ngIf="defect.date1 < 0"  class="defectlate"><ion-icon name="alert" style="position:relative;top:1px;"></ion-icon></span>
               </span>   
             </div>     
 

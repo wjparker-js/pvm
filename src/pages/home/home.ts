@@ -20,7 +20,7 @@ export class HomePage {
 
   public userDetails : any;
   public resposeData : any;
-  public PA5039 : any;
+  public PA5073 : any;
   public avatardata: any;
   public dataSet : any;
   public dataSetT5 : any;
@@ -35,6 +35,10 @@ export class HomePage {
   public weatherTemp: any;
   public weatherTemp_Max: any;
   public weatherTemp_Min: any;
+  createDefects: any;
+	showDefects: any;
+  manageDefects: any;
+  defectRole:any;
 
   userPostData = {
     "UserName": "",
@@ -86,6 +90,7 @@ export class HomePage {
     var data = JSON.parse(localStorage.getItem('userSystemData'));
 
     this.userPostData.SystemUserID   = data[0].SystemUserID;
+    this.userPostData.SystemUserID   = this.userPostData.SystemUserID.trim();
     this.userPostData.apiKey         = data[0].apiKey;
     this.userPostData.UserName       = data[0].Name;
     this.userPostData.Company        = data[0].Company;
@@ -93,7 +98,11 @@ export class HomePage {
     this.userPostData.Email          = data[0].Email;  
     this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID'); 
     this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName');     
-    this.PA5039                      = localStorage.getItem('Role-PA5039');  
+    this.PA5073                      = localStorage.getItem('Role-PA5073');  
+
+    if(this.showDefects   == 1){this.defectRole = "73"}
+		if(this.createDefects == 1){this.defectRole = "38"}
+		if(this.manageDefects == 1){this.defectRole = "39"}
 
     this.thumb =  'https://go.projectvaultuk.com/publiclogos/'+this.userPostData.ProjectID+'.png'; 
     
@@ -183,9 +192,9 @@ export class HomePage {
     this.navCtrl.push(DocumentSummary,{days});
   }
 
-  openDefectsSummary(status){
+  openDefectsSummary(status,sytemordernumber){
     console.log("Status:",status);
-    this.navCtrl.push(DefectsviewPage,{status});
+    this.navCtrl.push(DefectsviewPage,{status,sytemordernumber});
   }
 
    //Get current coordinates of device

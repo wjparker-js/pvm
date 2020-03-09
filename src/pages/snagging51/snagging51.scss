@@ -9,4 +9,45 @@ page-snagging51 {
         height: 100%;
         object-fit: cover; /*magic*/
       }
+      .notsent{
+          color:white;
+          background-color: rgb(20, 55, 209);
+          font-weight: bold;
+      }    
+      .new{
+          color:black;
+          background-color: #66C1E0;
+          font-weight: bold;
+      }
+      .fix{
+          color:black;
+          background-color: #FFCC00;
+          font-weight: bold;
+      }
+      .fixed{
+          color:white;
+          background-color: #663399;
+          font-weight: bold;
+      }
+      .inspect{
+          color:black;
+          background-color: rgb(250, 184, 228);
+          font-weight: bold;
+      }
+      .inspected{
+          color:black;
+          background-color: rgb(250, 184, 228);
+          font-weight: bold;
+      }
+      .pass{
+          color:black;
+          background-color: #66CC66;
+          font-weight: bold;
+      }
+      .fail{
+          color:white;
+          background-color: #FF0000;
+          font-weight: bold;
+      }
+  
 }

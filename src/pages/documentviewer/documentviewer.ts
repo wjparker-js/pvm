@@ -35,6 +35,7 @@ export class DocumentViewer {
     ionViewWillEnter() {
 
         this.userSystemData.id             = localStorage.getItem('login_id');
+        this.userSystemData.id             = this.userSystemData.id.trim();
         this.userSystemData.password       = localStorage.getItem('login_password');
         this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');
 

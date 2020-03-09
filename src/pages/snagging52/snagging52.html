@@ -10,30 +10,67 @@
   
   <ion-content padding>
 
-    <ion-item  *ngFor="let defect1 of defect1s">
-      <span class="text"><b>{{defect1.OrderReference}}</b></span>
-      <br>
+    <ion-card  style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;">
+      <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
+      Distribution
+      </ion-card-header>
+      <ion-card-content *ngFor="let defect1dist of defect1s" style="border-left: 10px; border-color: #201547">
+          <span style="font-size:13px;font-weight:bold !important;width:100px;" ><b>Created By: </b></span>
+          <span class="mytext">{{defect1dist.OwnerEmail}}</span>
+          <br>
+          <span style="font-size:13px;font-weight:bold !important;width:100px;" ><b>Inspector: </b></span>
+          <span class="mytext">{{defect1dist.InspectorEmail}}</span>
+          <br>
+          <span style="font-size:13px;font-weight:bold !important;width:100px;" ><b>Remediator: </b></span>
+          <span class="mytext">{{defect1dist.SubbyEmail}}</span>
+          <br>   
+          <span style="font-size:13px;font-weight:bold !important;width:100px;" ><b>Commercial: </b></span>
+          <span class="mytext">{{defect1dist.QSEmail}}</span>               
+      </ion-card-content>
+    </ion-card> 
+
+
+
+
+
+
+    <ion-card> 
+
+    <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
+      Details
+    </ion-card-header> 
+
+    <ion-card-content *ngFor="let defect1 of defect1s" style="padding-bottom: 0px;">
+
+      <span [hidden]="defect1.OrderStatusText != 'Not Sent Yet'"        class="notsent" style="width:100%;">{{defect1.OrderStatusText}}<br></span>
+      <span [hidden]="defect1.OrderStatusText != 'Sent'"                class="new" style="width:100%;">{{defect1.OrderStatusText}}<br></span>
+      <span [hidden]="defect1.OrderStatusText != 'Defect Fix Date Set'" class="fix" style="width:100%;">{{defect1.OrderStatusText}}<br></span>
+      <span [hidden]="defect1.OrderStatusText != 'Defect Fixed'"        class="fixed" style="width:100%;">{{defect1.OrderStatusText}}<br></span>
+      <span [hidden]="defect1.OrderStatusText != 'Inspection Date Set'" class="inspect" style="width:100%;">{{defect1.OrderStatusText}}<br></span>
+      <span [hidden]="defect1.OrderStatusText != 'Inspection Passed'"   class="pass" style="width:100%;">{{defect1.OrderStatusText}}<br></span>
+      <span [hidden]="defect1.OrderStatusText != 'Inspection Failed'"   class="fail" style="width:100%;">{{defect1.OrderStatusText}}<br></span>
+
       <span class="text"><b>Title: </b>{{defect1.OrderSubject}}</span> 
       <br>      
       <span class="text"><b>Location: </b>{{defect1.name}}</span>  
       <br>  
-      <span class="text"><b>Issued: </b>{{defect1.DateIssued  | date : 'dd MMM yyyy' }}</span>
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Details: </span>
+      <div class="text" [innerHTML]="defect1.SpecialInstructions"></div>
       <br>
-      <span class="text"><b>Required: </b>{{defect1.DeliverBy  | date : 'dd MMM yyyy' }}</span>
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Issued: </span>
+      <span class="text">{{defect1.DateIssued  | date : 'dd MMM yyyy' }}</span>
       <br>
-      <span class="text"><b>Proposed: </b>{{defect1.ProposedCompletionDate  | date : 'dd MMM yyyy' }}</span>
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Required: </span>
+      <span class="text">{{defect1.DeliverBy  | date : 'dd MMM yyyy' }}</span>
       <br>
-    </ion-item>
-  
-    <ion-item [hidden]="hasNotes !== 'hasNotes'" *ngFor="let defect1note of defect1snotes">
-      <span class="text"><b>Note By: </b></span>
-      <span class="text">{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated | date : 'dd MMM yyyy' }}<br>{{defect1note.Note}}</span>
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed: </span>
       <br>
-    </ion-item>   
-    
-    <ion-item style="position:relative;top:0px;padding-left:10px;height:100px;">        
+      <span class="text">{{this.ProposedCompletionDate | date : 'dd MMM yyyy' }}&nbsp;{{this.ProposedCompletionDateTxt}}{{defect1.DisputeTxt }}</span>
+      <br>
+      
+    <ion-item style="position:relative;top:0px;padding-left:10px;height:90px;">        
       <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
-        <img [src]="image"  style="width:100px; border: 2px;border-color:black;" imageViewer>
+        <img [src]="image"  style="width:100px; border: 1px solid #000;" imageViewer>
       </ion-thumbnail>   
       &nbsp;      
       <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
@@ -43,7 +80,20 @@
      <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
         <img [src]="postUrl"   style="width:100px; border: 2px;border-color:black;" imageViewer>
       </ion-thumbnail>  
-    </ion-item>      
+    </ion-item> 
+
+  </ion-card-content>
+</ion-card>     
+
+
+
+
+
+<ion-card  [hidden]="image === null" style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;">
+  <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
+    Form
+  </ion-card-header> 
+  <ion-card-content> 
 
     <ion-item>
       <ion-label class="text" style="width:20%"><b>Status</b></ion-label>
@@ -89,9 +139,25 @@
           </div> 
         </ion-col>
       </ion-row>
-
+ 
     </span>        
   </ion-item>  
+</ion-card-content>
+</ion-card>
+
+
+
+  <ion-card  [hidden]="hasNotes !== 'hasNotes'" style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;">
+    <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
+    Notes
+    </ion-card-header>
+    <ion-card-content *ngFor="let defect1note of defect1snotes" style="border-left: 10px; border-color: #201547">
+        <span style="font-size:13px;font-weight:bold !important;width:100px;" >Note By: </span>
+        <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated  | date : 'dd MMM yyyy' }}</B><br>{{defect1note.Note}}</span>
+        <br>
+    </ion-card-content>
+  </ion-card> 
+  
 </ion-content>
 
 <ion-footer  >

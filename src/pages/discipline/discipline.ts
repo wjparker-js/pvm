@@ -35,6 +35,7 @@ export class DisciplinePage {
 		this.disciplineSystemProjectID = localStorage.getItem('CurrentProjectID');
 		this.disciplineApiKey          = disciplineData[0].apiKey;
 		this.disciplineUserID          = disciplineData[0].SystemUserID;
+		this.disciplineUserID          = this.disciplineUserID.trim();
 
 		var url = Constants.apiUrl+"api/discipline/"+this.disciplineApiKey+"/"+this.disciplineSystemProjectID+"/"+this.selectedDefect;
 

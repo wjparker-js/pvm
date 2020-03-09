@@ -52,7 +52,8 @@ constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, pub
 
 		this.locationmapSystemProjectID = localStorage.getItem('CurrentProjectID');
 		this.locationmapApiKey          = locationmapData[0].apiKey;
-		this.locationmapUserID          = locationmapData[0].SystemUserID;
+    this.locationmapUserID          = locationmapData[0].SystemUserID;
+    this.locationmapUserID          = this.locationmapUserID.trim();
 
 		var url = Constants.apiUrl+"api/locationmap/"+this.locationmapApiKey+"/"+this.locationmapSystemProjectID+"/"+this.locationmapUserID;
 

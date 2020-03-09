@@ -48,6 +48,7 @@ export class AboutPage {
     this.docSystemData.pid     = localStorage.getItem('CurrentProjectID');
     this.docSystemData.scid    = documentData[0].SystemClientID;
     this.docSystemData.uid     = documentData[0].SystemUserID;
+    this.docSystemData.uid     = this.docSystemData.uid.trim();
     this.docSystemData.apiKey  = documentData[0].apiKey;     
     this.docSystemData.from    = localStorage.getItem('login_id');
     this.docSystemData.from    = localStorage.getItem('login_id').replace(" ","");

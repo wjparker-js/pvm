@@ -25,6 +25,9 @@ export class DefectsviewPage {
 	options: any;
 	details: any;
 	createdefects: any;
+	createDefects: any;
+	showDefects: any;
+	manageDefects: any;
 	showdefects: any;
 	managedefects: any;
 	userApiKey : any;
@@ -37,12 +40,11 @@ export class DefectsviewPage {
 	apiKey: any;
 	image: any;
 	location: string = "";
+	defectRole:any;
 
 	public ImgUrl:any;
 	public imageUrl: any;
 	public thumbbase:any;
-	public showDefects:any;
-	public createDefects:any;
 
 	constructor(public alertController: AlertController, public params: NavParams, public viewCtrl: ViewController, public navCtrl: NavController, private barcodeScanner:BarcodeScanner, private _sanitizer: DomSanitizer, public http: Http) {}
 
@@ -53,14 +55,23 @@ export class DefectsviewPage {
 		this.SystemProjectID     = localStorage.getItem('CurrentProjectID');
 		this.selectedProjectName = localStorage.getItem('CurrentProjectName');
 		this.SystemUserID        = localStorage.getItem('login_id');
+		this.SystemUserID        = this.SystemUserID.trim();
 		this.apiKey              = defectData[0].apiKey; 
 		this.defectslist         = "all";
 		this.createDefects       = localStorage.getItem('Role-PA5038');
-		this.managedefects       = localStorage.getItem('Role-PA5073');
-		this.showDefects         = localStorage.getItem('Role-PA5039');
+		this.manageDefects       = localStorage.getItem('Role-PA5039');
+		this.showDefects         = localStorage.getItem('Role-PA5073');
 		this.defectstatus        = this.params.get('status');
 		console.log("Defect Status:",this.defectstatus);
+		
 		var url = "";
+
+		this.createDefects       = localStorage.getItem('Role-PA5038');
+		if (this.createDefects === null){this.defectRole = 0}
+		this.showDefects         = localStorage.getItem('Role-PA5073');
+		if (this.showDefects   === null){this.defectRole = 0}
+		this.manageDefects       = localStorage.getItem('Role-PA5039');
+		if (this.manageDefects === null){this.defectRole = 0}
 
 		this.image = "https://projectvaultuk.com/PublicPics/"+this.SystemCID+"/"+this.SystemProjectID+"/LocationImages/";
 
@@ -68,7 +79,7 @@ export class DefectsviewPage {
 
 		this.imageUrl = Constants.publicUploadPath+this.SystemCID+'/'+this.SystemProjectID+'/LocationImages/';
 		
-		url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/nosearchsummary/"+this.defectstatus;
+		url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/nosearchsummary/"+this.defectstatus+"/"+this.defectRole;
 
 
 	    this.http.get(url).map(res => res.json()).subscribe(data => {
@@ -125,7 +136,7 @@ export class DefectsviewPage {
 
 			// QR Code on Page - Return Defects from BranchOrder
 			if (typeof this.location === "string" && !Number.isNaN(Number(this.location))) {
-				var pagedefecturl = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+this.location+"/room";	    
+				var pagedefecturl = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+this.location+"/room/"+this.defectRole;	    
 				this.http.get(pagedefecturl).map(res => res.json()).subscribe(data => {
 			      this._sanitizer.bypassSecurityTrustStyle(data);
 						this.defects = data; 
@@ -137,7 +148,7 @@ export class DefectsviewPage {
 
 			// QR Code on Sticker - Return Defect from BranchOrder
 			if (typeof this.location === "string" && Number.isNaN(Number(this.location))) {
-				var stickerdefectsurl = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+this.location+"/sticker";
+				var stickerdefectsurl = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+this.location+"/sticker/"+this.defectRole;
 		    	this.http.get(stickerdefectsurl).map(res => res.json()).subscribe(data => {
 			      this._sanitizer.bypassSecurityTrustStyle(data);
 						this.defects = data;   
@@ -165,7 +176,7 @@ export class DefectsviewPage {
 		this.dsearch             = $event.srcElement.value;
 		this.defectslist         = "";
 
-		var url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/xxx";
+		var url = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/xxx/"+this.defectRole;
 
 	    this.http.get(url).map(res => res.json()).subscribe(data => {
 	        this._sanitizer.bypassSecurityTrustStyle(data);
@@ -234,7 +245,7 @@ export class DefectsviewPage {
 
 	if(segment == "all"){
 
-		var urls1 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/1";
+		var urls1 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/1/"+this.defectRole;
 		console.log(urls1);
 
     this.http.get(urls1).map(res => res.json()).subscribe(data => {
@@ -250,7 +261,7 @@ export class DefectsviewPage {
 
     if(segment == "new"){
 
-			var urls2 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/2";
+			var urls2 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/2/"+this.defectRole;
 			console.log(urls2);
 
 			    this.http.get(urls2).map(res => res.json()).subscribe(data => {
@@ -267,7 +278,7 @@ export class DefectsviewPage {
 		
     if(segment == "open"){
 
-			var urls3 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/3";
+			var urls3 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/3/"+this.defectRole;
 			console.log(urls3);
 
 			    this.http.get(urls3).map(res => res.json()).subscribe(data => {

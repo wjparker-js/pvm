@@ -9,6 +9,7 @@ import { DrawingProvider } from '../../providers/drawing/drawing';
 export class WidthPopoverPage {
 
   constructor(public viewCtrl: ViewController, public drawing: DrawingProvider) {
+    this.drawing.changeBrushWidth(50);
   }
 
   /**

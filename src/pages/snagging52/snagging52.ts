@@ -31,6 +31,11 @@ export class Snagging52Page {
 	public snagid: string;
 	public showUpload: string = null;
 
+	showDefects: any;
+	createDefects: any;
+	manageDefects: any;
+	defectRole: any;
+
 	public details: string;
 	public approval:  any;
 	public defect1s:  any;
@@ -80,12 +85,21 @@ export class Snagging52Page {
 		this.api          = snagData[0].apiKey;
 		this.cid          = localStorage.getItem('CurrentProjectClientID');
 		this.uid          = snagData[0].SystemUserID;
+		this.uid          = this.uid.trim();
 		this.snagid       = this.navParams.get('snagid');
 		this.postImage    = null;
 
+		this.createDefects       = localStorage.getItem('Role-PA5038');
+		this.showDefects         = localStorage.getItem('Role-PA5073');
+		this.manageDefects       = localStorage.getItem('Role-PA5039');
+
+		if(this.showDefects   != 0 && this.showDefects   != null){this.defectRole = "73"}
+		if(this.createDefects != 0 && this.createDefects != null){this.defectRole = "38"}
+		if(this.manageDefects != 0 && this.showDefects   != null){this.defectRole = "39"}
+		
 		//this.openlocimg();
 
-		var url = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/"+this.uguid+"/nosearch/"+this.snagid;
+		var url = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/"+this.uguid+"/nosearch/"+this.snagid+"/"+this.defectRole;
 
 	      this.http.get(url).map(res => res.json()).subscribe(data => {
 	        this._sanitizer.bypassSecurityTrustStyle(data);

@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SplitPane } from '../providers/split-pane';
 import { Login } from '../pages/login/login';
+import { Http } from '@angular/http';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,17 +15,17 @@ export class MyApp {
   rootPage:any = Login; 
   SysUserID:any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public app: App, public splitPane: SplitPane, public menu: MenuController) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public app: App, public splitPane: SplitPane, public http: Http, public menu: MenuController) {
     platform.ready().then(() => {
       //statusBar.styleDefault();
       //splashScreen.hide();
-      
+      var userData  = localStorage.getItem('Role-Name');
+      this.SysUserID  = userData; 
+      console.log("userData",userData);
     });
   }
 
-  ionViewWillEnter() {
-    //var userData  = localStorage.getItem('userSystemData');
-    //this.SysUserID  = userData[0].Name;    
+  ionViewWDidEnter() {  
   }
 
    backToWelcome(){
@@ -46,8 +47,8 @@ export class MyApp {
     localStorage.setItem('Role-Name', "");
     localStorage.setItem('Role-Description', "");
     localStorage.setItem('Role-PA5038', "");
-    localStorage.setItem('Role-PA5039', "");
     localStorage.setItem('Role-PA5073', "");
+    localStorage.setItem('Role-PA5039', "");
     localStorage.setItem('postimage', "");
     localStorage.setItem('image', "");
     localStorage.setItem('preimage', "");

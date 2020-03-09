@@ -19,11 +19,13 @@ export class TabsPage {
   tab4Root = DefectsPage;
   tab5Root = ContactPage;
 
-  public defectsEnabled : boolean;
+  defectsEnabled : boolean;
  
   constructor() {
+
     let yourColor = "primary";
-    var canViewDefects = localStorage.getItem('Role-PA5039');
+
+    var canViewDefects = localStorage.getItem('Role-PA5073');
     
     this.defectsEnabled = false;
 

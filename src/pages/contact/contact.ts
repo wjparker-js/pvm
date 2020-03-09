@@ -55,6 +55,7 @@ export class ContactPage {
     this.userContactData.SystemProjectID   = localStorage.getItem('CurrentProjectID');
     this.userContactData.apiKey            = contactData[0].apiKey; 
     this.userName                          = localStorage.getItem('login_id');
+    this.userName                          = this.userName.trim();
     this.userContactData.ProjectName       = localStorage.getItem('CurrentProjectName'); 
     this.avatardata                        = localStorage.getItem('avatar');
 

@@ -31,7 +31,8 @@ export class DocumentSummary {
 
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
-    this.userdocumentInfoData.SystemUserID    = documentData[0].SystemUserID;    
+    this.userdocumentInfoData.SystemUserID    = documentData[0].SystemUserID;  
+    this.userdocumentInfoData.SystemUserID    = this.userdocumentInfoData.SystemUserID.trim();  
     this.userdocumentInfoData.SystemClientID  = documentData[0].SystemClientID;
     this.userdocumentInfoData.apiKey          = documentData[0].apiKey;
     this.userdocumentInfoData.SystemProjectID = localStorage.getItem('CurrentProjectID');    
