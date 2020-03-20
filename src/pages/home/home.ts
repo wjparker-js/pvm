@@ -10,6 +10,7 @@ import {DefectsviewPage} from '../defectsview/defectsview';
 import {WeatherProvider} from '../../providers/weather/weather';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as Constants from '../../providers/constants';
+import { IfObservable } from 'rxjs/observable/IfObservable';
 
 @Component({
   selector: 'page-home', 
@@ -39,6 +40,10 @@ export class HomePage {
 	showDefects: any;
   manageDefects: any;
   defectRole:any;
+
+  placeholdavatar:any;
+  testavatar:any;
+  avatar:any;
 
   userPostData = {
     "UserName": "",
@@ -105,6 +110,10 @@ export class HomePage {
 		if(this.manageDefects == 1){this.defectRole = "39"}
 
     this.thumb =  'https://go.projectvaultuk.com/publiclogos/'+this.userPostData.ProjectID+'.png'; 
+
+    this.testavatar      = 'https://go.projectvaultuk.com/publicpics/'+this.userPostData.SystemUserID+'.jpg';    
+    this.placeholdavatar = "https://go.projectvaultuk.com/PublicPics/avatar.png";
+    this.sleep(200); 
     
     var apiKey  = this.userPostData.apiKey;
     var uid     = this.userPostData.SystemUserID;  
@@ -186,7 +195,18 @@ export class HomePage {
     );   
 
   }
-  
+ 
+
+
+  ImageExist(url) 
+  {
+     var img = new Image();
+     img.src = url;
+     return img.height == 0;
+  }
+
+
+
 
   openDocumentSummary(days){ 
     this.navCtrl.push(DocumentSummary,{days});

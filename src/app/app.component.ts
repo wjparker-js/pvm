@@ -56,6 +56,7 @@ export class MyApp {
     localStorage.setItem('location', "");
     localStorage.setItem('OldProjectName', "");
     localStorage.setItem('CurrentProjectRoleID', "");
+    localStorage.setItem('ProjectThumb', "");
     
 
     setTimeout(()=> this.backToWelcome(), 200); 

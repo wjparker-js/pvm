@@ -92,6 +92,7 @@ export class ImgEditPagePre {
   }
 
   addText() {
+    
     let alert = this.alertCtrl.create({
       title: 'Add text',
       inputs: [
@@ -111,11 +112,13 @@ export class ImgEditPagePre {
           handler: (data) => {
             if (data.text === "")
               return false;
-
             // when adding text we need to disable drawing so that is possible
             // to manage text on screen
             this.drawingEnabled = false;
             this.drawing.addText(data.text);
+            //this.ok();
+            //this.drawingEnabled = true;        
+            //this.drawing.enableDrawing();            
           }
         }
       ]

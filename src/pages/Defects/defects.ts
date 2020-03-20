@@ -10,6 +10,7 @@ import { QrcodePage } from '../qrcode/qrcode';
 import * as Constants from '../../providers/constants';
 import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import 'rxjs/add/operator/map';
+import { e } from '@angular/core/src/render3';
 
 @Component({
   selector: 'page-defects',
@@ -255,16 +256,24 @@ export class DefectsPage {
 
 
 
-	openSnag(snagid,orderstatus,locname){
+	openSnag(snagid,orderstatus,locname,note){
 
 		localStorage.setItem('location', locname); 
-		console.log("Clicked");
+		console.log("Clicked open note");
 
-		if(orderstatus == 50){this.navCtrl.push(Snagging51Page,{snagid,orderstatus});}
-		if(orderstatus == 51){this.navCtrl.push(Snagging51Page,{snagid,orderstatus});}
+		if(orderstatus == 50){this.navCtrl.push(Snagging51Page,{snagid,orderstatus,note});}
+
+		if(orderstatus == 51){this.navCtrl.push(Snagging51Page,{snagid,orderstatus,note});}
+	
 		if(this.createDefects == 1 || this.manageDefects == 1){
-			if(orderstatus == 52){this.navCtrl.push(Snagging52Page,{snagid,orderstatus});}
-			if(orderstatus == 53){this.navCtrl.push(Snagging52Page,{snagid,orderstatus});}
+			if(orderstatus == 52){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
+			if(orderstatus == 53){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
+		}	
+
+		if(this.manageDefects == 1){
+			console.log("In 54 55");
+			if(orderstatus == 54){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
+			if(orderstatus == 55){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
 		}
 	}
 

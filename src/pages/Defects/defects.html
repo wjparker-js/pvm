@@ -53,10 +53,13 @@
     <ion-row [hidden]="showDefects == 0" > 
       <ion-col *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
        
-        <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
+       <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
+        
          <ion-card style="padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;" > 
-                    
-          <ion-item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name)" style="padding-left:3px;" >            
+
+          <ion-item-sliding >          
+
+          <ion-item #item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name,'nonote')" style="padding-left:3px;" >            
             
             <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin: 0px;margin-right:10px;">
               <img [src]="image+defect.OrderId+'.jpg'" style="border: 1px solid #000;max-width:100px;height:71px;border-color:black;border:2px;" imageViewer/>
@@ -85,6 +88,12 @@
             </div>     
 
           </ion-item>
+
+          <ion-item-options side="right">
+            <button ion-button color="primary" (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name,'note')">Add Note</button>
+          </ion-item-options>
+
+         </ion-item-sliding>
          </ion-card>
         </ion-list>
       </ion-col>

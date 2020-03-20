@@ -35,9 +35,11 @@ export class Snagging52Page {
 	createDefects: any;
 	manageDefects: any;
 	defectRole: any;
+	fixedUrl:any;
 
 	public details: string;
 	public approval:  any;
+	public newnote:  any;
 	public defect1s:  any;
 	public defect1snotes:  any;
 	public defect1snotesid:  any;	
@@ -49,6 +51,10 @@ export class Snagging52Page {
 	public lastImage: string = null;
   	public loading: Loading;
 	public currentImage: string;
+
+	public note: any;
+	public orderstatus:any;
+	public passedfailed: string = "false" ;
 
 	public postImage: string;
 	public locationImg: any;
@@ -86,7 +92,8 @@ export class Snagging52Page {
 		this.cid          = localStorage.getItem('CurrentProjectClientID');
 		this.uid          = snagData[0].SystemUserID;
 		this.uid          = this.uid.trim();
-		this.snagid       = this.navParams.get('snagid');
+		this.snagid       = this.navParams.get('snagid');		
+		this.note         = this.navParams.get('note');
 		this.postImage    = null;
 
 		this.createDefects       = localStorage.getItem('Role-PA5038');
@@ -104,6 +111,10 @@ export class Snagging52Page {
 	      this.http.get(url).map(res => res.json()).subscribe(data => {
 	        this._sanitizer.bypassSecurityTrustStyle(data);
 			this.defect1s = data;         
+
+			this.orderstatus = 	this.defect1s[0].OrderStatus;
+
+			if(this.orderstatus == "54" || this.orderstatus == "55"){this.passedfailed = "true"};
 			
 			this.defect1snotesid = 	this.defect1s[0].OrderId;
 
@@ -112,7 +123,8 @@ export class Snagging52Page {
 			this.image   = Constants.publicUploadPath+this.cid+"/"+this.pid+"/LocationImages/"+this.defect1snotesid+".jpg";
 			this.ImgUrl  = Constants.publicUploadPath+this.cid+"/"+this.pid+"/dfx/"+this.defect1snotesid+"/"+this.defect1snotesid+".jpg";
 			this.postUrl = Constants.publicUploadPath+this.cid+"/"+this.pid+"/dfx/"+this.defect1snotesid+"/"+this.defect1snotesid+"post.jpg";
-			
+			this.fixedUrl = Constants.publicUploadPath+this.cid+"/"+this.pid+"/dfx/"+this.defect1snotesid+"/"+this.defect1snotesid+"fixed.jpg";
+			this.sleep(500);
 			localStorage.setItem('image', this.image);
 			localStorage.setItem('preimage', this.ImgUrl);
 			localStorage.setItem('postimage', this.postUrl);
@@ -264,6 +276,37 @@ export class Snagging52Page {
 		
 		});
 	}
+
+	convertDate(date){
+		let dateArray=date.split("-");
+		let newDate = dateArray[0];
+		return newDate;
+	  }
+
+	uploadNote(){
+
+		var upnoteurl = "https://pvmobile.online/iuploadnotes.php";
+
+		const formData1 = new FormData();
+		
+		formData1.append('orderid', this.defect1snotesid);
+		formData1.append('details', this.newnote);
+		formData1.append('uid', this.uid);
+		formData1.append('cid', this.cid);
+
+	    this.http.post(upnoteurl,formData1).map(res => res.json()).subscribe(data => {
+	        this.updata = data;
+			console.log(data);
+	    },err => {console.log("Oops!")}); 
+
+		this.dismiss();
+	}
+
+	sleep(miliseconds) {
+		var currentTime = new Date().getTime(); 
+		while (currentTime + miliseconds >= new Date().getTime()) {
+		}
+	  }  
 
 	sendUploadData(){
 

@@ -146,6 +146,9 @@ export class ImgEditPagePost {
             // to manage text on screen
             this.drawingEnabled = false;
             this.drawing.addText(data.text);
+            //this.ok();
+            //this.drawingEnabled = true;        
+            //this.drawing.enableDrawing();
           }
         }
       ]

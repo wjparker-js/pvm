@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>    
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>       
-    <span style="font-size:16px;color:white;">{{selectedProjectName}} Fixed Details</span> 
+    <span style="font-size:16px;color:white;">{{selectedProjectName}} Issued / Fixed Scheduled</span> 
     <ion-buttons end>
       <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
@@ -59,29 +59,66 @@
       <br>
       <span  style="font-size:13px;font-weight:bold !important;width:100px;">Location: </span>
       <span class="text">{{defect1.name}}</span>  
-      <br>
-      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Details: </span>
-      <B><span class="text" [innerHTML]="defect1.SpecialInstructions" style="background-color:#e8e8e8"></span></B>
-      <br>
-      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Issued: </span>
-      <span class="text">{{defect1.DateIssued  | date : 'dd MMM yyyy' }}</span>
-      <br>
-      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Required: </span>
-      <span class="text">{{defect1.DeliverBy  | date : 'dd MMM yyyy' }}</span>
-      <br>
-      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed: </span>
-      <span class="text">{{this.ProposedCompletionDate | date : 'dd MMM yyyy' }}</span>
-      <!--<span {{this.ProposedCompletionDateTxt}}{{defect1.DisputeTxt }}></span>-->
+      <br><br>
 
-      <ion-item style="position:relative;top:0px;padding-left:0px;height:100px;">  
-        <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:0px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
-          <img [src]="image"  style="width:100px; height:50px; border: 1px solid #000;" imageViewer> 
-        </ion-thumbnail>   
-        &nbsp;
-        <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
-          <img [src]="ImgUrl"  style="width:100px; height:50px; border: 1px solid #000;" imageViewer>
-        </ion-thumbnail>  
-      </ion-item>   
+
+      <div [hidden]="defect1.DateIssued == '' || defect1.DateIssued == null">
+        <span style="font-size:13px;font-weight:bold !important;width:100px;" >Issued / Required Date: </span>
+        <span class="text">{{defect1.DateIssued}} / {{defect1.DeliverBy}}</span>  
+        <br>         
+        </div>
+        <div [hidden]="defect1.SpecialInstructions == '' || defect1.SpecialInstructions == null">
+        <span class="text" [innerHTML]="defect1.SpecialInstructions" style="background-color:#e8e8e8"></span>
+        <br>
+        </div>
+  
+        <div [hidden]="defect1.ProposedCompletionDate == '' || defect1.ProposedCompletionDate == null">
+        <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed Fix Date: </span>
+        <span class="text">{{defect1.ProposedCompletionDate}}</span> 
+        <br>         
+        <span class="text" [innerHTML]="defect1.ProposedCompletionDateTxt" style="background-color:#e8e8e8"></span>
+        <br>
+        </div>
+  
+        <div [hidden]="defect1.EndFixDate == '' || defect1.EndFixDate == null"> 
+        <span style="font-size:13px;font-weight:bold !important;width:100px;" >Fixed Date: </span>
+        <span class="text">{{defect1.EndFixDate}}</span>   
+        <br>          
+        <span class="text" [innerHTML]="defect1.EndFixDateTxt" style="background-color:#e8e8e8"></span>
+        <br>
+        </div>
+  
+        <div [hidden]="defect1.ScheduledInspectionDate == '' || defect1.ScheduledInspectionDate == null"> 
+        <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed Inspection Date: </span>
+        <span class="text">{{defect1.ScheduledInspectionDate}}</span>   
+        <br>          
+        <span class="text" [innerHTML]="defect1.ScheduledInspectionDateTxt" style="background-color:#e8e8e8"></span>
+        <br>
+        </div>
+  
+        <div [hidden]="defect1.CloseDate == '' || defect1.CloseDate == null">
+        <span style="font-size:13px;font-weight:bold !important;width:100px;" >Closed Date: </span>
+        <span class="text">{{defect1.CloseDate}}</span>   
+        <br>          
+        <span class="text" [innerHTML]="defect1.CloseDateTxt" style="background-color:#e8e8e8"></span>
+        <br>
+        </div>
+  
+        <br>
+  
+      <div [hidden]="this.passedfailed == 'true'">
+
+        <ion-item style="position:relative;top:0px;padding-left:10px;height:110px;width:320px;"> 
+          <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:5px;width: 150px;height: 105px;margin: 0px;">
+            <img [src]="image"  style="min-width: 150px;min-height: 105px; border: 1px solid #000;" imageViewer>
+          </ion-thumbnail>
+              &nbsp;&nbsp;
+          <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:5px;width: 150px;height: 105px;margin: 0px;">
+            <img [src]="ImgUrl" style="margin-left:10px;min-width: 150px;min-height: 105px; border: 1px solid #000;"imageViewer>
+          </ion-thumbnail>
+        </ion-item>
+           
+      </div>
 
     </ion-card-content>
   </ion-card>
@@ -96,16 +133,20 @@
 
 
 
-  <ion-card  [hidden]="image === null" style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;">
+    <!--[hidden]="image === null"-->
+    <ion-card  [hidden]="this.note == 'note'" style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;"> 
     <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
       Form
     </ion-card-header> 
+
       <ion-card-content>   
         
         <ion-item style="padding-left:0px;">
           <ion-label class="mylabel" style="font-size:15px;font-weight:bold !important;" ><b>Fix Notes</b></ion-label>
-          <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter notes here..."  style="font-size:13px;"></ion-textarea>
-        </ion-item>        
+          <ion-textarea class="mytext" rows="5"  name="details" [(ngModel)]="details" placeholder="Enter notes here..."  style="font-size:13px;background-color:#f2f2f2;"></ion-textarea>
+          <br><br>
+        </ion-item>
+        <br>       
 
         <ion-item style="padding-left:0px;height: 70px;top:-10px;">     
   
@@ -148,13 +189,44 @@
 
 
 
+
+    <ion-card  [hidden]="this.note == 'nonote'" style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;"> 
+      
+      <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
+        Form
+      </ion-card-header> 
+  
+      <ion-card-content>   
+        <div>
+        <ion-item style="padding-left:0px;">
+          <ion-label class="mylabel" style="font-size:15px;font-weight:bold !important;" ><b>Note</b></ion-label>
+          <ion-textarea class="mytext" rows="5"  name="newnote" [(ngModel)]="newnote"   style="font-size:13px;background-color:#f2f2f2;"></ion-textarea>
+        </ion-item>
+      </div>
+      <br>        
+        <div>
+          <ion-buttons >
+            <button full ion-button icon-left (click)="uploadNote()" >
+              <ion-icon name="cloud-upload"></ion-icon>Add New Note
+            </button>
+          </ion-buttons>
+        </div>
+
+      </ion-card-content>
+
+    </ion-card> 
+  
+  
+
+
+
     <ion-card  [hidden]="hasNotes !== 'hasNotes'" style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;">
       <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
       Notes
       </ion-card-header>
       <ion-card-content *ngFor="let defect1note of defect1snotes" style="border-left: 10px; border-color: #201547">
           <span style="font-size:13px;font-weight:bold !important;width:100px;" >Note By: </span>
-          <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated  | date : 'dd MMM yyyy' }}</B><br>{{defect1note.Note}}</span>
+          <span class="mytext"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated }}</B><br>{{defect1note.Note}}</span>
           <br>
       </ion-card-content>
     </ion-card> 

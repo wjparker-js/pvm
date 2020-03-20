@@ -56,6 +56,7 @@ export class DefectsviewPage {
 		this.selectedProjectName = localStorage.getItem('CurrentProjectName');
 		this.SystemUserID        = localStorage.getItem('login_id');
 		this.SystemUserID        = this.SystemUserID.trim();
+		this.SystemUserID        = defectData[0].SystemUserID;
 		this.apiKey              = defectData[0].apiKey; 
 		this.defectslist         = "all";
 		this.createDefects       = localStorage.getItem('Role-PA5038');
@@ -66,12 +67,14 @@ export class DefectsviewPage {
 		
 		var url = "";
 
-		this.createDefects       = localStorage.getItem('Role-PA5038');
-		if (this.createDefects === null){this.defectRole = 0}
+		
 		this.showDefects         = localStorage.getItem('Role-PA5073');
-		if (this.showDefects   === null){this.defectRole = 0}
+		this.createDefects       = localStorage.getItem('Role-PA5038');
 		this.manageDefects       = localStorage.getItem('Role-PA5039');
-		if (this.manageDefects === null){this.defectRole = 0}
+		
+		if(this.showDefects   != 0 && this.showDefects   != null){this.defectRole = "73"}
+		if(this.createDefects != 0 && this.createDefects != null){this.defectRole = "38"}
+		if(this.manageDefects != 0 && this.showDefects   != null){this.defectRole = "39"}
 
 		this.image = "https://projectvaultuk.com/PublicPics/"+this.SystemCID+"/"+this.SystemProjectID+"/LocationImages/";
 
@@ -217,16 +220,29 @@ export class DefectsviewPage {
 		});
 	 }
 
-	openSnag(snagid,orderstatus,locname){
+
+
+	 openSnag(snagid,orderstatus,locname,note){
+
 		localStorage.setItem('location', locname); 
-		console.log(snagid);
-		console.log(orderstatus);
-		console.log(locname);
-		if(orderstatus == 50){this.navCtrl.push(Snagging51Page,{snagid,orderstatus});}
-		if(orderstatus == 51){this.navCtrl.push(Snagging51Page,{snagid,orderstatus});}
-		if(orderstatus == 52){this.navCtrl.push(Snagging52Page,{snagid,orderstatus});}
-		if(orderstatus == 53){this.navCtrl.push(Snagging52Page,{snagid,orderstatus});}
+		console.log("Clicked open note");
+
+		if(orderstatus == 50){this.navCtrl.push(Snagging51Page,{snagid,orderstatus,note});}
+
+		if(orderstatus == 51){this.navCtrl.push(Snagging51Page,{snagid,orderstatus,note});}
+	
+		if(this.createDefects == 1 || this.manageDefects == 1){
+			if(orderstatus == 52){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
+			if(orderstatus == 53){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
+		}	
+
+		if(this.manageDefects == 1){
+			console.log("In 54 55");
+			if(orderstatus == 54){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
+			if(orderstatus == 55){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
+		}
 	}
+
 
   segmentChanged(segment){ 
 

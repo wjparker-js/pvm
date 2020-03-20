@@ -43,6 +43,10 @@ export class SnaggingPage {
 	createDefects: any;
 	manageDefects: any;
 	defectRole: any;
+	
+	newnote: any;
+
+
 
 	public api: string = "";
 	public associatedcode = " ";
@@ -291,7 +295,7 @@ export class SnaggingPage {
 		});
 	}
 
-	
+
 	public sendUploadData(){
 
 		var upurl = "https://pvmobile.online/iuploadnofile.php";

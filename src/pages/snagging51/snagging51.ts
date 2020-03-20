@@ -37,6 +37,7 @@ export class Snagging51Page {
 
 	public details: string;
 	public defect1s:  any;
+	public newnote:  any;
 	public defect1snotes:  any;
 	public defect1snotesid:  any;	
 	public ImgUrl:any;
@@ -52,6 +53,9 @@ export class Snagging51Page {
 	public locationImg: any;
 	public image: any;
 	public updata: any;
+
+	public note: any;
+	public passedfailed: string = "false" ;
 	
 	public ProposedCompletionDate:any;
 	public ProposedCompletionDateTxt:any;
@@ -89,7 +93,8 @@ export class Snagging51Page {
 		this.cid          = localStorage.getItem('CurrentProjectClientID');
 		this.uid          = snagData[0].SystemUserID;
 		this.uid          = this.uid.trim();
-		this.snagid       = this.navParams.get('snagid');
+		this.snagid       = this.navParams.get('snagid');		
+		this.note         = this.navParams.get('note');
 		this.postImage    = null;
 
 		this.createDefects       = localStorage.getItem('Role-PA5038');
@@ -301,6 +306,29 @@ export class Snagging51Page {
 
 		});		
 	}
+
+		
+
+	uploadNote(){
+
+		var upnoteurl = "https://pvmobile.online/iuploadnotes.php";
+
+		const formData1 = new FormData();
+		
+		formData1.append('orderid', this.defect1snotesid);
+		formData1.append('details', this.newnote);
+		formData1.append('uid', this.uid);		
+		formData1.append('cid', this.cid);
+
+	    this.http.post(upnoteurl,formData1).map(res => res.json()).subscribe(data => {
+	        this.updata = data;
+			console.log(data);
+	    },err => {console.log("Oops!")}); 
+
+		this.dismiss();
+	}
+
+
 
 	sendUploadData(){
 

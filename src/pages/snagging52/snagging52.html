@@ -1,7 +1,7 @@
-<ion-header>
+  <ion-header>
     <ion-toolbar>    
       <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>       
-      <span style="font-size:16px;color:white;">{{selectedProjectName}} inspect Details</span> 
+      <span style="font-size:16px;color:white;">{{selectedProjectName}} Fixed / Awaiting Inspection</span> 
       <ion-buttons end>
         <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
       </ion-buttons>
@@ -50,37 +50,81 @@
       <span [hidden]="defect1.OrderStatusText != 'Inspection Passed'"   class="pass" style="width:100%;">{{defect1.OrderStatusText}}<br></span>
       <span [hidden]="defect1.OrderStatusText != 'Inspection Failed'"   class="fail" style="width:100%;">{{defect1.OrderStatusText}}<br></span>
 
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Reference: </span>
+      <span class="mytext">{{defect1.OrderReference}}</span>
+      <br>
       <span class="text"><b>Title: </b>{{defect1.OrderSubject}}</span> 
       <br>      
       <span class="text"><b>Location: </b>{{defect1.name}}</span>  
-      <br>  
-      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Details: </span>
-      <div class="text" [innerHTML]="defect1.SpecialInstructions"></div>
+      <br><br>
+
+      <div [hidden]="defect1.DateIssued == '' || defect1.DateIssued == null">
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Issued / Required Date: </span>
+      <span class="text">{{defect1.DateIssued}} / {{defect1.DeliverBy}}</span>  
+      <br>         
+      </div>
+      <div [hidden]="defect1.SpecialInstructions == '' || defect1.SpecialInstructions == null">
+      <span class="text" [innerHTML]="defect1.SpecialInstructions" style="background-color:#e8e8e8"></span>
       <br>
-      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Issued: </span>
-      <span class="text">{{defect1.DateIssued  | date : 'dd MMM yyyy' }}</span>
+      </div>
+
+      <div [hidden]="defect1.ProposedCompletionDate == '' || defect1.ProposedCompletionDate == null">
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed Fix Date: </span>
+      <span class="text">{{defect1.ProposedCompletionDate}}</span> 
+      <br>         
+      <span class="text" [innerHTML]="defect1.ProposedCompletionDateTxt" style="background-color:#e8e8e8"></span>
       <br>
-      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Required: </span>
-      <span class="text">{{defect1.DeliverBy  | date : 'dd MMM yyyy' }}</span>
+      </div>
+
+      <div [hidden]="defect1.EndFixDate == '' || defect1.EndFixDate == null"> 
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Fixed Date: </span>
+      <span class="text">{{defect1.EndFixDate}}</span>   
+      <br>          
+      <span class="text" [innerHTML]="defect1.EndFixDateTxt" style="background-color:#e8e8e8"></span>
       <br>
-      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed: </span>
+      </div>
+
+      <div [hidden]="defect1.ScheduledInspectionDate == '' || defect1.ScheduledInspectionDate == null"> 
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Proposed Inspection Date: </span>
+      <span class="text">{{defect1.ScheduledInspectionDate}}</span>   
+      <br>          
+      <span class="text" [innerHTML]="defect1.ScheduledInspectionDateTxt" style="background-color:#e8e8e8"></span>
       <br>
-      <span class="text">{{this.ProposedCompletionDate | date : 'dd MMM yyyy' }}&nbsp;{{this.ProposedCompletionDateTxt}}{{defect1.DisputeTxt }}</span>
+      </div>
+
+      <div [hidden]="defect1.CloseDate == '' || defect1.CloseDate == null">
+      <span style="font-size:13px;font-weight:bold !important;width:100px;" >Closed Date: </span>
+      <span class="text">{{defect1.CloseDate}}</span>   
+      <br>          
+      <span class="text" [innerHTML]="defect1.CloseDateTxt" style="background-color:#e8e8e8"></span>
       <br>
+      </div>
+      <br>
+
+ 
+    <div>  
+
+      <ion-item style="position:relative;top:0px;padding-left:10px;height:110px;width:320px;"> 
+        <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:5px;width: 150px;height: 105px;margin: 0px;">
+          <img [src]="image"  style="min-width: 150px;min-height: 105px; border: 1px solid #000;" imageViewer>
+        </ion-thumbnail>
+            &nbsp;&nbsp;
+        <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:5px;width: 150px;height: 105px;margin: 0px;">
+          <img [src]="ImgUrl" style="margin-left:10px;min-width: 150px;min-height: 105px; border: 1px solid #000;"imageViewer>
+        </ion-thumbnail>
+      </ion-item>
       
-    <ion-item style="position:relative;top:0px;padding-left:10px;height:90px;">        
-      <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
-        <img [src]="image"  style="width:100px; border: 1px solid #000;" imageViewer>
-      </ion-thumbnail>   
-      &nbsp;      
-      <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
-        <img [src]="ImgUrl"   style="width:100px; border: 2px;border-color:black;" imageViewer>
-      </ion-thumbnail>  
-      &nbsp;      
-     <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:10px;width: 100px;height: 50px;margin-top: 0px;margin-bottom: 0px;">
-        <img [src]="postUrl"   style="width:100px; border: 2px;border-color:black;" imageViewer>
-      </ion-thumbnail>  
-    </ion-item> 
+      <ion-item style="position:relative;top:0px;padding-left:10px;height:110px;width:320px;"> 
+        <ion-thumbnail item-left  style="position:relative;top:0px;padding-left:5px;padding-right:5px;width: 150px;height: 105px;margin: 0px;">
+          <img [src]="postUrl"  style="min-width: 150px;min-height: 105px; border: 1px solid #000;" imageViewer>
+        </ion-thumbnail>
+            &nbsp;&nbsp;
+        <ion-thumbnail item-left [hidden]= 'this.passedfailed != "true"' style="position:relative;top:0px;padding-left:5px;padding-right:5px;width: 150px;height: 105px;margin: 0px;">
+          <img [src]="fixedUrl" style="margin-left:10px;min-width: 150px;min-height: 105px; border: 1px solid #000;"imageViewer>
+        </ion-thumbnail>
+      </ion-item>
+
+    </div>
 
   </ion-card-content>
 </ion-card>     
@@ -89,7 +133,7 @@
 
 
 
-<ion-card  [hidden]="image === null" style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;">
+<ion-card  [hidden]="this.note == 'note' || this.passedfailed == 'true'"  style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;">
   <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
     Form
   </ion-card-header> 
@@ -106,9 +150,10 @@
 
     <ion-item>
       <ion-label class="text" style="font-size:16px;font-weight:bold !important;" ><b>Notes</b></ion-label>
-      <ion-textarea class="text" rows="3"  name="details" [(ngModel)]="details"  style="font-size:14px;"></ion-textarea>
+      <ion-textarea class="text" rows="3"  name="details" [(ngModel)]="details"  style="font-size:13px;background-color:#f2f2f2;"></ion-textarea>
+      <br><br>
     </ion-item>
-
+    <br>
     <ion-item   [hidden]="image === null" style="padding-left:3px;padding-left:3px;height: 70px;">     
 
       <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 90px !Important;height: 90px !Important;margin-top: 0px;margin-bottom: 0px;">
@@ -127,14 +172,14 @@
         <ion-col style="width:50%;padding-left:0px;">
           <div style="width:100%;">  
             <button  start style="width:100%;height:100%;margin-left:0px;" ion-button (click)="addimage('add')">
-              <br/>Take<br>inspect<br>Picture<br/><br/>
+              <br/>Take<br>inspection<br>Picture<br/><br/>
             </button>
           </div> 
         </ion-col>
         <ion-col style="width:50%;padding-right:0px;">
           <div style="width:100%;">  
             <button  end style="width:100%;height:100%;margin-right:0px;" ion-button (click)="addimage('edit')">
-              <br/>Edit<br>inspect<br>Picture<br/><br/>
+              <br/>Edit<br>inspection<br>Picture<br/><br/>
             </button> 
           </div> 
         </ion-col>
@@ -144,6 +189,46 @@
   </ion-item>  
 </ion-card-content>
 </ion-card>
+
+
+
+
+
+
+
+
+
+<ion-card  [hidden]="this.note == 'nonote'" style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;"> 
+      
+  <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
+    Form
+  </ion-card-header> 
+
+  <ion-card-content>   
+    <div>
+    <ion-item style="padding-left:0px;">
+      <ion-label class="mylabel" style="font-size:15px;font-weight:bold !important;" ><b>Note</b></ion-label>
+      <ion-textarea class="mytext" rows="5"  name="newnote" [(ngModel)]="newnote"  style="font-size:13px;background-color:#f2f2f2;"></ion-textarea>
+    </ion-item>   
+  </div>
+  <br>     
+    <div>
+      <ion-buttons >
+        <button full ion-button icon-left (click)="uploadNote()" >
+          <ion-icon name="cloud-upload"></ion-icon>Add New Note
+        </button>
+      </ion-buttons>
+    </div>
+
+  </ion-card-content>
+
+</ion-card> 
+
+
+
+
+
+
 
 
 
@@ -157,6 +242,10 @@
         <br>
     </ion-card-content>
   </ion-card> 
+
+
+
+
   
 </ion-content>
 

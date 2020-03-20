@@ -24,7 +24,7 @@
           </td>
           <td IMG ALIGN=right>
             <!--<ion-thumbnail *ngIf="this.thumb != ''" item-right>-->
-              <img [src]="'https://go.projectvaultuk.com/publiclogos/'+this.userPostData.ProjectID+'.png'" style="max-height:70px;max-width:150px;border:1px;float: right;" />
+              <img [src]="'https://go.projectvaultuk.com/publiclogos/'+this.userPostData.ProjectID+'.png'"  onerror="this.src='assets/imgs/project.png'" style="max-height:70px;max-width:150px;border:1px;float: right;" />
             <!--</ion-thumbnail>-->            
           </td>
         </tr>
@@ -36,10 +36,10 @@
     <ion-list  *ngFor="let item of dataSet" style="margin-bottom: 1px;">
       <ion-item>
         <table style="width:100%;">
-          <tr>                
-            <td style="text-align:center;"><h3>24 Hours</h3></td>
-            <td style="text-align:center;"><h3>7 Days</h3></td>
-            <td style="text-align:center;"><h3>30 Days</h3></td>
+          <tr style="text-align:center;height:35px;">                
+            <td style="text-align:center;height:35px;"><h3>24 Hours</h3></td>
+            <td style="text-align:center;height:35px;"><h3>7 Days</h3></td>
+            <td style="text-align:center;height:35px;"><h3>30 Days</h3></td>
           </tr>
           <tr></tr>
           <tr>  
@@ -64,15 +64,19 @@
     <ion-list  style="margin-bottom: 1px;">
       <ion-item>
         <table style="width:100%;">
-          <tr>                               
-            <!--<td style="text-align:center;"><h3>Not Issued</h3></td>-->
-            <td style="text-align:center;"><h3>Snag Issued</h3></td>
-            <td style="text-align:center;"><h3>Fix Scheduled</h3></td>
-            <td style="text-align:center;"><h3>To Reinspect</h3></td>
+          <tr style="text-align:center;height:35px;">                               
+            
+            <td style="text-align:center;height:35px;"><h3>Snag<br>Issued</h3></td>
+            <td style="text-align:center;height:35px;"><h3>Fix<br>Scheduled</h3></td>
+            <td style="text-align:center;height:35px;"><h3><br>Fixed</h3></td>
+            <td style="text-align:center;height:35px;"><h3>Inspection<br>Scheduled</h3></td>
+            
+            
+
           </tr>
           <tr></tr>                                                                                                                                                                                               
           <tr> 
-            <td hidden *ngFor="let defect of dataSetT5"  style="text-align:center;">
+            <td  *ngFor="let defect of dataSetT5"  style="text-align:center;">
               <h2>
                 <span  (click)="openDefectsSummary(defect.OrderStatus,defect.SytemOrderNumber)" title="ON-TIME">{{defect.OK}}</span> / <span  (click)="openDefectsSummary(defect.OrderStatus)" style="color:red;">{{defect.Late}}</span>
               </h2>
@@ -87,12 +91,25 @@
     <b><span  style="color:white;position:relative;top:-2px;left:5px;">User Info</span></b>
     <ion-list  style="margin-bottom: 1px;">
       <ion-item padding>
+
+        
+        <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 80px !Important;height: 80px !Important;margin-top: 5px;margin-bottom: 5px;">
+          <img [src]="this.testavatar" onerror="this.placeholdavatar" style="width:60px;height:60px;border-color:black;border:1px;"/>    
+        </ion-thumbnail>
+
         <h4>{{this.userPostData.Email}}</h4>
         <h4>{{this.userPostData.UserName}}</h4>
         <h4>{{this.userPostData.Company}}</h4>
+
       </ion-item>
+      
+
     </ion-list>
 </div>
  
+
+
+
+
   
 </ion-content>
