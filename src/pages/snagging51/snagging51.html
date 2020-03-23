@@ -105,7 +105,40 @@
         </div>
   
         <br>
-  
+    </ion-card-content>
+  </ion-card>
+
+
+        <ion-card> 
+          <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
+            Location Image
+          </ion-card-header> 
+          <ion-card-content >
+            <ion-item style="position:relative;top:0px;">               
+              <ion-thumbnail item-left  style="position:relative;top:0px;width: 100%;">
+                <img [src]="image"  style="width: 100%; height:100%;border: 1px solid #000;" imageViewer>
+              </ion-thumbnail>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      
+      
+      
+        <ion-card> 
+          <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
+            Defect Image
+          </ion-card-header> 
+          <ion-card-content >
+            <ion-item style="position:relative;top:0px;"> 
+              <ion-thumbnail item-left  style="position:relative;top:0px;width: 100%;">
+                <img [src]="ImgUrl" style="width: 100%; height:100%;border: 1px solid #000;"imageViewer>
+              </ion-thumbnail>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      
+
+<!--  
       <div [hidden]="this.passedfailed == 'true'">
 
         <ion-item style="position:relative;top:0px;padding-left:10px;height:110px;width:320px;"> 
@@ -123,7 +156,7 @@
     </ion-card-content>
   </ion-card>
 
-      <!--<button end style="font-size:13px;font-weight:bold !important;width:100px;height:17px;position:relative;top:-3px;" ion-button (click)="sendreminder()">
+      <button end style="font-size:13px;font-weight:bold !important;width:100px;height:17px;position:relative;top:-3px;" ion-button (click)="sendreminder()">
         Reminder
       </button>-->
 
