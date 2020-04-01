@@ -108,12 +108,34 @@ page-documentsummary {
   align-items: flex-end;
 }
 
+/*
 ion-item {
   border-top: none;
   border-bottom: none;
-  --min-height: 30px;
+  height: 44px;
 }
 
+ion-label {
+  border-top: none;
+  border-bottom: none;
+  margin-top: none;
+  margin-bottom: none;
+  --max-height: 30px;
+}
+
+ion-icon {
+  
+  margin-top: 5px;
+  padding-top: 16px;
+  margin-bottom: 0px;
+  margin-right: 0px;  
+  --max-height: 30px;
+  --max-width:50px;
+  width:50px;
+
+}
+
+*/
 
 ion-card { border-top: 3px solid #322171; border-bottom: 0px solid #e8e8e8; padding-bottom: 15px;  }
 

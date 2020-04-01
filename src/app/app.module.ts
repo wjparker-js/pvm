@@ -53,6 +53,8 @@ import { ColorsPopoverPage } from '../pages/colors-popover/colors-popover';
 import { WidthPopoverPage } from '../pages/width-popover/width-popover';
 import { BrushTypePopoverPage } from '../pages/brush-type-popover/brush-type-popover';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
+import { Network } from '@ionic-native/network';
+
 
 @NgModule({
   declarations: [
@@ -138,13 +140,14 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     ImgEditPagePost,
     ColorsPopoverPage,
     WidthPopoverPage,
-    BrushTypePopoverPage   
+    BrushTypePopoverPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AuthService,
     SplitPane,
+    Network,
     Common,
     BarcodeScanner,
     Geolocation,
@@ -157,7 +160,8 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
     FileTransfer,
     FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DrawingProvider  
+    DrawingProvider
+     
   ]
 })
 

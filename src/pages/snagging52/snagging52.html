@@ -196,62 +196,6 @@
 
 
 
-<ion-card  [hidden]="this.note == 'note' || this.passedfailed == 'true'"  style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;">
-  <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
-    Form
-  </ion-card-header> 
-  <ion-card-content> 
-
-    <ion-item>
-      <ion-label class="text" style="width:20%"><b>Status</b></ion-label>
-      <ion-select class="myCustomSelect" [(ngModel)]="approval" name="approval"  style="text-align:left;" >
-        <ion-option class="myCustomSelect" [value] = "54">Approved</ion-option>
-        <ion-option class="myCustomSelect" [value] = "55">Rejected</ion-option>
-      </ion-select>
-      <br><br>
-    </ion-item>    
-
-    <ion-item>
-      <ion-label class="text" style="font-size:16px;font-weight:bold !important;" ><b>Notes</b></ion-label>
-      <ion-textarea class="text" rows="3"  name="details" [(ngModel)]="details"  style="font-size:13px;background-color:#f2f2f2;"></ion-textarea>
-      <br><br>
-    </ion-item>
-    <br>
-    <ion-item   [hidden]="image === null" style="padding-left:3px;padding-left:3px;height: 70px;">     
-
-      <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 90px !Important;height: 90px !Important;margin-top: 0px;margin-bottom: 0px;">
-        <img [src]="this.currentImage" style="width: 90px; margin: 0; position: absolute;top: 50%;left: 0px;transform: translate(0%, -50%);" >
-      </ion-thumbnail>  
-
-      <span>
-
-      <div> 
-        <button [hidden]="currentImage !== null"  start style="width:100%;height:100%;" ion-button (click)="addimage('add')">
-          <br/><br/>Take inspect Picture<br/><br/><br/>
-        </button>
-      </div> 
-        
-      <ion-row [hidden]="currentImage === null"  >
-        <ion-col style="width:50%;padding-left:0px;">
-          <div style="width:100%;">  
-            <button  start style="width:100%;height:100%;margin-left:0px;" ion-button (click)="addimage('add')">
-              <br/>Take<br>inspect<br>Picture<br/><br/>
-            </button>
-          </div> 
-        </ion-col>
-        <ion-col style="width:50%;padding-right:0px;">
-          <div style="width:100%;">  
-            <button  end style="width:100%;height:100%;margin-right:0px;" ion-button (click)="addimage('edit')">
-              <br/>Edit<br>inspect<br>Picture<br/><br/>
-            </button> 
-          </div> 
-        </ion-col>
-      </ion-row>
- 
-    </span>        
-  </ion-item>  
-</ion-card-content>
-</ion-card>
 
 
 
@@ -261,31 +205,6 @@
 
 
 
-<ion-card  [hidden]="this.note == 'nonote'" style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;"> 
-      
-  <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
-    Form
-  </ion-card-header> 
-
-  <ion-card-content>   
-    <div>
-    <ion-item style="padding-left:0px;">
-      <ion-label class="mylabel" style="font-size:15px;font-weight:bold !important;" ><b>Note</b></ion-label>
-      <ion-textarea class="mytext" rows="5"  name="newnote" [(ngModel)]="newnote"  style="font-size:13px;background-color:#f2f2f2;"></ion-textarea>
-    </ion-item>   
-  </div>
-  <br>     
-    <div>
-      <ion-buttons >
-        <button full ion-button icon-left (click)="uploadNote()" >
-          <ion-icon name="cloud-upload"></ion-icon>Add New Note
-        </button>
-      </ion-buttons>
-    </div>
-
-  </ion-card-content>
-
-</ion-card> 
 
 
 
@@ -309,15 +228,109 @@
 
 
 
+  <ion-card  [hidden]="this.note == 'note' || this.passedfailed == 'true'"  style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;">
+    <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
+      Form
+    </ion-card-header> 
+    <ion-card-content> 
   
+      <ion-item>
+        <ion-label class="text" style="width:20%"><b>Status</b></ion-label>
+        <ion-select class="myCustomSelect" [(ngModel)]="approval" name="approval"  style="text-align:left;" >
+          <ion-option class="myCustomSelect" [value] = "54">Approved</ion-option>
+          <ion-option class="myCustomSelect" [value] = "55">Rejected</ion-option>
+        </ion-select>
+        <br><br>
+      </ion-item>    
+  
+      <ion-item>
+        <ion-label class="text" style="font-size:16px;font-weight:bold !important;" ><b>Notes</b></ion-label>
+        <ion-textarea class="text" rows="3"  name="details" [(ngModel)]="details"  style="font-size:13px;background-color:#f2f2f2;"></ion-textarea>
+        <br><br>
+      </ion-item>
+      <br>
+      <ion-item   [hidden]="image === null" style="padding-left:3px;padding-left:3px;height: 70px;">     
+  
+        <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 90px !Important;height: 90px !Important;margin-top: 0px;margin-bottom: 0px;">
+          <img [src]="this.currentImage" style="width: 90px; margin: 0; position: absolute;top: 50%;left: 0px;transform: translate(0%, -50%);" >
+        </ion-thumbnail>  
+  
+        <span>
+  
+        <div> 
+          <button [hidden]="currentImage !== null"  start style="width:100%;height:100%;" ion-button (click)="addimage('add')">
+            <br/><br/>Take inspect Picture<br/><br/><br/>
+          </button>
+        </div> 
+          
+        <ion-row [hidden]="currentImage === null"  >
+          <ion-col style="width:50%;padding-left:0px;">
+            <div style="width:100%;">  
+              <button  start style="width:100%;height:100%;margin-left:0px;" ion-button (click)="addimage('add')">
+                <br/>Take<br>inspect<br>Picture<br/><br/>
+              </button>
+            </div> 
+          </ion-col>
+          <ion-col style="width:50%;padding-right:0px;">
+            <div style="width:100%;">  
+              <button  end style="width:100%;height:100%;margin-right:0px;" ion-button (click)="addimage('edit')">
+                <br/>Edit<br>inspect<br>Picture<br/><br/>
+              </button> 
+            </div> 
+          </ion-col>
+        </ion-row>
+   
+      </span>        
+    </ion-item>  
+  </ion-card-content>
+  </ion-card>
+  
+
+
+
+  <ion-card  [hidden]="this.note == 'nonote'" style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;"> 
+      
+    <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
+      Form
+    </ion-card-header> 
+  
+    <ion-card-content>   
+      <div>
+      <ion-item style="padding-left:0px;">
+        <ion-label class="mylabel" style="font-size:15px;font-weight:bold !important;" ><b>Note</b></ion-label>
+        <ion-textarea class="mytext" rows="5"  name="newnote" [(ngModel)]="newnote"  style="font-size:13px;background-color:#f2f2f2;"></ion-textarea>
+      </ion-item>   
+    </div>
+    <br>     
+      <div>
+        <ion-buttons >
+          <button full ion-button icon-left (click)="uploadNote()" >
+            <ion-icon name="cloud-upload"></ion-icon>Add New Note
+          </button>
+        </ion-buttons>
+      </div>
+  
+    </ion-card-content>
+  
+  </ion-card> 
+
+
+  <ion-card   [hidden]="this.note !== 'nonote'" >
+    <ion-card-content>
+
+      <div>
+        <ion-buttons >
+          <button full  [disabled]="showUpload == null" ion-button icon-left (click)="sendUploadData()" >
+            <ion-icon name="cloud-upload"></ion-icon>Upload Fixed Image
+          </button>
+        </ion-buttons>
+      </div>
+
+    </ion-card-content>
+  </ion-card> 
+
 </ion-content>
 
 <ion-footer  >
-  <div>
-    <ion-buttons >
-      <button full [disabled]="showUpload === null" ion-button icon-left (click)="sendUploadData()" >
-        <ion-icon name="cloud-upload"></ion-icon>Upload Inspected Image
-      </button>
-    </ion-buttons>
-  </div>
+
 </ion-footer>  

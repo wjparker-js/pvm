@@ -11,6 +11,7 @@ import {WeatherProvider} from '../../providers/weather/weather';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as Constants from '../../providers/constants';
 import { IfObservable } from 'rxjs/observable/IfObservable';
+import { Network } from '@ionic-native/network';
 
 @Component({
   selector: 'page-home', 
@@ -36,6 +37,7 @@ export class HomePage {
   public weatherTemp: any;
   public weatherTemp_Max: any;
   public weatherTemp_Min: any;
+  public connectionmsg: string ="";
   createDefects: any;
 	showDefects: any;
   manageDefects: any;
@@ -82,11 +84,23 @@ export class HomePage {
     public navCtrl : NavController, 
     public menu: MenuController,
     public navParams: NavParams, 
+    private network: Network,
     public app : App, 
     public authService : AuthService) {
   }
 
   ionViewWillEnter() {
+
+    this.network.onConnect().subscribe(data => {
+      console.log(data)
+      this.displayNetworkUpdate(data.type);
+    }, error => console.error(error));
+   
+    this.network.onDisconnect().subscribe(data => {
+      console.log(data)
+      this.displayNetworkUpdate(data.type);
+    }, error => console.error(error));
+
 
     this.menu.enable(true); 
     //this.getGeolocation();
@@ -275,6 +289,17 @@ export class HomePage {
     this.watchLocationUpdates.unsubscribe();
   }
 
+
+  displayNetworkUpdate(connectionState: string){
+    let networkType = this.network.type;
+    this.connectionmsg = `You are now ${connectionState} via ${networkType}`;
+    /* let toast = this.toastCtrl.create({
+      message: `You are now ${connectionState} via ${networkType}`,
+      duration: 3000,
+      cssClass: 'toast',
+      position: 'middle'
+    }).present(); */
+  }
 
   sleep(miliseconds) {
     var currentTime = new Date().getTime(); 

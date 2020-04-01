@@ -1,8 +1,15 @@
 <ion-content id="login" color="primary">
   <ion-grid style="height: 100%">
+
+    <span [hidden]="this.connectionmsg != 'wifi'" ><img src="./assets/imgs/wifi.jpg" style="max-width:40px;max-height:32px;position:relative;top:2px;float:right;z-index: 999;"></span>
+    <span [hidden]="this.connectionmsg != 'CELL'"><img src="./assets/imgs/lte.jpg"  style="max-width:40px;max-height:32px;position:relative;top:2px;float:right;z-index: 999;"></span>
+    <span [hidden]="this.connectionmsg != '2G'" ><img src="./assets/imgs/2g.jpg" style="max-width:40px;max-height:32px;position:relative;top:2px;float:right;z-index: 999;"></span>
+    <span [hidden]="this.connectionmsg != '3G'"><img src="./assets/imgs/3g.jpg"  style="max-width:40px;max-height:32px;position:relative;top:2px;float:right;z-index: 999;"></span>
+    <span [hidden]="this.connectionmsg != '4g'" ><img src="./assets/imgs/4g.jpg" style="max-width:40px;max-height:32px;position:relative;top:2px;float:right;z-index: 999;"></span>
+      
     <ion-row justify-content-center align-items-center style="height: 50%;">
       <ion-card padding style="position:relative;max-width:350px;top:150px;margin-top: 40px;margin-bottom: 0px;background: #fff;">
-        <img src="assets/imgs/Sys_Logo_PV4_SG-White.png" style="height:53px;width:318px;"/>
+        <img src="assets/imgs/Sys_Logo_PV4_SG-White.png" style="height:53px;width:318px;"/>        
         <ion-list>
           <ion-item>
             <ion-input #input type="email"  placeholder="Enter Username" [(ngModel)]="userSystemData.id" ></ion-input>

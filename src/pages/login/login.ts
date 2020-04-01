@@ -6,6 +6,8 @@ import { AuthService } from "../../providers/auth-service";
 import { Http } from '@angular/http';
 import * as Constants from '../../providers/constants';
 import {Md5} from 'ts-md5/dist/md5';
+import { Subscription} from 'rxjs/Subscription';
+import { Network } from '@ionic-native/network';
 
 @IonicPage()
 
@@ -18,6 +20,10 @@ export class Login {
 
   @ViewChild('input') myInput ;
 
+  connected: Subscription;
+  disconnected: Subscription;
+  public connectionmsg: string ="";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
   public defectsEnabled : boolean;
   public loginprojectuserdetails: any;
   
@@ -34,12 +40,23 @@ export class Login {
     public authService: AuthService, 
     private toastCtrl:ToastController,
     public  menu: MenuController,
+    private network: Network,
     public http: Http) 
   {}  
   
 
 
   ionViewWillEnter() {
+
+    this.network.onConnect().subscribe(data => {
+      console.log(data)
+      this.displayNetworkUpdate(data.type);
+    }, error => console.error(error));
+   
+    this.network.onDisconnect().subscribe(data => {
+      console.log(data)
+      this.displayNetworkUpdate(data.type);
+    }, error => console.error(error));
 
     if ((localStorage.getItem('login_password') !== null) && (localStorage.getItem('login_password') !== "xxx-xxx")) {
       this.showLogin = true;
@@ -68,6 +85,12 @@ export class Login {
     },150);
  }
 
+ ionViewDidEnter() {
+
+}                                                                
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 
   newuser(){    
     this.userSystemData.password = "xxx-xxx";
@@ -160,7 +183,16 @@ export class Login {
   this.menu.enable(true);
 }
 
-
+  displayNetworkUpdate(connectionState: string){
+    let networkType = this.network.type;
+    this.connectionmsg = `${networkType}`;
+    /* let toast = this.toastCtrl.create({
+      message: `You are now ${connectionState} via ${networkType}`,
+      duration: 3000,
+      cssClass: 'toast',
+      position: 'middle'
+    }).present(); */
+  }
 
   presentToast(msg) {
     let toast = this.toastCtrl.create({

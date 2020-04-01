@@ -73,12 +73,7 @@ export class ImgEditPagePostPost {
    * In this method you can do something with your drawing
    */
   save() {
-
-    // drawing variable is base64 image
-    let drawing = this.drawing.getAsImage();
-
     localStorage.setItem('postpostimage', this.drawing.getAsImage()); 
-
     this.dismiss();
   }
 

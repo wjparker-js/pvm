@@ -8,9 +8,10 @@ page-login {
         color:#000000;
 
         background-image: url("../assets/imgs/app_front_white1.jpg");
+        z-index: 1;
 
         h1{
-            font-size: 25px;
+            font-size: 20px;
             margin-top:20px
         }
         ion-card{
