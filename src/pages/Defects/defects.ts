@@ -304,7 +304,7 @@ export class DefectsPage {
 		        this._sanitizer.bypassSecurityTrustStyle(data);
 				
 		
-				if(isEmpty(this.defects)){
+				if(JSON.stringify(this.defects) === '{}'){
 					console.log("Empty data");
 				} else {
 				this.defects = data;       
@@ -326,8 +326,14 @@ export class DefectsPage {
 
 				    this.http.get(urls2).map(res => res.json()).subscribe(data => {
 				        this._sanitizer.bypassSecurityTrustStyle(data);
-								this.defects = data;          
-								console.log(this.defects);
+
+				if(JSON.stringify(this.defects) === '{}'){
+					console.log("Empty data");
+				} else {
+				this.defects = data;       
+				console.log("Some data");   
+				console.log(this.defects);
+				}
 				    },
 				    err => {
 				        console.log("Oops!");
@@ -341,9 +347,16 @@ export class DefectsPage {
 				console.log(urls3);
 
 			    this.http.get(urls3).map(res => res.json()).subscribe(data => {
-				        this._sanitizer.bypassSecurityTrustStyle(data);
-								this.defects = data;          
-								console.log(this.defects);
+				    this._sanitizer.bypassSecurityTrustStyle(data);
+
+					if(JSON.stringify(this.defects) === '{}'){
+						console.log("Empty data");
+					} else {
+					this.defects = data;       
+					console.log("Some data");   
+					console.log(this.defects);
+					}
+
 				    },
 				    err => {
 				        console.log("Oops!");
