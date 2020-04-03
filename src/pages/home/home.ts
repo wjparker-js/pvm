@@ -23,6 +23,8 @@ export class HomePage {
   public userDetails : any;
   public resposeData : any;
   public PA5073 : any;
+  public PA5039 : any;
+  public PA5038 : any;
   public avatardata: any;
   public dataSet : any;
   public dataSetT5 : any;
@@ -116,17 +118,22 @@ export class HomePage {
     this.userPostData.SystemClientID = data[0].SystemClientID;
     this.userPostData.Email          = data[0].Email;  
     this.userPostData.ProjectID      = localStorage.getItem('CurrentProjectID'); 
-    this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName');     
+    this.userPostData.ProjectName    = localStorage.getItem('CurrentProjectName');    
+     
     this.PA5073                      = localStorage.getItem('Role-PA5073');  
-
-    if(this.showDefects   == 1){this.defectRole = "73"}
-		if(this.createDefects == 1){this.defectRole = "38"}
-		if(this.manageDefects == 1){this.defectRole = "39"}
+    this.PA5039                      = localStorage.getItem('Role-PA5039'); 
+    this.PA5038                      = localStorage.getItem('Role-PA5038'); 
+    
+    if(this.PA5073 == 1){this.defectRole = "73"}
+    if(this.PA5038 == 1){this.defectRole = "38"}
+    if(this.PA5039 == 1){this.defectRole = "39"}
+    
+		
 
     this.thumb =  'https://go.projectvaultuk.com/publiclogos/'+this.userPostData.ProjectID+'.png'; 
 
     this.testavatar      = 'https://go.projectvaultuk.com/publicpics/'+this.userPostData.SystemUserID+'.jpg';    
-    this.placeholdavatar = "https://go.projectvaultuk.com/PublicPics/avatar.png";
+    this.placeholdavatar = "./assets/imgs/user.jpg";
     this.sleep(200); 
     
     var apiKey  = this.userPostData.apiKey;
@@ -137,7 +144,7 @@ export class HomePage {
     var urld    = Constants.apiUrl+"api/dashboard/"+uid+"/"+pid;
     var urlt3   = Constants.apiUrl+"api/t3/"+apiKey+"/"+uid+"/"+pid;
     var urlt4   = Constants.apiUrl+"api/t4/"+apiKey+"/"+uid+"/"+pid;
-    var urlt5   = Constants.apiUrl+"api/t5/"+apiKey+"/"+uid+"/"+pid;
+    var urlt5   = Constants.apiUrl+"api/t5/"+apiKey+"/"+uid+"/"+pid+"/"+this.defectRole;
     var urlcity = Constants.apiUrl+"api/locationcity/"+pid;
 
     //this.watchLocation();

@@ -302,8 +302,16 @@ export class DefectsPage {
 
 		    	this.http.get(urls1).map(res => res.json()).subscribe(data => {
 		        this._sanitizer.bypassSecurityTrustStyle(data);
-					this.defects = data;          
-					console.log(this.defects);
+				
+		
+				if(isEmpty(this.defects)){
+					console.log("Empty data");
+				} else {
+				this.defects = data;       
+				console.log("Some data");   
+				console.log(this.defects);
+				}
+
 			    },
 			    err => {
 			      console.log("Oops!");

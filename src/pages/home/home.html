@@ -66,10 +66,10 @@
         <table style="width:100%;">
           <tr style="text-align:center;height:35px;">                               
             
-            <td style="text-align:center;height:35px;"><h3>Snag<br>Issued</h3></td>
-            <td style="text-align:center;height:35px;"><h3>Fix<br>Scheduled</h3></td>
-            <td style="text-align:center;height:35px;"><h3><br>Fixed</h3></td>
-            <td style="text-align:center;height:35px;"><h3>Inspection<br>Scheduled</h3></td>
+            <td style="text-align:center;height:35px;"><h3><br>Issued</h3></td>
+            <td style="text-align:center;height:35px;"><h3>Fix<br>Date Set</h3></td>
+            <td style="text-align:center;height:35px;"><h3>Ready To<br>Inspect</h3></td>
+            <td style="text-align:center;height:35px;"><h3>Inspection<br>Date Set</h3></td>
             
             
 
@@ -78,7 +78,7 @@
           <tr> 
             <td  *ngFor="let defect of dataSetT5"  style="text-align:center;">
               <h2>
-                <span  (click)="openDefectsSummary(defect.OrderStatus,defect.SytemOrderNumber)" title="ON-TIME">{{defect.OK}}</span> / <span  (click)="openDefectsSummary(defect.OrderStatus)" style="color:red;">{{defect.Late}}</span>
+                <span  (click)="openDefectsSummary(defect.OrderStatus)" title="ON-TIME">{{defect.OK}} / </span><span  (click)="openDefectsSummary(defect.OrderStatus)" style="color:red;">{{defect.Late}}</span>
               </h2>
             </td> 
           </tr>
