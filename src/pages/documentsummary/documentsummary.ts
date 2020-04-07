@@ -25,9 +25,7 @@ export class DocumentSummary {
 
   constructor(public navCtrl: NavController,public platform: Platform, public params: NavParams, public http: Http, private _sanitizer: DomSanitizer, public modalCtrl: ModalController, public viewCtrl: ViewController) {
 
-    var docdays="";
     this.docdays = this.params.get('days');
-    console.log(this.docdays);
 
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
@@ -38,22 +36,13 @@ export class DocumentSummary {
     this.userdocumentInfoData.SystemProjectID = localStorage.getItem('CurrentProjectID');    
     this.userdocumentInfoData.Thumbnail       = documentData[0].PhotoTiny;
     this.userdocumentInfoData.DocumentNumber  = documentData[0].DocumentNumber;
+    this.avatardata                           = localStorage.getItem('avatar');
 
-    this.avatardata     = localStorage.getItem('avatar');
-    console.log("Documents Avatar = "+this.avatardata);
-
-    var documentApiKey          = this.userdocumentInfoData.apiKey;  
-    var documentSystemUserID    = this.userdocumentInfoData.SystemUserID;
-    var documentSystemProjectID = this.userdocumentInfoData.SystemProjectID; 
-    var documentThumbnail       = this.userdocumentInfoData.Thumbnail;
-    var documentDocumentNumber  = this.userdocumentInfoData.DocumentNumber;
-
-    var url = Constants.apiUrl+"api/documentsummary/"+documentApiKey+"/"+documentSystemUserID+"/"+documentSystemProjectID+"/"+this.docdays;
+    var url = Constants.apiUrl+"api/documentsummary/"+this.userdocumentInfoData.apiKey+"/"+this.userdocumentInfoData.SystemUserID+"/"+this.userdocumentInfoData.SystemProjectID+"/"+this.docdays;
     
         this.http.get(url).map(res => res.json()).subscribe(data => {
               this._sanitizer.bypassSecurityTrustStyle(data);
-              this.userdocumentssummary = data;          
-              console.log(this.userdocumentssummary);
+              this.userdocumentssummary = data;         
           },
           err => {
               console.log("Document info not found.");

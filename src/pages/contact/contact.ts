@@ -94,9 +94,9 @@ export class ContactPage {
 
     if(segment == "contacts"){
 
-      var url = Constants.apiUrl+"api/contacts/"+this.userContactData.apiKey+"/"+this.userContactData.SystemProjectID+"/"+this.userName+"/2";
+      var urlc = Constants.apiUrl+"api/contacts/"+this.userContactData.apiKey+"/"+this.userContactData.SystemProjectID+"/"+this.userName+"/2";
 
-      this.http.get(url).map(res => res.json()).subscribe(data => {
+      this.http.get(urlc).map(res => res.json()).subscribe(data => {
             this._sanitizer.bypassSecurityTrustStyle(data);
             this.userContacts = data;          
             console.log(this.userContacts);

@@ -2,7 +2,7 @@
   <ion-toolbar>   
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>    
     <span style="font-size:16px;color:white;">{{selectedProjectName}} Summary: 
-      <span style="font-size:12px;color:white;padding-left:5px;" [innerHTML]="docdays + ' Days'"></span>
+      <span style="font-size:16px;color:white;padding-left:5px;" [innerHTML]="docdays + ' Days'"></span>
     </span>
     <ion-buttons end>
       <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
@@ -22,21 +22,32 @@
                     <ion-card-content>
                         <ion-list >
                             <ion-item >
+                                <b>Folder: </b><span [innerHTML]="document.FolderName"></span>
+                                <br/>
                                 <b>Doc No: </b><span [innerHTML]="document.DocumentNumber"></span>
                                 <br/>
-                                <b>Rev: </b><span [innerHTML]="document.Rev"></span>
+                                <b>Rev: </b><span [innerHTML]="document.Revision"></span>
                                 <br/>
                                 <b>Title: </b><span [innerHTML]="document.Title"></span>
                                 <br/>
-                                <b>Folder: </b><span [innerHTML]="document.FolderName"></span>
+                                <b>Current: </b><span [innerHTML]="document.Latest"></span>
                                 <br/>
-                                <b>Designer: </b><span [innerHTML]="document.DesignerName"></span>
+                                <b>Designer: </b><span [innerHTML]="document.Designer"></span>
                                 <br/>
-                                <b>Discipline: </b><span [innerHTML]="document.DisciplineName"></span>
+                                <b>Discipline: </b><span [innerHTML]="document.Discipline"></span>
+                                <br/>                               
+                                <b>Status: </b><span [innerHTML]="document.Status"></span>
                                 <br/>
                                 <b>Doc Type: </b><span [innerHTML]="document.TypeName"></span>
+                                <br/>                                
+                                <b>Issue  Reason: </b><span [innerHTML]="document.IssueReason"></span>
                                 <br/>
-                                <b>Issue Reason: </b><span [innerHTML]="document.ReasonName"></span>
+                                <b>Issue  Type: </b><span [innerHTML]="document.Type"></span>
+                                <br/>
+                                <b>Issue Date: </b><span [innerHTML]="document.uploadDate"></span>
+                                <br/>
+                                <b>Reg Date: </b><span [innerHTML]="document.intogridDate"></span>
+                                <br/>
                             </ion-item>
                         </ion-list>
                     </ion-card-content>  

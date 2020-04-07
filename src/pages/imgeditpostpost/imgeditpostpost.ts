@@ -5,7 +5,6 @@ import { DrawingProvider } from '../../providers/drawing/drawing';
 import { ColorsPopoverPage } from '../colors-popover/colors-popover';
 import { WidthPopoverPage } from '../width-popover/width-popover';
 import { BrushTypePopoverPage } from '../brush-type-popover/brush-type-popover';
-import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'page-imgeditpostpost',
@@ -57,8 +56,6 @@ export class ImgEditPagePostPost {
     }
     this.imgheight = height;
     this.imgwidth = width;
-    //console.log("Width: ",this,imgwidth);
-    //console.log("Height: ",this,imgheight);
     this.drawing.create(width, height);
     
     this.drawingEnabled = false;
@@ -250,9 +247,7 @@ export class ImgEditPagePostPost {
     actionSheet.present();
   }
 
-  /**
-   * Undo last change
-   */
+
   undo() {
     this.drawing.undo();
   }
@@ -266,10 +261,7 @@ export class ImgEditPagePostPost {
 	 } 
 	 
 
-  /**
-   * Takes image from camera or photo gallery
-   * @param from_camera
-   */
+
   private takePicture(from_camera) {
 
     return new Promise((resolve, reject) => {
@@ -281,8 +273,8 @@ export class ImgEditPagePostPost {
         saveToPhotoAlbum  : false,
         cameraDirection   : 0,
         correctOrientation: true,
-        targetWidth       : 1200,
-        targetHeight      : 800,
+        targetWidth       : 500,
+        targetHeight      : 500,
         sourceType        : from_camera ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY,
         destinationType   : this.camera.DestinationType.DATA_URL,
         encodingType      : this.camera.EncodingType.JPEG

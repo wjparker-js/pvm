@@ -125,7 +125,14 @@ export class DefectsPage {
 		await alert.present();
 	}
 
+	async presentNoAccessAlert() {
+		const alert1 = await this.alertController.create({
+		message: 'Sorry, you cannot modify your defects once status is changed to Ready To Inspect or better.<br><br>   You can add a note by sliding the item to the left.',
+		buttons: ['OK']
+		});
 
+		await alert1.present();
+	}
 
 
 	imageExists(url, callback) {
@@ -265,10 +272,14 @@ export class DefectsPage {
 
 		if(orderstatus == 51){this.navCtrl.push(Snagging51Page,{snagid,orderstatus,note});}
 	
-		if(this.createDefects == 1 || this.manageDefects == 1){
+		if((this.createDefects == 1 || this.manageDefects == 1) || note == 'note'){
 			if(orderstatus == 52){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
 			if(orderstatus == 53){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
-		}	
+		} 
+
+		if((this.createDefects == 0 || this.manageDefects == 0)  && orderstatus > 51 && note == 'nonote'){
+			this.presentNoAccessAlert();
+		}
 
 		if(this.manageDefects == 1){
 			console.log("In 54 55");

@@ -228,8 +228,8 @@ export class SnaggingPage {
 			saveToPhotoAlbum  : true,
 			cameraDirection   : 0,
 			correctOrientation: true,
-			targetWidth       : 800,
-			targetHeight      : 1200,
+			targetWidth       : 500,
+			targetHeight      : 500,
 			sourceType        : from_camera ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY,
 			destinationType   : this.camera.DestinationType.DATA_URL,
 			encodingType      : this.camera.EncodingType.JPEG

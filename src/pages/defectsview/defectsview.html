@@ -37,14 +37,14 @@
 
               <b>{{defect.OrderReference}}</b><br>
 
-              <span [hidden]="defect.OrderStatusText != 'Not Sent Yet'"        class="notsent" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              <span [hidden]="defect.OrderStatusText != 'Sent'"                class="new" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              <span [hidden]="defect.OrderStatusText != 'Defect Fix Date Set'" class="fix" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              <span [hidden]="defect.OrderStatusText != 'Defect Fixed'"        class="fixed" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              <span [hidden]="defect.OrderStatusText != 'Not Sent'"            class="notsent" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              <span [hidden]="defect.OrderStatusText != 'Issued'"              class="new" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              <span [hidden]="defect.OrderStatusText != 'Fix Date Set'"        class="fix" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              <span [hidden]="defect.OrderStatusText != 'Ready To Inspect'"    class="fixed" style="width:100%;">{{defect.OrderStatusText}}<br></span>
               <span [hidden]="defect.OrderStatusText != 'Inspection Date Set'" class="inspect" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              <span [hidden]="defect.OrderStatusText != 'Inspection Passed'"   class="pass" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              <span [hidden]="defect.OrderStatusText != 'Inspection Failed'"   class="fail" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              
+              <span [hidden]="defect.OrderStatusText != 'Passed'"              class="pass" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+              <span [hidden]="defect.OrderStatusText != 'Failed'"              class="fail" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+  
 
               {{defect.OrderSubject}}<br>           
               <span  text-wrap>              

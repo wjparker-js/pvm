@@ -133,7 +133,13 @@ export class HomePage {
     this.thumb =  'https://go.projectvaultuk.com/publiclogos/'+this.userPostData.ProjectID+'.png'; 
 
     this.testavatar      = 'https://go.projectvaultuk.com/publicpics/'+this.userPostData.SystemUserID+'.jpg';    
-    this.placeholdavatar = "./assets/imgs/user.jpg";
+    
+   this.placeholdavatar = "https://go.projectvaultuk.com/PublicPics/A95B9363-46E6-4BA5-BC2B-2B5FE9E52CA6.jpg";
+
+   
+    this.checkImage(this.testavatar);
+
+
     this.sleep(200); 
     
     var apiKey  = this.userPostData.apiKey;
@@ -218,15 +224,16 @@ export class HomePage {
   }
  
 
-
-  ImageExist(url) 
-  {
-     var img = new Image();
-     img.src = url;
-     return img.height == 0;
+  checkImage(imageSrc) {
+    var image = new Image();
+    image.src = imageSrc;
+    if (image.width == 0) {
+      this.testavatar  = 'https://go.projectvaultuk.com/publicpics/'+this.userPostData.SystemUserID+'.jpg';    
+    } else {
+      this.testavatar  =  this.placeholdavatar;
+    }     
   }
-
-
+ 
 
 
   openDocumentSummary(days){ 
