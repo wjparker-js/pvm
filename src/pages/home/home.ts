@@ -132,9 +132,9 @@ export class HomePage {
 
     this.thumb =  'https://go.projectvaultuk.com/publiclogos/'+this.userPostData.ProjectID+'.png'; 
 
-    this.testavatar      = 'https://go.projectvaultuk.com/publicpics/'+this.userPostData.SystemUserID+'.jpg';    
+    this.testavatar      = 'https://go.projectvaultuk.com/PublicPics/'+this.userPostData.SystemUserID+'.jpg';    
     
-   this.placeholdavatar = "https://go.projectvaultuk.com/PublicPics/A95B9363-46E6-4BA5-BC2B-2B5FE9E52CA6.jpg";
+    this.placeholdavatar = "https://go.projectvaultuk.com/PublicPics/A95B9363-46E6-4BA5-BC2B-2B5FE9E52CA6.jpg";
 
    
     this.checkImage(this.testavatar);

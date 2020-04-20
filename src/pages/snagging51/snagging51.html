@@ -25,7 +25,7 @@
         <span class="mytext">{{defect1dist.SubbyEmail}}</span>
         <br>   
         <span style="font-size:13px;font-weight:bold !important;width:100px;" ><b>Commercial: </b></span>
-        <span class="mytext">{{defect1dist.QSEmail}}</span>               
+        <span *ngIf = "defect1dist.QSEmail != null" class="mytext">{{defect1dist.QSEmail}}</span>               
     </ion-card-content>
   </ion-card> 
 

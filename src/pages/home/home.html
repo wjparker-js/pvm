@@ -91,10 +91,10 @@
     <b><span  style="color:white;position:relative;top:-2px;left:5px;">User Info</span></b>
     <ion-list  style="margin-bottom: 1px;">
       <ion-item padding>
-        [hidden]="currentImage === null"
         
         <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 80px !Important;height: 80px !Important;margin-top: 5px;margin-bottom: 5px;">
-          <img id="avatar"  [src]="this.testavatar"  style="width:60px;height:60px;border-color:black;border:1px;"/>            </ion-thumbnail>
+          <img id="avatar"  [src]="this.testavatar" onerror="this.src='https://go.projectvaultuk.com/PublicPics/A95B9363-46E6-4BA5-BC2B-2B5FE9E52CA6.jpg'" style="width:60px;height:60px;border-color:black;border:1px;"/>            
+        </ion-thumbnail>
 
         <h4>{{this.userPostData.Email}}</h4>
         <h4>{{this.userPostData.UserName}}</h4>

@@ -33,7 +33,8 @@ export class Snagging51Page {
 	showDefects: any;
 	createDefects: any;
 	manageDefects: any;
-	defectRole: any;
+	defectRole: number = 1;
+	orderstatus: any;
 
 	public details: string;
 	public defect1s:  any;
@@ -84,6 +85,8 @@ export class Snagging51Page {
 
 	public ionViewWillEnter() {
 
+		console.log("In 51");
+
 		var snagData = JSON.parse(localStorage.getItem('userSystemData'));
 				
 		this.pid          = localStorage.getItem('CurrentProjectID');
@@ -93,21 +96,33 @@ export class Snagging51Page {
 		this.cid          = localStorage.getItem('CurrentProjectClientID');
 		this.uid          = snagData[0].SystemUserID;
 		this.uid          = this.uid.trim();
+
 		this.snagid       = this.navParams.get('snagid');		
 		this.note         = this.navParams.get('note');
+		this.orderstatus  = this.navParams.get('orderstatus');
+
+		console.log("this.snagid         = ",this.snagid);
+		console.log("this.note           = ",this.note);
+		console.log("this.orderstatus    = ",this.orderstatus);
+
 		this.postImage    = null;
 
 		this.createDefects       = localStorage.getItem('Role-PA5038');
 		this.showDefects         = localStorage.getItem('Role-PA5073');
 		this.manageDefects       = localStorage.getItem('Role-PA5039');
-		
-		this.createDefects       = localStorage.getItem('Role-PA5038');
-		if (this.createDefects === null){this.defectRole = 0}
-		this.showDefects         = localStorage.getItem('Role-PA5073');
-		if (this.showDefects   === null){this.defectRole = 0}
-		this.manageDefects       = localStorage.getItem('Role-PA5039');
-		if (this.manageDefects === null){this.defectRole = 0}
 
+		console.log("this.createDefects    = ",this.createDefects);
+		console.log("this.showDefects      = ",this.showDefects);
+		console.log("this.manageDefects    = ",this.manageDefects);
+
+		this.showDefects         = localStorage.getItem('Role-PA5073');
+		if (this.showDefects   != 1){this.defectRole = 0}
+		this.createDefects       = localStorage.getItem('Role-PA5038');
+		if (this.createDefects != 1){this.defectRole = 0}
+		this.manageDefects       = localStorage.getItem('Role-PA5039');
+		if (this.manageDefects != 1){this.defectRole = 0}
+
+		console.log("this.defectRole  = ",this.defectRole);
 
 		this.openlocimg();
 

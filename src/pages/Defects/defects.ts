@@ -266,25 +266,23 @@ export class DefectsPage {
 	openSnag(snagid,orderstatus,locname,note){
 
 		localStorage.setItem('location', locname); 
-		console.log("Clicked open note");
+		console.log(orderstatus);
+		console.log(note);
+		console.log(snagid);
+		console.log("heading to snagging...");
 
-		if(orderstatus == 50){this.navCtrl.push(Snagging51Page,{snagid,orderstatus,note});}
-
-		if(orderstatus == 51){this.navCtrl.push(Snagging51Page,{snagid,orderstatus,note});}
+		if(orderstatus == 50 || orderstatus == 51 ){this.navCtrl.push(Snagging51Page,{snagid,orderstatus,note})}
 	
 		if((this.createDefects == 1 || this.manageDefects == 1) || note == 'note'){
-			if(orderstatus == 52){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
-			if(orderstatus == 53){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
+			if(orderstatus == 52 || orderstatus == 53 ){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
 		} 
-
-		if((this.createDefects == 0 || this.manageDefects == 0)  && orderstatus > 51 && note == 'nonote'){
+/*
+	 	if((this.createDefects == 0 || this.manageDefects == 0)  && orderstatus > 51 && note == 'nonote'){
 			this.presentNoAccessAlert();
 		}
-
+*/
 		if(this.manageDefects == 1){
-			console.log("In 54 55");
-			if(orderstatus == 54){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
-			if(orderstatus == 55){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
+			if(orderstatus == 54 || orderstatus == 55 || orderstatus == 56){this.navCtrl.push(Snagging52Page,{snagid,orderstatus,note});}
 		}
 	}
 
@@ -299,17 +297,16 @@ export class DefectsPage {
 			if(htmlElement.length == 1){ searchTerm = htmlElement["0"].value;}
 			if(htmlElement.length == 2){ searchTerm = htmlElement["1"].value;}		
 
-			console.log(htmlElement);
-			console.log(searchTerm);
+			console.log("searchTerm  = ",searchTerm);
 
 			if(searchTerm == ""){searchTerm = "nosearch";}
-
-
+			
+			console.log("searchTerm  = ",searchTerm);
 
 			if(segment == "all"){
 
 				var urls1 = Constants.apiUrl+"api/defects/"+this.apiKey+"/"+this.SystemProjectID+"/"+this.SystemUserID+"/"+searchTerm+"/1/"+this.defectRole;
-				console.log(urls1);
+				console.log("urls1   ",urls1);
 
 		    	this.http.get(urls1).map(res => res.json()).subscribe(data => {
 		        this._sanitizer.bypassSecurityTrustStyle(data);
