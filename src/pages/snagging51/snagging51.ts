@@ -332,12 +332,13 @@ export class Snagging51Page {
 		
 		formData1.append('orderid', this.defect1snotesid);
 		formData1.append('details', this.newnote);
-		formData1.append('uid', this.uid);		
+		formData1.append('uid', this.uid);	
 		formData1.append('cid', this.cid);
+		formData1.append('pid', this.pid);
 
 	    this.http.post(upnoteurl,formData1).map(res => res.json()).subscribe(data => {
 	        this.updata = data;
-			console.log(data);
+			console.log("data");
 	    },err => {console.log("Oops!")}); 
 
 		this.dismiss();
