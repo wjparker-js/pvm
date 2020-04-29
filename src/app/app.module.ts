@@ -54,6 +54,7 @@ import { WidthPopoverPage } from '../pages/width-popover/width-popover';
 import { BrushTypePopoverPage } from '../pages/brush-type-popover/brush-type-popover';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { Network } from '@ionic-native/network';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { Network } from '@ionic-native/network';
   ],
   imports: [
     BrowserModule,HttpModule,NgxQRCodeModule,IonicImageViewerModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp, {
       platforms: {
           ios: {

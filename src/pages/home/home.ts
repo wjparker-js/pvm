@@ -12,6 +12,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import * as Constants from '../../providers/constants';
 import { IfObservable } from 'rxjs/observable/IfObservable';
 import { Network } from '@ionic-native/network';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home', 
@@ -44,6 +45,7 @@ export class HomePage {
 	showDefects: any;
   manageDefects: any;
   defectRole:any;
+  bname:any;
 
   placeholdavatar:any;
   testavatar:any;
@@ -88,6 +90,7 @@ export class HomePage {
     public navParams: NavParams, 
     private network: Network,
     public app : App, 
+    private storage: Storage,
     public authService : AuthService) {
   }
 
@@ -103,6 +106,11 @@ export class HomePage {
       this.displayNetworkUpdate(data.type);
     }, error => console.error(error));
 
+    this.storage.set('bname', 'Billiam');
+    
+  this.storage.get('bname').then(data => (this.bname = data));
+  
+    
 
     this.menu.enable(true); 
     //this.getGeolocation();
@@ -141,6 +149,8 @@ export class HomePage {
 
 
     this.sleep(200); 
+
+    console.log("bname = ",this.bname);
     
     var apiKey  = this.userPostData.apiKey;
     var uid     = this.userPostData.SystemUserID;  
@@ -220,9 +230,12 @@ export class HomePage {
           console.log("Oops! - No T4 Data");
       }
     );   
-
   }
  
+  ionViewDidEnter() {
+    
+  }
+
 
   checkImage(imageSrc) {
     var image = new Image();
