@@ -16,6 +16,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { DocumentsPage } from '../pages/documents/documents';
 import { DocumentViewer } from '../pages/documentviewer/documentviewer';
 import { DocumentInfo } from '../pages/documentinfo/documentinfo';
+import { DocumentIdInfo } from '../pages/documentidinfo/documentidinfo';
 import { ProjectsPage } from '../pages/projects/projects';
 import { SnaggingPage } from '../pages/snagging/snagging';
 import { Snagging51Page } from '../pages/snagging51/snagging51';
@@ -67,6 +68,7 @@ import { IonicStorageModule } from '@ionic/storage';
     DocumentsPage,
     DocumentViewer,
     DocumentInfo,
+    DocumentIdInfo,
     ProjectsPage,
     DocumentSummary,
     SnaggingPage,
@@ -118,6 +120,7 @@ import { IonicStorageModule } from '@ionic/storage';
     DocumentsPage,
     DocumentViewer,
     DocumentInfo,
+    DocumentIdInfo,
     ProjectsPage,
     SnaggingPage,
     Snagging51Page,

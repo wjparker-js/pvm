@@ -41,19 +41,15 @@ export class DocumentInfo {
     public viewCtrl: ViewController
     ) {
 
-    var docimg="";
     this.docimg = this.params.get('docimg');
     console.log("IMG: %s",this.docimg);
 
-    var docid="";
     this.docid = this.params.get('docid');
     console.log("ID: %s",this.docid);
 
-    var docno1="";
     this.docno1 = this.params.get('docno1');
     console.log("DOC: %s",this.docno1);
 
-    var search="";
     this.search = this.params.get('search');
     console.log("Ser: %s",this.search);
 
@@ -68,12 +64,6 @@ export class DocumentInfo {
     this.userdocumentInfoData.DocumentNumber  = documentData[0].DocumentNumber;
 
     this.avatardata             = localStorage.getItem('avatar');
-
-    var documentApiKey          = this.userdocumentInfoData.apiKey;  
-    var documentSystemUserID    = this.userdocumentInfoData.SystemUserID;
-    var documentSystemProjectID = this.userdocumentInfoData.SystemProjectID; 
-    var documentThumbnail       = this.userdocumentInfoData.Thumbnail;
-    var documentDocumentNumber  = this.userdocumentInfoData.DocumentNumber;
 
     var url = Constants.apiUrl+"api/documentinfo/xxx/"+this.userdocumentInfoData.SystemUserID+"/"+this.userdocumentInfoData.SystemProjectID+"/docno"+this.docno1+"/"+this.search;
     

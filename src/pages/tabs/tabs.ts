@@ -19,18 +19,22 @@ export class TabsPage {
   tab4Root = DefectsPage;
   tab5Root = ContactPage;
 
-  defectsEnabled : boolean;
+  defectsShow : boolean;
  
   constructor() {
-
-    let yourColor = "primary";
-
-    var canViewDefects = localStorage.getItem('Role-PA5073');
+/*
+    var canViewDefects   = localStorage.getItem('Role-PA5073');
+    var canAddDefects    = localStorage.getItem('Role-PA5038');    
+    var canManageDefects = localStorage.getItem('Role-PA5039');
     
-    this.defectsEnabled = false;
+    this.defectsShow = false;
+    //canManageDefects = "1";
 
-    if(canViewDefects == "1"){
-      this.defectsEnabled = true;
+    if(canManageDefects == "1" || canAddDefects == "1" || canViewDefects == "1"){
+      this.defectsShow = true;
+      this.tab4Root = DocumentsPage;
+      this.tab5Root = DefectsPage;
+*/
     }
-  }
+                                                                                          
 }

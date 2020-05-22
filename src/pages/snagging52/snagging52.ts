@@ -203,14 +203,29 @@ export class Snagging52Page {
 			buttons: [
 				{
 					text: 'Load from Library',
-					handler: () => {
-						this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+					handler: () => {						
+						this.takePicture(false)
+						.then(
+							
+							(image: string) => {
+								localStorage.setItem('postpostimage', image);
+								this.currentImage = localStorage.getItem('postpostimage');
+							}
+						)
+						.catch(() => {});
 					}
 				},
 				{
 					text: 'Use Camera',
 					handler: () => {
-						this.takePicture(this.camera.PictureSourceType.CAMERA);
+						this.takePicture(true)
+						.then(
+							(image: string) => {
+								localStorage.setItem('postpostimage', image);
+								this.currentImage = localStorage.getItem('postpostimage');
+							}
+						)
+						.catch(() => {});
 					}
 				},
 				{
@@ -225,15 +240,7 @@ export class Snagging52Page {
 
 	private addimage(action){
 		if(action === "add"){
-			this.takePicture(true)
-			.then(
-				(image: string) => {
-					localStorage.setItem('postpostimage', image);
-					this.currentImage = localStorage.getItem('postpostimage');
-				}
-			)
-			.catch(() => {})
-			;
+			this.presentActionSheet()
 		} else {
 			console.log("In addimage");
 			this.navCtrl.push(ImgEditPagePostPost, {callback:this.myCallbackFunction});

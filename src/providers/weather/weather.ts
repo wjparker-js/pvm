@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-
 
 @Injectable()
 export class WeatherProvider {
@@ -17,13 +15,12 @@ export class WeatherProvider {
   }
 
   getWeather(city){
-    console.log('Getting Weather');
-    var theCity = city.replace(" ", "-");
+    console.log('Getting Weather for a city');
   	return  this.http.get(this.url+city+",gb").map(res => res.json());
   }
 
   getWeathercoords(lat,long){
-  	console.log('Getting Weather');
+  	console.log('Getting Weather using coordinates');
   	return  this.http.get(this.url+"&lat="+lat+"&lon="+long).map(res => res.json());
   }
 }

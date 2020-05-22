@@ -28,23 +28,11 @@ export class AboutPage {
 
   constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public params: NavParams, public http: Http, public modalCtrl: ModalController, public viewCtrl: ViewController, private toastCtrl:ToastController) {
 
-    this.avatardata     = localStorage.getItem('avatar');
-    console.log("Documents Avatar = "+this.avatardata);
-
-    var docimg="";
-    this.docimg = this.params.get('docimg');
-    console.log("Img: %s",this.docimg);
-
-    var docid="";
-    this.docid = this.params.get('docid');
-    console.log("DId: %s",this.docid);
-
-    var docno1="";
-    this.docno1 = this.params.get('docno1');
-    console.log("DNo: %s",this.docno1);
-
-    const documentData = JSON.parse(localStorage.getItem('userSystemData'));   
-
+    this.avatardata            = localStorage.getItem('avatar');
+    this.docimg                = this.params.get('docimg');
+    this.docid                 = this.params.get('docid');
+    this.docno1                = this.params.get('docno1');
+    const documentData         = JSON.parse(localStorage.getItem('userSystemData'));   
     this.docSystemData.pid     = localStorage.getItem('CurrentProjectID');
     this.docSystemData.scid    = documentData[0].SystemClientID;
     this.docSystemData.uid     = documentData[0].SystemUserID;
@@ -73,6 +61,7 @@ export class AboutPage {
   }
 
 
+  
   setUserType(sGroup) {
 
     if(sGroup == "Users" ){
@@ -85,7 +74,7 @@ export class AboutPage {
             console.log(this.groupContacts);
         },
         err => {
-            console.log("Oops!");
+            console.log("Oops! Group Contacs error");
         }
       ); 
 
@@ -99,7 +88,7 @@ export class AboutPage {
             console.log(this.groupContacts);
         },
         err => {
-            console.log("Oops!");
+              console.log("Oops! Group Contacs error");
         }
       ); 
 
@@ -108,10 +97,13 @@ export class AboutPage {
   }
 
 
+
   private delay(ms: number)
   {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+
 
   private async presentProjectToast(msg){
     let toast = this.toastCtrl.create({
@@ -125,21 +117,23 @@ export class AboutPage {
   }
 
 
+
   sendEmail(){
 
-    //Send email - written to audit
     this.http.get(Constants.apiUrl+'api/sendemail/'+this.docSystemData.apiKey+'/'+this.docSystemData.uid+'/'+this.docSystemData.pid+'/'+this.docSystemData.from+'/'+this.docSystemData.to+'/'+this.docSystemData.subject+'/'+this.docSystemData.message+'/'+this.docSystemData.docid+'/'+this.docno1).map(res => res.json()).subscribe(data => {
           this.useremaildata = data;
           console.log(this.useremaildata);
       },
       err => {
-          console.log("Oops!");
+          console.log("Oops! User Email error");
       }
     ); 
 
     this.presentProjectToast("Email Sent");
 
   }
+
+
 
   dismiss() {
     this.viewCtrl.dismiss();

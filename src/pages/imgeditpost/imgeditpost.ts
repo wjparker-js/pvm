@@ -158,6 +158,58 @@ export class ImgEditPagePost {
   }
 
 
+  /**
+   * Adds image to canvas
+   */
+  addImageURL() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Add photo',
+      buttons: [
+        {
+          text: 'Take picture',
+          icon: 'camera',
+          handler: () => {
+            this.takePicture(true)
+              .then(
+                (image: string) => {
+                  this.drawingEnabled = false;
+                  this.drawing.addImage(image);
+                  //canvas.setActiveObject(canvas.item(0));
+                  //image.scaleToHeight(300);
+                  //image.scaleToWifth(300);
+                }
+              )
+              .catch(() => {})
+            ;
+          }
+        },{
+          text: 'Select from gallery',
+          icon: 'image',
+          handler: () => {
+            this.takePicture(false)
+              .then(
+                (image: string) => {
+                  this.drawingEnabled = false;
+                  this.drawing.addImage(image);
+                  this.drawing.canvas.setActiveObject(this.drawing.canvas.item(0));
+                  this.drawing.canvas.image.scaleToHeight(50);
+                  this.drawing.canvas.image.scaleToWifth(50);
+                }
+              )
+              .catch(() => {})
+            ;
+          }
+        },{
+          text: 'Cancel',
+          icon: 'close',
+          handler: () => {}
+        }
+      ]
+    });
+
+    actionSheet.present();
+  }
+
 
 
   /**

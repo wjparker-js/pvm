@@ -1,13 +1,20 @@
 <ion-header>
-  <ion-navbar primary>   
+  <ion-navbar>       
     <ion-buttons left style='margin-left: 0px;margin-right: 0px;'>
         <button ion-button menuToggle start style='margin-left:6px'>
             <ion-icon name="menu"></ion-icon>
         </button>
     </ion-buttons>
-    <span style="font-size:16px;color:white;">{{this.userdocumentData.SystemProjectName}}</span>  
-  </ion-navbar>
 
+    <span style="font-size:16px;color:white;">{{this.userdocumentData.SystemProjectName}}</span>    
+    
+    <ion-buttons right>        
+        <button ion-button  color="light" type="button" item-right style="font-size:24px;" (click)="scanDocQRCode()"> 
+        <ion-icon name="qr-scanner"> </ion-icon>
+        </button>  
+        &nbsp;
+    </ion-buttons>
+  </ion-navbar> 
   <div>
     <ion-searchbar
       #mySearchbar 

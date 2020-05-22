@@ -13,3 +13,5 @@ export const fileUrl = 'https://docs.google.com/gview?embedded=true&url=https://
 export const defectUploadPath = "//filesrv-1/websites/SV/projectvaultuk.com/PublicPics/";
 export const publicUploadPath = "https://projectvaultuk.com/PublicPics/";
 //
+
+export const showDefects = false; 

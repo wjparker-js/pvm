@@ -90,17 +90,19 @@ export class ProjectsPage {
 
           localStorage.setItem('Role-Name', RoleName);
           localStorage.setItem('Role-Description', RoleDescription);
-          localStorage.setItem('Role-PA5038', PA5038);
+
           localStorage.setItem('Role-PA5073', PA5073); 
+          localStorage.setItem('Role-PA5038', PA5038);
+          if(PA5038 == "1"){localStorage.setItem('Role-PA5073', "1")}
           localStorage.setItem('Role-PA5039', PA5039); 
+          if(PA5039 == "1"){localStorage.setItem('Role-PA5073', "1")}
+
           localStorage.setItem('postimage', ""); 
           localStorage.setItem('image', ""); 
           localStorage.setItem('preimage', ""); 
           localStorage.setItem('locationimage', ""); 
           localStorage.setItem('location', ""); 
           //localStorage.setItem('CurrentProjectClientID', "");
-          
-          
 
           console.log(this.navCtrl.parent.select(0));  
       },
@@ -117,7 +119,8 @@ export class ProjectsPage {
       position: 'bottom'
     });
     toast.present();
+    //document.location.href = 'index.html';
     this.navCtrl.parent.select(0);
   }
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 }

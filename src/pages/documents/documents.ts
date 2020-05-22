@@ -6,11 +6,15 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { DocumentViewer } from '../documentviewer/documentviewer';
 import { DocumentInfo } from '../documentinfo/documentinfo';
+import { DocumentIdInfo } from '../documentidinfo/documentidinfo';
 import { DocumentAudit } from '../documentaudit/documentaudit';
 import { AboutPage } from '../about/about';
 import { Keyboard } from '@ionic-native/keyboard';
 import { SubtypesPage } from '../subtypes/subtypes';
 import * as Constants from '../../providers/constants';
+
+import { QrcodePage } from '../qrcode/qrcode';
+import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 
 @IonicPage()
 
@@ -25,6 +29,20 @@ export class DocumentsPage {
  
 
   userdocuments: any;
+  
+  documentID: any;
+  documentNumber: any;
+  photoTiny: any;
+  projectID: any;
+  systemclientID: any;
+
+
+  documentQRData:any;
+  apiKey:any;
+	options: any;
+	defectslist: any;
+  scannedCode: any;
+  location:any;
   customfieldnames: any;
   fieldnames: any;
   userApiKey : any;
@@ -35,6 +53,7 @@ export class DocumentsPage {
   cpid : any;
   scid : any;
   mySearchTerm:any;
+  searchDoc:any;
   searchbar: Searchbar;
   
   userdocumentData = {
@@ -54,10 +73,11 @@ export class DocumentsPage {
               private _sanitizer: DomSanitizer, 
               private keyboard : Keyboard,
               private renderer:Renderer,
+              private barcodeScanner:BarcodeScanner,
               public modalCtrl: ModalController) {}
 
   ionViewDidLeave(){
-    //document.getElementsByClassName("searchbar-input")["0"].value = "";
+    //document.getElementsByClassName("searchbar-input")["0"].value = "for";
     //console.log(searchvalue);
     //this.searchbar.clearInput(null);
     //this.searchbar.value = '';
@@ -68,7 +88,6 @@ export class DocumentsPage {
 
     console.log("myInput = ", this.myInput);
 
-
     //https://www.sky-vault.co.uk/PublicPics/"+this.scid+"/"+cpid+"/' + 
 
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
@@ -77,11 +96,11 @@ export class DocumentsPage {
     this.userdocumentData.SystemProjectName = localStorage.getItem('CurrentProjectName'); 
     this.userdocumentData.SystemClientID    = documentData[0].SystemClientID;
     this.userdocumentData.SystemUserID      = documentData[0].SystemUserID;
-    this.userdocumentData.SystemUserID      = this.userdocumentData.SystemUserID.trim();
     this.userdocumentData.apiKey            = documentData[0].apiKey;    
     this.userdocumentData.Thumbnail         = documentData[0].PhotoTiny;
     this.userdocumentData.DocumentNumber    = documentData[0].DocumentNumber; 
     this.userdocumentData.FileExtension     = documentData[0].FileExtension; 
+		this.apiKey                             = documentData[0].apiKey; 
     
     var documentSystemProjectID = this.userdocumentData.SystemProjectID; 
     var selectedProjectName     = this.userdocumentData.SystemProjectName;    
@@ -174,7 +193,56 @@ export class DocumentsPage {
       return Object.keys(obj);
   }
 
-  
+
+
+	scanDocQRCode(){
+			
+		this.options = {prompt : "Scan your barcode"}
+
+		this.barcodeScanner.scan(this.options).then(barcodedata => {
+
+			this.scannedCode = barcodedata.text;			
+      console.log("QR Scanned Code: ", this.scannedCode);     
+
+			if(this.scannedCode.indexOf("=") > 0){
+				var index = this.scannedCode.split( "=" );
+        this.scannedCode = index[1];
+        index = this.scannedCode.split( "-" );
+        var auditCode = index[0];
+        var projNum   = index[1];
+				var documentQRDatasurl = Constants.apiUrl+"api/documentQRData/"+this.apiKey+"/"+auditCode+"/"+projNum+"/"+this.userdocumentData.SystemUserID;
+				this.http.get(documentQRDatasurl).map(res => res.json()).subscribe(data => {
+			      this._sanitizer.bypassSecurityTrustStyle(data);
+            this.documentQRData = data; 
+
+            console.log("Doc QR Data",this.documentQRData);
+
+            this.documentID     = this.documentQRData["0"].DocumentID;
+            this.documentNumber = this.documentQRData["0"].DocumentNumber;
+            this.projectID      = this.documentQRData["0"].ProjectID;
+            this.systemclientID = this.documentQRData["0"].SystemClientID;
+
+            console.log("DocumentID       ",this.documentQRData["0"].DocumentID);
+            console.log("DocumentNumber   ",this.documentQRData["0"].DocumentNumber);
+            console.log("ProjectID        ",this.documentQRData["0"].ProjectID);
+            console.log("SystemClientID   ",this.documentQRData["0"].SystemClientID);
+            
+            //this.navCtrl.push(DocumentIdInfo,{this.systemclientID,this.documentID,this.projectID,this.userdocumentData.SystemUserID});
+
+            //scid,did,docno,pid,uid}  this.navCtrl.push(DocumentInfo,{this.photoTiny, this.documentID, this.documentNumber,''});
+            
+            this.openDocumentIdInfo(this.systemclientID,this.documentID,this.projectID,this.userdocumentData.SystemUserID); 
+
+						
+					},err => {
+					  console.log("Get defects from sticker code failed.");
+				  });
+      } 
+      
+		});
+	}
+
+
 
   checkBlur($event){
     console.log("Got Blur");
@@ -198,20 +266,15 @@ checkFocus($event){
   searchByKeyword($event){
 
     var searchvalue = document.getElementsByClassName("searchbar-input")["0"].value;
-    console.log("Event ",$event);
-
-
+   
     this.selectedProjectName     = localStorage.getItem('CurrentProjectName');    
     var documentSystemUserID1    = this.userdocumentData.SystemUserID;
     var documentSystemProjectID1 = localStorage.getItem('CurrentProjectID');    
     var searchTerm               = $event.srcElement.value;
-    console.log("Search term ",searchTerm);
     var localDocumentData        = JSON.parse(localStorage.getItem('userSystemData'));
     var localApiKey              = localDocumentData[0].apiKey;
     this.eventInstance           = $event;
     this.dsearch                 = $event.srcElement.value;
-
-    console.log("myInput: ",this.myInput);
 
     if(typeof searchTerm  !== "undefined"){
       if(searchTerm.length > 1 ){
@@ -225,9 +288,6 @@ checkFocus($event){
               this.hasdocs = true;
             }
             console.log(this.userdocuments);
-            //this.searchbar._elementRef.nativeElement.blur;
-           // $event.srcElement.value       = "";
-            //console.log("Search term ",$event.srcElement.value );
             this.renderer.invokeElementMethod($event.target, 'blur');
         },
         err => {
@@ -286,6 +346,12 @@ checkFocus($event){
 
     this.navCtrl.push(DocumentInfo,{docimg, docid, docno1, search});
   }
+
+  
+  openDocumentIdInfo(iscid,idid,ipid,iuid){ 
+    this.navCtrl.push(DocumentIdInfo,{iscid,idid,ipid,iuid});
+  }
+
 
   openDocumentAudit(docimg, docid, docno1){ 
     this.navCtrl.push(DocumentAudit,{docimg, docid, docno1});

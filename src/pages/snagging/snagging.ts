@@ -126,20 +126,35 @@ export class SnaggingPage {
 
 	}
 
-/*	public presentActionSheet() {
+	public presentActionSheet() {
 		let actionSheet = this.actionSheetCtrl.create({
 			title: 'Select Image Source',
 			buttons: [
 				{
 					text: 'Load from Library',
 					handler: () => {
-						this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+						this.takePicture(false)
+						.then(
+							
+							(image: string) => {
+								localStorage.setItem('preimage', image);
+								this.currentImage = localStorage.getItem('preimage');
+							}
+						)
+						.catch(() => {});
 					}
 				},
 				{
 					text: 'Use Camera',
-					handler: () => {
-						this.takePicture(this.camera.PictureSourceType.CAMERA);
+					handler: () => {						
+						this.takePicture(true)
+						.then(
+							(image: string) => {
+								localStorage.setItem('pretimage', image);
+								this.currentImage = localStorage.getItem('pretimage');
+							}
+						)
+						.catch(() => {});
 					}
 				},
 				{
@@ -150,20 +165,12 @@ export class SnaggingPage {
 		});
 		actionSheet.present();
 	}
-*/
+
 
 	
 	private addimage(action){
 		if(action === "add"){
-			this.takePicture(true)
-			.then(
-				(image: string) => {
-					localStorage.setItem('preimage', image);
-					this.currentImage = localStorage.getItem('preimage');
-				}
-			)
-			.catch(() => {})
-			;
+			this.presentActionSheet();
 		} else {
 			this.navCtrl.push(ImgEditPagePre, {callback:this.myCallbackFunction8});
 		}

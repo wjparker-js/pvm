@@ -40,7 +40,8 @@ export class DefectsviewPage {
 	apiKey: any;
 	image: any;
 	location: string = "";
-	defectRole:any;
+	defectRole:any;	
+	alert:  string = "Y";
 
 	public ImgUrl:any;
 	public imageUrl: any;
@@ -66,15 +67,16 @@ export class DefectsviewPage {
 		console.log("Defect Status:",this.defectstatus);
 		
 		var url = "";
+		
+		this.defectslist         = "";
 
-		
-		this.showDefects         = localStorage.getItem('Role-PA5073');
 		this.createDefects       = localStorage.getItem('Role-PA5038');
-		this.manageDefects       = localStorage.getItem('Role-PA5039');
+		this.showDefects         = localStorage.getItem('Role-PA5073');
+		this.manageDefects       = localStorage.getItem('Role-PA5039');		
 		
-		if(this.showDefects   != 0 && this.showDefects   != null){this.defectRole = "73"}
-		if(this.createDefects != 0 && this.createDefects != null){this.defectRole = "38"}
-		if(this.manageDefects != 0 && this.showDefects   != null){this.defectRole = "39"}
+		if(this.createDefects == 1){this.defectRole = "38"; this.alert = "N"; localStorage.setItem('Role-PA5073','1');}
+		if(this.manageDefects == 1){this.defectRole = "39"; this.alert = "N"; localStorage.setItem('Role-PA5073','1');}
+		if(this.showDefects   != 1){this.defectRole = "73"; this.alert = "Y"}
 
 		this.image = "https://projectvaultuk.com/PublicPics/"+this.SystemCID+"/"+this.SystemProjectID+"/LocationImages/";
 
@@ -101,6 +103,7 @@ export class DefectsviewPage {
     });
 
     await alert.present();
+	this.navCtrl.parent.select(0);
   }
 
 
