@@ -56,6 +56,7 @@ import { BrushTypePopoverPage } from '../pages/brush-type-popover/brush-type-pop
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { Network } from '@ionic-native/network';
 import { IonicStorageModule } from '@ionic/storage';
+import { RfiPage } from '../pages/rfi/rfi';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { IonicStorageModule } from '@ionic/storage';
     DefectsviewPage,
     SubtypesPage,
     QrcodePage,
+    RfiPage,
     LocationmapPage,
     DisciplinePage,
     EffectsPage,
@@ -129,6 +131,7 @@ import { IonicStorageModule } from '@ionic/storage';
     DefectsviewPage,
     SubtypesPage,
     QrcodePage,
+    RfiPage,
     LocationmapPage,
     DisciplinePage,
     EffectsPage,

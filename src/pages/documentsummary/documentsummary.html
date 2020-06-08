@@ -19,6 +19,17 @@
                             <img [src]="document.PhotoTiny"  style="width:100%;border:2px;" (click)= "openDocuments(userdocumentInfoData.SystemClientID,userdocumentInfoData.SystemProjectID,document.DocumentID,document.FileExtension)"/>
                     </ion-card-header> 
 
+                    <ion-card-content  style="margin-top:10px;left:8px;width:100%; " >
+
+                      <ion-item *ngFor="let key of keys(document)" style = "font-size:11px;min-height:0px;margin-top:3px;" text-wrap>
+                        
+                        <ion-label [innerHtml]="'<b>'+key+':</b> '+document[key]" *ngIf="key != 'Display' && key != '' && key != 'HasPhoto' && key != 'HasNotes' && key != 'HasVersions' && key != 'PhotoTiny' && key != 'DocumentID' && key != 'DNREV' && key != 'TI'!= 'DNREV' && key != 'FolderID'" style="margin-top: 0px; margin-bottom: 4px;" ></ion-label>
+                       
+                      </ion-item>
+
+                    </ion-card-content>
+
+<!--
                     <ion-card-content>
                         <ion-list >
                             <ion-item >
@@ -51,7 +62,7 @@
                             </ion-item>
                         </ion-list>
                     </ion-card-content>  
-
+                  -->
                 </ion-card>
             </ion-col>
         </ion-row>

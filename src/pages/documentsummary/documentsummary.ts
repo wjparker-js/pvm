@@ -51,7 +51,10 @@ export class DocumentSummary {
 
   }
 
-  
+  keys(obj){
+    return Object.keys(obj);
+  }  
+
   openDocuments(clientid,projectid,docid,ext){
     this.navCtrl.push(DocumentViewer,{clientid,projectid,docid,ext});
   }

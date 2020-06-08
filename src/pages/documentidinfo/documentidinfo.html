@@ -22,7 +22,7 @@
               </ion-label> 
             </ion-item> 
             <ion-item *ngFor="let key of keys(document)" style = "font-size:11px;min-height:0px;margin-top:3px;" text-wrap>
-                <ion-label [innerHtml]="'<b>'+key+':</b> '+document[key]" style="margin-top: 0px; margin-bottom: 4px;" *ngIf="key != 'SystemClientID' && key != 'ProjectID' && key != 'Display' && key != 'PhotoTiny' && key != 'DocumentID' && key != 'DNREV' && key != 'TI'!= 'DNREV' && key != 'FolderID'"></ion-label>
+                <ion-label [innerHtml]="'<b>'+key+':</b> '+document[key]" style="margin-top: 0px; margin-bottom: 4px;" *ngIf="key != 'SystemClientID' && key != 'PhotoTiny' && key != 'ProjectID' && key != 'Display' && key != 'PhotoTiny' && key != 'DocumentID' && key != 'DNREV' && key != 'TI'!= 'DNREV' && key != 'FolderID'"></ion-label>
             </ion-item>
           </ion-card-content>
         </ion-card>

@@ -92,8 +92,8 @@ export class DefectsPage {
 		
 		this.alert = "Y";
 
-		if(this.createDefects == 1){this.defectRole = "38"; this.alert = "N"; localStorage.setItem('Role-PA5073','1')}
-		if(this.manageDefects == 1){this.defectRole = "39"; this.alert = "N"; localStorage.setItem('Role-PA5073','1')}
+		if(this.createDefects == 1){this.defectRole = "38"; this.alert = "N"; this.showDefects = 1; localStorage.setItem('Role-PA5073','1')}
+		if(this.manageDefects == 1){this.defectRole = "39"; this.alert = "N"; this.showDefects = 1; localStorage.setItem('Role-PA5073','1')}
 		if(this.showDefects   == 1){this.defectRole = "73"; this.alert = "N"}
 
 		console.log("Show alert: ",this.alert);

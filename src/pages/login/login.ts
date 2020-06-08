@@ -30,7 +30,8 @@ export class Login {
   public showLogin: boolean = false;
   public PIN:any;
   public md5:any;
-  public userSystemData = {"id":"","password":"","sysuserid":"","currentproject":"","apiKey":""};  
+  public userSystemData = {"id":"","password":"","sysuserid":"","currentproject":"","apiKey":""}; 
+
 
   constructor(
     public navCtrl: NavController, 
@@ -45,17 +46,19 @@ export class Login {
   ionViewWillEnter() {
 
     this.network.onConnect().subscribe(data => {
-      console.log(data)
+      console.log("Connect:",data)
       this.displayNetworkUpdate(data.type);
-    }, error => console.error(error));
+    }, error => console.log(error));
    
     this.network.onDisconnect().subscribe(data => {
-      console.log(data)
+      console.log("Disconnect:",data)
       this.displayNetworkUpdate(data.type);
-    }, error => console.error(error));
+    }, error => console.log(error));
+
+    //this.connectionmsg = "wifi";
 
     if ((localStorage.getItem('login_password') !== null) && (localStorage.getItem('login_password') !== "xxx-xxx")) {
-      this.showLogin = true;
+      this.showLogin                     = true;
       var userData                       = JSON.parse(localStorage.getItem('userSystemData'));
       this.userSystemData.sysuserid      = userData[0].SystemUserID;
       this.userSystemData.sysuserid      = this.userSystemData.sysuserid.trim();
@@ -76,7 +79,6 @@ export class Login {
 
 
   ionViewLoaded() {
-
     setTimeout(() => {
       this.myInput.setFocus();
     },150);
@@ -180,7 +182,9 @@ export class Login {
 
   displayNetworkUpdate(connectionState: string){
     let networkType = this.network.type;
-    this.connectionmsg = `${networkType}`;
+    this.connectionmsg = `${networkType}`;  
+    console.log("In  displayNetworkUpdate");
+    //this.connectionmsg = networkType;
   }
 
 

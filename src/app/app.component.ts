@@ -21,7 +21,6 @@ export class MyApp {
       //splashScreen.hide();
       var userData  = localStorage.getItem('Role-Name');
       this.SysUserID  = userData; 
-      console.log("userData",userData);
     });
   }
 

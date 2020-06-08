@@ -8,7 +8,6 @@ export class SplitPane {
   public splitPaneState : boolean;
 
   constructor(public platform : Platform) {
-    console.log('Hello SplitPane Provider');
     this.splitPaneState = false;
   }
 
