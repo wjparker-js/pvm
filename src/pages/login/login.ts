@@ -21,7 +21,7 @@ export class Login {
 
   public connected: Subscription;
   public disconnected: Subscription;
-  public connectionmsg: string ="";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+  public connectionmsg: string ="1";                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
   public defectsEnabled : boolean;
   public loginprojectuserdetails: any;  
   public responseData : any;
@@ -46,16 +46,33 @@ export class Login {
   ionViewWillEnter() {
 
     this.network.onConnect().subscribe(data => {
-      console.log("Connect:",data)
+      console.log("Connect:",data)          
+      localStorage.setItem('online','1');
       this.displayNetworkUpdate(data.type);
+      console.log(this.displayNetworkUpdate(data.type));
     }, error => console.log(error));
    
     this.network.onDisconnect().subscribe(data => {
-      console.log("Disconnect:",data)
-      this.displayNetworkUpdate(data.type);
+      console.log("Disconnect:",data) 
+      localStorage.setItem('online','0');
+      this.displayNetworkUpdate(data.type);      
+      console.log(this.displayNetworkUpdate(data.type));
     }, error => console.log(error));
+ 
+    this.connectionmsg = " ";    
 
-    //this.connectionmsg = "wifi";
+    if(this.connectionmsg == "NONE"){localStorage.setItem('online','0')} 
+    if(this.connectionmsg != "NONE"){localStorage.setItem('online','1');}
+
+    localStorage.setItem('selecteddocids',"");
+    localStorage.setItem('removeddocids',"");
+
+    if(this.connectionmsg == "NONE"){ 
+      setTimeout(() => {
+        this.navCtrl.push(TabsPage);
+      },1000);
+    }
+
 
     if ((localStorage.getItem('login_password') !== null) && (localStorage.getItem('login_password') !== "xxx-xxx")) {
       this.showLogin                     = true;
@@ -67,6 +84,8 @@ export class Login {
       this.userSystemData.password       = localStorage.getItem('login_password');
       this.userSystemData.id             = localStorage.getItem('login_id');
       this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');
+
+     
     }
 
     if ((localStorage.getItem('login_password') == null && localStorage.getItem('login_id') == null) || (localStorage.getItem('login_password') == "xxx-xxx" && localStorage.getItem('login_id') == "xxx-xxx") ) {

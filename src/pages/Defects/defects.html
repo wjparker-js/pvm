@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-navbar>       
+<ion-header >
+  <ion-navbar color="primary">       
     <ion-buttons left style='margin-left: 0px;margin-right: 0px;'>
         <button ion-button menuToggle start style='margin-left:6px'>
             <ion-icon name="menu"></ion-icon>
@@ -48,6 +48,27 @@
 
 </ion-header>
 
+<!--
+<ion-header [hidden]="!this.online">
+  <ion-navbar color="bold">       
+    <ion-buttons left style='margin-left: 0px;margin-right: 0px;'>
+        <button ion-button menuToggle start style='margin-left:6px'>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-buttons>
+
+    <span style="font-size:16px;color:white;">{{selectedProjectName}}</span>    
+    
+    <ion-buttons right>        
+        <button   ion-button  color="light" type="button" item-right style="font-size:16px;color:white;" (click)="newSnag('new')"> 
+          <ion-icon strong name="add"> </ion-icon>
+        </button>  
+        &nbsp;
+    </ion-buttons>
+  </ion-navbar> 
+</ion-header>
+-->
+
 <ion-content class="bodytext">
   <ion-grid style="position:relative;top:4px;">
     <ion-row [hidden]="showDefects == 0" > 
@@ -88,10 +109,6 @@
             </div>     
 
           </ion-item>
-
-          <ion-item-options side="right">
-            <button ion-button color="primary" (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name,'note')">Add Note</button>
-          </ion-item-options>
 
          </ion-item-sliding>
          </ion-card>

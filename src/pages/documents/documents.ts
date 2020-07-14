@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ViewChild, ElementRef, Renderer } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams, Searchbar} from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams,  ViewController , Searchbar} from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { DocumentViewer } from '../documentviewer/documentviewer';
@@ -27,7 +27,6 @@ export class DocumentsPage {
   //@ViewChild('mySearchbar') searchbar: Searchbar;
 
  
-
   userdocuments: any;
   
   documentID: any;
@@ -35,6 +34,7 @@ export class DocumentsPage {
   photoTiny: any;
   projectID: any;
   systemclientID: any;
+  fromProcess: string = "N";
 
 
   documentQRData:any;
@@ -55,6 +55,14 @@ export class DocumentsPage {
   mySearchTerm:any;
   searchDoc:any;
   searchbar: Searchbar;
+  inprocess:any;
+  selecteddocument:any;
+  selecteddocid:any;
+  selecteddocno:any;
+
+  callback: any;
+
+  addDocuments = [];
   
   userdocumentData = {
     "SystemProjectID":"",
@@ -69,6 +77,7 @@ export class DocumentsPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
+              public viewCtrl: ViewController,
               public http: Http,
               private _sanitizer: DomSanitizer, 
               private keyboard : Keyboard,
@@ -83,10 +92,15 @@ export class DocumentsPage {
     //this.searchbar.value = '';
     //this.navCtrl.pop();
   }
+
+
   
   ionViewDidEnter() {
 
-    console.log("myInput = ", this.myInput);
+    //this.inprocess = "Y";
+
+    this.inprocess = this.navParams.get('inprocess');
+    this.callback = this.navParams.get("callback")
 
     //https://www.sky-vault.co.uk/PublicPics/"+this.scid+"/"+cpid+"/' + 
 
@@ -187,7 +201,8 @@ export class DocumentsPage {
       }
     ); 
   }
-  
+
+
 
   keys(obj){
       return Object.keys(obj);
@@ -361,6 +376,20 @@ checkFocus($event){
     this.navCtrl.push(AboutPage,{docimg, docid, docno1});
   }
 
+
+  documentAdd(docid,docnumber){
+    this.selecteddocument = docid;
+    console.log("Sending back: ",this.selecteddocument);
+		this.viewCtrl.dismiss();
+  }
+
+	ionViewWillLeave() {
+		this.callback(this.selecteddocument).then(()=>{});
+  }
+  
+	dismiss() {
+		this.viewCtrl.dismiss();
+	}  
   
 /*
 	openDTList(){		

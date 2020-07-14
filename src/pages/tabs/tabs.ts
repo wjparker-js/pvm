@@ -19,16 +19,22 @@ export class TabsPage {
   tab4Root = DefectsPage;
   tab5Root = ContactPage;
 
-  defectsShow : boolean;
+  online : boolean=true;
+  defectsShow : boolean=true;
  
   constructor() {
-/*
+
     var canViewDefects   = localStorage.getItem('Role-PA5073');
     var canAddDefects    = localStorage.getItem('Role-PA5038');    
     var canManageDefects = localStorage.getItem('Role-PA5039');
+    var isonline         = localStorage.getItem('online');
     
-    this.defectsShow = false;
-    //canManageDefects = "1";
+    if(isonline != "1"){
+      this.online = false;  
+    }
+  
+
+ /*   //canManageDefects = "1";
 
     if(canManageDefects == "1" || canAddDefects == "1" || canViewDefects == "1"){
       this.defectsShow = true;

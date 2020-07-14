@@ -15,6 +15,7 @@ import { DisciplinePage } from '../discipline/discipline';
 import { EffectsPage } from '../effects/effects';
 import { ReasonsPage } from '../reasons/reasons';
 import { SubtypesPage } from '../subtypes/subtypes';
+import { DocumentsPage } from '../documents/documents';
 import { QrcodePage } from '../qrcode/qrcode';
 import * as Constants from '../../providers/constants';
 import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
@@ -43,7 +44,7 @@ export class SnaggingPage {
 	createDefects: any;
 	manageDefects: any;
 	defectRole: any;
-	
+	online: boolean=true;
 	newnote: any;
 
 
@@ -74,6 +75,24 @@ export class SnaggingPage {
 	public lastImage: string = "";
     public loading: Loading;
 	public imageUrl: string = "";
+	
+	adddoc:any;
+	adddoc1:any;
+	adddocid:any;	
+	adddocs = [];	
+	adddocids = [];
+	removeddocids = [];
+	hasdocs:any;
+
+	userdocuments = {DocumentID:"",PhotoTiny:"",DocumentNumber:"",FolderName:"",Rev:"",Title:""}
+/*
+	PhotoTiny:any;
+	Docno:any;
+	Docid:any;
+	Rev:any;
+	Title:any;
+	Folder:any;
+*/
 
 	frmData = {reference:"", details: ""};
 
@@ -96,12 +115,23 @@ export class SnaggingPage {
 	) 
 	{	this.currentImage = "data:image/jpeg;base64," +  "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";	
 		//localStorage.setItem('preimage', this.currentImage);
+		//localStorage.setItem('selecteddocids',"");
+		//localStorage.setItem('selecteddocnos',"");
 	}
 
 
 	ionViewWillEnter() {	
+		
+		var isonline = localStorage.getItem('online');
+	  
+		if(isonline != "1"){
+		  this.online = false;  
+		}	
 
+		//console.log("Online: ",this.online)
 		var snagData = JSON.parse(localStorage.getItem('userSystemData'));
+
+
 
 		this.pid     = localStorage.getItem('CurrentProjectID');		
 		this.usr     = localStorage.getItem('login_id');
@@ -254,43 +284,6 @@ export class SnaggingPage {
 	}
 
 
-
-/*  private createFileName() {
-		var d = new Date(),
-		n = d.getTime(),
-		newFileName =  n + ".jpg";
-		return newFileName;
-	}  
-
-	private copyFileToLocalDir(namePath, currentName, newFileName) {
-		console.log("cordova.file.dataDirectory: ",cordova.file.dataDirectory);
-		this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-			this.lastImage = newFileName;
-		}, error => {
-			this.presentToast('Error while storing file.');
-		});
-	}
-	
-	public pathForImage(img) {
-		if (img === null) {
-			return '';
-		} else {
-			console.log(cordova.file.dataDirectory + img);
-			return cordova.file.dataDirectory + img;
-		}
-	}
-
-	private presentToast(text) {
-		let toast = this.toastCtrl.create({
-			message: text,
-			duration: 3000,
-			position: 'top'
-		});
-		toast.present();
-	}
-*/
-
-
 	associateQRCode(){
 		
 		this.options = {prompt : "Scan your barcode"}
@@ -324,6 +317,7 @@ export class SnaggingPage {
 		formData.append('effect', this.effect);
 		formData.append('reason', this.reason);
 		formData.append('defecttype', this.defecttype);
+		formData.append('selecteddocids', localStorage.getItem('selecteddocids'));
 		formData.append('pairedid', this.associatedcode);
 
 	    this.http.post(upurl,formData).map(res => res.json()).subscribe(data => {
@@ -336,59 +330,23 @@ export class SnaggingPage {
 	}
 
 
-/*		public uploadImage() {
-		// Destination URL
-		//var url = "https://pvmobile.online/iupload.php";
-		var url = "https://pvmobile.online/iuploadnofile.php";
-	
-		// File for Upload
-		var targetPath = this.pathForImage(this.lastImage);
-	
-		// File name only
-		var filename = ""; //this.lastImage;
-	
-		var options = {
-			fileKey: "file",
-			fileName: filename,
-			chunkedMode: false,
-			mimeType: "multipart/form-data",
-			params : {
-				"reference": this.frmData.reference,
-				"location": this.name,
-				"discipline": this.discipline,
-				"details": this.frmData.details,
-				"pid": this.pid,
-				"uid": this.uid,
-				"cid": this.cid,
-				"api": this.api,
-				"effect": this.effect,
-				"reason": this.reason,
-				"defecttype": this.defecttype,
-				//"limg": this.image,
-				//"pimg": this.currentImage
-			}
-		};
-	
-		const fileTransfer: FileTransferObject = this.transfer.create();
-	
-		this.loading = this.loadingCtrl.create({
-			content: 'Uploading...',
-		});
+	removedoc(docid){
+		console.log(docid);
+		var checkremoveddocids = localStorage.getItem('removeddocids');
+		var selecteddocids     = localStorage.getItem('selecteddocids');
+
+		localStorage.setItem('removeddocids',checkremoveddocids+docid);
+
+		this.adddocids = selecteddocids.split(',');
+
+		if(this.adddocids.indexOf(docid) != -1){
+			console.log("Index: ",this.adddocids.indexOf(docid));
+			var docindex = this.adddocids.indexOf(docid);
 		
-		this.loading.present();
-	
-		// Use the FileTransfer to upload the image
-		fileTransfer.upload(targetPath, url, options).then(data => {
-			this.loading.dismissAll()
-			this.presentToast('Image succesful uploaded.');
-		}, err => {
-			this.loading.dismissAll()
-			this.presentToast('Error while uploading file.');
-		});
+			selecteddocids = this.adddocids.slice(this.adddocids.indexOf(),36)
+			console.log(selecteddocids);
+		}
 	}
-
-*/
-
 
 	public openlocimg(){
 		console.log("In openLoc");
@@ -461,6 +419,41 @@ export class SnaggingPage {
 		this.navCtrl.push(SubtypesPage, {callback:this.myCallbackFunction5});
 	}
 
+	openDocs(){		
+		this.navCtrl.push(DocumentsPage, {"inprocess":"Y",callback:this.myCallbackFunction0});
+	}
+
+	myCallbackFunction0 = (_params) => {
+
+		return new Promise((resolve, reject) => {
+			this.adddoc = _params;	 
+			resolve();
+
+			var checkselecteddocids = localStorage.getItem('selecteddocids')
+			
+			if(checkselecteddocids == ""){
+				localStorage.setItem('selecteddocids',this.adddoc);
+			}
+
+			if(checkselecteddocids != ""){
+				var updateselecteddocids = checkselecteddocids+","+this.adddoc;
+				localStorage.setItem('selecteddocids',updateselecteddocids);
+			}
+
+			var oldurl = Constants.apiUrl+"api/defectdocuments/"+this.api+"/"+this.pid+"/"+localStorage.getItem('selecteddocids');
+		    
+			this.http.get(oldurl).map(res => res.json()).subscribe(data => {
+			        this._sanitizer.bypassSecurityTrustStyle(data);
+					this.userdocuments = data;
+					this.hasdocs = true;
+			    },
+			    err => {
+			        console.log("Oops!");
+			    }
+			);  
+
+		});
+	}	
 
 	myCallbackFunction1 = (_params) => {
 	 return new Promise((resolve, reject) => {
@@ -523,6 +516,7 @@ export class SnaggingPage {
 	 }
 
 	 dismiss() {
+		localStorage.setItem('selecteddocids',""); 
 		this.viewCtrl.dismiss('') ;
 	 } 
 	 

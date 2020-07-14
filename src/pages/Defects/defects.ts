@@ -43,6 +43,9 @@ export class DefectsPage {
 	image: any;
 	location: string = "";
 	alert:  string;
+	online: boolean=true;
+ 
+
 
 	
 	myDefectsSearchTerm:any;
@@ -58,6 +61,12 @@ export class DefectsPage {
 
 
 	ionViewWillLeave(){
+
+		var isonline = localStorage.getItem('online');
+	  
+		if(isonline != "1"){
+		  this.online = false;  
+		}		
 
 		this.defectslist  = "";
 
@@ -249,7 +258,6 @@ export class DefectsPage {
 		this.navCtrl.push(SnaggingPage,{snagid});
 		console.log(snagid);
 	}
-
 
 
 	openLocationQRCode(){
