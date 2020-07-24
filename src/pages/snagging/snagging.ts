@@ -331,22 +331,34 @@ export class SnaggingPage {
 
 
 	removedoc(docid){
-		console.log(docid);
-		var checkremoveddocids = localStorage.getItem('removeddocids');
-		var selecteddocids     = localStorage.getItem('selecteddocids');
 
-		localStorage.setItem('removeddocids',checkremoveddocids+docid);
+		var selecteddocids = localStorage.getItem('selecteddocids');
+		this.adddocids = selecteddocids.split(',');		
+		if(this.adddocids.indexOf(docid) > -1){
 
-		this.adddocids = selecteddocids.split(',');
-
-		if(this.adddocids.indexOf(docid) != -1){
-			console.log("Index: ",this.adddocids.indexOf(docid));
-			var docindex = this.adddocids.indexOf(docid);
-		
-			selecteddocids = this.adddocids.slice(this.adddocids.indexOf(),36)
-			console.log(selecteddocids);
+			var docindex = this.adddocids.indexOf(docid);		
+			this.adddocids.splice(docindex,1);
+			localStorage.setItem('selecteddocids',this.adddocids.join(","));
 		}
+
+		this.hasdocs = false;
+
+		if(selecteddocids){
+			var oldurl = Constants.apiUrl+"api/defectdocuments/"+this.api+"/"+this.pid+"/"+localStorage.getItem('selecteddocids');
+			this.http.get(oldurl).map(res => res.json()).subscribe(data => {
+			        this._sanitizer.bypassSecurityTrustStyle(data);
+					this.userdocuments = data;
+					this.hasdocs = true;					
+			    },
+			    err => {
+			        console.log("Oops!");
+			    }
+			);
+		} else {this.hasdocs = false;}
 	}
+
+
+
 
 	public openlocimg(){
 		console.log("In openLoc");
@@ -434,7 +446,6 @@ export class SnaggingPage {
 			if(checkselecteddocids == ""){
 				localStorage.setItem('selecteddocids',this.adddoc);
 			}
-
 			if(checkselecteddocids != ""){
 				var updateselecteddocids = checkselecteddocids+","+this.adddoc;
 				localStorage.setItem('selecteddocids',updateselecteddocids);

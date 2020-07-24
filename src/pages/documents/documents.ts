@@ -101,6 +101,7 @@ export class DocumentsPage {
 
     this.inprocess = this.navParams.get('inprocess');
     this.callback = this.navParams.get("callback")
+    this.selecteddocument = "";
 
     //https://www.sky-vault.co.uk/PublicPics/"+this.scid+"/"+cpid+"/' + 
 
@@ -384,11 +385,15 @@ checkFocus($event){
   }
 
 	ionViewWillLeave() {
-		this.callback(this.selecteddocument).then(()=>{});
+    if(this.selecteddocument !== ""){
+      this.callback(this.selecteddocument).then(()=>{});
+    }
   }
   
 	dismiss() {
-		this.viewCtrl.dismiss();
+    if(this.selecteddocument !== ""){
+      this.viewCtrl.dismiss();
+    }
 	}  
   
 /*

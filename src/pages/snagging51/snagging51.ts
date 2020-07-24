@@ -9,7 +9,11 @@ import { normalizeURL } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ImgEditPagePost } from '../imgeditpost/imgeditpost';
 import { ImgViewPage } from '../imgview/imgview';
-
+import { DocumentViewer } from '../documentviewer/documentviewer';
+import { DocumentInfo } from '../documentinfo/documentinfo';
+import { DocumentIdInfo } from '../documentidinfo/documentidinfo';
+import { DocumentAudit } from '../documentaudit/documentaudit';
+import { AboutPage } from '../about/about';
 import * as Constants from '../../providers/constants';
 
 declare var cordova: any;
@@ -35,6 +39,9 @@ export class Snagging51Page {
 	manageDefects: any;
 	defectRole: number = 1;
 	orderstatus: any;
+	closeDateTxt: any;
+	attacheddocuments:any;
+	hasattacheddocs:any;
 
 	public details: string;
 	public defect1s:  any;
@@ -61,6 +68,9 @@ export class Snagging51Page {
 	public ProposedCompletionDate:any;
 	public ProposedCompletionDateTxt:any;
 	public DisputeTxt:any;
+
+	
+	dsearch : any;
 
 	frmData = {details: ""};
 
@@ -133,6 +143,7 @@ export class Snagging51Page {
 			this.defect1s = data;         
 			
 			this.defect1snotesid = 	this.defect1s[0].OrderId;
+			this.closeDateTxt = 	this.defect1s[0].CloseDateTxt;
 
 			if(this.defect1s[0].ProposedCompletionDate === null){
 				let date: Date = new Date();
@@ -150,6 +161,29 @@ export class Snagging51Page {
 			
 			localStorage.setItem('image', this.image);
 			localStorage.setItem('preimage', this.ImgUrl);
+
+			this.hasattacheddocs = false;
+
+			if(this.closeDateTxt !== ""){
+
+				var attacheddocsurl = Constants.apiUrl+"api/defectdocuments/"+this.api+"/"+this.pid+"/"+this.closeDateTxt;
+			    
+				this.http.get(attacheddocsurl).map(res => res.json()).subscribe(data => {
+				        this._sanitizer.bypassSecurityTrustStyle(data);
+						this.attacheddocuments = data;
+						this.hasattacheddocs = true;
+				    },
+				    err => {
+				        console.log("Oops!");
+				    }
+				);  
+			}
+
+
+
+
+
+
 
 /*			
 			if(this.defect1s[0].thumbbase64 !== null || this.defect1s[0].thumbbase64 !== ""){
@@ -202,6 +236,27 @@ export class Snagging51Page {
 		});
 	}
 
+	openDocument(clientid,projectid,docid,ext){
+		this.navCtrl.push(DocumentViewer,{clientid,projectid,docid,ext});
+	}
+
+	openDocumentIdInfo(iscid,idid,ipid,iuid){ 
+		this.navCtrl.push(DocumentIdInfo,{iscid,idid,ipid,iuid});
+	  }
+
+	openDocumentInfo(docimg, docid, docno1){ 
+		this.navCtrl.push(DocumentInfo,{docimg, docid, docno1, search});
+	}
+
+
+	openDocumentAudit(docimg, docid, docno1){ 
+		this.navCtrl.push(DocumentAudit,{docimg, docid, docno1});
+	}
+
+	openDocumentSend(docimg, docid, docno1){ 
+		this.navCtrl.push(AboutPage,{docimg, docid, docno1});
+	}
+	
 
 
 	openlocimg(){

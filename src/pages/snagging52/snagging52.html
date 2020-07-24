@@ -194,6 +194,64 @@
   -->
 
   
+  <ion-card  *ngIf="this.hasattacheddocs" > 
+    <ion-card-header style="padding-left: 0px;padding-bottom: 3px;padding-top: 0px;">
+      Attached Documents
+    </ion-card-header> 
+    <ion-card-content >       
+    <div id="maindiv">
+      <div>
+        <ion-grid>
+          <ion-row>
+            <ion-col  *ngFor="let document of attacheddocuments"  style="margin-top:8px;padding-top: 0px;padding-bottom: 0px;margin-left:0px;margin-right:0px;height: 80px;"  col-12 col-md-6 col-lg-4 col-xl-3>
+              <ion-list>
+                <ion-card style="width: 108%;display: flex;align-items: center; justify-content: center;border-top-color:white;border-bottom-color:white;margin:0px;margin-top:6px;padding:0px;" >                     
+                  <ion-item-sliding >              
+                    <ion-item padding  style="padding-left:5px;margin:0px;width:100%;height:90px;border-bottom-color:white;" class="card card-md" class="item item-block item-md">                  
+                         
+                      
+                      <ion-thumbnail item-left no-padding style="margin-left:5px;margin-top:0px;">
+                        <img 
+                          src="{{this.document.PhotoTiny}}" 
+                          style="position:relative;top:-5px;height:56px !Important;width:80px !Important;border: 1px solid #000;" 
+                          imageViewer
+                        />
+                      </ion-thumbnail>    
+                        
+                      <!--   
+                        <ion-thumbnail *ngIf="document.FileExtension != '.jpg' && document.FileExtension != '.jpeg' && document.FileExtension != '.png' && document.FileExtension != '.tif' && document.FileExtension != '.tiff' && document.FileExtension != '.gif' && document.FileExtension != '.bmp'" item-left no-padding style="margin-left:5px;margin-top:20px;" >
+                          <img 
+                            src="{{document.PhotoTiny}}" style="border: 1px solid #000;position:relative;top:-10px;height:100px;left:10px;width:70px;transform: rotate(90deg);margin-right:30px;" 
+                            (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"
+                            />
+                        </ion-thumbnail> 
+                      -->     
+                      <div style="position:relative;top:-5px;padding:0px;margin:5px;width:100%;">                    
+                          <ion-icon style = "font-size: 18px; position:relative;top:1px;color:darkgoldenrod" name="folder" >
+                            <b> <span style="font-size: 13px;color:black;font-family:arial;">{{this.document.FolderName}}</span></b>
+                          </ion-icon>                         
+                          <div  style="font-size: 13px;">{{this.document.DocumentNumber}} / {{this.document.Rev}}</div>  
+                          <div  style="font-size: 13px;">{{this.document.Title}}</div> 
+                      </div>                  
+                    </ion-item> 
+                    <ion-item-options side="right">
+                      <button ion-button color="bold" (click)="removedoc(document.DocumentID)">Remove</button>
+                    </ion-item-options>    
+                </ion-item-sliding> 
+              </ion-card>
+
+              </ion-list>
+            </ion-col> 
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+    </ion-card-content>
+  </ion-card>
+        
+
+<p></p>
+
 
 
 
