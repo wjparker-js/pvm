@@ -61,6 +61,9 @@ export class DocumentsPage {
   selecteddocno:any;
 
   callback: any;
+  adddoc: any;
+  adddocids:any;
+  api: any;
 
   addDocuments = [];
   
@@ -379,10 +382,66 @@ checkFocus($event){
 
 
   documentAdd(docid,docnumber){
+
+    document.getElementById(docid).style.visibility = "visible";
+
     this.selecteddocument = docid;
     console.log("Sending back: ",this.selecteddocument);
-		this.viewCtrl.dismiss();
+		//this.viewCtrl.dismiss();
+
+    var checkselecteddocids = localStorage.getItem('selecteddocids')
+			
+    if(checkselecteddocids == ""){
+      localStorage.setItem('selecteddocids',this.selecteddocument);
+    }
+    if(checkselecteddocids != ""){
+      var updateselecteddocids = checkselecteddocids+","+this.selecteddocument;
+      localStorage.setItem('selecteddocids',updateselecteddocids);
+    }
+
+    /*var oldurl = Constants.apiUrl+"api/defectdocuments/"+this.apiKey+"/"+this.userdocumentData.SystemProjectID+"/"+localStorage.getItem('selecteddocids');
+      
+    this.http.get(oldurl).map(res => res.json()).subscribe(data => {
+            this._sanitizer.bypassSecurityTrustStyle(data);
+        this.userdocuments = data;
+        this.hasdocs = true;
+        },
+        err => {
+            console.log("Oopsiw!");
+        }
+    );  */
+
   }
+
+	removedoc(docid){
+
+    document.getElementById(docid).style.visibility = "hidden";
+
+		var selecteddocids = localStorage.getItem('selecteddocids');
+		this.adddocids = selecteddocids.split(',');		
+		if(this.adddocids.indexOf(docid) > -1){
+
+			var docindex = this.adddocids.indexOf(docid);		
+			this.adddocids.splice(docindex,1);
+			localStorage.setItem('selecteddocids',this.adddocids.join(","));
+		}
+
+	/*		this.hasdocs = false;
+
+	if(selecteddocids){
+			var oldurl = Constants.apiUrl+"api/defectdocuments/"+this.api+"/"+this.userdocumentData.SystemProjectID+"/"+localStorage.getItem('selecteddocids');
+			this.http.get(oldurl).map(res => res.json()).subscribe(data => {
+			        this._sanitizer.bypassSecurityTrustStyle(data);
+					this.userdocuments = data;
+					this.hasdocs = true;					
+			    },
+			    err => {
+			        console.log("Oops!");
+			    }
+			);
+    } else {this.hasdocs = false;}
+    */
+	}
 
 	ionViewWillLeave() {
     if(this.selecteddocument !== ""){

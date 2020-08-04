@@ -207,18 +207,21 @@
 
 </ion-list>
 
+
+<div>
+  <ion-buttons >
+    <button full ion-button icon-left (click)="sendUploadData()" >   <!--[disabled]="showUpload === null"--> 
+      <ion-icon name="cloud-upload"></ion-icon>Upload Defect Image
+    </button>
+  </ion-buttons>
+</div>
+<br>
+
 </ion-content>
 
 
 
 <ion-footer  >
-  <div>
-    <ion-buttons >
-      <button full ion-button icon-left (click)="sendUploadData()" >   <!--[disabled]="showUpload === null"--> 
-        <ion-icon name="cloud-upload"></ion-icon>Upload Defect Image
-      </button>
-    </ion-buttons>
-  </div>
-  <br>
+
 </ion-footer>
   

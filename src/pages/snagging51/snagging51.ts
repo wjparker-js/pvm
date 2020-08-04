@@ -244,10 +244,6 @@ export class Snagging51Page {
 		this.navCtrl.push(DocumentIdInfo,{iscid,idid,ipid,iuid});
 	  }
 
-	openDocumentInfo(docimg, docid, docno1){ 
-		this.navCtrl.push(DocumentInfo,{docimg, docid, docno1, search});
-	}
-
 
 	openDocumentAudit(docimg, docid, docno1){ 
 		this.navCtrl.push(DocumentAudit,{docimg, docid, docno1});

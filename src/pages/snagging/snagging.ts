@@ -443,14 +443,14 @@ export class SnaggingPage {
 
 			var checkselecteddocids = localStorage.getItem('selecteddocids')
 			
-			if(checkselecteddocids == ""){
+/*			if(checkselecteddocids == ""){
 				localStorage.setItem('selecteddocids',this.adddoc);
 			}
 			if(checkselecteddocids != ""){
 				var updateselecteddocids = checkselecteddocids+","+this.adddoc;
 				localStorage.setItem('selecteddocids',updateselecteddocids);
 			}
-
+*/
 			var oldurl = Constants.apiUrl+"api/defectdocuments/"+this.api+"/"+this.pid+"/"+localStorage.getItem('selecteddocids');
 		    
 			this.http.get(oldurl).map(res => res.json()).subscribe(data => {

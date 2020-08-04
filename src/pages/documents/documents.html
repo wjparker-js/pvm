@@ -75,17 +75,24 @@
                       <div  style="position:relative;top:-5px;padding:0px;margin:0px;width:100%;">
                           
                           <ion-icon style = "font-size: 13px; padding-top: 0px;" name="refresh-circle"  class="flex-right hilite1" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
-                          <label  class="bodytext" color="primary" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber,dsearch)">Details</label>&nbsp;&nbsp;
+                          <label  class="bodytext" color="primary" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber,dsearch)">Details</label>&nbsp;
                           
                           <ion-icon style = "font-size: 13px;padding-top: 0px;" name="information-circle"  class="flex-right hilite2" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
-                          <label  class="bodytext" color="primary" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Audit</label>&nbsp;&nbsp;
+                          <label  class="bodytext" color="primary" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Audit</label>&nbsp;;
                           
                           <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="secondary" class="flex-right" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
-                          <label class="bodytext" class="bodytext" color="primary" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Send</label>&nbsp;&nbsp;
+                          <label class="bodytext" class="bodytext" color="primary" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Send</label>&nbsp;
                           
-                          <ion-icon [hidden]="this.inprocess != 'Y'" style = "font-size: 13px;padding-top: 8px;" name="mail" color="energy" class="flex-right" (click)="documentAdd(document.DocumentID,document.DocumentNumber)"></ion-icon>
-                          <label  [hidden]="this.inprocess != 'Y'" class="bodytext" color="primary" (click)="documentAdd(document.DocumentID,document.DocumentNumber)">Add</label>
-                        
+                          <span [hidden]="this.inprocess != 'Y'" (click)="documentAdd(document.DocumentID,document.DocumentNumber)">
+                            <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="energy" class="flex-right"></ion-icon>
+                            <label class="bodytext" color="primary">Add</label>&nbsp;
+                          </span>
+
+                          <span [hidden]="this.inprocess != 'Y'" id = "{{document.DocumentID}}" style="visibility: hidden;" (click)="removedoc(document.DocumentID,document.DocumentNumber)">
+                            <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="bold" class="flex-right"></ion-icon>
+                            <label class="bodytext" color="primary">Del</label>
+                          </span>
+
                       </div>
 
                     </ion-item> 
