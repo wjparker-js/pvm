@@ -207,6 +207,30 @@ export class SnaggingPage {
 	}
 
 
+
+	public presentQRActionSheet() {
+		let actionSheet = this.actionSheetCtrl.create({
+			title: 'Scan a Location QR Code',
+			buttons: [
+				{
+					text: 'Scan',
+					handler: () => {						
+						this.scanQRCode()
+						.then()
+						.catch(() => {});
+					}
+				},
+				{
+					text: 'Cancel',
+					role: 'cancel'
+				}
+			]
+		});
+		actionSheet.present();
+	}
+
+
+
 	scanQRCode(){
 		
 		this.options = {prompt : "Scan your barcode"}
@@ -284,7 +308,31 @@ export class SnaggingPage {
 	}
 
 
-	associateQRCode(){
+
+	public presentQRStickerActionSheet() {
+		let actionSheet = this.actionSheetCtrl.create({
+			title: 'Scan a QR Code Label',
+			buttons: [
+				{
+					text: 'Scan',
+					handler: () => {						
+						this.stickerQRCode()
+						.then()
+						.catch(() => {});
+					}
+				},
+				{
+					text: 'Cancel',
+					role: 'cancel'
+				}
+			]
+		});
+		actionSheet.present();
+	}
+
+
+
+	stickerQRCode(){
 		
 		this.options = {prompt : "Scan your barcode"}
 

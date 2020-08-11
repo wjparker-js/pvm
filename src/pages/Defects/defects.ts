@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, Searchbar } from 'ionic-angular';
+import { NavController, AlertController, Searchbar, ActionSheetController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ViewChild, ElementRef, Renderer } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -56,7 +56,13 @@ export class DefectsPage {
 	public thumbbase:any;
 	public showDefects:any;
 
-	constructor(public alertController: AlertController, public navCtrl: NavController, private barcodeScanner:BarcodeScanner, private _sanitizer: DomSanitizer, public http: Http) {}
+	constructor(
+		public alertController: AlertController, 
+		public actionSheetCtrl: ActionSheetController, 
+		public navCtrl: NavController, 
+		private barcodeScanner:BarcodeScanner, 
+		private _sanitizer: DomSanitizer, 
+		public http: Http) {}
 
 
 
@@ -128,6 +134,28 @@ export class DefectsPage {
 		this.imageUrl = Constants.publicUploadPath+this.SystemCID+'/'+this.SystemProjectID+'/LocationImages/';
 	}
 
+
+	public presentQRSearchActionSheet() {
+		let actionSheet = this.actionSheetCtrl.create({
+			title: 'Scan a QR Code',
+			size: 1.7rem,
+			buttons: [
+				{
+					text: 'Scan',
+					handler: () => {						
+						this.scanQRCode()
+						.then()
+						.catch(() => {});
+					}
+				},
+				{
+					text: 'Cancel',
+					role: 'cancel'
+				}
+			]
+		});
+		actionSheet.present();
+	}
 
 
 	async presentAlert() {

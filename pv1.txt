@@ -1,0 +1,729 @@
+> ionic-app-scripts.cmd serve --address localhost --port 8100 --livereload-port 35729 --dev-logger-port 53703 --nobrowser
+[app-scripts] [08:28:22]  ionic-app-scripts 3.2.4 
+[app-scripts] [08:28:22]  watch started ... 
+[app-scripts] [08:28:22]  build dev started ... 
+[app-scripts] [08:28:22]  clean started ... 
+[app-scripts] [08:28:22]  clean finished in 21 ms 
+[app-scripts] [08:28:22]  copy started ... 
+[app-scripts] [08:28:22]  copy finished in 79 ms 
+[app-scripts] [08:28:22]  deeplinks started ... 
+[app-scripts] [08:28:23]  deeplinks finished in 285 ms 
+[app-scripts] [08:28:23]  transpile started ... 
+[app-scripts] [08:28:27]  transpile finished in 4.63 s 
+[app-scripts] [08:28:27]  preprocess started ... 
+[app-scripts] [08:28:27]  preprocess finished in 1 ms 
+[app-scripts] [08:28:27]  webpack started ... 
+[app-scripts] [08:28:31]  webpack finished in 4.29 s 
+[app-scripts] [08:28:31]  sass started ... 
+[app-scripts] [08:28:33]  sass finished in 1.36 s 
+[app-scripts] [08:28:33]  postprocess started ... 
+[app-scripts] [08:28:33]  postprocess finished in 34 ms 
+[app-scripts] [08:28:33]  lint started ... 
+[app-scripts] [08:28:33]  build dev finished in 10.81 s 
+
+[INFO] Development server running!
+       
+       Local: http://localhost:8100
+       
+       Use Ctrl+C to quit this process
+
+[INFO] Browser window opened to http://localhost:8100!
+
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/projects/projects.ts, line: 1 [39m
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L1:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { ReasonsPage } from './../reasons/reasons';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/projects/projects.ts, line: 2 [39m
+[app-scripts] [2m       L2:  [22mimport { TabsPage } from './../tabs/tabs';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L1:  [22mimport { ReasonsPage } from './../reasons/reasons';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/tabs/tabs.ts, line: 27 [39m
+[app-scripts] [2m       L2:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { TabsPage } from './../tabs/tabs';
+[app-scripts] [2m       L3:  [22mimport { Component } from '@angular/core';
+[app-scripts]             'canViewDefects' is declared but its value is never read. 
+[app-scripts] [2m      L27:  [22m    var [41mc[49m[41ma[49m[41mn[49m[41mV[49m[41mi[49m[41me[49m[41mw[49m[41mD[49m[41me[49m[41mf[49m[41me[49m[41mc[49m[41mt[49m[41ms[49m   = localStorage.getItem('Role-PA5073');
+[app-scripts] [2m      L28:  [22m    var canAddDefects    = localStorage.getItem('Role-PA5038');    
+[app-scripts]             'canAddDefects' is declared but its value is never read. 
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/tabs/tabs.ts, line: 28 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/tabs/tabs.ts, line: 29 [39m
+[app-scripts] [2m      L27:  [22mvar canViewDefects   = localStorage.getItem('Role-PA5073');
+[app-scripts] [2m      L28:  [22mvar [41mc[49m[41ma[49m[41mn[49m[41mA[49m[41md[49m[41md[49m[41mD[49m[41me[49m[41mf[49m[41me[49m[41mc[49m[41mt[49m[41ms[49m    = localStorage.getItem('Role-PA5038');    
+[app-scripts] [2m      L29:  [22mvar canManageDefects = localStorage.getItem('Role-PA5039');
+[app-scripts]             'canManageDefects' is declared but its value is never read. 
+[app-scripts] [2m      L28:  [22mvar canAddDefects    = localStorage.getItem('Role-PA5038');    
+[app-scripts] [2m      L29:  [22mvar [41mc[49m[41ma[49m[41mn[49m[41mM[49m[41ma[49m[41mn[49m[41ma[49m[41mg[49m[41me[49m[41mD[49m[41me[49m[41mf[49m[41me[49m[41mc[49m[41mt[49m[41ms[49m = localStorage.getItem('Role-PA5039');
+[app-scripts] [2m      L30:  [22mvar isonline         = localStorage.getItem('online');
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L6:  [22mimport { DefectsPage } from '../Defects/defects';
+[app-scripts] [2m       L7:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { AboutPage } from '../about/about';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/tabs/tabs.ts, line: 7 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documenttabs/documentissues/documentissues.ts, line: 27 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documenttabs/documentaudit/documentaudit.ts, line: 27 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documenttabs/documentinfoall/documentinfoall.ts, line: 27 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documenttabs/documenttabs.ts, line: 2 [39m
+[app-scripts]             Property '_sanitizer' is declared but its value is never read. 
+[app-scripts] [2m      L27:  [22mform, public params: NavParams, public http: Http, private [41m_[49m[41ms[49m[41ma[49m[41mn[49m[41mi[49m[41mt[49m[41mi[49m[41mz[49m[41me[49m[41mr[49m: DomSanitizer, public modalCtrl: Modal
+[app-scripts]             Property '_sanitizer' is declared but its value is never read. 
+[app-scripts] [2m      L27:  [22mform, public params: NavParams, public http: Http, private [41m_[49m[41ms[49m[41ma[49m[41mn[49m[41mi[49m[41mt[49m[41mi[49m[41mz[49m[41me[49m[41mr[49m: DomSanitizer, public modalCtrl: Modal
+[app-scripts]             Property '_sanitizer' is declared but its value is never read. 
+[app-scripts] [2m      L27:  [22mform, public params: NavParams, public http: Http, private [41m_[49m[41ms[49m[41ma[49m[41mn[49m[41mi[49m[41mt[49m[41mi[49m[41mz[49m[41me[49m[41mr[49m: DomSanitizer, public modalCtrl: Modal
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L1:  [22mimport { Component } from '@angular/core';
+[app-scripts] [2m       L2:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { AboutPage } from '../about/about';
+[app-scripts] [2m       L3:  [22mimport { ContactPage } from '../contact/contact';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L2:  [22mimport { AboutPage } from '../about/about';
+[app-scripts] [2m       L3:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { ContactPage } from '../contact/contact';
+[app-scripts] [2m       L4:  [22mimport { HomePage } from '../home/home';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documenttabs/documenttabs.ts, line: 3 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documenttabs/documenttabs.ts, line: 4 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documenttabs/documenttabs.ts, line: 5 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documenttabs/documenttabs.ts, line: 6 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/providers/drawing/drawing.ts, line: 241 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 351 [39m
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L3:  [22mimport { ContactPage } from '../contact/contact';
+[app-scripts] [2m       L4:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { HomePage } from '../home/home';
+[app-scripts] [2m       L5:  [22mimport { DocumentsPage } from '../documents/documents';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L4:  [22mimport { HomePage } from '../home/home';
+[app-scripts] [2m       L5:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { DocumentsPage } from '../documents/documents';
+[app-scripts] [2m       L6:  [22mimport { ProjectsPage } from '../projects/projects';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L5:  [22mimport { DocumentsPage } from '../documents/documents';
+[app-scripts] [2m       L6:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { ProjectsPage } from '../projects/projects';
+[app-scripts]             'center' is declared but its value is never read. 
+[app-scripts] [2m     L241:  [22m      let [41mc[49m[41me[49m[41mn[49m[41mt[49m[41me[49m[41mr[49m = this.canvas.getCenter();
+[app-scripts] [2m     L242:  [22m      this.canvas.setBackgroundImage(imageSrc, this.canvas.renderAll.bind(this.canvas), {
+[app-scripts]             Duplicate variable: 'image' 
+[app-scripts] [2m     L350:  [22m  var image = image.replace(pt1,rep);
+[app-scripts] [2m     L351:  [22m  var [41mi[49m[41mm[49m[41ma[49m[41mg[49m[41me[49m = image.replace(pt2,rep);
+[app-scripts]             Duplicate variable: 'docno1' 
+[app-scripts] [2m     L363:  [22m    var docno1 = docno1.replace(pt1,rep);
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 364 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 86 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 124 [39m
+[app-scripts] [2m     L364:  [22m    var [41md[49m[41mo[49m[41mc[49m[41mn[49m[41mo[49m[41m1[49m = docno1.replace(pt2,rep);
+[app-scripts]             Property 'keyboard' is declared but its value is never read. 
+[app-scripts] [2m      L85:  [22mprivate _sanitizer: DomSanitizer, 
+[app-scripts] [2m      L86:  [22mprivate [41mk[49m[41me[49m[41my[49m[41mb[49m[41mo[49m[41ma[49m[41mr[49m[41md[49m : Keyboard,
+[app-scripts] [2m      L87:  [22mprivate renderer:Renderer,
+[app-scripts]             'selectedProjectName' is declared but its value is never read. 
+[app-scripts] [2m     L123:  [22mvar documentSystemProjectID = this.userdocumentData.SystemProjectID; 
+[app-scripts] [2m     L124:  [22mvar [41ms[49m[41me[49m[41ml[49m[41me[49m[41mc[49m[41mt[49m[41me[49m[41md[49m[41mP[49m[41mr[49m[41mo[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m[41mN[49m[41ma[49m[41mm[49m[41me[49m     = this.userdocumentData.SystemProjectName;    
+[app-scripts] [2m     L125:  [22mvar documentSystemClientID  = this.userdocumentData.SystemClientID;
+[app-scripts]             'documentSystemUserID' is declared but its value is never read. 
+[app-scripts] [2m     L125:  [22mvar documentSystemClientID  = this.userdocumentData.SystemClientID;
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 126 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 127 [39m
+[app-scripts] [2m     L126:  [22mvar [41md[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mS[49m[41my[49m[41ms[49m[41mt[49m[41me[49m[41mm[49m[41mU[49m[41ms[49m[41me[49m[41mr[49m[41mI[49m[41mD[49m    = this.userdocumentData.SystemUserID;    
+[app-scripts] [2m     L127:  [22mvar documentApiKey          = this.userdocumentData.apiKey;
+[app-scripts]             'documentApiKey' is declared but its value is never read. 
+[app-scripts] [2m     L126:  [22mvar documentSystemUserID    = this.userdocumentData.SystemUserID;    
+[app-scripts] [2m     L127:  [22mvar [41md[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mA[49m[41mp[49m[41mi[49m[41mK[49m[41me[49m[41my[49m          = this.userdocumentData.apiKey;
+[app-scripts] [2m     L128:  [22mvar documentThumbnail       = this.userdocumentData.Thumbnail;
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 128 [39m
+[app-scripts]             'documentThumbnail' is declared but its value is never read. 
+[app-scripts] [2m     L127:  [22mvar documentApiKey          = this.userdocumentData.apiKey;
+[app-scripts] [2m     L128:  [22mvar [41md[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mT[49m[41mh[49m[41mu[49m[41mm[49m[41mb[49m[41mn[49m[41ma[49m[41mi[49m[41ml[49m       = this.userdocumentData.Thumbnail;
+[app-scripts] [2m     L129:  [22mvar documentDocumentNumber  = this.userdocumentData.DocumentNumber;
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 129 [39m
+[app-scripts]             'documentDocumentNumber' is declared but its value is never read. 
+[app-scripts] [2m     L128:  [22mvar documentThumbnail       = this.userdocumentData.Thumbnail;
+[app-scripts] [2m     L129:  [22mvar [41md[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mD[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mN[49m[41mu[49m[41mm[49m[41mb[49m[41me[49m[41mr[49m  = this.userdocumentData.DocumentNumber;
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 130 [39m
+[app-scripts] [2m     L130:  [22mvar documentFileExtension   = this.userdocumentData.FileExtension;
+[app-scripts]             'documentFileExtension' is declared but its value is never read. 
+[app-scripts] [2m     L129:  [22m    var documentDocumentNumber  = this.userdocumentData.DocumentNumber;
+[app-scripts] [2m     L130:  [22m    var [41md[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mF[49m[41mi[49m[41ml[49m[41me[49m[41mE[49m[41mx[49m[41mt[49m[41me[49m[41mn[49m[41ms[49m[41mi[49m[41mo[49m[41mn[49m   = this.userdocumentData.FileExtension;
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 287 [39m
+[app-scripts]             'searchvalue' is declared but its value is never read. 
+[app-scripts] [2m     L287:  [22m    var [41ms[49m[41me[49m[41ma[49m[41mr[49m[41mc[49m[41mh[49m[41mv[49m[41ma[49m[41ml[49m[41mu[49m[41me[49m = document.getElementsByClassName("searchbar-input")["0"].value;
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 13 [39m
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m      L12:  [22mimport { Keyboard } from '@ionic-native/keyboard';
+[app-scripts] [2m      L13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { SubtypesPage } from '../subtypes/subtypes';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 16 [39m
+[app-scripts] [2m      L14:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m      L16:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { QrcodePage } from '../qrcode/qrcode';
+[app-scripts] [2m      L17:  [22mimport { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 17 [39m
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L16:  [22mimport { QrcodePage } from '../qrcode/qrcode';
+[app-scripts] [2m      L17:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L7:  [22mimport { BrushTypePopoverPage } from '../brush-type-popover/brush-type-popover';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/imgeditpost/imgeditpost.ts, line: 8 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/home/home.ts, line: 85 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/home/home.ts, line: 158 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/home/home.ts, line: 1 [39m
+[app-scripts] [2m       L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { TitleCasePipe } from '@angular/common';
+[app-scripts]             Property 'alertCtrl' is declared but its value is never read. 
+[app-scripts] [2m      L84:  [22mprivate nativeGeocoder: NativeGeocoder,
+[app-scripts] [2m      L85:  [22mprivate [41ma[49m[41ml[49m[41me[49m[41mr[49m[41mt[49m[41mC[49m[41mt[49m[41mr[49m[41ml[49m: AlertController, 
+[app-scripts] [2m      L86:  [22mpublic weatherProvider:WeatherProvider, 
+[app-scripts]             'pname' is declared but its value is never read. 
+[app-scripts] [2m     L157:  [22m    var pid     = this.userPostData.ProjectID;  
+[app-scripts] [2m     L158:  [22m    var [41mp[49m[41mn[49m[41ma[49m[41mm[49m[41me[49m   = this.userPostData.ProjectName;
+[app-scripts]             'ViewChild' is declared but its value is never read. 
+[app-scripts] [2m       L1:  [22mimport {Component, [41mV[49m[41mi[49m[41me[49m[41mw[49m[41mC[49m[41mh[49m[41mi[49m[41ml[49m[41md[49m, ElementRef} from '@angular/core';
+[app-scripts] [2m       L2:  [22mimport { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+[app-scripts]             'ElementRef' is declared but its value is never read. 
+[app-scripts] [2m       L1:  [22mimport {Component, ViewChild, [41mE[49m[41ml[49m[41me[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mR[49m[41me[49m[41mf[49m} from '@angular/core';
+[app-scripts] [2m       L2:  [22mimport { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+[app-scripts]             'IonicPage' is declared but its value is never read. 
+[app-scripts] [2m       L2:  [22mimport { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/home/home.ts, line: 1 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/home/home.ts, line: 3 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/home/home.ts, line: 13 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 24 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 201 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 444 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 3 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 7 [39m
+[app-scripts] [2m       L3:  [22mimport {[41mI[49m[41mo[49m[41mn[49m[41mi[49m[41mc[49m[41mP[49m[41ma[49m[41mg[49m[41me[49m, NavController, NavParams, MenuController } from 'ionic-angular';
+[app-scripts] [2m       L4:  [22mimport {App, AlertController} from 'ionic-angular';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m      L12:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [2m      L13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { IfObservable } from 'rxjs/observable/IfObservable';
+[app-scripts] [2m      L14:  [22mimport { Network } from '@ionic-native/network';
+[app-scripts]             'cordova' is declared but its value is never read. 
+[app-scripts] [2m      L24:  [22mdeclare var [41mc[49m[41mo[49m[41mr[49m[41md[49m[41mo[49m[41mv[49m[41ma[49m: any;
+[app-scripts]             'addimage' is declared but its value is never read. 
+[app-scripts] [2m     L201:  [22mprivate [41ma[49m[41md[49m[41md[49m[41mi[49m[41mm[49m[41ma[49m[41mg[49m[41me[49m(action){
+[app-scripts] [2m     L202:  [22m	if(action === "add"){
+[app-scripts]             'checkselecteddocids' is declared but its value is never read. 
+[app-scripts] [2m     L443:  [22mresolve();
+[app-scripts] [2m     L445:  [22mvar checkselecteddocids = localStorage.getItem('selecteddocids')
+[app-scripts]             'Img' is declared but its value is never read. 
+[app-scripts] [2m       L2:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+[app-scripts] [2m       L3:  [22m, ActionSheetController, ToastController, Platform, LoadingController, Loading, [41mI[49m[41mm[49m[41mg[49m } from 'ionic-angular';
+[app-scripts] [2m       L4:  [22mimport { Camera } from '@ionic-native/camera';
+[app-scripts]             'FileTransferObject' is declared but its value is never read. 
+[app-scripts] [2m       L6:  [22mimport { FilePath } from '@ionic-native/file-path';
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, [41mF[49m[41mi[49m[41ml[49m[41me[49m[41mT[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m[41mO[49m[41mb[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22mimport { normalizeURL } from 'ionic-angular';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { normalizeURL } from 'ionic-angular';
+[app-scripts] [2m       L9:  [22mimport { Http } from '@angular/http';
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L20:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 8 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 21 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 15 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 74 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 75 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 76 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 79 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 81 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 264 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 7 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 8 [39m
+[app-scripts] [2m      L21:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts]             'cordova' is declared but its value is never read. 
+[app-scripts] [2m      L15:  [22mdeclare var [41mc[49m[41mo[49m[41mr[49m[41md[49m[41mo[49m[41mv[49m[41ma[49m: any;
+[app-scripts]             Property 'transfer' is declared but its value is never read. 
+[app-scripts] [2m      L73:  [22mprivate camera: Camera,
+[app-scripts] [2m      L74:  [22mprivate [41mt[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m: FileTransfer,
+[app-scripts] [2m      L75:  [22mprivate file: File,
+[app-scripts]             Property 'file' is declared but its value is never read. 
+[app-scripts] [2m      L74:  [22mprivate transfer: FileTransfer,
+[app-scripts] [2m      L75:  [22mprivate [41mf[49m[41mi[49m[41ml[49m[41me[49m: File,
+[app-scripts] [2m      L76:  [22mprivate filePath: FilePath,
+[app-scripts]             Property 'filePath' is declared but its value is never read. 
+[app-scripts] [2m      L75:  [22mprivate file: File,
+[app-scripts] [2m      L76:  [22mprivate [41mf[49m[41mi[49m[41ml[49m[41me[49m[41mP[49m[41ma[49m[41mt[49m[41mh[49m: FilePath,
+[app-scripts] [2m      L77:  [22mprivate actionSheetCtrl: ActionSheetController, 
+[app-scripts]             Property 'platform' is declared but its value is never read. 
+[app-scripts] [2m      L78:  [22mprivate toastCtrl: ToastController, 
+[app-scripts] [2m      L79:  [22mprivate [41mp[49m[41ml[49m[41ma[49m[41mt[49m[41mf[49m[41mo[49m[41mr[49m[41mm[49m: Platform,
+[app-scripts] [2m      L80:  [22mpublic viewCtrl: ViewController,
+[app-scripts]             Property 'loadingCtrl' is declared but its value is never read. 
+[app-scripts] [2m      L80:  [22mpublic viewCtrl: ViewController,
+[app-scripts] [2m      L81:  [22mprivate [41ml[49m[41mo[49m[41ma[49m[41md[49m[41mi[49m[41mn[49m[41mg[49m[41mC[49m[41mt[49m[41mr[49m[41ml[49m: LoadingController, 
+[app-scripts] [2m      L82:  [22mprivate http: Http, 
+[app-scripts]             'addimage' is declared but its value is never read. 
+[app-scripts] [2m     L265:  [22m	private addimage(action){
+[app-scripts]             'FileTransferObject' is declared but its value is never read. 
+[app-scripts] [2m       L6:  [22mimport { FilePath } from '@ionic-native/file-path';
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, [41mF[49m[41mi[49m[41ml[49m[41me[49m[41mT[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m[41mO[49m[41mb[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22mimport { normalizeURL } from 'ionic-angular';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/defectsview/defectsview.ts, line: 10 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 122 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 4 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 11 [39m
+[app-scripts] [2m       L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { normalizeURL } from 'ionic-angular';
+[app-scripts] [2m       L9:  [22mimport { Http } from '@angular/http';
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m       L9:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [2m      L10:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts] [2m      L11:  [22mimport 'rxjs/add/operator/map';
+[app-scripts]             'url' is declared but its value is never read. 
+[app-scripts] [2m     L122:  [22m		var [41mu[49m[41mr[49m[41ml[49m = "";
+[app-scripts]             'Renderer' is declared but its value is never read. 
+[app-scripts] [2m       L3:  [22mimport { Http } from '@angular/http';
+[app-scripts] [2m       L4:  [22mimport { ViewChild, ElementRef, [41mR[49m[41me[49m[41mn[49m[41md[49m[41me[49m[41mr[49m[41me[49m[41mr[49m } from '@angular/core';
+[app-scripts] [2m       L5:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L10:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 13 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 19 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 82 [39m
+[app-scripts] [2m      L11:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts] [2m      L12:  [22mimport 'rxjs/add/operator/map';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m      L12:  [22mimport 'rxjs/add/operator/map';
+[app-scripts] [2m      L13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { e } from '@angular/core/src/render3';
+[app-scripts]             'cordova' is declared but its value is never read. 
+[app-scripts] [2m      L19:  [22mdeclare var [41mc[49m[41mo[49m[41mr[49m[41md[49m[41mo[49m[41mv[49m[41ma[49m: any;
+[app-scripts]             Property 'transfer' is declared but its value is never read. 
+[app-scripts] [2m      L81:  [22mprivate camera: Camera,
+[app-scripts] [2m      L82:  [22mprivate [41mt[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m: FileTransfer,
+[app-scripts] [2m      L83:  [22mprivate file: File,
+[app-scripts]             Property 'file' is declared but its value is never read. 
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 83 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 84 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 87 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 89 [39m
+[app-scripts] [2m      L82:  [22mprivate transfer: FileTransfer,
+[app-scripts] [2m      L83:  [22mprivate [41mf[49m[41mi[49m[41ml[49m[41me[49m: File,
+[app-scripts] [2m      L84:  [22mprivate filePath: FilePath,
+[app-scripts]             Property 'filePath' is declared but its value is never read. 
+[app-scripts] [2m      L83:  [22mprivate file: File,
+[app-scripts] [2m      L84:  [22mprivate [41mf[49m[41mi[49m[41ml[49m[41me[49m[41mP[49m[41ma[49m[41mt[49m[41mh[49m: FilePath,
+[app-scripts] [2m      L85:  [22mprivate actionSheetCtrl: ActionSheetController, 
+[app-scripts]             Property 'platform' is declared but its value is never read. 
+[app-scripts] [2m      L86:  [22mprivate toastCtrl: ToastController, 
+[app-scripts] [2m      L87:  [22mprivate [41mp[49m[41ml[49m[41ma[49m[41mt[49m[41mf[49m[41mo[49m[41mr[49m[41mm[49m: Platform,
+[app-scripts] [2m      L88:  [22mpublic viewCtrl: ViewController,
+[app-scripts]             Property 'loadingCtrl' is declared but its value is never read. 
+[app-scripts] [2m      L88:  [22mpublic viewCtrl: ViewController,
+[app-scripts] [2m      L89:  [22mprivate [41ml[49m[41mo[49m[41ma[49m[41md[49m[41mi[49m[41mn[49m[41mg[49m[41mC[49m[41mt[49m[41mr[49m[41ml[49m: LoadingController, 
+[app-scripts] [2m      L90:  [22mprivate http: Http, 
+[app-scripts]             'addimage' is declared but its value is never read. 
+[app-scripts] [2m     L348:  [22m	private addimage(action){
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 347 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 7 [39m
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 8 [39m
+[app-scripts]             'FileTransferObject' is declared but its value is never read. 
+[app-scripts] [2m       L6:  [22mimport { FilePath } from '@ionic-native/file-path';
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, [41mF[49m[41mi[49m[41ml[49m[41me[49m[41mT[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m[41mO[49m[41mb[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22mimport { normalizeURL } from 'ionic-angular';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { normalizeURL } from 'ionic-angular';
+[app-scripts] [2m       L9:  [22mimport { Http } from '@angular/http';
+[app-scripts] [33m[08:28:37]  tslint: C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 13 [39m
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m      L12:  [22mimport { DocumentViewer } from '../documentviewer/documentviewer';
+[app-scripts] [2m      L13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { DocumentInfo } from '../documentinfo/documentinfo';
+[app-scripts] [2m      L14:  [22mimport { DocumentIdInfo } from '../documentidinfo/documentidinfo';
+[app-scripts] [08:28:37]  lint finished in 4.00 s 
+[app-scripts] [08:39:06]  build started ... 
+[app-scripts] [08:39:06]  deeplinks update started ... 
+[app-scripts] [08:39:06]  deeplinks update finished in 429 ms 
+[app-scripts] [08:39:06]  transpile update started ... 
+[app-scripts] [08:39:06]  transpile update finished in 466 ms 
+[app-scripts] [08:39:06]  webpack update started ... 
+[app-scripts] [08:39:08]  webpack update finished in 1.34 s 
+[app-scripts] [08:39:08]  build finished in 2.30 s 
+[app-scripts] [33m[08:39:14]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 24 [39m
+[app-scripts]             'cordova' is declared but its value is never read. 
+[app-scripts] [2m      L24:  [22mdeclare var [41mc[49m[41mo[49m[41mr[49m[41md[49m[41mo[49m[41mv[49m[41ma[49m: any;
+[app-scripts] [33m[08:39:14]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 201 [39m
+[app-scripts]             'addimage' is declared but its value is never read. 
+[app-scripts] [2m     L201:  [22mprivate [41ma[49m[41md[49m[41md[49m[41mi[49m[41mm[49m[41ma[49m[41mg[49m[41me[49m(action){
+[app-scripts] [33m[08:39:14]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 468 [39m
+[app-scripts] [2m     L202:  [22m	if(action === "add"){
+[app-scripts]             'checkselecteddocids' is declared but its value is never read. 
+[app-scripts] [2m     L467:  [22mresolve();
+[app-scripts] [33m[08:39:14]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 3 [39m
+[app-scripts] [33m[08:39:14]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 7 [39m
+[app-scripts] [33m[08:39:14]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 8 [39m
+[app-scripts] [33m[08:39:14]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 21 [39m
+[app-scripts] [2m     L469:  [22mvar checkselecteddocids = localStorage.getItem('selecteddocids')
+[app-scripts]             'Img' is declared but its value is never read. 
+[app-scripts] [2m       L2:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+[app-scripts] [2m       L3:  [22m, ActionSheetController, ToastController, Platform, LoadingController, Loading, [41mI[49m[41mm[49m[41mg[49m } from 'ionic-angular';
+[app-scripts] [2m       L4:  [22mimport { Camera } from '@ionic-native/camera';
+[app-scripts]             'FileTransferObject' is declared but its value is never read. 
+[app-scripts] [2m       L6:  [22mimport { FilePath } from '@ionic-native/file-path';
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, [41mF[49m[41mi[49m[41ml[49m[41me[49m[41mT[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m[41mO[49m[41mb[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22mimport { normalizeURL } from 'ionic-angular';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { normalizeURL } from 'ionic-angular';
+[app-scripts] [2m       L9:  [22mimport { Http } from '@angular/http';
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L20:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [2m      L21:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts] [08:39:18]  build started ... 
+[app-scripts] [08:39:18]  template update started ... 
+[app-scripts] [08:39:18]  template update finished in 12 ms 
+[app-scripts] [08:39:18]  build finished in 20 ms 
+[app-scripts] [08:42:44]  build started ... 
+[app-scripts] [08:42:44]  deeplinks update started ... 
+[app-scripts] [08:42:44]  deeplinks update finished in 207 ms 
+[app-scripts] [08:42:44]  transpile update started ... 
+[app-scripts] [08:42:45]  transpile update finished in 261 ms 
+[app-scripts] [08:42:45]  webpack update started ... 
+[app-scripts] [08:42:48]  webpack update finished in 3.03 s 
+[app-scripts] [08:42:48]  build finished in 3.51 s 
+[app-scripts] [33m[08:42:53]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 24 [39m
+[app-scripts]             'cordova' is declared but its value is never read. 
+[app-scripts] [2m      L24:  [22mdeclare var [41mc[49m[41mo[49m[41mr[49m[41md[49m[41mo[49m[41mv[49m[41ma[49m: any;
+[app-scripts] [33m[08:42:53]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 201 [39m
+[app-scripts]             'addimage' is declared but its value is never read. 
+[app-scripts] [2m     L201:  [22mprivate [41ma[49m[41md[49m[41md[49m[41mi[49m[41mm[49m[41ma[49m[41mg[49m[41me[49m(action){
+[app-scripts] [33m[08:42:53]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 468 [39m
+[app-scripts] [2m     L202:  [22m	if(action === "add"){
+[app-scripts]             'checkselecteddocids' is declared but its value is never read. 
+[app-scripts] [33m[08:42:53]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 3 [39m
+[app-scripts] [2m     L467:  [22mresolve();
+[app-scripts] [2m     L469:  [22mvar checkselecteddocids = localStorage.getItem('selecteddocids')
+[app-scripts]             'Img' is declared but its value is never read. 
+[app-scripts] [2m       L2:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+[app-scripts] [33m[08:42:53]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 7 [39m
+[app-scripts] [2m       L3:  [22m, ActionSheetController, ToastController, Platform, LoadingController, Loading, [41mI[49m[41mm[49m[41mg[49m } from 'ionic-angular';
+[app-scripts] [2m       L4:  [22mimport { Camera } from '@ionic-native/camera';
+[app-scripts]             'FileTransferObject' is declared but its value is never read. 
+[app-scripts] [2m       L6:  [22mimport { FilePath } from '@ionic-native/file-path';
+[app-scripts] [33m[08:42:53]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 8 [39m
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, [41mF[49m[41mi[49m[41ml[49m[41me[49m[41mT[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m[41mO[49m[41mb[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22mimport { normalizeURL } from 'ionic-angular';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { normalizeURL } from 'ionic-angular';
+[app-scripts] [2m       L9:  [22mimport { Http } from '@angular/http';
+[app-scripts] [33m[08:42:53]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 21 [39m
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L20:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [2m      L21:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts] [08:48:11]  build started ... 
+[app-scripts] [08:48:11]  deeplinks update started ... 
+[app-scripts] [08:48:11]  deeplinks update finished in 215 ms 
+[app-scripts] [08:48:11]  transpile update started ... 
+[app-scripts] [08:48:11]  transpile update finished in 283 ms 
+[app-scripts] [08:48:11]  webpack update started ... 
+[app-scripts] [08:48:12]  webpack update finished in 815 ms 
+[app-scripts] [08:48:12]  build finished in 1.32 s 
+[app-scripts] [08:48:18]  build started ... 
+[app-scripts] [08:48:18]  deeplinks update started ... 
+[app-scripts] [08:48:18]  deeplinks update finished in 206 ms 
+[app-scripts] [08:48:18]  transpile update started ... 
+[app-scripts] [08:48:18]  transpile update finished in 309 ms 
+[app-scripts] [08:48:18]  webpack update started ... 
+[app-scripts] [33m[08:48:19]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 128 [39m
+[app-scripts]             'url' is declared but its value is never read. 
+[app-scripts] [2m     L128:  [22m		var [41mu[49m[41mr[49m[41ml[49m = "";
+[app-scripts] [33m[08:48:19]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 4 [39m
+[app-scripts]             'Renderer' is declared but its value is never read. 
+[app-scripts] [2m       L3:  [22mimport { Http } from '@angular/http';
+[app-scripts] [2m       L4:  [22mimport { ViewChild, ElementRef, [41mR[49m[41me[49m[41mn[49m[41md[49m[41me[49m[41mr[49m[41me[49m[41mr[49m } from '@angular/core';
+[app-scripts] [2m       L5:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+[app-scripts] [33m[08:48:19]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 11 [39m
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L10:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [2m      L11:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts] [2m      L12:  [22mimport 'rxjs/add/operator/map';
+[app-scripts] [33m[08:48:19]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 13 [39m
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m      L12:  [22mimport 'rxjs/add/operator/map';
+[app-scripts] [2m      L13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { e } from '@angular/core/src/render3';
+[app-scripts] [08:48:21]  webpack update finished in 2.64 s 
+[app-scripts] [08:48:21]  build finished in 3.16 s 
+[app-scripts] [33m[08:48:26]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 128 [39m
+[app-scripts]             'url' is declared but its value is never read. 
+[app-scripts] [2m     L128:  [22m		var [41mu[49m[41mr[49m[41ml[49m = "";
+[app-scripts] [33m[08:48:26]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 4 [39m
+[app-scripts]             'Renderer' is declared but its value is never read. 
+[app-scripts] [2m       L3:  [22mimport { Http } from '@angular/http';
+[app-scripts] [2m       L4:  [22mimport { ViewChild, ElementRef, [41mR[49m[41me[49m[41mn[49m[41md[49m[41me[49m[41mr[49m[41me[49m[41mr[49m } from '@angular/core';
+[app-scripts] [2m       L5:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+[app-scripts] [33m[08:48:26]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 11 [39m
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L10:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [2m      L11:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts] [2m      L12:  [22mimport 'rxjs/add/operator/map';
+[app-scripts] [33m[08:48:26]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 13 [39m
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m      L12:  [22mimport 'rxjs/add/operator/map';
+[app-scripts] [2m      L13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { e } from '@angular/core/src/render3';
+[app-scripts] [08:49:12]  build started ... 
+[app-scripts] [08:49:12]  template update started ... 
+[app-scripts] [08:49:12]  template update finished in 13 ms 
+[app-scripts] [08:49:12]  build finished in 25 ms 
+[app-scripts] [08:52:56]  build started ... 
+[app-scripts] [08:52:56]  deeplinks update started ... 
+[app-scripts] [08:52:56]  deeplinks update finished in 203 ms 
+[app-scripts] [08:52:56]  transpile update started ... 
+[app-scripts] [08:52:56]  transpile update finished in 237 ms 
+[app-scripts] [08:52:56]  webpack update started ... 
+[app-scripts] [08:52:57]  webpack update finished in 682 ms 
+[app-scripts] [08:52:57]  build finished in 1.14 s 
+[app-scripts] [33m[08:53:03]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 128 [39m
+[app-scripts]             'url' is declared but its value is never read. 
+[app-scripts] [2m     L128:  [22m		var [41mu[49m[41mr[49m[41ml[49m = "";
+[app-scripts] [33m[08:53:03]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 4 [39m
+[app-scripts]             'Renderer' is declared but its value is never read. 
+[app-scripts] [2m       L3:  [22mimport { Http } from '@angular/http';
+[app-scripts] [2m       L4:  [22mimport { ViewChild, ElementRef, [41mR[49m[41me[49m[41mn[49m[41md[49m[41me[49m[41mr[49m[41me[49m[41mr[49m } from '@angular/core';
+[app-scripts] [2m       L5:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+[app-scripts] [33m[08:53:03]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 11 [39m
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L10:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [2m      L11:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts] [2m      L12:  [22mimport 'rxjs/add/operator/map';
+[app-scripts] [33m[08:53:03]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 13 [39m
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m      L12:  [22mimport 'rxjs/add/operator/map';
+[app-scripts] [2m      L13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { e } from '@angular/core/src/render3';
+[app-scripts] [09:01:01]  build started ... 
+[app-scripts] [09:01:01]  deeplinks update started ... 
+[app-scripts] [09:01:01]  deeplinks update finished in 141 ms 
+[app-scripts] [09:01:01]  transpile update started ... 
+[app-scripts] [09:01:01]  build finished in 485 ms 
+[app-scripts] [33m[09:01:06]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 128 [39m
+[app-scripts]             'url' is declared but its value is never read. 
+[app-scripts] [2m     L128:  [22m		var [41mu[49m[41mr[49m[41ml[49m = "";
+[app-scripts] [33m[09:01:06]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 4 [39m
+[app-scripts]             'Renderer' is declared but its value is never read. 
+[app-scripts] [2m       L3:  [22mimport { Http } from '@angular/http';
+[app-scripts] [2m       L4:  [22mimport { ViewChild, ElementRef, [41mR[49m[41me[49m[41mn[49m[41md[49m[41me[49m[41mr[49m[41me[49m[41mr[49m } from '@angular/core';
+[app-scripts] [2m       L5:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+[app-scripts] [33m[09:01:06]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 11 [39m
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L10:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [2m      L11:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts] [2m      L12:  [22mimport 'rxjs/add/operator/map';
+[app-scripts] [33m[09:01:06]  tslint: C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 13 [39m
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m      L12:  [22mimport 'rxjs/add/operator/map';
+[app-scripts] [2m      L13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { e } from '@angular/core/src/render3';
+[app-scripts] [09:04:58]  build started ... 
+[app-scripts] [09:04:58]  deeplinks update started ... 
+[app-scripts] [09:04:58]  deeplinks update finished in 173 ms 
+[app-scripts] [09:04:58]  transpile update started ... 
+[app-scripts] [09:04:58]  transpile update finished in 321 ms 
+[app-scripts] [09:04:58]  webpack update started ... 
+[app-scripts] [09:05:02]  webpack update finished in 3.60 s 
+[app-scripts] [09:05:02]  build finished in 4.12 s 
+[app-scripts] [33m[09:05:08]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 24 [39m
+[app-scripts]             'cordova' is declared but its value is never read. 
+[app-scripts] [2m      L24:  [22mdeclare var [41mc[49m[41mo[49m[41mr[49m[41md[49m[41mo[49m[41mv[49m[41ma[49m: any;
+[app-scripts] [33m[09:05:08]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 201 [39m
+[app-scripts]             'addimage' is declared but its value is never read. 
+[app-scripts] [2m     L201:  [22mprivate [41ma[49m[41md[49m[41md[49m[41mi[49m[41mm[49m[41ma[49m[41mg[49m[41me[49m(action){
+[app-scripts] [2m     L202:  [22m	if(action === "add"){
+[app-scripts] [33m[09:05:08]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 492 [39m
+[app-scripts]             'checkselecteddocids' is declared but its value is never read. 
+[app-scripts] [2m     L491:  [22mresolve();
+[app-scripts] [2m     L493:  [22mvar checkselecteddocids = localStorage.getItem('selecteddocids')
+[app-scripts] [33m[09:05:08]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 3 [39m
+[app-scripts]             'Img' is declared but its value is never read. 
+[app-scripts] [2m       L2:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+[app-scripts] [2m       L3:  [22m, ActionSheetController, ToastController, Platform, LoadingController, Loading, [41mI[49m[41mm[49m[41mg[49m } from 'ionic-angular';
+[app-scripts] [2m       L4:  [22mimport { Camera } from '@ionic-native/camera';
+[app-scripts] [33m[09:05:08]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 7 [39m
+[app-scripts]             'FileTransferObject' is declared but its value is never read. 
+[app-scripts] [2m       L6:  [22mimport { FilePath } from '@ionic-native/file-path';
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, [41mF[49m[41mi[49m[41ml[49m[41me[49m[41mT[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m[41mO[49m[41mb[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22mimport { normalizeURL } from 'ionic-angular';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { normalizeURL } from 'ionic-angular';
+[app-scripts] [33m[09:05:08]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 8 [39m
+[app-scripts] [33m[09:05:08]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 21 [39m
+[app-scripts] [2m       L9:  [22mimport { Http } from '@angular/http';
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L20:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [2m      L21:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts] [09:05:13]  build started ... 
+[app-scripts] [09:05:13]  template update started ... 
+[app-scripts] [09:05:13]  template update finished in 15 ms 
+[app-scripts] [09:05:13]  build finished in 21 ms 
+[app-scripts] [09:06:23]  build started ... 
+[app-scripts] [09:06:23]  deeplinks update started ... 
+[app-scripts] [09:06:23]  deeplinks update finished in 147 ms 
+[app-scripts] [09:06:23]  transpile update started ... 
+[app-scripts] [09:06:23]  transpile update finished in 311 ms 
+[app-scripts] [09:06:23]  webpack update started ... 
+[app-scripts] [09:06:24]  webpack update finished in 639 ms 
+[app-scripts] [09:06:24]  build finished in 1.11 s 
+[app-scripts] [33m[09:06:30]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 24 [39m
+[app-scripts]             'cordova' is declared but its value is never read. 
+[app-scripts] [2m      L24:  [22mdeclare var [41mc[49m[41mo[49m[41mr[49m[41md[49m[41mo[49m[41mv[49m[41ma[49m: any;
+[app-scripts] [33m[09:06:30]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 201 [39m
+[app-scripts]             'addimage' is declared but its value is never read. 
+[app-scripts] [2m     L201:  [22mprivate [41ma[49m[41md[49m[41md[49m[41mi[49m[41mm[49m[41ma[49m[41mg[49m[41me[49m(action){
+[app-scripts] [33m[09:06:30]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 492 [39m
+[app-scripts] [2m     L202:  [22m	if(action === "add"){
+[app-scripts]             'checkselecteddocids' is declared but its value is never read. 
+[app-scripts] [2m     L491:  [22mresolve();
+[app-scripts] [33m[09:06:30]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 3 [39m
+[app-scripts] [2m     L493:  [22mvar checkselecteddocids = localStorage.getItem('selecteddocids')
+[app-scripts]             'Img' is declared but its value is never read. 
+[app-scripts] [2m       L2:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+[app-scripts] [33m[09:06:30]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 7 [39m
+[app-scripts] [2m       L3:  [22m, ActionSheetController, ToastController, Platform, LoadingController, Loading, [41mI[49m[41mm[49m[41mg[49m } from 'ionic-angular';
+[app-scripts] [2m       L4:  [22mimport { Camera } from '@ionic-native/camera';
+[app-scripts]             'FileTransferObject' is declared but its value is never read. 
+[app-scripts] [2m       L6:  [22mimport { FilePath } from '@ionic-native/file-path';
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, [41mF[49m[41mi[49m[41ml[49m[41me[49m[41mT[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m[41mO[49m[41mb[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22mimport { normalizeURL } from 'ionic-angular';
+[app-scripts] [33m[09:06:30]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 8 [39m
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m       L7:  [22mimport { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+[app-scripts] [2m       L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { normalizeURL } from 'ionic-angular';
+[app-scripts] [33m[09:06:30]  tslint: C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 21 [39m
+[app-scripts] [2m       L9:  [22mimport { Http } from '@angular/http';
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L20:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts] [2m      L21:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts] [09:13:45]  build started ... 
+[app-scripts] [09:13:45]  deeplinks update started ... 
+[app-scripts] [09:13:45]  deeplinks update finished in 147 ms 
+[app-scripts] [09:13:45]  transpile update started ... 
+[app-scripts] [09:13:45]  transpile update finished in 15 ms 
+[app-scripts] [09:13:45]  webpack update started ... 
+[app-scripts] [09:13:48]  webpack update finished in 3.01 s 
+[app-scripts] [09:13:48]  build finished in 3.19 s 
+[app-scripts] [09:16:08]  build started ... 
+[app-scripts] [09:16:08]  deeplinks update started ... 
+[app-scripts] [09:16:08]  deeplinks update finished in 136 ms 
+[app-scripts] [09:16:08]  transpile update started ... 
+[app-scripts] [09:16:08]  transpile update finished in 13 ms 
+[app-scripts] [09:16:08]  webpack update started ... 
+[app-scripts] [09:16:09]  webpack update finished in 826 ms 
+[app-scripts] [09:16:09]  build finished in 982 ms 
+[app-scripts] [09:17:35]  build started ... 
+[app-scripts] [09:17:35]  deeplinks update started ... 
+[app-scripts] [09:17:36]  deeplinks update finished in 153 ms 
+[app-scripts] [09:17:36]  transpile update started ... 
+[app-scripts] [09:17:36]  transpile update finished in 27 ms 
+[app-scripts] [09:17:36]  webpack update started ... 
+[app-scripts] [09:17:38]  webpack update finished in 2.72 s 
+[app-scripts] [09:17:38]  build finished in 2.93 s 
+[app-scripts] [09:18:54]  build started ... 
+[app-scripts] [09:18:54]  deeplinks update started ... 
+[app-scripts] [09:18:54]  deeplinks update finished in 166 ms 
+[app-scripts] [09:18:54]  transpile update started ... 
+[app-scripts] [09:18:54]  transpile update finished in 17 ms 
+[app-scripts] [09:18:54]  webpack update started ... 
+[app-scripts] [09:18:55]  webpack update finished in 749 ms 
+[app-scripts] [09:18:55]  build finished in 938 ms 
+[app-scripts] [09:19:11]  build started ... 
+[app-scripts] [09:19:11]  deeplinks update started ... 
+[app-scripts] [09:19:11]  deeplinks update finished in 113 ms 
+[app-scripts] [09:19:11]  transpile update started ... 
+[app-scripts] [09:19:11]  transpile update finished in 16 ms 
+[app-scripts] [09:19:11]  webpack update started ... 
+[app-scripts] [09:19:14]  webpack update finished in 3.61 s 
+[app-scripts] [09:19:14]  build finished in 3.76 s 
+[app-scripts] [09:20:55]  build started ... 
+[app-scripts] [09:20:55]  deeplinks update started ... 
+[app-scripts] [09:20:56]  deeplinks update finished in 150 ms 
+[app-scripts] [09:20:56]  transpile update started ... 
+[app-scripts] [09:20:56]  transpile update finished in 9 ms 
+[app-scripts] [09:20:56]  webpack update started ... 
+[app-scripts] [09:20:56]  webpack update finished in 669 ms 
+[app-scripts] [09:20:56]  build finished in 841 ms 
+[app-scripts] [09:26:33]  build started ... 
+[app-scripts] [09:26:33]  deeplinks update started ... 
+[app-scripts] [09:26:33]  deeplinks update finished in 202 ms 
+[app-scripts] [09:26:33]  transpile update started ... 
+[app-scripts] [09:26:33]  transpile update finished in 114 ms 
+[app-scripts] [09:26:33]  webpack update started ... 
+[app-scripts] [09:26:37]  webpack update finished in 3.26 s 
+[app-scripts] [09:26:37]  build finished in 3.59 s 
+[app-scripts] [09:26:37]  build started ... 
+[app-scripts] [09:26:37]  deeplinks update started ... 
+[app-scripts] [09:26:37]  deeplinks update finished in 131 ms 
+[app-scripts] [09:26:37]  transpile update started ... 
+[app-scripts] [09:26:37]  transpile update finished in 192 ms 
+[app-scripts] [09:26:37]  build finished in 340 ms 
+[app-scripts] [33m[09:26:41]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 86 [39m
+[app-scripts]             Property 'keyboard' is declared but its value is never read. 
+[app-scripts] [2m      L85:  [22mprivate _sanitizer: DomSanitizer, 
+[app-scripts] [2m      L86:  [22mprivate [41mk[49m[41me[49m[41my[49m[41mb[49m[41mo[49m[41ma[49m[41mr[49m[41md[49m : Keyboard,
+[app-scripts] [33m[09:26:41]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 124 [39m
+[app-scripts] [2m      L87:  [22mprivate renderer:Renderer,
+[app-scripts]             'selectedProjectName' is declared but its value is never read. 
+[app-scripts] [2m     L123:  [22mvar documentSystemProjectID = this.userdocumentData.SystemProjectID; 
+[app-scripts] [33m[09:26:41]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 126 [39m
+[app-scripts] [2m     L124:  [22mvar [41ms[49m[41me[49m[41ml[49m[41me[49m[41mc[49m[41mt[49m[41me[49m[41md[49m[41mP[49m[41mr[49m[41mo[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m[41mN[49m[41ma[49m[41mm[49m[41me[49m     = this.userdocumentData.SystemProjectName;    
+[app-scripts] [2m     L125:  [22mvar documentSystemClientID  = this.userdocumentData.SystemClientID;
+[app-scripts]             'documentSystemUserID' is declared but its value is never read. 
+[app-scripts] [2m     L125:  [22mvar documentSystemClientID  = this.userdocumentData.SystemClientID;
+[app-scripts] [2m     L126:  [22mvar [41md[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mS[49m[41my[49m[41ms[49m[41mt[49m[41me[49m[41mm[49m[41mU[49m[41ms[49m[41me[49m[41mr[49m[41mI[49m[41mD[49m    = this.userdocumentData.SystemUserID;    
+[app-scripts] [33m[09:26:41]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 127 [39m
+[app-scripts] [2m     L127:  [22mvar documentApiKey          = this.userdocumentData.apiKey;
+[app-scripts]             'documentApiKey' is declared but its value is never read. 
+[app-scripts] [2m     L126:  [22mvar documentSystemUserID    = this.userdocumentData.SystemUserID;    
+[app-scripts] [33m[09:26:41]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 128 [39m
+[app-scripts] [2m     L127:  [22mvar [41md[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mA[49m[41mp[49m[41mi[49m[41mK[49m[41me[49m[41my[49m          = this.userdocumentData.apiKey;
+[app-scripts] [2m     L128:  [22mvar documentThumbnail       = this.userdocumentData.Thumbnail;
+[app-scripts]             'documentThumbnail' is declared but its value is never read. 
+[app-scripts] [2m     L127:  [22mvar documentApiKey          = this.userdocumentData.apiKey;
+[app-scripts] [2m     L128:  [22mvar [41md[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mT[49m[41mh[49m[41mu[49m[41mm[49m[41mb[49m[41mn[49m[41ma[49m[41mi[49m[41ml[49m       = this.userdocumentData.Thumbnail;
+[app-scripts] [2m     L129:  [22mvar documentDocumentNumber  = this.userdocumentData.DocumentNumber;
+[app-scripts] [33m[09:26:41]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 129 [39m
+[app-scripts]             'documentDocumentNumber' is declared but its value is never read. 
+[app-scripts] [2m     L128:  [22mvar documentThumbnail       = this.userdocumentData.Thumbnail;
+[app-scripts] [33m[09:26:41]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 130 [39m
+[app-scripts] [2m     L129:  [22mvar [41md[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mD[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mN[49m[41mu[49m[41mm[49m[41mb[49m[41me[49m[41mr[49m  = this.userdocumentData.DocumentNumber;
+[app-scripts] [2m     L130:  [22mvar documentFileExtension   = this.userdocumentData.FileExtension;
+[app-scripts]             'documentFileExtension' is declared but its value is never read. 
+[app-scripts] [2m     L129:  [22m    var documentDocumentNumber  = this.userdocumentData.DocumentNumber;
+[app-scripts] [33m[09:26:41]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 287 [39m
+[app-scripts] [33m[09:26:41]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 13 [39m
+[app-scripts] [2m     L130:  [22m    var [41md[49m[41mo[49m[41mc[49m[41mu[49m[41mm[49m[41me[49m[41mn[49m[41mt[49m[41mF[49m[41mi[49m[41ml[49m[41me[49m[41mE[49m[41mx[49m[41mt[49m[41me[49m[41mn[49m[41ms[49m[41mi[49m[41mo[49m[41mn[49m   = this.userdocumentData.FileExtension;
+[app-scripts]             'searchvalue' is declared but its value is never read. 
+[app-scripts] [2m     L287:  [22m    var [41ms[49m[41me[49m[41ma[49m[41mr[49m[41mc[49m[41mh[49m[41mv[49m[41ma[49m[41ml[49m[41mu[49m[41me[49m = document.getElementsByClassName("searchbar-input")["0"].value;
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m      L12:  [22mimport { Keyboard } from '@ionic-native/keyboard';
+[app-scripts] [33m[09:26:41]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 16 [39m
+[app-scripts] [33m[09:26:41]  tslint: C:/Ionic3/pvm/src/pages/documents/documents.ts, line: 17 [39m
+[app-scripts] [2m      L13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { SubtypesPage } from '../subtypes/subtypes';
+[app-scripts] [2m      L14:  [22mimport * as Constants from '../../providers/constants';
+[app-scripts]             All imports on this line are unused. 
+[app-scripts] [2m      L16:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { QrcodePage } from '../qrcode/qrcode';
+[app-scripts] [2m      L17:  [22mimport { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+[app-scripts] [2m      L16:  [22mimport { QrcodePage } from '../qrcode/qrcode';
+[app-scripts] [2m      L17:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts] [09:35:56]  build started ... 
+[app-scripts] [09:35:56]  deeplinks update started ... 
+[app-scripts] [09:35:56]  deeplinks update finished in 145 ms 
+[app-scripts] [09:35:56]  transpile update started ... 
+[app-scripts] [09:35:56]  transpile update finished in 232 ms 
+[app-scripts] [09:35:56]  webpack update started ... 
+[app-scripts] [09:35:57]  webpack update finished in 644 ms 
+[app-scripts] [09:35:57]  build finished in 1.03 s 
+[app-scripts] [09:41:51]  build started ... 
+[app-scripts] [09:41:51]  deeplinks update started ... 
+[app-scripts] [09:41:51]  deeplinks update finished in 210 ms 
+[app-scripts] [09:41:51]  transpile update started ... 
+[app-scripts] [09:41:51]  transpile update finished in 276 ms 
+[app-scripts] [09:41:51]  webpack update started ... 
+[app-scripts] [09:41:54]  webpack update finished in 2.69 s 
+[app-scripts] [09:41:54]  build finished in 3.20 s 
+[app-scripts] [09:42:20]  build started ... 
+[app-scripts] [09:42:20]  template update started ... 
+[app-scripts] [09:42:20]  template update finished in 11 ms 
+[app-scripts] [09:42:20]  build finished in 17 ms 
+[app-scripts] [09:47:49]  build started ... 
+[app-scripts] [09:47:49]  deeplinks update started ... 
+[app-scripts] [09:47:49]  deeplinks update finished in 142 ms 
+[app-scripts] [09:47:49]  transpile update started ... 
+[app-scripts] [09:47:49]  transpile update finished in 211 ms 
+[app-scripts] [09:47:49]  webpack update started ... 
+[app-scripts] [09:47:50]  webpack update finished in 824 ms 
+[app-scripts] [09:47:50]  build finished in 1.19 s 
+[app-scripts] [09:49:10]  build started ... 
+[app-scripts] [09:49:10]  template update started ... 
+[app-scripts] [09:49:10]  template update finished in 11 ms 
+[app-scripts] [09:49:10]  build finished in 18 ms 

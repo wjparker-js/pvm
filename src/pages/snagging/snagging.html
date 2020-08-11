@@ -45,7 +45,7 @@
     
       <ion-input class="text" readonly type="text"   id = "Location" name="location" value="{{name}}" (ionChange)="openlocimg()" style="font-size:13px;"></ion-input>
 	
-      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="scanQRCode()" > 
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="presentQRActionSheet()" > 
       	<ion-icon name="qr-scanner"> </ion-icon> 
       </button>    
       <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openList()"> 
@@ -73,7 +73,7 @@
   <ion-item>
     <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;">Sticker Code</ion-label>    
       <ion-input class="text" readonly type="text"   id = "Location" name="location" value="{{associatedcode}}"  style="font-size:13px;"></ion-input>	
-      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="associateQRCode()" > 
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="presentQRStickerActionSheet()" > 
       	<ion-icon name="qr-scanner"> </ion-icon> 
       </button>    
   </ion-item>

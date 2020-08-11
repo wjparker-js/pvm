@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ViewChild, ElementRef, Renderer } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams,  ViewController , Searchbar} from 'ionic-angular';
+import { IonicPage,  ActionSheetController, ModalController, NavController, NavParams,  ViewController , Searchbar} from 'ionic-angular';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { DocumentViewer } from '../documentviewer/documentviewer';
@@ -9,12 +9,8 @@ import { DocumentInfo } from '../documentinfo/documentinfo';
 import { DocumentIdInfo } from '../documentidinfo/documentidinfo';
 import { DocumentAudit } from '../documentaudit/documentaudit';
 import { AboutPage } from '../about/about';
-import { Keyboard } from '@ionic-native/keyboard';
-import { SubtypesPage } from '../subtypes/subtypes';
 import * as Constants from '../../providers/constants';
-
-import { QrcodePage } from '../qrcode/qrcode';
-import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @IonicPage()
 
@@ -78,35 +74,23 @@ export class DocumentsPage {
     "FileExtension":""
   };
 
-  constructor(public navCtrl: NavController, 
+  constructor(
+		          public actionSheetCtrl: ActionSheetController,
+              public navCtrl: NavController, 
               public navParams: NavParams, 
               public viewCtrl: ViewController,
               public http: Http,
               private _sanitizer: DomSanitizer, 
-              private keyboard : Keyboard,
               private renderer:Renderer,
               private barcodeScanner:BarcodeScanner,
               public modalCtrl: ModalController) {}
 
-  ionViewDidLeave(){
-    //document.getElementsByClassName("searchbar-input")["0"].value = "for";
-    //console.log(searchvalue);
-    //this.searchbar.clearInput(null);
-    //this.searchbar.value = '';
-    //this.navCtrl.pop();
-  }
-
-
-  
+ 
   ionViewDidEnter() {
-
-    //this.inprocess = "Y";
 
     this.inprocess = this.navParams.get('inprocess');
     this.callback = this.navParams.get("callback")
     this.selecteddocument = "";
-
-    //https://www.sky-vault.co.uk/PublicPics/"+this.scid+"/"+cpid+"/' + 
 
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
@@ -120,14 +104,8 @@ export class DocumentsPage {
     this.userdocumentData.FileExtension     = documentData[0].FileExtension; 
 		this.apiKey                             = documentData[0].apiKey; 
     
-    var documentSystemProjectID = this.userdocumentData.SystemProjectID; 
-    var selectedProjectName     = this.userdocumentData.SystemProjectName;    
+    var documentSystemProjectID = this.userdocumentData.SystemProjectID;  
     var documentSystemClientID  = this.userdocumentData.SystemClientID;
-    var documentSystemUserID    = this.userdocumentData.SystemUserID;    
-    var documentApiKey          = this.userdocumentData.apiKey;
-    var documentThumbnail       = this.userdocumentData.Thumbnail;
-    var documentDocumentNumber  = this.userdocumentData.DocumentNumber;
-    var documentFileExtension   = this.userdocumentData.FileExtension;
 
     var currentProjectName      = localStorage.getItem('CurrentProjectName');
     console.log("Current Proj = ", currentProjectName);
@@ -138,23 +116,13 @@ export class DocumentsPage {
     this.cpid = localStorage.getItem('CurrentProjectID');
     this.scid = localStorage.getItem('CurrentProjectClientID');
 
-
     setTimeout(() => {
       console.log("setTimeout");
       this.myInput.nativeElement.focus();
-      
-     // if(currentProjectName != oldProjectName ){
-        //this.myInput.nativeElement.innerText = "Hello";
-      //}
-
       this.myInput.nativeElement.blur();
       this.myInput.nativeElement.focus();
     },150);
 
-  
-
-    //this.hasdocs = false;
-    //this.searchbar.clearInput(null);
     if(currentProjectName != oldProjectName ){
       
       console.log("Current Proj 1 = ", currentProjectName);
@@ -173,7 +141,6 @@ export class DocumentsPage {
             console.log("Old Proj 2 = ", oldProjectName);
 
             document.getElementById("maindiv").style.display="block";
-            //document.getElementsByClassName("searchbar-input")["0"].value = "";
         },
         err => {
             console.log("Oops!");
@@ -212,6 +179,26 @@ export class DocumentsPage {
       return Object.keys(obj);
   }
 
+	public presentQRDocSearchActionSheet() {
+		let actionSheet = this.actionSheetCtrl.create({
+			title: 'Scan a QR Code',
+			buttons: [
+				{
+					text: 'Scan',
+					handler: () => {						
+						this.scanDocQRCode()
+						.then()
+						.catch(() => {});
+					}
+				},
+				{
+					text: 'Cancel',
+					role: 'cancel'
+				}
+			]
+		});
+		actionSheet.present();
+	}
 
 
 	scanDocQRCode(){
@@ -240,19 +227,9 @@ export class DocumentsPage {
             this.documentNumber = this.documentQRData["0"].DocumentNumber;
             this.projectID      = this.documentQRData["0"].ProjectID;
             this.systemclientID = this.documentQRData["0"].SystemClientID;
-
-            console.log("DocumentID       ",this.documentQRData["0"].DocumentID);
-            console.log("DocumentNumber   ",this.documentQRData["0"].DocumentNumber);
-            console.log("ProjectID        ",this.documentQRData["0"].ProjectID);
-            console.log("SystemClientID   ",this.documentQRData["0"].SystemClientID);
-            
-            //this.navCtrl.push(DocumentIdInfo,{this.systemclientID,this.documentID,this.projectID,this.userdocumentData.SystemUserID});
-
-            //scid,did,docno,pid,uid}  this.navCtrl.push(DocumentInfo,{this.photoTiny, this.documentID, this.documentNumber,''});
-            
+          
             this.openDocumentIdInfo(this.systemclientID,this.documentID,this.projectID,this.userdocumentData.SystemUserID); 
-
-						
+					
 					},err => {
 					  console.log("Get defects from sticker code failed.");
 				  });
@@ -266,26 +243,16 @@ export class DocumentsPage {
   checkBlur($event){
     console.log("Got Blur");
     console.log("Value ",$event._value);
-    //$event._value = "";
     console.log("Value ",$event._value);
   }
 
 checkFocus($event){
   console.log("Got Focus");
   console.log("Value ",$event._value);
-  
-  //document.getElementsByClassName("searchbar-input")["0"].value = "for";
-  //$event._value = "what";
-  console.log("Value ",$event._value);
 }
-
-//onSearch(event) { this.renderer.invokeElementMethod(event.target, 'blur'); }
-
 
   searchByKeyword($event){
 
-    var searchvalue = document.getElementsByClassName("searchbar-input")["0"].value;
-   
     this.selectedProjectName     = localStorage.getItem('CurrentProjectName');    
     var documentSystemUserID1    = this.userdocumentData.SystemUserID;
     var documentSystemProjectID1 = localStorage.getItem('CurrentProjectID');    
@@ -348,7 +315,7 @@ checkFocus($event){
       var pt2 = "</span>";
       var rep = "";
       var image = image.replace(pt1,rep);
-      var image = image.replace(pt2,rep);
+      image = image.replace(pt2,rep);
     }
 
     console.log("Fixed Image: ",image);
@@ -361,7 +328,7 @@ checkFocus($event){
     var pt2 = "</span>";
     var rep = "";
     var docno1 = docno1.replace(pt1,rep);
-    var docno1 = docno1.replace(pt2,rep);
+    docno1 = docno1.replace(pt2,rep);
 
     this.navCtrl.push(DocumentInfo,{docimg, docid, docno1, search});
   }
@@ -399,18 +366,6 @@ checkFocus($event){
       localStorage.setItem('selecteddocids',updateselecteddocids);
     }
 
-    /*var oldurl = Constants.apiUrl+"api/defectdocuments/"+this.apiKey+"/"+this.userdocumentData.SystemProjectID+"/"+localStorage.getItem('selecteddocids');
-      
-    this.http.get(oldurl).map(res => res.json()).subscribe(data => {
-            this._sanitizer.bypassSecurityTrustStyle(data);
-        this.userdocuments = data;
-        this.hasdocs = true;
-        },
-        err => {
-            console.log("Oopsiw!");
-        }
-    );  */
-
   }
 
 	removedoc(docid){
@@ -426,21 +381,6 @@ checkFocus($event){
 			localStorage.setItem('selecteddocids',this.adddocids.join(","));
 		}
 
-	/*		this.hasdocs = false;
-
-	if(selecteddocids){
-			var oldurl = Constants.apiUrl+"api/defectdocuments/"+this.api+"/"+this.userdocumentData.SystemProjectID+"/"+localStorage.getItem('selecteddocids');
-			this.http.get(oldurl).map(res => res.json()).subscribe(data => {
-			        this._sanitizer.bypassSecurityTrustStyle(data);
-					this.userdocuments = data;
-					this.hasdocs = true;					
-			    },
-			    err => {
-			        console.log("Oops!");
-			    }
-			);
-    } else {this.hasdocs = false;}
-    */
 	}
 
 	ionViewWillLeave() {
@@ -454,20 +394,6 @@ checkFocus($event){
       this.viewCtrl.dismiss();
     }
 	}  
-  
-/*
-	openDTList(){		
-		this.navCtrl.push(SubtypesPage, {callback:this.myCallbackFunction5});
-	}
 
-
-  myCallbackFunctiondAudit = (_params) => {
-	 return new Promise((resolve, reject) => {
-	     this.hasdocs = _params;
-	     resolve();
-	     console.log(this.name);
-	 });
-	}
-*/
 }
                                                   

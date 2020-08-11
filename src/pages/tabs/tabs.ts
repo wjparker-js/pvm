@@ -4,8 +4,6 @@ import { HomePage } from '../home/home';
 import { DocumentsPage } from '../documents/documents';
 import { ProjectsPage } from '../projects/projects';
 import { DefectsPage } from '../Defects/defects';
-import { AboutPage } from '../about/about';
-
 
 @Component({
   templateUrl: 'tabs.html'
@@ -24,23 +22,12 @@ export class TabsPage {
  
   constructor() {
 
-    var canViewDefects   = localStorage.getItem('Role-PA5073');
-    var canAddDefects    = localStorage.getItem('Role-PA5038');    
-    var canManageDefects = localStorage.getItem('Role-PA5039');
     var isonline         = localStorage.getItem('online');
     
     if(isonline != "1"){
       this.online = false;  
     }
-  
 
- /*   //canManageDefects = "1";
-
-    if(canManageDefects == "1" || canAddDefects == "1" || canViewDefects == "1"){
-      this.defectsShow = true;
-      this.tab4Root = DocumentsPage;
-      this.tab5Root = DefectsPage;
-*/
-    }
+  }
                                                                                           
 }

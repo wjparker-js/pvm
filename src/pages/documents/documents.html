@@ -9,7 +9,7 @@
     <span style="font-size:16px;color:white;">{{this.userdocumentData.SystemProjectName}}</span>    
     
     <ion-buttons right>        
-        <button ion-button  color="light" type="button" item-right style="font-size:24px;" (click)="scanDocQRCode()"> 
+        <button ion-button  color="light" type="button" item-right style="font-size:24px;" (click)="presentQRDocSearchActionSheet()"> 
         <ion-icon name="qr-scanner"> </ion-icon>
         </button>  
         &nbsp;
@@ -74,19 +74,25 @@
 
                       <div  style="position:relative;top:-5px;padding:0px;margin:0px;width:100%;">
                           
-                          <ion-icon style = "font-size: 13px; padding-top: 0px;" name="refresh-circle"  class="flex-right hilite1" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber)"></ion-icon>
-                          <label  class="bodytext" color="primary" (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber,dsearch)">Details</label>&nbsp;
+                          <span (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber,dsearch)">
+                          <ion-icon style = "font-size: 13px; padding-top: 0px;" name="refresh-circle"  class="flex-right hilite1" ></ion-icon>
+                          <label  class="bodytext" color="primary" >Details</label>
+                          </span>&nbsp;
                           
-                          <ion-icon style = "font-size: 13px;padding-top: 0px;" name="information-circle"  class="flex-right hilite2" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
-                          <label  class="bodytext" color="primary" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Audit</label>&nbsp;;
-                          
-                          <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="secondary" class="flex-right" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)"></ion-icon>
-                          <label class="bodytext" class="bodytext" color="primary" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">Send</label>&nbsp;
-                          
+                          <span (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">
+                          <ion-icon style = "font-size: 13px;padding-top: 0px;" name="information-circle"  class="flex-right hilite2" ></ion-icon>
+                          <label  class="bodytext" color="primary">Audit</label>
+                          </span>&nbsp;
+
+                          <span [hidden]="this.inprocess == 'Y'" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">
+                          <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="secondary" class="flex-right" ></ion-icon>
+                          <label class="bodytext" class="bodytext" color="primary" >Send</label>
+                          </span>&nbsp;
+
                           <span [hidden]="this.inprocess != 'Y'" (click)="documentAdd(document.DocumentID,document.DocumentNumber)">
                             <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="energy" class="flex-right"></ion-icon>
-                            <label class="bodytext" color="primary">Add</label>&nbsp;
-                          </span>
+                            <label class="bodytext" color="primary">Add</label>
+                          </span>&nbsp;
 
                           <span [hidden]="this.inprocess != 'Y'" id = "{{document.DocumentID}}" style="visibility: hidden;" (click)="removedoc(document.DocumentID,document.DocumentNumber)">
                             <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="bold" class="flex-right"></ion-icon>
@@ -97,7 +103,7 @@
 
                     </ion-item> 
 
-                    <ion-item-options [hidden]="this.inprocess != 'Y'" side="right">
+                    <ion-item-options [hidden]="this.inprocess == 'Y'" side="right">
                       <button ion-button color="bold" (click)="removedoc(document.DocumentID)">Remove</button>
                     </ion-item-options>
           
