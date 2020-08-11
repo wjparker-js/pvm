@@ -216,8 +216,6 @@ export class SnaggingPage {
 					text: 'Scan',
 					handler: () => {						
 						this.scanQRCode()
-						.then()
-						.catch(() => {});
 					}
 				},
 				{
@@ -317,8 +315,6 @@ export class SnaggingPage {
 					text: 'Scan',
 					handler: () => {						
 						this.stickerQRCode()
-						.then()
-						.catch(() => {});
 					}
 				},
 				{

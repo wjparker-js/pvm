@@ -187,8 +187,6 @@ export class DocumentsPage {
 					text: 'Scan',
 					handler: () => {						
 						this.scanDocQRCode()
-						.then()
-						.catch(() => {});
 					}
 				},
 				{

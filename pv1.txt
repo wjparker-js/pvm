@@ -727,3 +727,5 @@
 [app-scripts] [09:49:10]  template update started ... 
 [app-scripts] [09:49:10]  template update finished in 11 ms 
 [app-scripts] [09:49:10]  build finished in 18 ms 
+[app-scripts] Terminate batch job (Y/N)? 
+Terminate batch job (Y/N)? 

@@ -138,14 +138,11 @@ export class DefectsPage {
 	public presentQRSearchActionSheet() {
 		let actionSheet = this.actionSheetCtrl.create({
 			title: 'Scan a QR Code',
-			size: 1.7rem,
 			buttons: [
 				{
 					text: 'Scan',
 					handler: () => {						
 						this.scanQRCode()
-						.then()
-						.catch(() => {});
 					}
 				},
 				{
