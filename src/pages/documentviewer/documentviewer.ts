@@ -80,12 +80,7 @@ export class DocumentViewer {
               //console.log("Oops!");
           }
         ); 
-
-        
-   
-
-
-
+                                                                         
   }
 
   dismiss(dfile) {

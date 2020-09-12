@@ -120,9 +120,6 @@ export class Snagging52Page {
 			if(this.orderstatus == "54" || this.orderstatus == "55"){this.passedfailed = "true"};
 			
 			this.defect1snotesid = 	this.defect1s[0].OrderId;
-			this.closeDateTxt = 	this.defect1s[0].CloseDateTxt;
-
-			console.log("Hello Main Defects Details: ",this.defect1s);
 
 			this.image   = Constants.publicUploadPath+this.cid+"/"+this.pid+"/LocationImages/"+this.defect1snotesid+".jpg";
 			this.ImgUrl  = Constants.publicUploadPath+this.cid+"/"+this.pid+"/dfx/"+this.defect1snotesid+"/"+this.defect1snotesid+".jpg";
@@ -133,23 +130,21 @@ export class Snagging52Page {
 			localStorage.setItem('preimage', this.ImgUrl);
 			localStorage.setItem('postimage', this.postUrl);
 
-
 			this.hasattacheddocs = false;
 
-			if(this.closeDateTxt !== ""){
+			var attacheddocsurl = Constants.apiUrl+"api/defectdocuments/"+this.api+"/"+this.pid+"/order"+this.defect1snotesid;
+		    
+			this.http.get(attacheddocsurl).map(res => res.json()).subscribe(data => {
+			        this._sanitizer.bypassSecurityTrustStyle(data);
+					this.attacheddocuments = data;
+					this.hasattacheddocs = true;
+					console.log("attacheddocuments   -   ",this.attacheddocuments);
+			    },
+			    err => {
+			        console.log("Well Oops!");
+			    }
+			);  
 
-				var attacheddocsurl = Constants.apiUrl+"api/defectdocuments/"+this.api+"/"+this.pid+"/"+this.closeDateTxt;
-			    
-				this.http.get(attacheddocsurl).map(res => res.json()).subscribe(data => {
-				        this._sanitizer.bypassSecurityTrustStyle(data);
-						this.attacheddocuments = data;
-						this.hasattacheddocs = true;
-				    },
-				    err => {
-				        console.log("Oops!");
-				    }
-				);  
-			}
 
 
 			var urldefectsnotes = Constants.apiUrl+"api/defectsnotes/"+this.api+"/"+this.cid+"/"+this.defect1snotesid;

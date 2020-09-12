@@ -57,6 +57,10 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { Network } from '@ionic-native/network';
 import { IonicStorageModule } from '@ionic/storage';
 import { RfiPage } from '../pages/rfi/rfi';
+import { RemediatorPage } from '../pages/remediator/remediator';
+import { QsPage } from '../pages/qs/qs';
+import { InspectorPage } from '../pages/inspector/inspector';
+import { DatePickerModule } from 'ionic-calendar-date-picker';
 
 
 @NgModule({
@@ -95,10 +99,13 @@ import { RfiPage } from '../pages/rfi/rfi';
     ImgEditPagePost,
     ColorsPopoverPage,
     WidthPopoverPage,
+    RemediatorPage,
+    QsPage,
+    InspectorPage,
     BrushTypePopoverPage
   ],
   imports: [
-    BrowserModule,HttpModule,NgxQRCodeModule,IonicImageViewerModule,
+    BrowserModule,HttpModule,NgxQRCodeModule,IonicImageViewerModule,DatePickerModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp, {
       platforms: {
@@ -148,6 +155,9 @@ import { RfiPage } from '../pages/rfi/rfi';
     ImgEditPagePost,
     ColorsPopoverPage,
     WidthPopoverPage,
+    RemediatorPage,
+    QsPage,
+    InspectorPage,
     BrushTypePopoverPage
   ],
   providers: [

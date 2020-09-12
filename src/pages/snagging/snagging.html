@@ -30,7 +30,7 @@
       <button ion-button color="light" type="button" item-right (click)="openDTList()"> 
         <ion-icon name="list"> </ion-icon> 
       </button>       
-  </ion-item>
+  </ion-item> 
 
   <ion-item  [hidden]="defecttype == '' || defecttype == undefined ">
       <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Discipline</ion-label>
@@ -38,6 +38,30 @@
         <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openDList(defecttype)"> 
           <ion-icon name="list"> </ion-icon> 
         </button>          
+  </ion-item>
+
+  <ion-item  [hidden]="discipline == '' || discipline == undefined ">
+    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Inspector</ion-label>
+      <ion-input class="text" readonly type="text" id = "Inspector" name="inspector" value="{{inspector}}" style="font-size:13px;"></ion-input>  
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openInspectorList()"> 
+        <ion-icon name="list"> </ion-icon> 
+      </button>          
+  </ion-item>
+
+  <ion-item  [hidden]="discipline == '' || discipline == undefined ">
+    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Remediator</ion-label>
+      <ion-input class="text" readonly type="text" id = "Remediator" name="remediator" value="{{remediator}}" style="font-size:13px;"></ion-input>  
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openRemediatorList()"> 
+        <ion-icon name="list"> </ion-icon> 
+      </button>          
+  </ion-item>
+
+  <ion-item  [hidden]="discipline == '' || discipline == undefined ">
+    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Commercial</ion-label>
+      <ion-input class="text" readonly type="text" id = "Qs" name="qs" value="{{qs}}" style="font-size:13px;"></ion-input>  
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openQsList()"> 
+        <ion-icon name="list"> </ion-icon> 
+      </button>          
   </ion-item>
 
 	<ion-item>
@@ -69,6 +93,17 @@
       </button>          
   </ion-item>  
 
+  <ion-item>
+    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Fix By</ion-label>
+      <ion-input class="text" readonly type="text" id = "Fixdate" name="fixdate" value="{{fixdate}}" style="font-size:13px;"></ion-input>  
+      <button ion-button color="light" type="button" item-right (click)="openFixDate()"> 
+        <ion-icon name="calendar-outline"></ion-icon> 
+      </button>       
+  </ion-item>
+
+  <ion-item [hidden]="showdate == 'N'">
+    <ionic-calendar-date-picker (onSelect)="dateSelected($event)"></ionic-calendar-date-picker>      
+  </ion-item>
 
   <ion-item>
     <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;">Sticker Code</ion-label>    

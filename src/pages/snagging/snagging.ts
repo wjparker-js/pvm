@@ -17,6 +17,9 @@ import { ReasonsPage } from '../reasons/reasons';
 import { SubtypesPage } from '../subtypes/subtypes';
 import { DocumentsPage } from '../documents/documents';
 import { QrcodePage } from '../qrcode/qrcode';
+import { QsPage } from '../qs/qs';
+import { RemediatorPage } from '../remediator/remediator';
+import { InspectorPage } from '../inspector/inspector';
 import * as Constants from '../../providers/constants';
 import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 
@@ -29,7 +32,6 @@ declare var cordova: any;
   selector: 'page-snagging',
   templateUrl: 'snagging.html',
 })
-
 
 export class SnaggingPage {
 
@@ -75,6 +77,11 @@ export class SnaggingPage {
 	public lastImage: string = "";
     public loading: Loading;
 	public imageUrl: string = "";
+	public qs: string = "";
+	public remediator: string = "";
+	public inspector: string = "";
+	public showdate: string = "N";
+	public fixdate: string = "";
 	
 	adddoc:any;
 	adddoc1:any;
@@ -131,15 +138,13 @@ export class SnaggingPage {
 		//console.log("Online: ",this.online)
 		var snagData = JSON.parse(localStorage.getItem('userSystemData'));
 
-
-
 		this.pid     = localStorage.getItem('CurrentProjectID');		
 		this.usr     = localStorage.getItem('login_id');
 		this.usr     = this.usr.trim();
     	this.api     = snagData[0].apiKey;
 		this.cid     = localStorage.getItem('CurrentProjectClientID');
 		
-    	this.uguid     = localStorage.getItem('SystemUserID');
+    	this.uguid   = localStorage.getItem('SystemUserID');
 		this.uid     = snagData[0].SystemUserID;		
 		this.snagid  = this.navParams.get('snagid');
 
@@ -432,6 +437,19 @@ export class SnaggingPage {
 		    }); 
 	}
 
+	openFixDate(){
+		if(this.showdate == "N"){
+			this.showdate = "Y";
+		} else {
+			this.showdate = "N";
+		}
+	} 
+
+	dateSelected(date){
+		this.fixdate = date.toDateString();
+		//this.fixdate = date.toISOString().slice(0,12) 
+	}
+
 	hexToBase64(str) {
 		return btoa(String.fromCharCode.apply(null,
 			str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" "))
@@ -461,6 +479,18 @@ export class SnaggingPage {
 
 	openDList(selecteddefect){		
 		this.navCtrl.push(DisciplinePage, {selecteddefect,callback:this.myCallbackFunction2});
+	}
+
+	openInspectorList(){		
+		this.navCtrl.push(InspectorPage, {callback:this.myCallbackFunction11});
+	}
+
+	openQsList(){		
+		this.navCtrl.push(QsPage, {callback:this.myCallbackFunction10});
+	}
+
+	openRemediatorList(){		
+		this.navCtrl.push(RemediatorPage, {callback:this.myCallbackFunction9});
 	}
 
 	openRList(){		
@@ -569,6 +599,30 @@ export class SnaggingPage {
 		}); 	
 		
 	 }
+
+	 myCallbackFunction9 = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.remediator = _params;
+			resolve();	
+		}); 	
+		
+	 }
+
+	 myCallbackFunction10 = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.qs = _params;
+			resolve();	
+		}); 	
+		
+	 }	 
+	 
+	 myCallbackFunction11 = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.inspector = _params;
+			resolve();	
+		}); 	
+		
+	 }	 
 
 	 dismiss() {
 		localStorage.setItem('selecteddocids',""); 

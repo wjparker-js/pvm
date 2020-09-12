@@ -138,12 +138,13 @@ export class Snagging51Page {
 
 		var url = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/"+this.uid+"/nosearch/"+this.snagid+"/"+this.defectRole;
 
+		console.log("URL: ",url);
+
 	      this.http.get(url).map(res => res.json()).subscribe(data => {
 	        this._sanitizer.bypassSecurityTrustStyle(data);
 			this.defect1s = data;         
 			
 			this.defect1snotesid = 	this.defect1s[0].OrderId;
-			this.closeDateTxt = 	this.defect1s[0].CloseDateTxt;
 
 			if(this.defect1s[0].ProposedCompletionDate === null){
 				let date: Date = new Date();
@@ -154,8 +155,6 @@ export class Snagging51Page {
 				this.ProposedCompletionDateTxt = this.defect1s[0].ProposedCompletionDateTxt; 		
 			}
 
-			console.log("Hello Main Defects Details: ",this.defect1s);
-
 			this.image   = Constants.publicUploadPath+this.cid+"/"+this.pid+"/LocationImages/"+this.defect1snotesid+".jpg";
 			this.ImgUrl  = Constants.publicUploadPath+this.cid+"/"+this.pid+"/dfx/"+this.defect1snotesid+"/"+this.defect1snotesid+".jpg";
 			
@@ -164,25 +163,18 @@ export class Snagging51Page {
 
 			this.hasattacheddocs = false;
 
-			if(this.closeDateTxt !== ""){
-
-				var attacheddocsurl = Constants.apiUrl+"api/defectdocuments/"+this.api+"/"+this.pid+"/"+this.closeDateTxt;
-			    
-				this.http.get(attacheddocsurl).map(res => res.json()).subscribe(data => {
-				        this._sanitizer.bypassSecurityTrustStyle(data);
-						this.attacheddocuments = data;
-						this.hasattacheddocs = true;
-				    },
-				    err => {
-				        console.log("Oops!");
-				    }
-				);  
-			}
-
-
-
-
-
+			var attacheddocsurl = Constants.apiUrl+"api/defectdocuments/"+this.api+"/"+this.pid+"/order"+this.defect1snotesid;
+		    
+			this.http.get(attacheddocsurl).map(res => res.json()).subscribe(data => {
+			        this._sanitizer.bypassSecurityTrustStyle(data);
+					this.attacheddocuments = data;
+					this.hasattacheddocs = true;
+					console.log("attacheddocuments   -   ",this.attacheddocuments);
+			    },
+			    err => {
+			        console.log("Well Oops!");
+			    }
+			);  
 
 
 /*			
@@ -243,7 +235,6 @@ export class Snagging51Page {
 	openDocumentIdInfo(iscid,idid,ipid,iuid){ 
 		this.navCtrl.push(DocumentIdInfo,{iscid,idid,ipid,iuid});
 	  }
-
 
 	openDocumentAudit(docimg, docid, docno1){ 
 		this.navCtrl.push(DocumentAudit,{docimg, docid, docno1});

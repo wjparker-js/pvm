@@ -1,0 +1,267 @@
+
+C:/Ionic3/pvm/src/pages/projects/projects.ts, line: 1 [39m
+[app-scripts]             All imports on this line are unused. 
+L1:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { ReasonsPage } from './../reasons/reasons';
+L2:  [22mimport { TabsPage } from './../tabs/tabs';                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+L1:  [22mimport { ReasonsPage } from './../reasons/reasons';
+
+
+
+C:/Ionic3/pvm/src/providers/drawing/drawing.ts, line: 241 [39m
+L2:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { TabsPage } from './../tabs/tabs';
+L3:  [22mimport { Component } from '@angular/core';
+[app-scripts]             'center' is declared but its value is never read. 
+[app-scripts] [2m     L241:  [22m      let [41mc[49m[41me[49m[41mn[49m[41mt[49m[41me[49m[41mr[49m = this.canvas.getCenter();
+[app-scripts] [2m     L242:  [22m      this.canvas.setBackgroundImage(imageSrc, this.canvas.renderAll.bind(this.canvas), {
+
+
+
+C:/Ionic3/pvm/src/pages/imgeditpost/imgeditpost.ts, line: 8 [39m
+
+
+
+C:/Ionic3/pvm/src/pages/home/home.ts, line: 83 [39m
+[app-scripts]             All imports on this line are unused. 
+L7:  [22mimport { BrushTypePopoverPage } from '../brush-type-popover/brush-type-popover';
+L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { TitleCasePipe } from '@angular/common';
+[app-scripts]             Property 'alertCtrl' is declared but its value is never read. 
+82:  [22mprivate nativeGeocoder: NativeGeocoder,
+
+
+
+C:/Ionic3/pvm/src/pages/home/home.ts, line: 89 [39m
+83:  [22mprivate [41ma[49m[41ml[49m[41me[49m[41mr[49m[41mt[49m[41mC[49m[41mt[49m[41mr[49m[41ml[49m: AlertController, 
+84:  [22mpublic weatherProvider:WeatherProvider, 
+[app-scripts]             Property 'network' is declared but its value is never read. 
+88:  [22mpublic navParams: NavParams, 
+89:  [22mprivate [41mn[49m[41me[49m[41mt[49m[41mw[49m[41mo[49m[41mr[49m[41mk[49m: Network,
+90:  [22mpublic app : App, 
+
+
+
+C:/Ionic3/pvm/src/pages/home/home.ts, line: 135 [39m
+
+
+
+C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 24 [39m
+[app-scripts]             'pname' is declared but its value is never read. 
+[app-scripts] [2m     L134:  [22m  var pid     = this.userPostData.ProjectID;  
+[app-scripts] [2m     L135:  [22m  var [41mp[49m[41mn[49m[41ma[49m[41mm[49m[41me[49m   = this.userPostData.ProjectName;
+[app-scripts]             'cordova' is declared but its value is never read. 
+24:  [22mdeclare var [41mc[49m[41mo[49m[41mr[49m[41md[49m[41mo[49m[41mv[49m[41ma[49m: any;
+[app-scripts]             'addimage' is declared but its value is never read. 
+
+
+
+C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 201 [39m
+
+
+
+C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 488 [39m
+[app-scripts] [2m     L201:  [22mprivate [41ma[49m[41md[49m[41md[49m[41mi[49m[41mm[49m[41ma[49m[41mg[49m[41me[49m(action){
+[app-scripts] [2m     L202:  [22m	if(action === "add"){
+[app-scripts]             'checkselecteddocids' is declared but its value is never read. 
+[app-scripts] [2m     L487:  [22mresolve();
+[app-scripts] [2m     L489:  [22mvar checkselecteddocids = localStorage.getItem('selecteddocids')
+[app-scripts]             'Img' is declared but its value is never read. 
+
+
+
+C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 3 [39m
+
+
+
+C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 7 [39m
+L2:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+L3:  [22m, ActionSheetController, ToastController, Platform, LoadingController, Loading, [41mI[49m[41mm[49m[41mg[49m } from 'ionic-angular';
+L4:  [22mimport { Camera } from '@ionic-native/camera';
+[app-scripts]             'FileTransferObject' is declared but its value is never read. 
+L6:  [22mimport { FilePath } from '@ionic-native/file-path';
+L7:  [22mimport { FileTransfer, [41mF[49m[41mi[49m[41ml[49m[41me[49m[41mT[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m[41mO[49m[41mb[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m } from '@ionic-native/file-transfer';
+L8:  [22mimport { normalizeURL } from 'ionic-angular';
+
+
+
+C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 8 [39m
+
+
+
+C:/Ionic3/pvm/src/pages/snagging/snagging.ts, line: 21 [39m
+[app-scripts]             All imports on this line are unused. 
+L7:  [22mimport { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { normalizeURL } from 'ionic-angular';
+L9:  [22mimport { Http } from '@angular/http';
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+20:  [22mimport * as Constants from '../../providers/constants';
+
+
+
+C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 15 [39m
+
+
+
+C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 74 [39m
+21:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+[app-scripts]             'cordova' is declared but its value is never read. 
+15:  [22mdeclare var [41mc[49m[41mo[49m[41mr[49m[41md[49m[41mo[49m[41mv[49m[41ma[49m: any;
+[app-scripts]             Property 'transfer' is declared but its value is never read. 
+73:  [22mprivate camera: Camera,
+
+
+
+C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 75 [39m
+74:  [22mprivate [41mt[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m: FileTransfer,
+75:  [22mprivate file: File,
+[app-scripts]             Property 'file' is declared but its value is never read. 
+74:  [22mprivate transfer: FileTransfer,
+75:  [22mprivate [41mf[49m[41mi[49m[41ml[49m[41me[49m: File,
+76:  [22mprivate filePath: FilePath,
+[app-scripts]             Property 'filePath' is declared but its value is never read. 
+
+
+
+C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 76 [39m
+C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 79 [39m
+75:  [22mprivate file: File,
+76:  [22mprivate [41mf[49m[41mi[49m[41ml[49m[41me[49m[41mP[49m[41ma[49m[41mt[49m[41mh[49m: FilePath,
+77:  [22mprivate actionSheetCtrl: ActionSheetController, 
+[app-scripts]             Property 'platform' is declared but its value is never read. 
+78:  [22mprivate toastCtrl: ToastController, 
+79:  [22mprivate [41mp[49m[41ml[49m[41ma[49m[41mt[49m[41mf[49m[41mo[49m[41mr[49m[41mm[49m: Platform,
+80:  [22mpublic viewCtrl: ViewController,
+
+
+
+C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 81 [39m
+[app-scripts]             Property 'loadingCtrl' is declared but its value is never read. 
+80:  [22mpublic viewCtrl: ViewController,
+81:  [22mprivate [41ml[49m[41mo[49m[41ma[49m[41md[49m[41mi[49m[41mn[49m[41mg[49m[41mC[49m[41mt[49m[41mr[49m[41ml[49m: LoadingController, 
+
+
+
+C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 264 [39m
+82:  [22mprivate http: Http, 
+[app-scripts]             'addimage' is declared but its value is never read. 
+[app-scripts] [2m     L265:  [22m	private addimage(action){
+
+
+
+C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 7 [39m
+[app-scripts]             'FileTransferObject' is declared but its value is never read. 
+L6:  [22mimport { FilePath } from '@ionic-native/file-path';
+
+
+
+C:/Ionic3/pvm/src/pages/snagging52/snagging52.ts, line: 8 [39m
+L7:  [22mimport { FileTransfer, [41mF[49m[41mi[49m[41ml[49m[41me[49m[41mT[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m[41mO[49m[41mb[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m } from '@ionic-native/file-transfer';
+L8:  [22mimport { normalizeURL } from 'ionic-angular';
+[app-scripts]             All imports on this line are unused. 
+L7:  [22mimport { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { normalizeURL } from 'ionic-angular';
+
+
+
+C:/Ionic3/pvm/src/pages/defectsview/defectsview.ts, line: 10 [39m
+L9:  [22mimport { Http } from '@angular/http';
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+L9:  [22mimport * as Constants from '../../providers/constants';
+10:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+
+
+
+C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 128 [39m
+11:  [22mimport 'rxjs/add/operator/map';
+[app-scripts]             'url' is declared but its value is never read. 
+
+
+
+C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 4 [39m
+[app-scripts] [2m     L128:  [22m		var [41mu[49m[41mr[49m[41ml[49m = "";
+[app-scripts]             'Renderer' is declared but its value is never read. 
+L3:  [22mimport { Http } from '@angular/http';
+
+
+
+C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 11 [39m
+L4:  [22mimport { ViewChild, ElementRef, [41mR[49m[41me[49m[41mn[49m[41md[49m[41me[49m[41mr[49m[41me[49m[41mr[49m } from '@angular/core';
+L5:  [22mimport { DomSanitizer } from '@angular/platform-browser';
+[app-scripts]             'BarcodeScannerOptions' is declared but its value is never read. 
+10:  [22mimport * as Constants from '../../providers/constants';
+11:  [22mimport { BarcodeScanner ,[41mB[49m[41ma[49m[41mr[49m[41mc[49m[41mo[49m[41md[49m[41me[49m[41mS[49m[41mc[49m[41ma[49m[41mn[49m[41mn[49m[41me[49m[41mr[49m[41mO[49m[41mp[49m[41mt[49m[41mi[49m[41mo[49m[41mn[49m[41ms[49m } from '@ionic-native/barcode-scanner';
+12:  [22mimport 'rxjs/add/operator/map';
+
+
+
+
+
+
+C:/Ionic3/pvm/src/pages/Defects/defects.ts, line: 13 [39m
+[app-scripts]             All imports on this line are unused. 
+12:  [22mimport 'rxjs/add/operator/map';
+13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { e } from '@angular/core/src/render3';
+
+
+
+C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 19 [39m
+[app-scripts]             'cordova' is declared but its value is never read. 
+19:  [22mdeclare var [41mc[49m[41mo[49m[41mr[49m[41md[49m[41mo[49m[41mv[49m[41ma[49m: any;
+[app-scripts]             Property 'transfer' is declared but its value is never read. 
+
+
+
+C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 82 [39m
+81:  [22mprivate camera: Camera,
+82:  [22mprivate [41mt[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m: FileTransfer,
+83:  [22mprivate file: File,
+[app-scripts]             Property 'file' is declared but its value is never read. 
+
+
+
+C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 83 [39m
+C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 84 [39m
+82:  [22mprivate transfer: FileTransfer,
+83:  [22mprivate [41mf[49m[41mi[49m[41ml[49m[41me[49m: File,
+84:  [22mprivate filePath: FilePath,
+[app-scripts]             Property 'filePath' is declared but its value is never read. 
+83:  [22mprivate file: File,
+
+
+
+C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 87 [39m
+84:  [22mprivate [41mf[49m[41mi[49m[41ml[49m[41me[49m[41mP[49m[41ma[49m[41mt[49m[41mh[49m: FilePath,
+85:  [22mprivate actionSheetCtrl: ActionSheetController, 
+[app-scripts]             Property 'platform' is declared but its value is never read. 
+86:  [22mprivate toastCtrl: ToastController, 
+87:  [22mprivate [41mp[49m[41ml[49m[41ma[49m[41mt[49m[41mf[49m[41mo[49m[41mr[49m[41mm[49m: Platform,
+88:  [22mpublic viewCtrl: ViewController,
+[app-scripts]             Property 'loadingCtrl' is declared but its value is never read. 
+
+
+
+C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 89 [39m
+C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 347 [39m
+C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 7 [39m
+88:  [22mpublic viewCtrl: ViewController,
+89:  [22mprivate [41ml[49m[41mo[49m[41ma[49m[41md[49m[41mi[49m[41mn[49m[41mg[49m[41mC[49m[41mt[49m[41mr[49m[41ml[49m: LoadingController, 
+90:  [22mprivate http: Http, 
+[app-scripts]             'addimage' is declared but its value is never read. 
+[app-scripts] [2m     L348:  [22m	private addimage(action){
+[app-scripts]             'FileTransferObject' is declared but its value is never read. 
+L6:  [22mimport { FilePath } from '@ionic-native/file-path';
+L7:  [22mimport { FileTransfer, [41mF[49m[41mi[49m[41ml[49m[41me[49m[41mT[49m[41mr[49m[41ma[49m[41mn[49m[41ms[49m[41mf[49m[41me[49m[41mr[49m[41mO[49m[41mb[49m[41mj[49m[41me[49m[41mc[49m[41mt[49m } from '@ionic-native/file-transfer';
+L8:  [22mimport { normalizeURL } from 'ionic-angular';
+
+
+
+C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 8 [39m
+C:/Ionic3/pvm/src/pages/snagging51/snagging51.ts, line: 13 [39m
+[app-scripts]             All imports on this line are unused. 
+L7:  [22mimport { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+L8:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { normalizeURL } from 'ionic-angular';
+L9:  [22mimport { Http } from '@angular/http';
+
+[app-scripts]             All imports on this line are unused. 
+12:  [22mimport { DocumentViewer } from '../documentviewer/documentviewer';
+13:  [22m[41mi[49m[41mm[49m[41mp[49m[41mo[49m[41mr[49m[41mt[49m { DocumentInfo } from '../documentinfo/documentinfo';
+14:  [22mimport { DocumentIdInfo } from '../documentidinfo/documentidinfo';
+
