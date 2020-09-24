@@ -14,6 +14,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class DisciplinePage {
 
   selectedDiscipline:string;
+  selectedcommercialemail:string = "Undefined";
+  selectedremediatoremail:string = "Undefined";
+  selectedinspectoremail:string = "Undefined";  
+  selectedcommercialid:string = "Undefined";
+  selectedremediatorid:string = "Undefined";
+  selectedinspectorid:string = "Undefined";
+
   selectedDefect:string;
   callback: any;
 
@@ -56,11 +63,17 @@ export class DisciplinePage {
 	} 
 
 	ionViewWillLeave() {
-		this.callback(this.selectedDiscipline).then(()=>{});
+		this.callback(this.selectedDiscipline,this.selectedinspectoremail,this.selectedremediatoremail,this.selectedcommercialemail,this.selectedinspectorid,this.selectedremediatorid,this.selectedcommercialid).then(()=>{});
 	}
 
-	sendBack(item){
+	sendBack(item,inspector,remediator,commercial,inspectorid,remediatorid,commercialid){
 		this.selectedDiscipline = item;
+		this.selectedinspectoremail = inspector;
+		this.selectedremediatoremail = remediator;
+		this.selectedcommercialemail = commercial;
+		this.selectedinspectorid = inspectorid;
+		this.selectedremediatorid = remediatorid;
+		this.selectedcommercialid = commercialid;
 		this.viewCtrl.dismiss();
 	}
 

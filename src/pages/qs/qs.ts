@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class QsPage {
 
   selectedQs:string;
+  commercialid:string;
   selectedProjectName: string;
   callback: any;
 
@@ -51,12 +52,13 @@ export class QsPage {
 	} 
 
 	ionViewWillLeave() {
-		this.callback(this.selectedQs).then(()=>{});
+		this.callback(this.selectedQs,this.commercialid).then(()=>{});
 	}
 
-	sendBack(item){
+	sendBack(item,userid){
 		this.selectedQs = item;
-		this.viewCtrl.dismiss();
+		this.commercialid = userid;
+		this.dismiss();
 	}
 
 }

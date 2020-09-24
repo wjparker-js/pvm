@@ -9,7 +9,9 @@ import { normalizeURL } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ImgEditPagePostPost } from '../imgeditpostpost/imgeditpostpost';
 import { ImgViewPage } from '../imgview/imgview';
-
+import { QsPage } from '../qs/qs';
+import { RemediatorPage } from '../remediator/remediator';
+import { InspectorPage } from '../inspector/inspector';
 import * as Constants from '../../providers/constants';
 
 declare var cordova: any;
@@ -40,7 +42,12 @@ export class Snagging52Page {
 	attacheddocuments:any;
 	hasattacheddocs:any;
 
-	public details: string;
+	remediatoremail:any;
+	commercialemail:any;
+	inspectoremail:any;
+
+
+	public details: string = "";
 	public approval:  any;
 	public newnote:  any;
 	public defect1s:  any;
@@ -99,21 +106,40 @@ export class Snagging52Page {
 		this.note         = this.navParams.get('note');
 		this.postImage    = null;
 
-		this.createDefects       = localStorage.getItem('Role-PA5038');
 		this.showDefects         = localStorage.getItem('Role-PA5073');
+		if (this.showDefects   != 1){this.defectRole = 0}
+		this.createDefects       = localStorage.getItem('Role-PA5038');
+		if (this.createDefects != 1){this.defectRole = 0}
 		this.manageDefects       = localStorage.getItem('Role-PA5039');
+		if (this.manageDefects != 1){this.defectRole = 0}
 
-		if(this.showDefects   != 0 && this.showDefects   != null){this.defectRole = "73"}
-		if(this.createDefects != 0 && this.createDefects != null){this.defectRole = "38"}
-		if(this.manageDefects != 0 && this.showDefects   != null){this.defectRole = "39"}
-		
-		//this.openlocimg();
 
 		var url = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/"+this.uguid+"/nosearch/"+this.snagid+"/"+this.defectRole;
 
 	      this.http.get(url).map(res => res.json()).subscribe(data => {
 	        this._sanitizer.bypassSecurityTrustStyle(data);
 			this.defect1s = data;         
+
+					
+			var xinspectoremail  = this.defect1s[0].inspectoremail;
+			var xremediatoremail = this.defect1s[0].remediatoremail;
+			var xcommercialemail = this.defect1s[0].commercialemail;
+
+			if(localStorage.getItem('inspectoremail') == "0"){
+				localStorage.setItem('inspectoremail',  xinspectoremail);
+				this.inspectoremail  = localStorage.getItem('inspectoremail');
+			}	
+			9		
+			if(localStorage.getItem('remediatoremail') == "0"){
+				localStorage.setItem('remediatoremail', xremediatoremail);
+				this.remediatoremail = localStorage.getItem('remediatoremail');
+			}
+
+			if(localStorage.getItem('commercialemail') == "0"){
+				localStorage.setItem('commercialemail', xcommercialemail);
+				this.commercialemail = localStorage.getItem('commercialemail');
+			}
+
 
 			this.orderstatus = 	this.defect1s[0].OrderStatus;
 
@@ -266,16 +292,62 @@ export class Snagging52Page {
 	}
 
 
-	myCallbackFunction = (_params) => {
+	changestatus(stat){
+		console.log(stat);
+	}
+
+
+	openQsList(){		
+		this.navCtrl.push(QsPage, {callback:this.myCallbackFunction10});
+	}
+
+	openRemediatorList(){		
+		this.navCtrl.push(RemediatorPage, {callback:this.myCallbackFunction9});
+	}
+
+	openInspectorList(){		
+		this.navCtrl.push(InspectorPage, {callback:this.myCallbackFunction11});
+	}
+
+
+	
+	myCallbackFunction9 = (_params) => {
 		return new Promise((resolve, reject) => {
-			this.currentImage = _params;
+			this.remediatoremail = _params;
 			resolve();	
+			localStorage.setItem('remediatoremail',  this.remediatoremail);
 		}); 	
 		
 	 }
 
+	 myCallbackFunction10 = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.commercialemail = _params;
+			resolve();	
+			localStorage.setItem('commercialemail',  this.commercialemail);
+		}); 			
+	 }	 
+	 
+	 myCallbackFunction11 = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.inspectoremail = _params;
+			resolve();	
+			localStorage.setItem('inspectoremail',  this.inspectoremail);
+		}); 
+			
+	}	 
 
-	private takePicture(from_camera) {
+
+	myCallbackFunction = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.currentImage = _params;
+			resolve();	
+		}); 			
+	}
+	 
+
+
+	takePicture(from_camera) {
 
 		return new Promise((resolve, reject) => {
 

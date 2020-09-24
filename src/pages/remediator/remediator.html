@@ -2,9 +2,9 @@
   <ion-toolbar>   
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>    
     <span style="font-size:16px;color:white;">{{selectedProjectName}} Remediator List</span>
-    <ion-buttons end>
+    <!--<ion-buttons end>
       <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
-    </ion-buttons>
+    </ion-buttons>-->
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +14,7 @@
       <ion-col  *ngFor="let remediator of remediators" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
         <ion-list style="margin-bottom: 0px;">
           <ion-item>
-            <button ion-button full style="background-color:#dddddd;border:0px;margin:0px;padding:0px;color:#000000" (click)='sendBack(remediator.email)'>
+            <button ion-button full style="background-color:#dddddd;border:0px;margin:0px;padding:0px;color:#000000" (click)='sendBack(remediator.email,remediator.userid)'>
           	 <b>{{remediator.email}}</b>
            </button>
           </ion-item>

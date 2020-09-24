@@ -17,203 +17,163 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    
-  <ion-item>
-    <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;" >Reference</ion-label>
-    <ion-input class="mytext" type="text"  id = "reference" name="reference" [(ngModel)]="frmData.reference" style="font-size:13px;"></ion-input>
-  </ion-item>
 
-  <ion-item>
-    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Defect Type</ion-label>
+  <ion-list>
+
+    <ion-item>
+      <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Defect Type</ion-label>
       <ion-input class="text" readonly type="text" id = "Defecttype" name="defecttype" value="{{defecttype}}" style="font-size:13px;"></ion-input>  
       <button ion-button color="light" type="button" item-right (click)="openDTList()"> 
         <ion-icon name="list"> </ion-icon> 
       </button>       
-  </ion-item> 
+    </ion-item> 
+      
+    <ion-item>
+      <ion-label class="mylabel" style="font-size:13px;width:90px;font-weight:bold !important;" >Subject</ion-label>
+      <ion-input class="mytext" type="text"  placeholder="" id = "reference" name="reference" [(ngModel)]="frmData.reference" style="font-size:13px;"></ion-input>
+    </ion-item>
 
-  <ion-item  [hidden]="defecttype == '' || defecttype == undefined ">
-      <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Discipline</ion-label>
-        <ion-input class="text" readonly type="text" id = "Discipline" name="discipline" value="{{discipline}}" style="font-size:13px;"></ion-input>  
-        <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openDList(defecttype)"> 
-          <ion-icon name="list"> </ion-icon> 
-        </button>          
-  </ion-item>
+    <ion-item  [hidden]="defecttype == '' || defecttype == undefined ">
+      <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Discipline</ion-label>
+      <ion-input class="text" readonly type="text" id = "Discipline" name="discipline" value="{{discipline}}" style="font-size:13px;"></ion-input>  
+      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openDList(defecttype)"> 
+        <ion-icon name="list"> </ion-icon> 
+      </button>          
+    </ion-item>
 
-  <ion-item  [hidden]="discipline == '' || discipline == undefined ">
-    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Inspector</ion-label>
-      <ion-input class="text" readonly type="text" id = "Inspector" name="inspector" value="{{inspector}}" style="font-size:13px;"></ion-input>  
+    <ion-item  [hidden]="discipline == '' || discipline == undefined ">
+      <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Inspector</ion-label>
+      <ion-input class="text" readonly type="text" id = "Inspectoremail" name="inspectoremail" value="{{inspectoremail}}" style="font-size:13px;"></ion-input>  
       <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openInspectorList()"> 
         <ion-icon name="list"> </ion-icon> 
       </button>          
-  </ion-item>
+    </ion-item>
 
-  <ion-item  [hidden]="discipline == '' || discipline == undefined ">
-    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Remediator</ion-label>
-      <ion-input class="text" readonly type="text" id = "Remediator" name="remediator" value="{{remediator}}" style="font-size:13px;"></ion-input>  
+    <ion-item  [hidden]="discipline == '' || discipline == undefined ">
+      <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Remediator</ion-label>
+      <ion-input class="text" readonly type="text" id = "Remediatoremail" name="remediatoremail" value="{{remediatoremail}}" style="font-size:13px;"></ion-input>  
       <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openRemediatorList()"> 
         <ion-icon name="list"> </ion-icon> 
       </button>          
-  </ion-item>
+    </ion-item>
 
-  <ion-item  [hidden]="discipline == '' || discipline == undefined ">
-    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Commercial</ion-label>
-      <ion-input class="text" readonly type="text" id = "Qs" name="qs" value="{{qs}}" style="font-size:13px;"></ion-input>  
+    <ion-item  [hidden]="discipline == '' || discipline == undefined ">
+      <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Commercial</ion-label>
+      <ion-input class="text" readonly type="text" id = "Commercialemail" name="commercialemail" value="{{commercialemail}}" style="font-size:13px;"></ion-input>  
       <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openQsList()"> 
         <ion-icon name="list"> </ion-icon> 
       </button>          
-  </ion-item>
+    </ion-item>
 
-	<ion-item>
-    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Location</ion-label>
-    
-      <ion-input class="text" readonly type="text"   id = "Location" name="location" value="{{name}}" (ionChange)="openlocimg()" style="font-size:13px;"></ion-input>
-	
+    <ion-item>
+      <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Location</ion-label>    
+      <ion-input class="text" readonly type="text"   id = "Location" name="location" value="{{name}}" (ionChange)="openlocimg()" style="font-size:13px;"></ion-input>	
       <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="presentQRActionSheet()" > 
-      	<ion-icon name="qr-scanner"> </ion-icon> 
+        <ion-icon name="qr-scanner"> </ion-icon> 
       </button>    
       <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openList()"> 
-      	<ion-icon name="list"> </ion-icon> 
+        <ion-icon name="list"> </ion-icon> 
       </button>   
-  </ion-item>
-  
-  <ion-item>
-    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Reason</ion-label>
-      <ion-input class="text" readonly type="text" id = "Reason" name="reason" value="{{reason}}" style="font-size:13px;"></ion-input>  
-      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openRList()"> 
-        <ion-icon name="list"> </ion-icon> 
-      </button>          
-  </ion-item>
+    </ion-item>
 
-  <ion-item>
-    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Effect</ion-label>
-      <ion-input class="text" readonly type="text" id = "Effect" name="effect" value="{{effect}}" style="font-size:13px;"></ion-input>  
-      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openEList()"> 
-        <ion-icon name="list"> </ion-icon> 
-      </button>          
-  </ion-item>  
+    <div padding [hidden]="image === null" style="margin-top: 0px;padding-bottom: 0px;margin-bottom: 0px;">       
+        <ion-item style="height: 70px;">  
+            <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 90px !Important;height: 90px !Important;margin-top: 0px;margin-bottom: 0px;">
+              <img src="{{image}}" style="width: 90px; margin: 0; position: absolute;top: 50%;left: 0px;transform: translate(0%, -50%);" >
+            </ion-thumbnail> 
+            <span>
+              <button style="width:100%;height:50%;" ion-button (click)="editloc()">
+                <span><br/>Edit<BR>Location<br/><br/></span>
+              </button>
+            </span>        
+        </ion-item>  
+    </div> 
 
-  <ion-item>
-    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;">Fix By</ion-label>
-      <ion-input class="text" readonly type="text" id = "Fixdate" name="fixdate" value="{{fixdate}}" style="font-size:13px;"></ion-input>  
-      <button ion-button color="light" type="button" item-right (click)="openFixDate()"> 
-        <ion-icon name="calendar-outline"></ion-icon> 
-      </button>       
-  </ion-item>
+    <ion-item>
+      <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Due Date</ion-label>
+        <ion-input class="text" readonly type="text" id = "Fixdate" name="fixdate" value="{{fixdate}}" style="font-size:13px;"></ion-input>  
+        <button ion-button color="light" type="button" item-right (click)="openFixDate()"> 
+          <ion-icon name="ios-calendar-outline"></ion-icon> 
+        </button>       
+    </ion-item>
 
-  <ion-item [hidden]="showdate == 'N'">
-    <ionic-calendar-date-picker (onSelect)="dateSelected($event)"></ionic-calendar-date-picker>      
-  </ion-item>
+    <ion-item [hidden]="showdate == 'N'">
+      <ionic-calendar-date-picker (onSelect)="dateSelected($event)"></ionic-calendar-date-picker>      
+    </ion-item>
+    
+    <ion-item>
+      <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Reason</ion-label>
+        <ion-input class="text" readonly type="text" id = "Reason" name="reason" value="{{reason}}" style="font-size:13px;"></ion-input>  
+        <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openRList()"> 
+          <ion-icon name="list"> </ion-icon> 
+        </button>          
+    </ion-item>
 
-  <ion-item>
-    <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;">Sticker Code</ion-label>    
-      <ion-input class="text" readonly type="text"   id = "Location" name="location" value="{{associatedcode}}"  style="font-size:13px;"></ion-input>	
-      <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="presentQRStickerActionSheet()" > 
-      	<ion-icon name="qr-scanner"> </ion-icon> 
-      </button>    
-  </ion-item>
+    <ion-item>
+      <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Effect</ion-label>
+        <ion-input class="text" readonly type="text" id = "Effect" name="effect" value="{{effect}}" style="font-size:13px;"></ion-input>  
+        <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openEList()"> 
+          <ion-icon name="list"> </ion-icon> 
+        </button>          
+    </ion-item>  
 
-  <ion-item>
-    <ion-label class="mylabel"  style="font-size:13px;font-weight:bold !important;" (click)="openDocs()">Add Document</ion-label>
+    <ion-item>
+      <ion-label class="mylabel" style="font-size:13px;width:90px;font-weight:bold !important;">Sticker Code</ion-label>    
+        <ion-input class="text" readonly type="text"   id = "Location" name="location" value="{{associatedcode}}"  style="font-size:13px;"></ion-input>	
+        <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="presentQRStickerActionSheet()" > 
+          <ion-icon name="qr-scanner"> </ion-icon> 
+        </button>    
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="mylabel"  style="font-size:13px;width:115px;font-weight:bold !important;" (click)="openDocs()">Add Documents</ion-label>
+      <ion-input class="text" readonly type="text"   id = "docs" name="docs" value=""  style="font-size:13px;"></ion-input>	    
       <button ion-button  [hidden]="snagid !== 'new'" color="light" type="button" item-right (click)="openDocs()"> 
-        <ion-icon name="list"> </ion-icon> 
-      </button>          
-  </ion-item>  
+          <ion-icon name="list"> </ion-icon> 
+        </button>          
+    </ion-item>  
 
-  <div id="maindiv">
-    <div *ngIf="this.hasdocs" >
-      <ion-grid>
-        <ion-row>
-          <ion-col  *ngFor="let document of userdocuments"  style="margin-top:8px;padding-top: 0px;padding-bottom: 0px;margin-left:0px;margin-right:0px;height: 80px;"  col-12 col-md-6 col-lg-4 col-xl-3>
-            <ion-list>
-              <ion-card style="width: 108%;display: flex;align-items: center; justify-content: center;border-top-color:white;border-bottom-color:white;margin:0px;margin-top:6px;padding:0px;" >                     
-                <ion-item-sliding >              
-                  <ion-item padding  style="padding-left:5px;margin:0px;width:100%;height:90px;border-bottom-color:white;" class="card card-md" class="item item-block item-md">                  
-                         
-                        
-                          <ion-thumbnail item-left no-padding style="margin-left:5px;margin-top:0px;">
-                            <img 
-                              src="{{this.document.PhotoTiny}}" 
-                              style="position:relative;top:-5px;height:56px !Important;width:80px !Important;border: 1px solid #000;" 
-                              imageViewer
-                            />
-                          </ion-thumbnail>    
-                        
-                         <!-- 
-                        <ion-thumbnail *ngIf="document.FileExtension != '.jpg' && document.FileExtension != '.jpeg' && document.FileExtension != '.png' && document.FileExtension != '.tif' && document.FileExtension != '.tiff' && document.FileExtension != '.gif' && document.FileExtension != '.bmp'" item-left no-padding style="margin-left:5px;margin-top:20px;" >
-                          <img 
-                            src="{{document.PhotoTiny}}" style="border: 1px solid #000;position:relative;top:-10px;height:100px;left:10px;width:70px;transform: rotate(90deg);margin-right:30px;" 
-                            (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"
-                            />
-                        </ion-thumbnail> 
-                        -->   
-                    <div style="position:relative;top:-5px;padding:0px;margin:5px;width:100%;">                    
-                        <ion-icon style = "font-size: 18px; position:relative;top:1px;color:darkgoldenrod" name="folder" >
-                          <b> <span style="font-size: 13px;color:black;font-family:arial;">{{this.document.FolderName}}</span></b>
-                        </ion-icon>                         
-                        <div  style="font-size: 13px;">{{this.document.DocumentNumber}} / {{this.document.Rev}}</div>  
-                        <div  style="font-size: 13px;">{{this.document.Title}}</div> 
-                    </div>       
-                   <!-- <div  style="font-size: 9px;">
-
-                      <ion-icon style = "font-size: 10px; padding-top: 0px;" name="refresh-circle"  class="flex-right hilite1" (click)="openDocumentIdInfo(this.cid,document.DocumentID,this.pid,this.uid)"></ion-icon>
-                      <label  color="primary" (click)="openDocumentIdInfo(this.cid,document.DocumentID,this.pid,this.uid)">Details</label>&nbsp;
-                      
-                      <ion-icon style = "font-size: 10px;padding-top: 0px;" name="information-circle"  class="flex-right hilite2" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,this.cid)"></ion-icon>
-                      <label  color="primary" (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,this.cid)">Audit</label>&nbsp;
-                      
-                      <ion-icon style = "font-size: 10px;padding-top: 8px;" name="mail" color="secondary" class="flex-right" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,this.cid)"></ion-icon>
-                      <label color="primary" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,this.cid)">Send</label>
-                    </div>  -->                              
-                  </ion-item> 
-                  <ion-item-options side="right">
-                    <button ion-button color="bold" (click)="removedoc(document.DocumentID)">Remove</button>
-                  </ion-item-options>    
-              </ion-item-sliding> 
-            </ion-card>
-
-            </ion-list>
-          </ion-col> 
-        </ion-row>
-      </ion-grid>
+    <div id="maindiv">
+      <div *ngIf="this.hasdocs" >
+        <ion-grid>
+          <ion-row>
+            <ion-col  *ngFor="let document of userdocuments"  style="margin-top:8px;padding-top: 0px;padding-bottom: 0px;margin-left:0px;margin-right:0px;height: 80px;"  col-12 col-md-6 col-lg-4 col-xl-3>
+              <ion-list>
+                <ion-card style="width: 108%;display: flex;align-items: center; justify-content: center;border-top-color:white;border-bottom-color:white;margin:0px;margin-top:6px;padding:0px;" >                     
+                  <ion-item-sliding >              
+                    <ion-item padding  style="padding-left:5px;margin:0px;width:100%;height:90px;border-bottom-color:white;" class="card card-md" class="item item-block item-md">                                          
+                      <ion-thumbnail item-left no-padding style="margin-left:5px;margin-top:0px;">
+                        <img 
+                          src="{{this.document.PhotoTiny}}" 
+                          style="position:relative;top:-5px;height:56px !Important;width:80px !Important;border: 1px solid #000;" 
+                          imageViewer
+                        />
+                      </ion-thumbnail> 
+                      <div style="position:relative;top:-5px;padding:0px;margin:5px;width:100%;">                    
+                          <ion-icon style = "font-size: 18px; position:relative;top:1px;color:darkgoldenrod" name="folder" >
+                            <b> <span style="font-size: 13px;color:black;font-family:arial;">{{this.document.FolderName}}</span></b>
+                          </ion-icon>                         
+                          <div  style="font-size: 13px;">{{this.document.DocumentNumber}} / {{this.document.Rev}}</div>  
+                          <div  style="font-size: 13px;">{{this.document.Title}}</div> 
+                      </div>    
+                    </ion-item> 
+                    <ion-item-options side="right">
+                      <button ion-button color="bold" (click)="removedoc(document.DocumentID)">Remove</button>
+                    </ion-item-options>    
+                </ion-item-sliding> 
+              </ion-card>
+              </ion-list>
+            </ion-col> 
+          </ion-row>
+        </ion-grid>
+      </div>
     </div>
-  </div>
-        
-
-
-
-
-  <ion-item>
-      <ion-label class="mylabel" style="font-size:13px;font-weight:bold !important;" >Details</ion-label>
-      <ion-textarea class="mytext" rows="3"  name="details" [(ngModel)]="frmData.details" placeholder="Enter detailled snag information here..."  style="font-size:13px;"></ion-textarea>
-  </ion-item>
-
-  <ion-card  [hidden]="image === null" style="margin-top: 0px;padding-bottom: 0px;margin-bottom: 0px;">
-    <ion-card-content>       
-      <ion-item style="padding-left:3px;padding-left:3px;height: 70px;">   
-
-          <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 90px !Important;height: 90px !Important;margin-top: 0px;margin-bottom: 0px;">
-            <img src="{{image}}" style="width: 90px; margin: 0; position: absolute;top: 50%;left: 0px;transform: translate(0%, -50%);" >
-          </ion-thumbnail> 
-
-          <span>
-            <button style="width:100%;height:100%;" ion-button (click)="editloc()">
-              <span><br/><br/>Edit Location<br/><br/><br/></span>
-            </button>
-          </span>        
-      </ion-item>  
-    </ion-card-content>   
-  </ion-card> 
-
-  
-  <ion-card  [hidden]="image === null" style="margin-top: 0px;padding-bottom: 0px;margin-bottom: 0px;">
-    <ion-card-content>       
-      <ion-item style="padding-left:3px;padding-left:3px;height: 70px;">     
-
+    
+    <div  [hidden]="image === null" style="margin-top: 0px;padding-bottom: 0px;margin-bottom: 0px;">
+      <ion-item style="padding-left:3px;padding-left:3px;height: 70px;">
         <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 90px !Important;height: 90px !Important;margin-top: 0px;margin-bottom: 0px;">
           <img [src]="this.currentImage" style="width: 90px; margin: 0; position: absolute;top: 50%;left: 0px;transform: translate(0%, -50%);" >
         </ion-thumbnail>  
-
         <span>
             <div> 
                 <ion-row [hidden]="currentImage === null"  >
@@ -234,29 +194,26 @@
                 </ion-row>
             </div>
         </span>    
-
       </ion-item>  
-    </ion-card-content>
-  </ion-card> 
+    </div> 
+      
+    <ion-item>
+      <ion-label class="mylabel" style="font-size:13px;width:90px;font-weight:bold !important;" >Details</ion-label>
+      <ion-textarea class="mytext" rows="3"  name="details" [(ngModel)]="frmData.details" placeholder=""  style="font-size:13px;"></ion-textarea>
+    </ion-item>
 
-
-</ion-list>
-
-
-<div>
-  <ion-buttons >
-    <button full ion-button icon-left (click)="sendUploadData()" >   <!--[disabled]="showUpload === null"--> 
-      <ion-icon name="cloud-upload"></ion-icon>Upload Defect Image
-    </button>
-  </ion-buttons>
-</div>
-<br>
+  </ion-list>
 
 </ion-content>
 
-
-
-<ion-footer  >
-
+<ion-footer >
+  <div>
+    <ion-buttons  [hidden]="frmData.details === ''">
+      <button full ion-button icon-left (click)="sendUploadData()" >   <!--[disabled]="showUpload === null"--> 
+        <ion-icon name="cloud-upload"></ion-icon>Upload New Defect
+      </button>
+    </ion-buttons>
+  </div>
+  <br>
 </ion-footer>
   

@@ -104,6 +104,10 @@ export class DefectsPage {
 		this.createDefects       = localStorage.getItem('Role-PA5038');
 		this.showDefects         = localStorage.getItem('Role-PA5073');
 		this.manageDefects       = localStorage.getItem('Role-PA5039');		
+
+		localStorage.setItem('inspectoremail',"0");
+		localStorage.setItem('remediatoremail',"0");
+		localStorage.setItem('commercialemail',"0");
 		
 		this.alert = "Y";
 

@@ -14,7 +14,7 @@
       <ion-col  *ngFor="let discipline of disciplines" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
         <ion-list style="margin-bottom: 0px;">
           <ion-item>
-            <button ion-button full style="background-color:#dddddd;border:0px;margin:0px;padding:0px;color:#000000" (click)='sendBack(discipline.GroupName)'>
+            <button ion-button full style="background-color:#dddddd;border:0px;margin:0px;padding:0px;color:#000000" (click)='sendBack(discipline.GroupName,discipline.inspectoremail,discipline.remediatoremail,discipline.commercialemail,discipline.inspectorid,discipline.remediatorid,discipline.commercialid)'>
           	 <b>{{discipline.GroupName}}</b>
            </button>
           </ion-item>

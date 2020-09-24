@@ -22,6 +22,7 @@ import { RemediatorPage } from '../remediator/remediator';
 import { InspectorPage } from '../inspector/inspector';
 import * as Constants from '../../providers/constants';
 import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
+import { getSymbolIterator } from '@angular/core/src/util';
 
 
 declare var cordova: any;
@@ -77,9 +78,12 @@ export class SnaggingPage {
 	public lastImage: string = "";
     public loading: Loading;
 	public imageUrl: string = "";
-	public qs: string = "";
-	public remediator: string = "";
-	public inspector: string = "";
+	public commercialemail: string = "";
+	public remediatoremail: string = "";
+	public inspectoremail: string = "";
+	public commercialid: string = "";
+	public remediatorid: string = "";
+	public inspectorid: string = "";
 	public showdate: string = "N";
 	public fixdate: string = "";
 	
@@ -351,23 +355,31 @@ export class SnaggingPage {
 
 		//var headers = {'Content-Type' : 'multipart/form-data'};
 
-		const formData = new FormData();
-		
-        formData.append('limg', this.image);
-		formData.append('pimg', this.currentImage);
+		const formData = new FormData();		
+
 		formData.append('reference', this.frmData.reference);
 		formData.append('location', this.name);
 		formData.append('discipline', this.discipline);
+		formData.append('inspectoremail', this.inspectoremail);
+		formData.append('remediatoremail', this.remediatoremail);
+		formData.append('commercialemail', this.commercialemail);
+		formData.append('inspectorid', this.inspectorid);
+		formData.append('remediatorid', this.remediatorid);
+		formData.append('commercialid', this.commercialid);
 		formData.append('details', this.frmData.details);
 		formData.append('pid', this.pid);
 		formData.append('uid', this.uid);
 		formData.append('cid', this.cid);
 		formData.append('api', this.api);
 		formData.append('effect', this.effect);
-		formData.append('reason', this.reason);
+		formData.append('reason', this.reason);		
+		formData.append('duedate', this.fixdate);
 		formData.append('defecttype', this.defecttype);
 		formData.append('selecteddocids', localStorage.getItem('selecteddocids'));
 		formData.append('pairedid', this.associatedcode);
+		formData.append('limg', this.image);
+		formData.append('pimg', this.currentImage);
+		
 
 	    this.http.post(upurl,formData).map(res => res.json()).subscribe(data => {
 	        this.updata = data;
@@ -446,7 +458,9 @@ export class SnaggingPage {
 	} 
 
 	dateSelected(date){
-		this.fixdate = date.toDateString();
+		this.fixdate = date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear();
+		this.showdate = "N"; //   date.toDateString();
+
 		//this.fixdate = date.toISOString().slice(0,12) 
 	}
 
@@ -481,18 +495,6 @@ export class SnaggingPage {
 		this.navCtrl.push(DisciplinePage, {selecteddefect,callback:this.myCallbackFunction2});
 	}
 
-	openInspectorList(){		
-		this.navCtrl.push(InspectorPage, {callback:this.myCallbackFunction11});
-	}
-
-	openQsList(){		
-		this.navCtrl.push(QsPage, {callback:this.myCallbackFunction10});
-	}
-
-	openRemediatorList(){		
-		this.navCtrl.push(RemediatorPage, {callback:this.myCallbackFunction9});
-	}
-
 	openRList(){		
 		this.navCtrl.push(ReasonsPage, {callback:this.myCallbackFunction3});
 	}
@@ -507,6 +509,18 @@ export class SnaggingPage {
 
 	openDocs(){		
 		this.navCtrl.push(DocumentsPage, {"inprocess":"Y",callback:this.myCallbackFunction0});
+	}
+
+	openInspectorList(){		
+		this.navCtrl.push(InspectorPage, {callback:this.myCallbackFunction11});
+	}
+
+	openQsList(){		
+		this.navCtrl.push(QsPage, {callback:this.myCallbackFunction10});
+	}
+
+	openRemediatorList(){		
+		this.navCtrl.push(RemediatorPage, {callback:this.myCallbackFunction9});
 	}
 
 	myCallbackFunction0 = (_params) => {
@@ -547,10 +561,28 @@ export class SnaggingPage {
 	 });
 	}
 
-	myCallbackFunction2 = (_params) => {
+	myCallbackFunction2 = (_params,inspector,remediator,commercial,inspectorid,remediatorid,commercialid) => {
 	 return new Promise((resolve, reject) => {
-	     this.discipline = _params;
-	     resolve();
+		 this.discipline = _params;
+		 if(this.inspectoremail == ""){
+		 	this.inspectoremail = inspector;
+		 } else {
+			this.inspectoremail = "Undwfined"; 
+		 }
+		 if(this.remediatoremail == ""){
+		 this.remediatoremail = remediator;
+		 } else {
+			this.remediatoremail = "Undwfined"; 
+		 }
+		 if(this.commercialemail == ""){
+		 this.commercialemail = commercial;
+		 } else {
+			this.commercialemail = "Undwfined"; 
+		 }
+		 this.inspectorid = inspectorid;
+		 this.remediatorid = remediatorid;
+		 this.commercialid = commercialid;
+	     resolve(_params);
 	 });
 	}
 
@@ -602,7 +634,7 @@ export class SnaggingPage {
 
 	 myCallbackFunction9 = (_params) => {
 		return new Promise((resolve, reject) => {
-			this.remediator = _params;
+			this.remediatoremail = _params;
 			resolve();	
 		}); 	
 		
@@ -610,7 +642,7 @@ export class SnaggingPage {
 
 	 myCallbackFunction10 = (_params) => {
 		return new Promise((resolve, reject) => {
-			this.qs = _params;
+			this.commercialemail = _params;
 			resolve();	
 		}); 	
 		
@@ -618,7 +650,7 @@ export class SnaggingPage {
 	 
 	 myCallbackFunction11 = (_params) => {
 		return new Promise((resolve, reject) => {
-			this.inspector = _params;
+			this.inspectoremail = _params;
 			resolve();	
 		}); 	
 		

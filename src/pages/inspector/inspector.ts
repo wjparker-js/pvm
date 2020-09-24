@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class InspectorPage {
 
   selectedinspector:string;  
+  inspectorid:string;
   selectedProjectName: string;
   callback: any;
 
@@ -51,12 +52,13 @@ export class InspectorPage {
 	} 
 
 	ionViewWillLeave() {
-		this.callback(this.selectedinspector).then(()=>{});
+		this.callback(this.selectedinspector,this.inspectorid).then(()=>{});
 	}
 
-	sendBack(item){
+	sendBack(item,userid){
 		this.selectedinspector = item;
-		this.viewCtrl.dismiss();
+		this.inspectorid = userid;
+		this.dismiss();
 	}
 
 }

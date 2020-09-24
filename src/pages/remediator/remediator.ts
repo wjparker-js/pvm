@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class RemediatorPage {
 
   selectedremediator:string;  
+  remediatorid:string;
   selectedProjectName: string;
   callback: any;
 
@@ -51,12 +52,13 @@ export class RemediatorPage {
 	} 
 
 	ionViewWillLeave() {
-		this.callback(this.selectedremediator).then(()=>{});
+		this.callback(this.selectedremediator,this.remediatorid).then(()=>{});
 	}
 
-	sendBack(item){
+	sendBack(item,userid){
 		this.selectedremediator = item;
-		this.viewCtrl.dismiss();
+		this.remediatorid = userid;
+		this.dismiss();
 	}
 
 }

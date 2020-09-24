@@ -14,6 +14,9 @@ import { DocumentInfo } from '../documentinfo/documentinfo';
 import { DocumentIdInfo } from '../documentidinfo/documentidinfo';
 import { DocumentAudit } from '../documentaudit/documentaudit';
 import { AboutPage } from '../about/about';
+import { QsPage } from '../qs/qs';
+import { RemediatorPage } from '../remediator/remediator';
+import { InspectorPage } from '../inspector/inspector';
 import * as Constants from '../../providers/constants';
 
 declare var cordova: any;
@@ -42,8 +45,9 @@ export class Snagging51Page {
 	closeDateTxt: any;
 	attacheddocuments:any;
 	hasattacheddocs:any;
+	callback: any;
 
-	public details: string;
+	public details: string ="";
 	public defect1s:  any;
 	public newnote:  any;
 	public defect1snotes:  any;
@@ -61,6 +65,16 @@ export class Snagging51Page {
 	public locationImg: any;
 	public image: any;
 	public updata: any;
+
+	public tempcommercialemail: string = "";
+	public tempremediatoremail: string = "";
+	public tempinspectoremail: string = "";
+	public commercialemail: string;
+	public remediatoremail: string;
+	public inspectoremail: string;
+	public commercialid: string = "";
+	public remediatorid: string = "";
+	public inspectorid: string = "";
 
 	public note: any;
 	public passedfailed: string = "false" ;
@@ -95,8 +109,6 @@ export class Snagging51Page {
 
 	public ionViewWillEnter() {
 
-		console.log("In 51");
-
 		var snagData = JSON.parse(localStorage.getItem('userSystemData'));
 				
 		this.pid          = localStorage.getItem('CurrentProjectID');
@@ -110,20 +122,8 @@ export class Snagging51Page {
 		this.snagid       = this.navParams.get('snagid');		
 		this.note         = this.navParams.get('note');
 		this.orderstatus  = this.navParams.get('orderstatus');
-
-		console.log("this.snagid         = ",this.snagid);
-		console.log("this.note           = ",this.note);
-		console.log("this.orderstatus    = ",this.orderstatus);
-
 		this.postImage    = null;
 
-		this.createDefects       = localStorage.getItem('Role-PA5038');
-		this.showDefects         = localStorage.getItem('Role-PA5073');
-		this.manageDefects       = localStorage.getItem('Role-PA5039');
-
-		console.log("this.createDefects    = ",this.createDefects);
-		console.log("this.showDefects      = ",this.showDefects);
-		console.log("this.manageDefects    = ",this.manageDefects);
 
 		this.showDefects         = localStorage.getItem('Role-PA5073');
 		if (this.showDefects   != 1){this.defectRole = 0}
@@ -132,19 +132,42 @@ export class Snagging51Page {
 		this.manageDefects       = localStorage.getItem('Role-PA5039');
 		if (this.manageDefects != 1){this.defectRole = 0}
 
-		console.log("this.defectRole  = ",this.defectRole);
-
 		this.openlocimg();
 
 		var url = Constants.apiUrl+"api/defects/"+this.api+"/"+this.pid+"/"+this.uid+"/nosearch/"+this.snagid+"/"+this.defectRole;
-
-		console.log("URL: ",url);
 
 	      this.http.get(url).map(res => res.json()).subscribe(data => {
 	        this._sanitizer.bypassSecurityTrustStyle(data);
 			this.defect1s = data;         
 			
-			this.defect1snotesid = 	this.defect1s[0].OrderId;
+			this.defect1snotesid = this.defect1s[0].OrderId;
+/*
+			if(this.inspectoremail  === "") {this.inspectoremail  = this.defect1s[0].inspectoremail};
+			if(this.remediatoremail === "") {this.remediatoremail = this.defect1s[0].remediatoremail};
+			if(this.commercialemail === "") {this.commercialemail = this.defect1s[0].commercialemail};
+
+			
+*/
+
+			var xinspectoremail  = this.defect1s[0].inspectoremail;
+			var xremediatoremail = this.defect1s[0].remediatoremail;
+			var xcommercialemail = this.defect1s[0].commercialemail;
+
+			if(localStorage.getItem('inspectoremail') == "0"){
+				localStorage.setItem('inspectoremail',  xinspectoremail);
+				this.inspectoremail  = localStorage.getItem('inspectoremail');
+			}	
+			9		
+			if(localStorage.getItem('remediatoremail') == "0"){
+				localStorage.setItem('remediatoremail', xremediatoremail);
+				this.remediatoremail = localStorage.getItem('remediatoremail');
+			}
+
+			if(localStorage.getItem('commercialemail') == "0"){
+				localStorage.setItem('commercialemail', xcommercialemail);
+				this.commercialemail = localStorage.getItem('commercialemail');
+			}
+
 
 			if(this.defect1s[0].ProposedCompletionDate === null){
 				let date: Date = new Date();
@@ -293,6 +316,9 @@ export class Snagging51Page {
 
 	viewpre(){this.navCtrl.push(ImgViewPage,{imgtype:"preimage"});}
 
+	changestatus(stat){
+		console.log(stat);
+	}
 
 	presentActionSheet() {
 		let actionSheet = this.actionSheetCtrl.create({
@@ -410,6 +436,9 @@ export class Snagging51Page {
 		formData.append('cid', this.cid);
 		formData.append('api', this.api);	
 		formData.append('postimg', this.currentImage);
+		formData.append('inspectoremail', this.inspectoremail);
+		formData.append('remediatoremail', this.remediatoremail);
+		formData.append('commercialemail', this.commercialemail);
 
 	    this.http.post(upurl,formData).map(res => res.json()).subscribe(data => {
 	        this.updata = data;
@@ -430,6 +459,44 @@ export class Snagging51Page {
 		
 	 }
 
+
+	 openInspectorList(){		
+		this.navCtrl.push(InspectorPage, {callback:this.myCallbackFunction11});
+	}
+
+	openQsList(){		
+		this.navCtrl.push(QsPage, {callback:this.myCallbackFunction10});
+	}
+
+	openRemediatorList(){		
+		this.navCtrl.push(RemediatorPage, {callback:this.myCallbackFunction9});
+	}
+
+	myCallbackFunction9 = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.remediatoremail = _params;
+			resolve();	
+			localStorage.setItem('remediatoremail',  this.remediatoremail);
+		}); 	
+		
+	 }
+
+	 myCallbackFunction10 = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.commercialemail = _params;
+			resolve();	
+			localStorage.setItem('commercialemail',  this.commercialemail);
+		}); 	
+		
+	 }	 
+	 
+	 myCallbackFunction11 = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.inspectoremail = _params;
+			resolve();	
+			localStorage.setItem('inspectoremail',  this.inspectoremail);
+		}); 	
+	 }	
 
 	presentToast(text) {
 		let toast = this.toastCtrl.create({
@@ -453,245 +520,3 @@ export class Snagging51Page {
 			 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/*
-		takePicture(sourceType) {
-
-			var options = {
-				quality: 80,
-				sourceType: sourceType,
-				saveToPhotoAlbum: false,
-				correctOrientation: true,
-				allowEdit : true,
-			};
-			
-			this.camera.getPicture(options).then((imagePath) => {
-
-				if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {        
-					this.filePath.resolveNativePath(imagePath)
-						.then(filePath => {
-							let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-							let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-							var correctFilename = this.createFileName();
-							this.currentImage = normalizeURL(correctPath + currentName);
-							this.copyFileToLocalDir(correctPath, currentName, correctFilename);
-							this.file.readAsDataURL(correctPath, currentName).then((imageDataUrl) => {
-								this.currentImage = imageDataUrl;
-							})
-						});
-				} else {
-					var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-					var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-					var correctFilename = this.createFileName();
-					this.currentImage = normalizeURL(correctPath + currentName);
-					console.log(correctPath);
-					console.log(currentName);
-					console.log(correctFilename);	
-					console.log(this.currentImage);
-					this.copyFileToLocalDir(correctPath, currentName, correctFilename);  
-					this.file.readAsDataURL(correctPath, currentName).then((imageDataUrl) => {
-					this.currentImage = imageDataUrl;
-					console.log(this.currentImage);
-					})
-				}
-			}, (err) => {
-				this.presentToast('Error while selecting image.');
-			});
-		}  
-		private createFileName() {
-			var d = new Date(),
-			n = d.getTime(),
-			newFileName =  n + ".jpg";
-			return newFileName;
-		}  
-		private copyFileToLocalDir(namePath, currentName, newFileName) {
-			console.log("in fun");
-			console.log(namePath);
-			console.log(currentName);
-			console.log(newFileName);
-			console.log(cordova.file.dataDirectory);
-			this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-				this.lastImage = newFileName;
-			}, error => {
-				this.presentToast('Error while storing file.');
-			});
-		}
-		public pathForImage(img) {
-			if (img === null) {
-				return '';
-			} else {
-				console.log(cordova.file.dataDirectory + img);
-				return cordova.file.dataDirectory + img;
-			}
-		}
-		public uploadImage() {
-			console.log("in post upload");
-			// Destination URL
-			var url = "https://pvmobile.online/iupload51.php";
-			console.log(url);
-			// File for Upload
-			var targetPath = this.pathForImage(this.lastImage);
-		
-			// File name only
-			var filename = this.lastImage;
-		
-			var options = {
-				fileKey: "file",
-				fileName: filename,
-				chunkedMode: false,
-				mimeType: "multipart/form-data",
-				params : {
-					"pid": this.pid,
-					"uid": this.uid,
-					"cid": this.cid,
-					"api": this.api,
-					"son": this.snagid,
-					"det": this.details
-				}
-			};
-
-			console.log(options);
-		
-			const fileTransfer: FileTransferObject = this.transfer.create();
-		
-			this.loading = this.loadingCtrl.create({
-				content: 'Uploading...',
-			});
-			
-			this.loading.present();
-
-		
-			// Use the FileTransfer to upload the image
-			fileTransfer.upload(targetPath, url, options).then(data => {
-				this.loading.dismissAll()
-				this.presentToast('Image succesful uploaded.');
-			}, err => {
-				this.loading.dismissAll()
-				this.presentToast('Error while uploading file.');
-			});
-		}
-	*/
