@@ -244,55 +244,65 @@
             <span class="mytext" style="font-size:13px;"><B>{{defect1note.FirstName}}&nbsp;{{defect1note.LastName}} - {{defect1note.DateCreated }}</B><br>{{defect1note.Note}}</span>
             <br><hr>
         </div>
-      </div> 
+      </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 
+    <div>
 
-    <div [hidden]="this.createDefects != 1 && this.manageDefects != 1 ">   
-      <h4>Recipients</h4>
-      <div  *ngFor="let defect1dist of defect1s" >
+      <div [hidden]="this.createDefects != 1 && this.manageDefects != 1 ">   
 
-        <ion-item>
-          <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Inspector</ion-label>
-            <ion-input class="text" readonly type="text" id = "Inspectoremail" name="inspectoremail" value="{{this.inspectoremail}}" style="font-size:13px;"></ion-input>  
-            <button  ion-button  color="light" type="button" item-right (click)="openInspectorList()"> 
-              <ion-icon name="list"> </ion-icon> 
-            </button>          
-        </ion-item>
+        <div  *ngFor="let defect1dist of defect1s">
+          <h4  style="color:#fa0303;">Amend Defect</h4> 
+          <ion-item>
+            <ion-label class="mylabel"  style="color:#fa0303;font-size:13px;width:90px;font-weight:bold !important;">Inspector</ion-label>
+              <ion-input class="text" readonly type="text" id = "Inspectoremail" name="inspectoremail" value="{{this.inspectoremail}}" style="color:#fa0303;font-size:13px;"></ion-input>  
+              <button  ion-button  color="light" type="button" item-right (click)="openInspectorList()"> 
+                <ion-icon name="list" style="color:#fa0303;"> </ion-icon> 
+              </button>          
+          </ion-item>
 
-        <ion-item>
-          <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Commercial</ion-label>
-            <ion-input class="text" readonly type="text" id = "Commercialemail" name="commercialemail" value="{{this.commercialemail}}" style="font-size:13px;"></ion-input>  
-            <button  ion-button  color="light" type="button" item-right (click)="openQsList()"> 
-              <ion-icon name="list"> </ion-icon> 
-            </button>          
-        </ion-item>
-    
-        <ion-item>
-          <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Remediator</ion-label>
-            <ion-input class="text" readonly type="text" id = "Remediatoremail" name="remediatoremail" value="{{this.remediatoremail}}" style="font-size:13px;"></ion-input>  
-            <button  ion-button  color="light" type="button" item-right (click)="openRemediatorList()"> 
-              <ion-icon name="list"> </ion-icon> 
-            </button>          
-        </ion-item>
-        <hr>
-        <ion-item>
-          <ion-label class="mylabel" style="font-size:13px;width:20%;font-weight:bold !important;">Status Change</ion-label>
-          <ion-select   (ionChange)="changestatus(defectstatuschange)" class="myCustomSelect" [(ngModel)]="defectstatuschange" name="defectstatuschange"  style ="max-width:80%;width:80%;text-align:left;" > 
-            <ion-option class="myCustomSelect"  style="text-align:right;width:80%;-webkit-flex: none!important; flex: none!important;text-align:left;" [value] = "-50">Reissue Defect</ion-option>
-            <ion-option class="myCustomSelect"  style="text-align:right;width:80%;-webkit-flex: none!important; flex: none!important;text-align:left;" [value] = "-52">Set Defect Fixed</ion-option>
-            <ion-option class="myCustomSelect"  style="text-align:right;width:80%;-webkit-flex: none!important; flex: none!important;text-align:left;" [value] = "-54">Approve Defect</ion-option>
-            <ion-option class="myCustomSelect"  style="text-align:right;width:80%;-webkit-flex: none!important; flex: none!important;text-align:left;" [value] = "-55">Reject Defect</ion-option>
-            <ion-option class="myCustomSelect"  style="text-align:right;width:80%;-webkit-flex: none!important; flex: none!important;text-align:left;" [value] = "-66">Cancel Defect</ion-option>
-          </ion-select>
-          <br>
-        </ion-item>  
-    
+          <ion-item>
+            <ion-label class="mylabel"  style="color:#fa0303;font-size:13px;width:90px;font-weight:bold !important;">Commercial</ion-label>
+              <ion-input class="text" readonly type="text" id = "Commercialemail" name="commercialemail" value="{{this.commercialemail}}" style="color:#fa0303;font-size:13px;"></ion-input>  
+              <button  ion-button  color="light" type="button" item-right (click)="openQsList()"> 
+                <ion-icon name="list" style="color:#fa0303;"> </ion-icon> 
+              </button>          
+          </ion-item>
+      
+          <ion-item>
+            <ion-label class="mylabel"  style="color:#fa0303;font-size:13px;width:90px;font-weight:bold !important;">Remediator</ion-label>
+              <ion-input class="text" readonly type="text" id = "Remediatoremail" name="remediatoremail" value="{{this.remediatoremail}}" style="color:#fa0303;font-size:13px;"></ion-input>  
+              <button  ion-button  color="light" type="button" item-right (click)="openRemediatorList()"> 
+                <ion-icon name="list" style="color:#fa0303;"> </ion-icon> 
+              </button>          
+          </ion-item>
+          
+      
+          <ion-item>
+            <ion-label class="mylabel"  style="color:#fa0303;font-size:13px;width:90px;font-weight:bold !important;">Status</ion-label>
+              <ion-input class="text" readonly type="text" id = "statuschange" name="statuschange" value="{{this.displaystatus}}" style="color:#fa0303;font-size:13px;"></ion-input>  
+              <button  ion-button  color="light" type="button" item-right (click)="openstatuschangeList()"> 
+                <ion-icon name="list" style="color:#fa0303;"> </ion-icon> 
+              </button>          
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="mylabel"  style="color:#fa0303;font-size:13px;width:90px;font-weight:bold !important;">Due Date</ion-label>
+              <ion-input class="text" readonly type="text" id = "deliverby" name="deliverby" value="{{this.deliverby}}" style="color:#fa0303;font-size:13px;"></ion-input>  
+              <button ion-button color="light" type="button" item-right (click)="openFixDate()"> 
+                <ion-icon name="ios-calendar-outline" style="color:#fa0303;"></ion-icon> 
+              </button>       
+          </ion-item>
+      
+          <ion-item [hidden]="showdeliverby == 'N'">
+            <ionic-calendar-date-picker (onSelect)="dateSelected($event)"></ionic-calendar-date-picker>      
+          </ion-item>
+
+        </div>
       </div>
-    </div>
-
+    </div >
 
       <br>
-      <h4>Fix Details</h4>
+      <h4>Defect Fix Details</h4>
       <div   [hidden]="this.note == 'note'" style="margin-top: 0px;padding-bottom: 15px;margin-bottom: 12px;">  
 
         <ion-item style="padding-left:0px;">

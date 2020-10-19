@@ -1,89 +1,57 @@
 page-documents {
 
-ion-item {
-   border-top: none;
-   border-bottom: none;
-}
+    ion-card { border-top: 1px solid #e8e8e8 !important; border-bottom: 1px solid #e8e8e8 !important; margin-bottom:8px; }
 
-ion-card { border-top: 3px solid #322171; border-bottom: 0px solid #e8e8e8; padding-bottom: 15px;  }
+    background-color: #e8e8e8 !important;                                                                                                                                                                                                                                                                          
 
-//ion-list {height:70px;}
-
-
-
-page-documents .label-md {
-    margin: 0px 3.5px 3px 0;
-  }
-
-  .label-md {
-    margin: 0px 3.5px 3px 0;
-}
-
-.item-md.item-block .item-inner {
-    padding-right: 3.5px;
-    border-bottom: 1px solid #ffffff;
-}
-
-.searchbar-input {background-color: #ffffff;}
-
-    .bodytext {
-        font-size:10px;
-        color:black;
+    .listheader{
+        font-size:20px;
+        color:black; 
+        margin-top:20px;
+        background-color:#4282c1;
+        font-family: "Roboto", "Helvetica Neue", sans-serif;
     }
-    .cardheadertext {
-        font-size:16px;
-        color:black;
-    }    
-    .headertext {
-        font-size:14px;
-        color:black;
-    }
+
     h1{
         font-size: 30px;
-        margin-top:20px
+        margin-top:20px;
+        font-family: "Roboto", "Helvetica Neue", sans-serif;
     }
+
+    ion-list-header{
+        font-size:16px;
+        color:black;   
+        font-family: "Roboto", "Helvetica Neue", sans-serif;     
+    }
+
     ion-title{
         font-size:12px;
         color:yellow;
+        font-family: "Roboto", "Helvetica Neue", sans-serif;
     }
-    ion-card{
-        margin-top:75px;
-    } 
+
     ion-button{
         margin-top:20px;
     }       
+
     ion-list{
-        margin-top:20px;
+        margin-top:15px;
         margin-bottom:30px;
+        font-family: "Roboto", "Helvetica Neue", sans-serif;
     }
+    
     .marginTop{
         margin-top:150px;
     }
     .logo{
         height: 15px;
     }
-    .hilite{
-        color: rgba(226, 213, 31, 0.733);
-    }
-    .hilite1{
-        color: rgb(248, 96, 8);
-        background-color:white;
-    }
-    .hilite2{
-        color:  blue;
-        background-color: white;
-    }
-    a{
-        text-align: center;
-        margin-top: 30px;
-    }
-    .flex-right {
-        justify-content: flex-end;
-    }
-    .masters {
-        background-color: gray;
-    }
 
+a{
+    text-align: center;
+    margin-top: 30px;
+    font-family: "Roboto", "Helvetica Neue", sans-serif;
+}
 }
 
 

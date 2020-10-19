@@ -18,6 +18,7 @@ import { QsPage } from '../qs/qs';
 import { RemediatorPage } from '../remediator/remediator';
 import { InspectorPage } from '../inspector/inspector';
 import * as Constants from '../../providers/constants';
+import { ChangedatePage } from '../changedate/changedate';
 
 declare var cordova: any;
 
@@ -84,9 +85,14 @@ export class Snagging51Page {
 	public DisputeTxt:any;
 
 	
+	public fixdate: string = "";
 	dsearch : any;
-
+	showdate:any;
 	frmData = {details: ""};
+	statuschange:any;
+	deliverby:any;
+	showdeliverby:string="N";
+	displaystatus:any;
 
 
 	constructor(
@@ -124,6 +130,7 @@ export class Snagging51Page {
 		this.orderstatus  = this.navParams.get('orderstatus');
 		this.postImage    = null;
 
+		this.showdate = "N";
 
 		this.showDefects         = localStorage.getItem('Role-PA5073');
 		if (this.showDefects   != 1){this.defectRole = 0}
@@ -152,12 +159,14 @@ export class Snagging51Page {
 			var xinspectoremail  = this.defect1s[0].inspectoremail;
 			var xremediatoremail = this.defect1s[0].remediatoremail;
 			var xcommercialemail = this.defect1s[0].commercialemail;
+			var xorderstatus     = this.defect1s[0].OrderStatus;
+			var xdeliverby       = this.defect1s[0].DeliverBy;
 
 			if(localStorage.getItem('inspectoremail') == "0"){
 				localStorage.setItem('inspectoremail',  xinspectoremail);
 				this.inspectoremail  = localStorage.getItem('inspectoremail');
 			}	
-			9		
+					
 			if(localStorage.getItem('remediatoremail') == "0"){
 				localStorage.setItem('remediatoremail', xremediatoremail);
 				this.remediatoremail = localStorage.getItem('remediatoremail');
@@ -166,6 +175,22 @@ export class Snagging51Page {
 			if(localStorage.getItem('commercialemail') == "0"){
 				localStorage.setItem('commercialemail', xcommercialemail);
 				this.commercialemail = localStorage.getItem('commercialemail');
+			}
+
+			if(localStorage.getItem('statuschange') == "0"){
+				this.statuschange = xorderstatus;
+				if(this.statuschange == 50)(this.displaystatus = "Defect Issued")
+				if(this.statuschange == 51)(this.displaystatus = "Defect Fix Date Set")
+				if(this.statuschange == 52)(this.displaystatus = "Defect Fixed")
+				if(this.statuschange == 54)(this.displaystatus = "Defect Approved")
+				if(this.statuschange == 55)(this.displaystatus = "Defect Rejected")
+				if(this.statuschange == 66)(this.displaystatus = "Defect Cancelled")				
+				localStorage.setItem('statuschange', this.displaystatus);
+			}
+
+			if(localStorage.getItem('deliverby') == "0"){
+				localStorage.setItem('deliverby', xdeliverby);
+				this.deliverby = localStorage.getItem('deliverby');
 			}
 
 
@@ -320,6 +345,22 @@ export class Snagging51Page {
 		console.log(stat);
 	}
 
+
+	openFixDate(){
+		if(this.showdeliverby == "N"){
+			this.showdeliverby = "Y";
+		} else {
+			this.showdeliverby = "N";
+		}
+	} 
+
+	dateSelected(date){
+		this.deliverby = date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear();
+		this.showdeliverby = "N"; //   date.toDateString();
+
+		//this.fixdate = date.toISOString().slice(0,12) 
+	}
+
 	presentActionSheet() {
 		let actionSheet = this.actionSheetCtrl.create({
 			title: 'Select Image Source',
@@ -436,9 +477,12 @@ export class Snagging51Page {
 		formData.append('cid', this.cid);
 		formData.append('api', this.api);	
 		formData.append('postimg', this.currentImage);
+		
 		formData.append('inspectoremail', this.inspectoremail);
 		formData.append('remediatoremail', this.remediatoremail);
 		formData.append('commercialemail', this.commercialemail);
+		formData.append('statuschange', this.statuschange);
+		formData.append('deliverby', this.deliverby);
 
 	    this.http.post(upurl,formData).map(res => res.json()).subscribe(data => {
 	        this.updata = data;
@@ -472,6 +516,12 @@ export class Snagging51Page {
 		this.navCtrl.push(RemediatorPage, {callback:this.myCallbackFunction9});
 	}
 
+
+	openstatuschangeList(){		
+		this.navCtrl.push(ChangedatePage, {callback:this.myCallbackFunction12});
+	}
+
+
 	myCallbackFunction9 = (_params) => {
 		return new Promise((resolve, reject) => {
 			this.remediatoremail = _params;
@@ -497,6 +547,14 @@ export class Snagging51Page {
 			localStorage.setItem('inspectoremail',  this.inspectoremail);
 		}); 	
 	 }	
+	 
+	 myCallbackFunction12 = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.displaystatus = _params;
+			resolve();	
+			localStorage.setItem('statuschange',  this.displaystatus);
+		}); 	
+	 }	
 
 	presentToast(text) {
 		let toast = this.toastCtrl.create({
@@ -506,7 +564,8 @@ export class Snagging51Page {
 		});
 		toast.present();
 	}
-	
+
+
 
 	dismiss() {
 		this.viewCtrl.dismiss('') ;

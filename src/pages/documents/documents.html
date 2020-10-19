@@ -34,88 +34,75 @@
 </ion-header>
 
 <ion-content>
- <div id="maindiv">
-    <div *ngIf="this.hasdocs; else nodocs" >
-      <ion-grid>
-        <ion-row>
-          <ion-col  *ngFor="let document of userdocuments"  style="margin-top:8px;padding-top: 0px;padding-bottom: 0px;margin-left:0px;margin-right:0px;height: 80px;"  col-12 col-md-6 col-lg-4 col-xl-3>
-            <ion-list >
-              <ion-item style="width: 99%;display: flex;align-items: center; justify-content: center;border-bottom-color:white;padding-left:0px;padding-right: 0px;height:90px;">                
-                <ion-card *ngIf="document.Latest == 'Current' || document.Current == 'Current'" style="width: 108%;display: flex;align-items: center; justify-content: center;border-bottom-color:white;margin:0px;margin-top:6px;padding:0px;" >                     
-                  <ion-item-sliding >
-                    <ion-item padding style="padding-left:5px;margin:0px;width:100%;height:90px;border-bottom-color:white;" class="card card-md" class="item item-block item-md">
-              
-                      <!--<ion-checkbox [hidden]="this.inprocess != 'Y'" id="{{document.DocumentID}}" start color="primary" style="margin-right: 8px;left:50px;"></ion-checkbox>-->
+  <div id="maindiv"  *ngIf="this.hasdocs; else nodocs" >
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let document of userdocuments"  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+          <ion-list  style="margin-bottom: 0px;">
+            <ion-card *ngIf="document.Latest == 'Current' || document.Current == 'Current'" style="min-height:80px; max-height:80px;padding-bottom: 0px;margin-top: 3px;margin-bottom: 3px;" >                     
+              <ion-item-sliding> 
 
-                      <ion-thumbnail *ngIf="document.FileExtension == '.jpg' || document.FileExtension == '.jpeg' || document.FileExtension == '.png' || document.FileExtension == '.tif' || document.FileExtension == '.tiff' || document.FileExtension == '.gif' || document.FileExtension == '.bmp'" item-left no-padding style="margin-left:5px;margin-top:20px;">
-                        <img 
-                          src="{{document.PhotoTiny}}" style="border: 1px solid #000;position:relative;top:-10px;height:70px;width:100px;border: 2px solid #000;" 
-                          style="border: 1px solid #000;position:relative;left:-5px;top:-10px;height:70px;width:100px;"
-                          imageViewer
-                          />
-                      </ion-thumbnail>          
+                <ion-item padding style="padding-left:5px;padding-top:8px;margin:0px;width:100%;height:90px;border-bottom-color:white;" class="card card-md" class="item item-block item-md">
+                  
+                  <ion-thumbnail *ngIf="document.FileExtension == '.jpg' || document.FileExtension == '.jpeg' || document.FileExtension == '.png' || document.FileExtension == '.tif' || document.FileExtension == '.tiff' || document.FileExtension == '.gif' || document.FileExtension == '.bmp'" item-left no-padding style="margin-left:5px;margin-top:20px;">                  
+                    <img item-left no-padding  src="{{document.PhotoTiny}}" style="border: 1px solid #000;position:relative;top:-10px;height:70px;width:100px;border: 2px solid #000;" style="border: 1px solid #000;position:relative;left:-5px;top:-10px;height:70px;width:100px;" imageViewer >
+                  </ion-thumbnail>
 
-                      <ion-thumbnail *ngIf="document.FileExtension != '.jpg' && document.FileExtension != '.jpeg' && document.FileExtension != '.png' && document.FileExtension != '.tif' && document.FileExtension != '.tiff' && document.FileExtension != '.gif' && document.FileExtension != '.bmp'" item-left no-padding style="margin-left:5px;margin-top:20px;" >
-                        <img 
-                          src="{{document.PhotoTiny}}" style="border: 1px solid #000;position:relative;top:-10px;height:100px;left:10px;width:70px;transform: rotate(90deg);margin-right:30px;" 
-                          (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)"
-                          />
-                      </ion-thumbnail> 
+                  <ion-thumbnail *ngIf="document.FileExtension != '.jpg' && document.FileExtension != '.jpeg' && document.FileExtension != '.png' && document.FileExtension != '.tif' && document.FileExtension != '.tiff' && document.FileExtension != '.gif' && document.FileExtension != '.bmp'" item-left no-padding style="margin-left:5px;margin-top:20px;" >
+                    <img item-left no-padding  src="{{document.PhotoTiny}}" style="border: 1px solid #000;position:relative;top:-10px;height:100px;left:10px;width:70px;transform: rotate(90deg);margin-right:30px;" (click)= "openDocument(userdocumentData.SystemClientID,userdocumentData.SystemProjectID,document.DocumentID,document.FileExtension)">
+                  </ion-thumbnail>   
 
-                      <div style="padding:0px;margin:0px;width:100%;margin-top:2px;">
-                        
-                          <ion-icon style = "font-size: 13px; position:relative;top:0px;" name="folder" class="flex-left hilite" >
-                            <b> <span style="font-size: 11px;color:black;font-family:arial;top:-1px;" [innerHtml]="document.FolderName "></span></b>
-                          </ion-icon>                         
-                          <div  style="font-size: 10px;top:0px" [innerHtml]="document.DNREV"></div>  
-                          <div  style="font-size: 11px;top:-3px;" [innerHtml]="document.Title"></div> 
+                  <div style="padding:0px;margin:0px;width:100%;margin-top:2px;">
+                    
+                    <ion-icon style = "font-size: 14px; position:relative;top:0px;color:goldenrod" name="folder" class="flex-left hilite" >
+                      <b> <span style = "font-size: 13px;color:black;font-family:Arial, Helvetica, sans-serif" class="bodytext"  [innerHtml]="document.FolderName "></span></b>
+                    </ion-icon>                         
+                    <div  style="font-size: 11px;top:0px" [innerHtml]="document.DNREV"></div>  
+                    <div  style="font-size: 11px;top:-3px;" [innerHtml]="document.Title"></div> 
 
-                      </div> 
+                  </div> 
 
-                      <div  style="position:relative;top:-5px;padding:0px;margin:0px;width:100%;">
-                          
-                          <span (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber,dsearch)">
-                          <ion-icon style = "font-size: 13px; padding-top: 0px;" name="refresh-circle"  class="flex-right hilite1" ></ion-icon>
-                          <label  class="bodytext" color="primary" >Details</label>
-                          </span>&nbsp;
-                          
-                          <span (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">
-                          <ion-icon style = "font-size: 13px;padding-top: 0px;" name="information-circle"  class="flex-right hilite2" ></ion-icon>
-                          <label  class="bodytext" color="primary">Audit</label>
-                          </span>&nbsp;
+                  <div  style="position:relative;top:-5px;padding:0px;margin:0px;width:100%;">
+                      
+                      <span (click)="openDocumentInfo(document.PhotoTiny,document.DocumentID,document.DocumentNumber,dsearch)">
+                        <ion-icon style = "color:slateblue;  font-size: 14px; padding-top: 0px;" name="refresh-circle"  class="flex-right hilite1" ></ion-icon>
+                        <label  style = "font-size: 13px;" >Details</label>
+                      </span>&nbsp;
+                      
+                      <span (click)="openDocumentAudit(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">
+                        <ion-icon style = "color:chocolate font-size: 13px;padding-top: 0px;" name="information-circle"  class="flex-right hilite2" ></ion-icon>
+                        <label  style = "font-size: 13px;">Audit</label>
+                      </span>&nbsp;
 
-                          <span [hidden]="this.inprocess == 'Y'" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">
-                          <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="secondary" class="flex-right" ></ion-icon>
-                          <label class="bodytext" class="bodytext" color="primary" >Send</label>
-                          </span>&nbsp;
+                      <span [hidden]="this.inprocess == 'Y'" (click)="openDocumentSend(document.PhotoTiny,document.DocumentID,document.DocumentNumber,document.SystemClientID)">
+                        <ion-icon style = "color:dodgerblue: 1px;padding-top: 8px;" name="mail" color="secondary" class="flex-right" ></ion-icon>
+                        <label class="bodytext" style = "font-size: 13px;" >Send</label>
+                      </span>&nbsp;
 
-                          <span [hidden]="this.inprocess != 'Y'" (click)="documentAdd(document.DocumentID,document.DocumentNumber)">
-                            <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="energy" class="flex-right"></ion-icon>
-                            <label class="bodytext" color="primary">Add</label>
-                          </span>&nbsp;
+                      <span [hidden]="this.inprocess != 'Y'" (click)="documentAdd(document.DocumentID,document.DocumentNumber)">
+                        <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="energy" class="flex-right"></ion-icon>
+                        <label class="bodytext" color="primary">Add</label>
+                      </span>&nbsp;
 
-                          <span [hidden]="this.inprocess != 'Y'" id = "{{document.DocumentID}}" style="visibility: hidden;" (click)="removedoc(document.DocumentID,document.DocumentNumber)">
-                            <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="bold" class="flex-right"></ion-icon>
-                            <label class="bodytext" color="primary">Del</label>
-                          </span>
+                      <span [hidden]="this.inprocess != 'Y'" id = "{{document.DocumentID}}" style="visibility: hidden;" (click)="removedoc(document.DocumentID,document.DocumentNumber)">
+                        <ion-icon style = "font-size: 13px;padding-top: 8px;" name="mail" color="bold" class="flex-right"></ion-icon>
+                        <label class="bodytext" color="primary">Del</label>
+                      </span>
 
-                      </div>
+                  </div>
 
-                    </ion-item> 
+                </ion-item> 
 
-                    <ion-item-options [hidden]="this.inprocess == 'Y'" side="right">
-                      <button ion-button color="bold" (click)="removedoc(document.DocumentID)">Remove</button>
-                    </ion-item-options>
-          
-                  </ion-item-sliding>         
-                </ion-card>
-              </ion-item>
-            </ion-list>
-            <br> <br>
-          </ion-col>
-        </ion-row>
-      </ion-grid>     
-    </div>
+                <ion-item-options [hidden]="this.inprocess == 'Y'" side="right">
+                  <button ion-button color="bold" (click)="removedoc(document.DocumentID)">Remove</button>
+                </ion-item-options>
+
+              </ion-item-sliding>
+            </ion-card> 
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>     
   </div>
 
   <ng-template #nodocs>

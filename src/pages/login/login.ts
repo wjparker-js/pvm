@@ -83,9 +83,7 @@ export class Login {
       this.apikey                        = userData[0].apiKey;
       this.userSystemData.password       = localStorage.getItem('login_password');
       this.userSystemData.id             = localStorage.getItem('login_id');
-      this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');
-
-     
+      this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');     
     }
 
     if ((localStorage.getItem('login_password') == null && localStorage.getItem('login_id') == null) || (localStorage.getItem('login_password') == "xxx-xxx" && localStorage.getItem('login_id') == "xxx-xxx") ) {
@@ -94,16 +92,13 @@ export class Login {
       console.log("New User.")
     }
     
-  }
-
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 
   ionViewLoaded() {
     setTimeout(() => {
       this.myInput.setFocus();
     },150);
- }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+  }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 
   newuser(){    
 

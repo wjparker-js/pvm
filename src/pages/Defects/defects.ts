@@ -108,6 +108,8 @@ export class DefectsPage {
 		localStorage.setItem('inspectoremail',"0");
 		localStorage.setItem('remediatoremail',"0");
 		localStorage.setItem('commercialemail',"0");
+		localStorage.setItem('statuschange', "0");
+		localStorage.setItem('deliverby', "0");
 		
 		this.alert = "Y";
 

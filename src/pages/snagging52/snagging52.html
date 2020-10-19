@@ -243,15 +243,25 @@
         </div>
       </div> 
   
-  
-        
+ 
+
+<!--
+    <div [hidden]="this.createDefects != 1 && this.manageDefects != 1 ">   
+      <h4>Recipients</h4>
       <div  *ngFor="let defect1dist of defect1s" >
-        <h4>Recipients</h4>
 
         <ion-item>
           <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Inspector</ion-label>
             <ion-input class="text" readonly type="text" id = "Inspectoremail" name="inspectoremail" value="{{this.inspectoremail}}" style="font-size:13px;"></ion-input>  
-            <button ion-button  color="light" type="button" item-right (click)="openInspectorList()"> 
+            <button  ion-button  color="light" type="button" item-right (click)="openInspectorList()"> 
+              <ion-icon name="list"> </ion-icon> 
+            </button>          
+        </ion-item>
+
+        <ion-item>
+          <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Commercial</ion-label>
+            <ion-input class="text" readonly type="text" id = "Commercialemail" name="commercialemail" value="{{this.commercialemail}}" style="font-size:13px;"></ion-input>  
+            <button  ion-button  color="light" type="button" item-right (click)="openQsList()"> 
               <ion-icon name="list"> </ion-icon> 
             </button>          
         </ion-item>
@@ -259,32 +269,37 @@
         <ion-item>
           <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Remediator</ion-label>
             <ion-input class="text" readonly type="text" id = "Remediatoremail" name="remediatoremail" value="{{this.remediatoremail}}" style="font-size:13px;"></ion-input>  
-            <button ion-button  color="light" type="button" item-right (click)="openRemediatorList()"> 
+            <button  ion-button  color="light" type="button" item-right (click)="openRemediatorList()"> 
               <ion-icon name="list"> </ion-icon> 
             </button>          
         </ion-item>
+        
     
         <ion-item>
-          <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Commercial</ion-label>
-            <ion-input class="text" readonly type="text" id = "Commercialemail" name="commercialemail" value="{{this.commercialemail}}" style="font-size:13px;"></ion-input>  
-            <button ion-button  color="light" type="button" item-right (click)="openQsList()"> 
+          <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Status</ion-label>
+            <ion-input class="text" readonly type="text" id = "statuschange" name="statuschange" value="{{this.statuschange}}" style="font-size:13px;"></ion-input>  
+            <button  ion-button  color="light" type="button" item-right (click)="openstatuschangeList()"> 
               <ion-icon name="list"> </ion-icon> 
             </button>          
         </ion-item>
-        <hr>
+
+
         <ion-item>
-          <ion-label class="mylabel" style="font-size:13px;width:90px;font-weight:bold !important;">Stat Change</ion-label>
-          <ion-select   (ionChange)="changestatus(defectstatuschange)" class="myCustomSelect" [(ngModel)]="defectstatuschange" name="defectstatuschange"  style ="max-width:80%;width:80%;text-align:left;" > 
-            <ion-option class="myCustomSelect"  style="text-align:right;width:80%;-webkit-flex: none!important; flex: none!important;text-align:left;" [value] = "-50">Reissue Defect</ion-option>
-            <ion-option class="myCustomSelect"  style="text-align:right;width:80%;-webkit-flex: none!important; flex: none!important;text-align:left;" [value] = "-52">Set Defect Fixed</ion-option>
-            <ion-option class="myCustomSelect"  style="text-align:right;width:80%;-webkit-flex: none!important; flex: none!important;text-align:left;" [value] = "-54">Approve Defect</ion-option>
-            <ion-option class="myCustomSelect"  style="text-align:right;width:80%;-webkit-flex: none!important; flex: none!important;text-align:left;" [value] = "-55">Reject Defect</ion-option>
-            <ion-option class="myCustomSelect"  style="text-align:right;width:80%;-webkit-flex: none!important; flex: none!important;text-align:left;" [value] = "-66">Cancel Defect</ion-option>
-          </ion-select>
-          <br>
-        </ion-item>  
+          <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Due Date</ion-label>
+            <ion-input class="text" readonly type="text" id = "deliverby" name="deliverby" value="{{this.deliverby}}" style="font-size:13px;"></ion-input>  
+            <button ion-button color="light" type="button" item-right (click)="openFixDate()"> 
+              <ion-icon name="ios-calendar-outline"></ion-icon> 
+            </button>       
+        </ion-item>
     
+        <ion-item [hidden]="showdeliverby == 'N'">
+          <ionic-calendar-date-picker (onSelect)="dateSelected($event)"></ionic-calendar-date-picker>      
+        </ion-item>
+
       </div>
+    </div>
+-->
+
 
  
 
@@ -303,7 +318,7 @@
         <h4>Resolution</h4>
         <ion-item>
           <ion-label class="text" style="width:20%"><b>Status</b></ion-label>
-          <ion-select class="myCustomSelect" [(ngModel)]="approval" name="approval"  style="text-align:left;" >
+          <ion-select class="myCustomSelect" [(ngModel)]="approval" id="approval"  name="approval"  style="text-align:left;" >
             <ion-option class="myCustomSelect" [value] = "54">Approved</ion-option>
             <ion-option class="myCustomSelect" [value] = "55">Rejected</ion-option>
           </ion-select>
@@ -523,7 +538,7 @@
 
   <ion-footer>
     <ion-buttons >
-      <button full [disabled]="this.details === ''" ion-button icon-left (click)="sendUploadData()" >
+      <button full [hidden]="this.details === '' &&  this.approval === ''" ion-button icon-left (click)="sendUploadData()" >
         <ion-icon name="cloud-upload"></ion-icon>Upload Resolution Image
       </button>
     </ion-buttons>

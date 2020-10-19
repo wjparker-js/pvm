@@ -13,6 +13,7 @@ import { QsPage } from '../qs/qs';
 import { RemediatorPage } from '../remediator/remediator';
 import { InspectorPage } from '../inspector/inspector';
 import * as Constants from '../../providers/constants';
+import { ChangedatePage } from '../changedate/changedate';
 
 declare var cordova: any;
 
@@ -72,6 +73,9 @@ export class Snagging52Page {
 	public updata: any;
 
 	frmData = {details: ""};
+	deliverby:any;
+	showdeliverby:string="N";
+	statuschange:any;
 
 
 	constructor(
@@ -121,15 +125,18 @@ export class Snagging52Page {
 			this.defect1s = data;         
 
 					
+
 			var xinspectoremail  = this.defect1s[0].inspectoremail;
 			var xremediatoremail = this.defect1s[0].remediatoremail;
 			var xcommercialemail = this.defect1s[0].commercialemail;
+			var xorderstatus     = this.defect1s[0].OrderStatus;
+			var xdeliverby       = this.defect1s[0].DeliverBy;
 
 			if(localStorage.getItem('inspectoremail') == "0"){
 				localStorage.setItem('inspectoremail',  xinspectoremail);
 				this.inspectoremail  = localStorage.getItem('inspectoremail');
 			}	
-			9		
+					
 			if(localStorage.getItem('remediatoremail') == "0"){
 				localStorage.setItem('remediatoremail', xremediatoremail);
 				this.remediatoremail = localStorage.getItem('remediatoremail');
@@ -139,6 +146,17 @@ export class Snagging52Page {
 				localStorage.setItem('commercialemail', xcommercialemail);
 				this.commercialemail = localStorage.getItem('commercialemail');
 			}
+
+			if(localStorage.getItem('statuschange') == "0"){
+				localStorage.setItem('statuschange', xorderstatus);
+				this.statuschange = localStorage.getItem('statuschange');
+			}
+
+			if(localStorage.getItem('deliverby') == "0"){
+				localStorage.setItem('deliverby', xdeliverby);
+				this.deliverby = localStorage.getItem('deliverby');
+			}
+
 
 
 			this.orderstatus = 	this.defect1s[0].OrderStatus;
@@ -296,10 +314,34 @@ export class Snagging52Page {
 		console.log(stat);
 	}
 
+	
+
+	openFixDate(){
+		if(this.showdeliverby == "N"){
+			this.showdeliverby = "Y";
+		} else {
+			this.showdeliverby = "N";
+		}
+	} 
+
+	dateSelected(date){
+		this.deliverby = date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear();
+		this.showdeliverby = "N"; //   date.toDateString();
+
+		//this.fixdate = date.toISOString().slice(0,12) 
+	}
+
 
 	openQsList(){		
 		this.navCtrl.push(QsPage, {callback:this.myCallbackFunction10});
 	}
+
+
+	openstatuschangeList(){		
+		this.navCtrl.push(ChangedatePage, {callback:this.myCallbackFunction12});
+	}
+
+
 
 	openRemediatorList(){		
 		this.navCtrl.push(RemediatorPage, {callback:this.myCallbackFunction9});
@@ -345,6 +387,14 @@ export class Snagging52Page {
 		}); 			
 	}
 	 
+	 
+	myCallbackFunction12 = (_params) => {
+		return new Promise((resolve, reject) => {
+			this.statuschange = _params;
+			resolve();	
+			localStorage.setItem('statuschange',  this.statuschange);
+		}); 	
+	 }	
 
 
 	takePicture(from_camera) {

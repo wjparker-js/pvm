@@ -58,8 +58,10 @@ import { Network } from '@ionic-native/network';
 import { IonicStorageModule } from '@ionic/storage';
 import { RfiPage } from '../pages/rfi/rfi';
 import { RemediatorPage } from '../pages/remediator/remediator';
+import { ChangedatePage } from '../pages/changedate/changedate';
 import { QsPage } from '../pages/qs/qs';
 import { InspectorPage } from '../pages/inspector/inspector';
+import { WrapperPage } from '../pages/wrapper/wrapper';
 import { DatePickerModule } from 'ionic-calendar-date-picker';
 
 
@@ -102,6 +104,8 @@ import { DatePickerModule } from 'ionic-calendar-date-picker';
     RemediatorPage,
     QsPage,
     InspectorPage,
+    ChangedatePage,
+    WrapperPage,
     BrushTypePopoverPage
   ],
   imports: [
@@ -158,6 +162,8 @@ import { DatePickerModule } from 'ionic-calendar-date-picker';
     RemediatorPage,
     QsPage,
     InspectorPage,
+    ChangedatePage,
+    WrapperPage,
     BrushTypePopoverPage
   ],
   providers: [

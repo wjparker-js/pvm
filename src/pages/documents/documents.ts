@@ -130,7 +130,7 @@ export class DocumentsPage {
 
 
       document.getElementsByClassName("searchbar-input")["0"].value = "";
-      document.getElementById("maindiv").style.display="none";
+      //document.getElementById("main").style.display = "none";
 
       var oldurl = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxxxxxxxxxxxxxxx/xxx";
       this.http.get(oldurl).map(res => res.json()).subscribe(data => {
@@ -140,7 +140,7 @@ export class DocumentsPage {
             localStorage.setItem('OldProjectName', this.userdocumentData.SystemProjectName);
             console.log("Old Proj 2 = ", oldProjectName);
 
-            document.getElementById("maindiv").style.display="block";
+            document.getElementById("main").style.display="block";
         },
         err => {
             console.log("Oops!");

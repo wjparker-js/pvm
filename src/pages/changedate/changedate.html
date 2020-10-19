@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>   
+    <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>    
+    <span style="font-size:16px;color:white;">{{selectedProjectName}} Status List</span>
+    <ion-buttons end>
+      <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
+        <ion-list style="margin-bottom: 0px;">
+          <ion-item>
+            <button ion-button full style="background-color:#dddddd;border:0px;margin:0px;padding:0px;color:#000000" (click)='sendBack("Fixed Defect")'>
+          	 <b>Fixed Defect</b>
+           </button>
+          </ion-item> 
+          <ion-item>
+            <button ion-button full style="background-color:#dddddd;border:0px;margin:0px;padding:0px;color:#000000" (click)='sendBack("Approve Defect")'>
+          	 <b>Approve Defect</b>
+           </button>
+          </ion-item>
+          <ion-item>
+            <button ion-button full style="background-color:#dddddd;border:0px;margin:0px;padding:0px;color:#000000" (click)='sendBack("Reject Defect")'>
+          	 <b>Reject Defect</b>
+           </button>
+          </ion-item>
+          <ion-item>
+            <button ion-button full style="background-color:#dddddd;border:0px;margin:0px;padding:0px;color:#000000" (click)='sendBack("Reissue Defect")'>
+          	 <b>Reissue Defect</b>
+           </button>
+          </ion-item>          
+          <ion-item>
+            <button ion-button full style="background-color:#dddddd;border:0px;margin:0px;padding:0px;color:#000000" (click)='sendBack("Cancel Defect")'>
+          	 <b>Cancel Defect</b>
+           </button>
+          </ion-item>                    
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

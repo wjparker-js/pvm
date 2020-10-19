@@ -94,6 +94,7 @@ export class SnaggingPage {
 	adddocids = [];
 	removeddocids = [];
 	hasdocs:any;
+	statuschange:any;
 
 	userdocuments = {DocumentID:"",PhotoTiny:"",DocumentNumber:"",FolderName:"",Rev:"",Title:""}
 /*

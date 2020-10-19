@@ -72,46 +72,46 @@
 <ion-content class="bodytext">
   <ion-grid style="position:relative;top:4px;">
     <ion-row [hidden]="showDefects == 0" > 
-      <ion-col *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
-       
-       <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
-        
-         <ion-card style="padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;" > 
+      <ion-col *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+       <ion-list  style="margin-bottom: 0px;">
+          <ion-card style="border-top: 2px solid #e0e0e0;
+          border-top-width: 2px;
+          border-top-style: solid;
+          border-top-color: rgb(224, 224, 224);min-height:100px; max-height:100px;padding-bottom: 0px;margin-top: 3px;margin-bottom: 3px;" > 
+            <ion-item-sliding >          
 
-          <ion-item-sliding >          
+              <ion-item #item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name,'nonote')" style="padding-left:3px;" >            
+                
+                <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin: 0px;margin-right:10px;">
+                  <img [src]="image+defect.OrderId+'.jpg'" style="border: 1px solid #000;max-width:100px;height:71px;border-color:black;border:2px;" imageViewer/>
+                </ion-thumbnail> 
+                <!--          <img src="{{'data:image/jpeg;base64,' +  this.hexToBase64(defect.LocationImage)}}" border="1" style="width:100px;height:71px;border-color:black;border:2px;" imageViewer/>-->
+                <div id="defectdetails">
+                  <b>{{defect.OrderReference}}</b><br>
 
-          <ion-item #item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name,'nonote')" style="padding-left:3px;" >            
-            
-            <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 100px !Important;height: 71px !Important;margin: 0px;margin-right:10px;">
-              <img [src]="image+defect.OrderId+'.jpg'" style="border: 1px solid #000;max-width:100px;height:71px;border-color:black;border:2px;" imageViewer/>
-            </ion-thumbnail> 
-  <!--          <img src="{{'data:image/jpeg;base64,' +  this.hexToBase64(defect.LocationImage)}}" border="1" style="width:100px;height:71px;border-color:black;border:2px;" imageViewer/>-->
-            <div id="defectdetails">
-              <b>{{defect.OrderReference}}</b><br>
+                  <span [hidden]="defect.OrderStatusText != 'Not Sent'"            class="notsent" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+                  <span [hidden]="defect.OrderStatusText != 'Issued'"              class="new" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+                  <span [hidden]="defect.OrderStatusText != 'Fix Date Set'"        class="fix" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+                  <span [hidden]="defect.OrderStatusText != 'Ready To Inspect'"    class="fixed" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+                  <span [hidden]="defect.OrderStatusText != 'Inspection Date Set'" class="inspect" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+                  <span [hidden]="defect.OrderStatusText != 'Passed'"              class="pass" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+                  <span [hidden]="defect.OrderStatusText != 'Failed'"              class="fail" style="width:100%;">{{defect.OrderStatusText}}<br></span>
+                  
+                  <span *ngIf="defect.name">{{defect.name}}<br></span>
+                  {{defect.OrderSubject}}<br>
+                  <!--<span text-wrap>{{defect.SpecialInstructions}}<br></span>-->           
+                  <span  text-wrap>              
+                    <span *ngIf="defect.DateIsssued">Issued:&nbsp;{{defect.DateIsssued  | date : 'dd MMM yy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span *ngIf="defect.ProposedDate">Scheduled:&nbsp;{{defect.ProposedDate  | date : 'dd MMM yy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span *ngIf="defect.DeliverBy"><b>Required:&nbsp;{{defect.DeliverBy  | date : 'dd MMM yy' }}</b>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span *ngIf="defect.date1 < 0"  class="defectlate"><ion-icon name="alert" style="position:relative;top:1px;"></ion-icon></span>
+                  </span>   
+                </div>     
 
-              <span [hidden]="defect.OrderStatusText != 'Not Sent'"            class="notsent" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              <span [hidden]="defect.OrderStatusText != 'Issued'"              class="new" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              <span [hidden]="defect.OrderStatusText != 'Fix Date Set'"        class="fix" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              <span [hidden]="defect.OrderStatusText != 'Ready To Inspect'"    class="fixed" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              <span [hidden]="defect.OrderStatusText != 'Inspection Date Set'" class="inspect" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              <span [hidden]="defect.OrderStatusText != 'Passed'"              class="pass" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              <span [hidden]="defect.OrderStatusText != 'Failed'"              class="fail" style="width:100%;">{{defect.OrderStatusText}}<br></span>
-              
-              <span *ngIf="defect.name">{{defect.name}}<br></span>
-              {{defect.OrderSubject}}<br>
-              <!--<span text-wrap>{{defect.SpecialInstructions}}<br></span>-->           
-              <span  text-wrap>              
-                <span *ngIf="defect.DateIsssued">Issued:&nbsp;{{defect.DateIsssued  | date : 'dd MMM yy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span *ngIf="defect.ProposedDate">Scheduled:&nbsp;{{defect.ProposedDate  | date : 'dd MMM yy' }}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span *ngIf="defect.DeliverBy"><b>Required:&nbsp;{{defect.DeliverBy  | date : 'dd MMM yy' }}</b>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span *ngIf="defect.date1 < 0"  class="defectlate"><ion-icon name="alert" style="position:relative;top:1px;"></ion-icon></span>
-              </span>   
-            </div>     
+              </ion-item>
 
-          </ion-item>
-
-         </ion-item-sliding>
-         </ion-card>
+            </ion-item-sliding>
+          </ion-card>
         </ion-list>
       </ion-col>
     </ion-row>

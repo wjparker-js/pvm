@@ -28,6 +28,7 @@
     "@ionic-native/file-path": "^4.20.0",
     "@ionic-native/file-transfer": "^4.9.0",
     "@ionic-native/geolocation": "^4.20.0",
+    "@ionic-native/in-app-browser": "^5.28.0",
     "@ionic-native/keyboard": "^4.20.0",
     "@ionic-native/native-geocoder": "^4.20.0",
     "@ionic-native/network": "^4.20.0",
@@ -71,6 +72,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.2.4",
+    "cordova-plugin-inappbrowser": "git+https://github.com/jverlee/cordova-plugin-inappbrowser-camera.git",
     "typescript": "~2.6.2"
   },
   "description": "Mobile App for ProjectVault",
@@ -97,7 +99,8 @@
       },
       "cordova-plugin-geolocation": {},
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-network-information": {}
+      "cordova-plugin-network-information": {},
+      "cordova-plugin-inappbrowser-camera": {}
     },
     "platforms": [
       "android",

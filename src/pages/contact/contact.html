@@ -17,15 +17,16 @@
       </ion-segment-button>
     </ion-segment>
   </div>
+
 </ion-header>
 
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col  *ngFor="let contact of userContacts" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 0px;padding-bottom: 0px;">
+      <ion-col  *ngFor="let contact of userContacts" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
         <ion-list style="margin: 0px; padding-left:3px;padding-right:3px;">
-          <ion-card style=" padding-bottom: 0px; margin-bottom: 0px;margin-top: 1px;">
-            <ion-item style="padding-left:3px;">
+          <ion-card style="min-height:100px; max-height:100px;padding-bottom: 0px;margin-top: 3px;margin-bottom: 3px;">
+            <ion-item style="padding-left:3px;padding-bottom: 0px;margin-bottom: 5px;margin-top: 0px;">
 
               <ion-thumbnail item-left  style="padding-left:3px;padding-right: 6px;width: 60px !Important;height: 60px !Important;margin-top: 5px;margin-bottom: 5px;">
                 <img [src]="contact.avatar"   border="1" style="width:60px;height:60px;border-color:black;border:1px;"/>    
@@ -49,12 +50,10 @@
                   </span>
                   </ng-template>
               </h3>
-
-            </ion-item>
-         </ion-card> 
-      </ion-list>
-
-    <!-- </div> -->
+                                                                                                                                                         dqqqqqqqqqqqqq
+              </ion-item>              
+          </ion-card> 
+        </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
