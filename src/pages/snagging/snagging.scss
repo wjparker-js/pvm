@@ -1,4 +1,13 @@
 page-snagging {
+
+    .item-select select {
+        max-width: 100%!important;
+        width: 100%!important;
+        right: auto!important;
+        direction: ltr!important;
+        padding-left: 0!important;
+      }
+
     .notsent{
         color:white;
         background-color: rgb(20, 55, 209);

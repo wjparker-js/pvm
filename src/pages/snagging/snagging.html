@@ -21,6 +21,15 @@
   <ion-list>
 
     <ion-item>
+      <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;"><b>Reference</b></ion-label>
+      <ion-select class="myCustomSelect" [(ngModel)]="Reference" id="Reference"  name="Reference"  style="font-size:13px;;text-align:left;" >
+        <ion-option class="myCustomSelect" [value] = "1">HI - 100</ion-option>
+        <ion-option class="myCustomSelect" [value] = "2">EL - 100</ion-option>
+        <ion-option class="myCustomSelect" [value] = "3">AC - 100</ion-option>
+      </ion-select>
+    </ion-item>   
+
+    <ion-item>
       <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Defect Type</ion-label>
       <ion-input class="text" readonly type="text" id = "Defecttype" name="defecttype" value="{{defecttype}}" style="font-size:13px;"></ion-input>  
       <button ion-button color="light" type="button" item-right (click)="openDTList()"> 

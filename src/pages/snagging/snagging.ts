@@ -78,6 +78,7 @@ export class SnaggingPage {
 	public lastImage: string = "";
     public loading: Loading;
 	public imageUrl: string = "";
+
 	public commercialemail: string = "";
 	public remediatoremail: string = "";
 	public inspectoremail: string = "";
@@ -95,6 +96,8 @@ export class SnaggingPage {
 	removeddocids = [];
 	hasdocs:any;
 	statuschange:any;
+	pa5038:any;
+
 
 	userdocuments = {DocumentID:"",PhotoTiny:"",DocumentNumber:"",FolderName:"",Rev:"",Title:""}
 /*
@@ -141,7 +144,8 @@ export class SnaggingPage {
 		}	
 
 		//console.log("Online: ",this.online)
-		var snagData = JSON.parse(localStorage.getItem('userSystemData'));
+		var snagData = JSON.parse(localStorage.getItem('userSystemData'));		
+		this.pa5038  = localStorage.getItem('Role-PA5038');
 
 		this.pid     = localStorage.getItem('CurrentProjectID');		
 		this.usr     = localStorage.getItem('login_id');
@@ -633,25 +637,28 @@ export class SnaggingPage {
 		
 	 }
 
-	 myCallbackFunction9 = (_params) => {
+	 myCallbackFunction9 = (_params,remediatorid) => {
 		return new Promise((resolve, reject) => {
 			this.remediatoremail = _params;
+			this.remediatorid = remediatorid;
 			resolve();	
 		}); 	
 		
 	 }
 
-	 myCallbackFunction10 = (_params) => {
+	 myCallbackFunction10 = (_params,commercialid) => {
 		return new Promise((resolve, reject) => {
 			this.commercialemail = _params;
+			this.commercialid = commercialid;
 			resolve();	
 		}); 	
 		
 	 }	 
 	 
-	 myCallbackFunction11 = (_params) => {
+	 myCallbackFunction11 = (_params,inspectorid) => {
 		return new Promise((resolve, reject) => {
 			this.inspectoremail = _params;
+			this.inspectorid = inspectorid;
 			resolve();	
 		}); 	
 		

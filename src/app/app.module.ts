@@ -62,7 +62,10 @@ import { ChangedatePage } from '../pages/changedate/changedate';
 import { QsPage } from '../pages/qs/qs';
 import { InspectorPage } from '../pages/inspector/inspector';
 import { WrapperPage } from '../pages/wrapper/wrapper';
+import { InspectPage } from '../pages/inspect/inspect';
 import { DatePickerModule } from 'ionic-calendar-date-picker';
+import { InspectionitemsPage } from '../pages/inspectionitems/inspectionitems';
+
 
 
 @NgModule({
@@ -106,6 +109,8 @@ import { DatePickerModule } from 'ionic-calendar-date-picker';
     InspectorPage,
     ChangedatePage,
     WrapperPage,
+    InspectPage,
+    InspectionitemsPage,
     BrushTypePopoverPage
   ],
   imports: [
@@ -164,6 +169,8 @@ import { DatePickerModule } from 'ionic-calendar-date-picker';
     InspectorPage,
     ChangedatePage,
     WrapperPage,
+    InspectPage,
+    InspectionitemsPage,
     BrushTypePopoverPage
   ],
   providers: [

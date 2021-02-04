@@ -1,0 +1,45 @@
+page-inspect {
+    page-list {
+
+        // reduce min height restriction
+        
+           .item {
+        
+               min-height: 0.5rem;
+        
+               max-height: 8rem;
+        
+           }
+
+           ion-label {
+               padding:0px !important;
+               margin:0px !important;
+               
+                margin-top: 0px;
+                margin-bottom: 0px;
+           }
+
+           .label-md label{
+            padding:0px !important;
+            margin:0px !important;
+            
+             margin-top: 0px;
+             margin-bottom: 0px;               
+           }
+
+           ion-item {
+            --min-height: 16px;
+            }
+                          
+        
+           // set max height of list item
+        
+           .small-list {
+                height: 25px;        
+                max-height: 25px;
+        
+           }      
+        
+        
+        }
+}

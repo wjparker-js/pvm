@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar> 
+    <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>       
+    <span style="font-size:16px;color:white;">Request Items</span> 
+    <ion-buttons end>
+      <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>  
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+          <ion-list  style="margin-bottom: 0px;"> 
+            
+            <ion-item [hidden]="this.pa5038 == 1">
+              <ion-select placeholder="Select a Location"  id = "selectlocation" (ionChange)="locselected(location)" class="myCustomSelect"  [(ngModel)]="location" style = "padding-left: 10px;padding-top: 10px;margin:0px;border-bottom-color:black;padding-right: 10px;padding-bottom: 0px;text-align:left;font-size:13px;">
+                 <!--<ion-option class="myCustomSelect" selected class="myCustomSelect" [value] = "nolocationselected" style = "padding-left:5px;" placeholder = "No Location Selected">No Location Selected</ion-option>-->
+                 <ion-option  *ngFor="let location of locationMaps" style = "padding-left:5px;" [value] = "location.name+'!'+location.L1ID+'!'+location.L2ID+'!'+location.L3ID+'!'+location.L4ID" >{{location.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item [hidden]="this.pa5038 == 0">
+              <ion-select placeholder="Location"  id = "selectlocation"  class="myCustomSelect"  [(ngModel)]="location" style = "padding-left: 10px;padding-top: 10px;margin:0px;border-bottom-color:black;padding-right: 10px;padding-bottom: 0px;text-align:left;font-size:13px;">
+                 <ion-option class="myCustomSelect" selected class="myCustomSelect" [value] = "Location" style = "padding-left:5px;" placeholder = "">Location</ion-option>-->
+              </ion-select>
+            </ion-item>
+
+            <ion-item   *ngFor="let inspectionitem of inspectionitemssdata" class="card card-md" class="lite -block item-md" style="padding-left: 0px;padding-top: 0px;margin:0px;width:100%;border-bottom-color:white;padding-right: 0px;padding-bottom: 0px;" >                    
+              <ion-grid>                                                                       
+                <ion-row>
+                  <ion-col col-1>   
+                  {{inspectionitem.ItemNumber}}
+                  </ion-col>
+                  <ion-col col-9 style="width:100%;max-height:500px;word-wrap: break-word;" text-wrap>
+                    {{inspectionitem.ItemText}}
+                  </ion-col> 
+                  <ion-col col-1>  
+                    <ion-icon                              id="{{inspectionitem.ItemID}}pass"  (click) = "passClick(inspectionitem.TemplateID,inspectionitem.ItemID)" name="checkmark-circle" style="color:black;font-size:30px; display: inline-block;vertical-align: middle;margin-left:5px;margin-right:5px;padding-right:5px;"></ion-icon>
+                  </ion-col>
+                  <ion-col col-1>
+                    <ion-icon [hidden]="this.pa5038 == 0"  id="{{inspectionitem.ItemID}}fail"  (click) = "failClick(inspectionitem.TemplateID,inspectionitem.ItemID)" name="close-circle"    style="color:black;font-size:30px; display: inline-block;vertical-align: middle;padding-left:5px"></ion-icon>
+                  </ion-col>
+                  <br><br><br>
+                </ion-row> 
+              </ion-grid>
+            </ion-item>         
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>   
+    <br>
+</ion-content>
+
+<ion-footer >
+    <ion-buttons [hidden]="!this.allChecked && this.selectedlocation == ''">
+      <button full ion-button icon-left (click)="sendReport()"> 
+        <ion-icon name="cloud-upload"></ion-icon>Send Imspection Request
+      </button>
+    </ion-buttons>
+</ion-footer>

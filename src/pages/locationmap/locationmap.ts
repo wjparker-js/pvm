@@ -20,6 +20,7 @@ export class LocationmapPage {
   locationmapSystemProjectID:any;
   locationmapUserID:any;
   locationMaps:any;
+  pa5038:any;
 
   LocationmapData = {
     "SystemProjectID":"",
@@ -50,12 +51,13 @@ constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, pub
 
 		var locationmapData = JSON.parse(localStorage.getItem('userSystemData'));
 
-		this.locationmapSystemProjectID = localStorage.getItem('CurrentProjectID');
+    this.locationmapSystemProjectID = localStorage.getItem('CurrentProjectID');
+    this.pa5038                     = localStorage.getItem('Role-PA5038');    
 		this.locationmapApiKey          = locationmapData[0].apiKey;
     this.locationmapUserID          = locationmapData[0].SystemUserID;
     this.locationmapUserID          = this.locationmapUserID.trim();
 
-		var url = Constants.apiUrl+"api/locationmap/"+this.locationmapApiKey+"/"+this.locationmapSystemProjectID+"/"+this.locationmapUserID;
+		var url = Constants.apiUrl+"api/locationmap/"+this.locationmapApiKey+"/"+this.locationmapSystemProjectID+"/"+this.locationmapUserID+"/"+this.pa5038;
 
 		    this.http.get(url).map(res => res.json()).subscribe(data => {
 		      this._sanitizer.bypassSecurityTrustStyle(data);
