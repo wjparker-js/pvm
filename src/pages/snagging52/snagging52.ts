@@ -166,10 +166,15 @@ export class Snagging52Page {
 			this.defect1snotesid = 	this.defect1s[0].OrderId;
 
 			this.image   = Constants.publicUploadPath+this.cid+"/"+this.pid+"/LocationImages/"+this.defect1snotesid+".jpg";
+			console.log("this.image   ",this.image);
 			this.ImgUrl  = Constants.publicUploadPath+this.cid+"/"+this.pid+"/dfx/"+this.defect1snotesid+"/"+this.defect1snotesid+".jpg";
+			console.log("this.ImgUrl   ",this.ImgUrl);
 			this.postUrl = Constants.publicUploadPath+this.cid+"/"+this.pid+"/dfx/"+this.defect1snotesid+"/"+this.defect1snotesid+"post.jpg";
+			console.log("this.postUrl   ",this.postUrl);
 			this.fixedUrl = Constants.publicUploadPath+this.cid+"/"+this.pid+"/dfx/"+this.defect1snotesid+"/"+this.defect1snotesid+"fixed.jpg";
+			console.log("this.fixedUrl   ",this.fixedUrl);
 			this.sleep(500);
+			
 			localStorage.setItem('image', this.image);
 			localStorage.setItem('preimage', this.ImgUrl);
 			localStorage.setItem('postimage', this.postUrl);
@@ -192,7 +197,7 @@ export class Snagging52Page {
 
 
 			var urldefectsnotes = Constants.apiUrl+"api/defectsnotes/"+this.api+"/"+this.cid+"/"+this.defect1snotesid;
-
+			
 		    this.http.get(urldefectsnotes).map(res => res.json()).subscribe(data => {
 		        this._sanitizer.bypassSecurityTrustStyle(data);
 				this.defect1snotes = data;          

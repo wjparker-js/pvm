@@ -25,37 +25,95 @@ export class InspectPage {
   templateid:any;
   pa5038:any;
 
-	constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public viewCtrl: ViewController, public navParams: NavParams, public http: Http) {
-  }
+  lid1:any;
+  lid2:any;
+  lid3:any;
+  lid4:any;
+
+	constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public viewCtrl: ViewController, public navParams: NavParams, public http: Http) {}
 
 	ionViewWillEnter() {
 
-		//this.selectedinspectionrequest = this.navParams.get('selecteddefect');
-		//this.callback                  = this.navParams.get("callback");
-
 		var inspectionrequestData             = JSON.parse(localStorage.getItem('userSystemData'));
 
-		this.inspectionrequestSystemProjectID = localStorage.getItem('CurrentProjectID');		
-		this.pa5038                           = localStorage.getItem('Role-PA5038');
+		this.inspectionrequestSystemProjectID = localStorage.getItem('CurrentProjectID');
 		this.inspectionrequestApiKey          = inspectionrequestData[0].apiKey;
 		this.inspectionrequestUserID          = inspectionrequestData[0].SystemUserID;
 		this.inspectionrequestUserID          = this.inspectionrequestUserID.trim();
 
-		this.showform = 0;
+		var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/xxx";
 
-		var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/xxx/"+this.pa5038;
+    this.http.get(url).map(res => res.json()).subscribe(data => {
+      this._sanitizer.bypassSecurityTrustStyle(data);
+      this.inspectionrequests = data;  			  
+      //this.templateid = this.inspectionrequests[0].ParentTemplateFormID;
+      console.log("Templateid: ", this.inspectionrequests);
+      },
+      err => {
+          console.log("Oops!");
+      }
+    ); 
+  }
 
-		    this.http.get(url).map(res => res.json()).subscribe(data => {
-		      this._sanitizer.bypassSecurityTrustStyle(data);
-			  this.inspectionrequests = data;  			  
-			  //this.templateid = this.inspectionrequests[0].ParentTemplateFormID;
-			  console.log("Templateid: ", this.inspectionrequests);
+	segmentChanged(segment){ 
+
+		if(segment == "new"){
+      console.log("new");
+
+      var newurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/xxx";
+
+	    this.http.get(newurl).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+        this.inspectionrequests = data;  			  
+        console.log("Templateid: ", this.inspectionrequests);
 		    },
 		    err => {
-		        console.log("Oops!");
+		       console.log("Oops!");
 		    }
-		); 
+		  ); 
+		}
+
+		if(segment == "fix"){
+      console.log("fix");
+
+      var fixurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/xxx";
+
+      this.http.get(fixurl).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+        this.inspectionrequests = data;  			  
+        console.log("Templateid: ", this.inspectionrequests);
+        },
+        err => {
+           console.log("Oops!");
+        }
+      ); 
+    }
+		
+		if(segment == "passed"){
+      console.log("passed");
+
+      var passedurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/xxx";
+
+      this.http.get(passedurl).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+        this.inspectionrequests = data;  			  
+        console.log("Templateid: ", this.inspectionrequests);
+        },
+        err => {
+           console.log("Oops!");
+        }
+      ); 
+    }	
+
+  }
+
+	showtheform(ParentFormID,requestid,lid1,lid2,lid3,lid4) { 
+		this.navCtrl.push(InspectionitemsPage,{ParentFormID,requestid,lid1,lid2,lid3,lid4});
 	}
+                                                                                                                                                                                                                       
+	dismiss() {
+		this.viewCtrl.dismiss();
+	} 
 
 	getRequestDetails(request){
 		console.log(request);
@@ -70,13 +128,5 @@ export class InspectPage {
 		    }
 		); 
 	}
-
-	showtheform(requestid) { 
-		this.navCtrl.push(InspectionitemsPage,{requestid});
-	  }
-                                                                                                                                                                                                                       
-	dismiss() {
-		this.viewCtrl.dismiss();
-	} 
 
 }

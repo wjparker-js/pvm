@@ -65,7 +65,7 @@ import { WrapperPage } from '../pages/wrapper/wrapper';
 import { InspectPage } from '../pages/inspect/inspect';
 import { DatePickerModule } from 'ionic-calendar-date-picker';
 import { InspectionitemsPage } from '../pages/inspectionitems/inspectionitems';
-
+import { InspectionModalPage } from '../pages/inspection-modal/inspection-modal';
 
 
 @NgModule({
@@ -101,6 +101,7 @@ import { InspectionitemsPage } from '../pages/inspectionitems/inspectionitems';
     ImgEditPage,
     ImgEditPagePre,
     ImgEditPagePostPost,
+    InspectionModalPage,
     ImgEditPagePost,
     ColorsPopoverPage,
     WidthPopoverPage,
@@ -157,6 +158,7 @@ import { InspectionitemsPage } from '../pages/inspectionitems/inspectionitems';
     DocumentAudit,
     DocumentIssues,
     DocumentSummary,
+    InspectionModalPage,
     ImgViewPage,
     ImgEditPage,
     ImgEditPagePre,

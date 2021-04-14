@@ -3,17 +3,33 @@
     <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>    
     <span style="font-size:16px;color:white;">{{selectedProjectName}} Inspection Request</span>
   </ion-toolbar>
-</ion-header>
 
+  <!--<div style='padding: 10px;'>   
+    <ion-segment color="primary" disabled  mode='ios' [(ngModel)]="defectslist" (ionChange)="segmentChanged(defectslist)">
+      <ion-segment-button value="new" disabled>
+        New Inspection
+      </ion-segment-button>
+      <ion-segment-button value="fix" disabled>
+        Needs Fix
+      </ion-segment-button>
+      <ion-segment-button value="passed" disabled>
+        Approved
+      </ion-segment-button>
+    </ion-segment>
+  </div>-->
+
+</ion-header>
 
 <ion-content>
   <ion-grid>
     <ion-row>                  
       <ion-col  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
         <ion-list *ngFor="let request of inspectionrequests"   class="small-list"  style="margin: 0px; padding-left:3px;padding-right:3px;">
-            <ion-item style="padding:0px;padding-left:3px;"  (click)="showtheform(request.FormID)">                      
+            <ion-item style="padding:0px;padding-left:3px;"  (click)="showtheform(request.ParentFormID,request.FormID,request.LID1,request.LID2,request.LID3,request.LID4)">                      
               <h3><b>{{request.FormName}}{{request.Form_Name}} - {{request.FormNumber}}</b></h3>
-              <h3>{{request.PackageTitleValue}} Package</h3>             
+              <h3>{{request.PackageTitleValue}} Package</h3> 
+              <h3>Owner: {{request.SubcontractorValue}}
+              <!--<br>Inspector: {{request.InspectorF}} {{request.InspectorL}}-->                                                                                                                                                                                                                                                                                                                                                                                      </h3>                             
             </ion-item>       
         </ion-list>        
       </ion-col>

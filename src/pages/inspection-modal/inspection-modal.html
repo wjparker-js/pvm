@@ -1,0 +1,67 @@
+<ion-header >  
+  <ion-toolbar> 
+    <button ion-button menuToggle start><ion-icon name="menu"></ion-icon></button>       
+    <span style="font-size:16px;color:white;">Rejected Item</span> 
+    <ion-buttons end>
+      <button ion-button style="font-size:24px;" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+        <ion-list  style="margin-bottom: 0px;"> 
+          <ion-item>
+            <ion-grid>                                                                       
+              <ion-row>
+                <ion-col col-2> 
+                  <ion-label class="mylabel" style="width:20%">Actioms</ion-label>
+                </ion-col>
+                <ion-col col-10> 
+                  <ion-select  class="myCustomSelect" (ionChange)="newAction(value)" [(ngModel)]="formActions" name="group"  style="text-align:left;" >
+                    <ion-option class="myCustomSelect" selected [value] = "noAction">No Additional Action</ion-option>
+                    <ion-option class="myCustomSelect"  [value] = "newDefect">Create a New Defect</ion-option>
+                    <ion-option class="myCustomSelect"  [value] = "newPhoto">Take a Photo</ion-option>
+                  </ion-select>
+                </ion-col>
+                <ion-col col-9>
+                    <ion-label class="mylabel"  style="font-size:13px;width:90px;font-weight:bold !important;">Defect Type</ion-label>
+                    <ion-input class="text" readonly type="text" id = "Defecttype" name="defecttype" value="{{defecttype}}" style="font-size:13px;"></ion-input>  
+                    <button ion-button color="light" type="button" item-right (click)="openDTList()"> 
+                      <ion-icon name="list"> </ion-icon> 
+                    </button> 
+                </ion-col>
+              </ion-row>
+            </ion-grid>       
+          </ion-item>    
+          <ion-item>
+            <ion-grid>                                                                       
+              <ion-row>
+                <ion-col col-12> 
+                    <ion-label class="mylabel" style="font-size:13px;width:90px;font-weight:bold !important;" >Notes</ion-label>
+                    <ion-textarea class="mytext" rows="5"  name="details"  placeholder=""  style="font-size:13px;"></ion-textarea>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>   
+  <br>
+</ion-content>
+
+<ion-footer >
+  <div>
+    <ion-buttons>
+      <button full ion-button icon-left (click)="dismiss()" >
+        <ion-icon name="cloud-upload"></ion-icon>Update Report
+      </button>
+    </ion-buttons>
+  </div>
+  <br>
+</ion-footer>
+  
