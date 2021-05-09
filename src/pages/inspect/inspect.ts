@@ -21,9 +21,20 @@ export class InspectPage {
   callback: any;
   inspectionrequests:any;
   inspectionrequestsdata:any;
+  inspectionusers:any;
   showform:any;
   templateid:any;
   pa5038:any;
+  today:any;
+  suborinspector:any;
+  
+  defectslist:any;
+  subdefectslist:any;
+
+  usercompanyname:any;
+  username:any;
+
+  isinspector:any;
 
   lid1:any;
   lid2:any;
@@ -41,31 +52,68 @@ export class InspectPage {
 		this.inspectionrequestUserID          = inspectionrequestData[0].SystemUserID;
 		this.inspectionrequestUserID          = this.inspectionrequestUserID.trim();
 
-		var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/xxx";
+    this.usercompanyname                = inspectionrequestData[0].Company;
+    this.usercompanyname                = this.usercompanyname.trim();
+    this.username                       = inspectionrequestData[0].Name;
+    this.username                       = this.username.trim(); 
 
-    this.http.get(url).map(res => res.json()).subscribe(data => {
+    this.subdefectslist = "submit";
+    this.defectslist = "inspect";
+
+    this.today =new Date();
+    console.log("this.today  ",this.today);
+
+
+		var url1 = Constants.apiUrl+"api/inspectinusers/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID;
+    this.http.get(url1).map(res => res.json()).subscribe(data => {
       this._sanitizer.bypassSecurityTrustStyle(data);
-      this.inspectionrequests = data;  			  
-      //this.templateid = this.inspectionrequests[0].ParentTemplateFormID;
-      console.log("Templateid: ", this.inspectionrequests);
+      this.inspectionusers = data;  			  
+      this.isinspector = this.inspectionusers[0].isinspector;
+
+        if(this.isinspector == 0){
+          console.log("is subby");
+          var url11 = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/submit/sub";
+          this.http.get(url11).map(res => res.json()).subscribe(data => {
+            this._sanitizer.bypassSecurityTrustStyle(data);
+            this.inspectionrequests = data;
+            },
+            err => {
+                console.log("Oops!");
+            }
+          ); 
+        } 
+      
+        if(this.isinspector != 0){
+          console.log("in ins");
+          var url22 = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/inspect/ins";
+          this.http.get(url22).map(res => res.json()).subscribe(data => {
+            this._sanitizer.bypassSecurityTrustStyle(data);
+            this.inspectionrequests = data;
+            },
+            err => {
+                console.log("Oops!");
+            }
+          );       
+        }
+
       },
       err => {
-          console.log("Oops!");
+          console.log("Oops! no inspectionusers");
       }
-    ); 
+    );
   }
+
+
+
 
 	segmentChanged(segment){ 
 
-		if(segment == "new"){
-      console.log("new");
-
-      var newurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/xxx";
-
-	    this.http.get(newurl).map(res => res.json()).subscribe(data => {
+		if(segment == "inspect"){
+      var inspecturl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/inspect/ins";
+	    this.http.get(inspecturl).map(res => res.json()).subscribe(data => {
         this._sanitizer.bypassSecurityTrustStyle(data);
-        this.inspectionrequests = data;  			  
-        console.log("Templateid: ", this.inspectionrequests);
+        this.inspectionrequests = data; 	
+        this.suborinspector = "ins";		  			  
 		    },
 		    err => {
 		       console.log("Oops!");
@@ -73,31 +121,68 @@ export class InspectPage {
 		  ); 
 		}
 
-		if(segment == "fix"){
-      console.log("fix");
-
-      var fixurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/xxx";
-
-      this.http.get(fixurl).map(res => res.json()).subscribe(data => {
+    if(segment == "approved"){
+      var approvedurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/approved/ins";
+      this.http.get(approvedurl).map(res => res.json()).subscribe(data => {
         this._sanitizer.bypassSecurityTrustStyle(data);
-        this.inspectionrequests = data;  			  
-        console.log("Templateid: ", this.inspectionrequests);
+        this.inspectionrequests = data;  	
+        this.suborinspector = "ins";		 
+        },
+        err => {
+           console.log("Oops!");
+        }
+      ); 
+    }	    
+    
+		if(segment == "failed"){
+      var failedurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/failed/ins";
+      this.http.get(failedurl).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+        this.inspectionrequests = data;  	
+        this.suborinspector = "ins";		  
         },
         err => {
            console.log("Oops!");
         }
       ); 
     }
-		
+
+  }
+
+	segmentChangedsub(segment){     
+
+		if(segment == "submit"){
+      var submiturl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/submit/sub";
+      this.http.get(submiturl).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+        this.inspectionrequests = data;
+        this.suborinspector = "sub";
+        },
+        err => {
+            console.log("Oops!");
+        }
+      ); 
+    }		
+
+		if(segment == "fix"){
+      var fixurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/fix/subi";
+	    this.http.get(fixurl).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+        this.inspectionrequests = data;  	
+        this.suborinspector = "subi";	
+		    },
+		    err => {
+		       console.log("Oops!");
+		    }
+		  ); 
+		}
+
 		if(segment == "passed"){
-      console.log("passed");
-
-      var passedurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/xxx";
-
+      var passedurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/passed/subi";
       this.http.get(passedurl).map(res => res.json()).subscribe(data => {
         this._sanitizer.bypassSecurityTrustStyle(data);
-        this.inspectionrequests = data;  			  
-        console.log("Templateid: ", this.inspectionrequests);
+        this.inspectionrequests = data;  		
+        this.suborinspector = "subi";	  
         },
         err => {
            console.log("Oops!");
@@ -107,8 +192,8 @@ export class InspectPage {
 
   }
 
-	showtheform(ParentFormID,requestid,lid1,lid2,lid3,lid4) { 
-		this.navCtrl.push(InspectionitemsPage,{ParentFormID,requestid,lid1,lid2,lid3,lid4});
+	showtheform(ParentFormID,requestid,lid1,lid2,lid3,lid4,template,who) { 
+		this.navCtrl.push(InspectionitemsPage,{ParentFormID,requestid,lid1,lid2,lid3,lid4,template,who});
 	}
                                                                                                                                                                                                                        
 	dismiss() {
@@ -117,7 +202,7 @@ export class InspectPage {
 
 	getRequestDetails(request){
 		console.log(request);
-		var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+request+"/"+this.pa5038;
+		var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+this.username+"/"+this.usercompanyname+"/"+request+"/"+this.pa5038;
 
 		    this.http.get(url).map(res => res.json()).subscribe(data => {
 		      this._sanitizer.bypassSecurityTrustStyle(data);

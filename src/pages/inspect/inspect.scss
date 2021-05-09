@@ -2,7 +2,17 @@ page-inspect {
     page-list {
 
         // reduce min height restriction
-        
+
+        ion-card {
+            border-top: 0px solid #ffffff !important;
+          }
+
+          .defectlate   { 
+            color:red;
+            font-size:1.3rem;
+        }
+    
+
            .item {
         
                min-height: 0.5rem;

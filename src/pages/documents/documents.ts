@@ -86,7 +86,7 @@ export class DocumentsPage {
               public modalCtrl: ModalController) {}
 
  
-  ionViewDidEnter() {
+  ionViewWillEnter() {
 
     this.inprocess = this.navParams.get('inprocess');
     this.callback = this.navParams.get("callback")
@@ -140,7 +140,7 @@ export class DocumentsPage {
             localStorage.setItem('OldProjectName', this.userdocumentData.SystemProjectName);
             console.log("Old Proj 2 = ", oldProjectName);
 
-            document.getElementById("main").style.display="block";
+            document.getElementById("maindiv").style.display="block";
         },
         err => {
             console.log("Oops!");

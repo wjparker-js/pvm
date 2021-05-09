@@ -4,19 +4,33 @@
     <span style="font-size:16px;color:white;">{{selectedProjectName}} Inspection Request</span>
   </ion-toolbar>
 
-  <!--<div style='padding: 10px;'>   
-    <ion-segment color="primary" disabled  mode='ios' [(ngModel)]="defectslist" (ionChange)="segmentChanged(defectslist)">
-      <ion-segment-button value="new" disabled>
-        New Inspection
+  <div style='padding: 10px;' [hidden]="this.isinspector == 0">   
+    <ion-segment color="primary"  mode='ios' [(ngModel)]="defectslist" (ionChange)="segmentChanged(defectslist)">
+      <ion-segment-button value="inspect" >
+        <b>New Inspections</b>
       </ion-segment-button>
-      <ion-segment-button value="fix" disabled>
-        Needs Fix
+      <ion-segment-button value="failed" >
+        <b>Failed</b>
       </ion-segment-button>
-      <ion-segment-button value="passed" disabled>
-        Approved
+      <ion-segment-button value="approved" >
+        <b>Approved</b>
       </ion-segment-button>
     </ion-segment>
-  </div>-->
+  </div>
+
+  <div style='padding: 10px;' [hidden]="this.isinspector != 0">   
+    <ion-segment color="primary"   mode='ios' [(ngModel)]="subdefectslist" (ionChange)="segmentChangedsub(subdefectslist)">
+      <ion-segment-button value="submit" >
+        <b>Submit</b>
+      </ion-segment-button>
+      <ion-segment-button value="fix" >
+        <b>Fix</b>
+      </ion-segment-button>
+      <ion-segment-button value="passed" >
+        <b>Passed</b>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
 </ion-header>
 
@@ -25,12 +39,23 @@
     <ion-row>                  
       <ion-col  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
         <ion-list *ngFor="let request of inspectionrequests"   class="small-list"  style="margin: 0px; padding-left:3px;padding-right:3px;">
-            <ion-item style="padding:0px;padding-left:3px;"  (click)="showtheform(request.ParentFormID,request.FormID,request.LID1,request.LID2,request.LID3,request.LID4)">                      
-              <h3><b>{{request.FormName}}{{request.Form_Name}} - {{request.FormNumber}}</b></h3>
+          
+          <ion-card style="border-top: 0px solid #ffffff !important;position:relative;top:10px;min-height:50px; max-height:500px;padding-bottom: 0px;margin-top: 3px;margin-bottom: 3px;">
+            
+            <ion-item style="padding:0px;padding-left:3px;font-size:1.3rem;"  (click)="showtheform(request.ParentFormID,request.FormID,request.LID1,request.LID2,request.LID3,request.LID4,request.Template,this.isinspector)">                      
+              <b>{{request.FormName}}{{request.Form_Name}} - {{request.FormNumber}}</b>
+              
+              <div [hidden]="this.isinspector == 0"><h3>Location: {{request.LocationText}}</h3></div> 
               <h3>{{request.PackageTitleValue}} Package</h3> 
-              <h3>Owner: {{request.SubcontractorValue}}
-              <!--<br>Inspector: {{request.InspectorF}} {{request.InspectorL}}-->                                                                                                                                                                                                                                                                                                                                                                                      </h3>                             
-            </ion-item>       
+              <div [hidden]="this.isinspector == 0"><h3>Contractor: {{request.SubcontractorValue}}</h3></div> 
+              <div [hidden]="this.isinspector == 0">Due: {{request.reqdate | date : 'dd MMM yy'}} &nbsp;<ion-icon *ngIf="request.daydiff < 0" name="alert" style="position:relative;top:1px;color:red;">&nbsp;Overdue.</ion-icon></div>      
+              <div [hidden]="this.isinspector != 0"><h3>Inspector: {{request.InspectorF}} {{request.InspectorL}}</h3></div> 
+              <div [hidden]="this.isinspector != 0">Due: {{request.reqdate | date : 'dd MMM yy'}}</div>                  
+                                                                                                                                                                                                                                                                                                                                                                                                                           
+            </ion-item>   
+
+          </ion-card> 
+
         </ion-list>        
       </ion-col>
     </ion-row>

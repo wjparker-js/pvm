@@ -59,6 +59,12 @@ export class InspectionitemsPage {
   lid1:any;
   lid2:any;
 
+  urllocationlocnames:any;
+  FormPlotFlatName:any;
+  FormFloorLevelName:any;
+  FormFlatTypeName:any;
+  FormComponentName:any;
+
   lid3:any;
   lid4:any;
   locationtext:any;
@@ -89,6 +95,21 @@ export class InspectionitemsPage {
   overallimg3:string = "";
 
   openedDiv:any;
+  location1:any;
+  location2:any;
+  location3:any;
+  location4:any;
+
+  locnamepart1:  string = "";
+  locnamepart2:  string = "";
+  locnamepart3:  string = "";
+  locnamepart4:  string = "";
+
+  locationpart1: string = "null";
+  locationpart2: string = "null";
+  locationpart3: string = "null";
+  locationpart4: string = "null";
+  who:any;
 
   updataO1:any;
   updataO2:any;
@@ -123,6 +144,8 @@ export class InspectionitemsPage {
   notes19:any;
   notes20:any;
 
+  temp:any;
+
   frmData1 = {notes:"", onotes1:"", onotes2:"", onotes3:"", notes1:"", notes2:"", notes3:"", notes4:"", notes5:"", notes6:"",  notes7:"", notes8:"", notes9:"",  notes10:"", notes11:"", notes12:"",  notes13:"", notes14:"", notes15:"",  notes16:"", notes17:"", note18:"",  notes19:"", notes20:"", notes21:"",  notes22:"", notes23:"", notes24:"",  notes25:"", notes26:"", notes27:"",  notes28:"", notes29:"", notes30:"",   details: ""};
 
 	constructor(
@@ -143,20 +166,31 @@ export class InspectionitemsPage {
   ionViewWillEnter(): void {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
       
     var inspectionitemstData = JSON.parse(localStorage.getItem('userSystemData')); 
-
-    //this.frmData1.notes = "A test";
-    
+ 
     this.ParentFormID        = this.navParams.get('ParentFormID');    
     this.requestid           = this.navParams.get('requestid');
-    this.overallimg1         = "";
-    this.overallimg2         = "";
-    this.overallimg3         = "";
-    this.valuation           = 3;
     this.inspectionitemsid   = this.navParams.get('requestid');	
     this.lid1                = this.navParams.get('lid1');	 
     this.lid2                = this.navParams.get('lid2');	 
     this.lid3                = this.navParams.get('lid3');	 
-    this.lid4                = this.navParams.get('lid4');
+    this.lid4                = this.navParams.get('lid4');	 
+    this.who                 = this.navParams.get('who');	 
+    this.temp                = this.navParams.get('template');
+
+    console.log("this.who   ",this.who);
+    console.log("this.temp    ",this.temp );
+
+    this.overallimg1         = "";
+    this.overallimg2         = "";
+    this.overallimg3         = "";
+    this.valuation           = 3;
+
+    if(this.temp == 0){this.temp = "sub";} 
+    if(this.temp == 1 && this.who == 0){this.temp = "subi";} 
+    if(this.temp == 1 && this.who >= 1){this.temp = "ins";}
+
+    
+    console.log("this.temp    ",this.temp );
 
     if(this.lid1 == undefined){this.lid1 = "NULL"}
     if(this.lid2 == undefined){this.lid2 = "NULL"}
@@ -178,9 +212,9 @@ export class InspectionitemsPage {
     this.inspectionitemsUserID          = inspectionitemstData[0].SystemUserID;
     this.inspectionitemsUserID          = this.inspectionitemsUserID.trim();
     this.usercompanyname                = inspectionitemstData[0].Company;
-    this.usercompanyname                = this.usercompanyname.trim();
+    this.usercompanyname                = encodeURI(this.usercompanyname.trim());
     this.username                       = inspectionitemstData[0].Name;
-    this.username                       = this.username.trim();    
+    this.username                       = encodeURI(this.username.trim());    
     this.buttonDisabled                 = true;
     this.allChecked                     = false;
     this.checkeditems                   = [];
@@ -190,10 +224,20 @@ export class InspectionitemsPage {
     this.delcheck                       = false;
     this.formData                       = [];
       
-    var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.inspectionitemsid;
-    this.http.get(url).map(res => res.json()).subscribe(data => {
+
+
+
+
+    if(this.temp == "sub"){
+      var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.requestid+"/"+this.temp;
+    } else {
+      var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.inspectionitemsid+"/"+this.temp;
+    }
+    console.log("url  =  ",url);
+    this.http.get(url).map(res => res.json()).subscribe(data => {
       this._sanitizer.bypassSecurityTrustStyle(data);
       this.inspectionitemssdata = data;
+      console.log("inspectionitemssdata   ",this.inspectionitemssdata);
       if (data.length > 0) {
       if(this.inspectionitemssdata[0].Template != null){
         this.template = this.inspectionitemssdata[0].Template;
@@ -201,26 +245,94 @@ export class InspectionitemsPage {
       this.formid   = this.inspectionitemssdata[0].FormID;      
       this.showlocationlookup = this.inspectionitemssdata[0].Template;
       }
-      
+      console.log("showlocationlookup  ",this.showlocationlookup);
       this.getOnotes(this.formid);      
-      
-      if(this.showlocationlookup == 1){
+
+
+      var locationurl = Constants.apiUrl+"api/locationmap/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.pa5038;
+      this.http.get(locationurl).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+        this.locationMaps = data;  
+        if (data.length > 0) {
+          this.locationtext = this.locationMaps[0].name;
+          this.selectedlocation = this.locationMaps[0].name;
+          console.log("this.locationtext xxx  ",this.locationtext);
+          } else {
+            this.locationtext = "No Data ";
+            this.selectedlocation = "No Data ";
+          } 
+        console.log("locationMaps  ",this.locationMaps);      
+        },
+        err => {
+          console.log("Oops!");
+        }
+      ); 
+
+
+      //if(this.showlocationlookup == 1){
         var urlloctext = Constants.apiUrl+"api/locationtext/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.lid1+"/"+this.lid2+"/"+this.lid3+"/"+this.lid4;    
         this.http.get(urlloctext).map(res => res.json()).subscribe(data => {
         this._sanitizer.bypassSecurityTrustStyle(data);
         this.locationtextdata = data;
         if (data.length > 0) {
-        this.locationtext = this.locationtextdata[0].name;
+        //this.locationtext = this.locationtextdata[0].name;
         this.selectedlocation = this.locationtextdata[0].name;
+        console.log("this.locationtext   ",this.locationtext);
         } else {
-          this.locationtext = "No Data Available";
+          //this.locationtext = "No Data Available";
           this.selectedlocation = "No Data Available";
         }      
         },
         err => {
             console.log("Oops! Error getting location data");
         }); 
-      }
+
+
+
+        var urllocationlocname = Constants.apiUrl+"api/locationlocnames/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID;    
+        this.http.get(urllocationlocname).map(res => res.json()).subscribe(data => {
+          this._sanitizer.bypassSecurityTrustStyle(data);
+          this.urllocationlocnames = data;
+          if (data.length > 0) {
+            this.FormPlotFlatName = this.urllocationlocnames[0].FormPlotFlatName;
+            this.FormFloorLevelName = this.urllocationlocnames[0].FormFloorLevelName;
+            this.FormFlatTypeName = this.urllocationlocnames[0].FormFlatTypeName;
+            this.FormComponentName = this.urllocationlocnames[0].FormComponentName;
+            console.log("FormPlotFlatName ",this.FormPlotFlatName);
+            console.log("FormFloorLevelName ",this.FormFloorLevelName);
+            console.log("FormFlatTypeName ",this.FormFlatTypeName);
+            console.log("FormComponentName ",this.FormComponentName);
+          }     
+        },
+        err => {
+            console.log("Oops! Error getting location data");
+        }); 
+
+        var urlloctext1 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location1";    
+        this.http.get(urlloctext1).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+        this.location1 = data;
+        }, err => {console.log("Oops! Error getting location data");}); 
+        
+        var urlloctext2 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location2";    
+        this.http.get(urlloctext2).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+        this.location2 = data;
+        }, err => {console.log("Oops! Error getting location data");}); 
+
+        var urlloctext3 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location3";    
+        this.http.get(urlloctext3).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+        this.location3 = data;
+        }, err => {console.log("Oops! Error getting location data");}); 
+
+        var urlloctext4 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location4";    
+        this.http.get(urlloctext4).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+        this.location4 = data;
+        }, err => {console.log("Oops! Error getting location data");}); 
+
+      //}
 
       var myStringArray = this.inspectionitemssdata;
       var arrayLength   = myStringArray.length;
@@ -249,15 +361,7 @@ export class InspectionitemsPage {
           console.log("Oops! Error reading template data");
     }); 
 
-    var locationurl = Constants.apiUrl+"api/locationmap/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.pa5038;
-    this.http.get(locationurl).map(res => res.json()).subscribe(data => {
-      this._sanitizer.bypassSecurityTrustStyle(data);
-      this.locationMaps = data;        
-      },
-      err => {
-        console.log("Oops!");
-      }
-    );     
+    
   } 
 
 
@@ -455,8 +559,8 @@ export class InspectionitemsPage {
 
       if(document.getElementById(theItempass1).style.color == "black"){
         document.getElementById(theItempass1).style.color = "MediumSeaGreen";
-        this.frmData1.notes = notes;
-        this.setStars(item,value);
+        //this.frmData1.notes = notes;
+        //this.setStars(item,value);
         this.checkeditems.push(item);
         for( var i = 0; i < this.delitems.length; i++){     
           if ( this.delitems[i] === item) {     
@@ -488,67 +592,6 @@ export class InspectionitemsPage {
   }
 
 
-  passClickold(itemnumber,template,item,value,notes){
-
-    var theItempass1 = item+"pass";
-    var theItemfail1 = item+"fail";
-    var thisdiv1     = "div"+item;
-        
-    this.passOrfail  = "pass";
-    this.openedDiv   = thisdiv1;
-
-    if(this.isOpened == false){
-
-      if(document.getElementById(theItempass1).style.color == "black"){
-        
-        console.log("1 this.isOpened",this.isOpened);
-
-        document.getElementById(theItempass1).style.color = "mediumseagreen";
-        document.getElementById(theItemfail1).style.color = "black";
-        document.getElementById(thisdiv1).style.display   = "block"; 
-
-        this.frmData1.notes = notes;
-        this.setStars(item,value);            
-        this.reportImage = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";      
-        this.isOpened    = true; 
-
-        this.checkeditems.push(item);
-        for( var i = 0; i < this.delitems.length; i++){     
-          if ( this.delitems[i] === item) {     
-              this.delitems.splice(i, 1); 
-          }   
-        }
-        this.addcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
-        if (this.addcheck == true) {
-          this.allChecked = true;
-        } else {
-          this.allChecked = false;
-        }
-
-      } else {
-
-        console.log("2 this.isOpened",this.isOpened);
-        document.getElementById(thisdiv1).style.display   = "none"; 
-        this.frmData1.notes = notes;
-        this.setStars(item,value);            
-        this.reportImage = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";      
-        this.isOpened    = false  ;
-      }
-
-    } else {
-
-      if(document.getElementById(theItempass1).style.color == "black"){          
-        document.getElementById(thisdiv1).style.display   = "block";       
-        console.log("3 this.isOpened",this.isOpened);
-        console.log("document.getElementById(theItempass1).style.color",document.getElementById(theItempass1).style.color);
-      } else if(document.getElementById(theItempass1).style.color == "mediumseagreen"){          
-        document.getElementById(thisdiv1).style.display   = "block";       
-        console.log("4 this.isOpened",this.isOpened);
-        console.log("document.getElementById(theItempass1).style.color",document.getElementById(theItempass1).style.color);
-      }
-    }
-  }
-
   passClick(itemnumber,template,item,value,notes){
 
     var theItempass1 = item+"pass";
@@ -556,21 +599,30 @@ export class InspectionitemsPage {
     var thisdiv1     = "div"+item;
 
     if(this.isOpened == false){
+
       this.isOpened    = true;
       this.openedDiv   = thisdiv1;
       this.passOrfail  = "pass";
-      if(document.getElementById(theItempass1).style.color == "black"){
-        document.getElementById(theItempass1).style.color = "mediumseagreen";
+      
+      if(document.getElementById(theItempass1).style.color == "black" || document.getElementById(theItempass1).style.color == "mediumseagreen"){
+        
+        document.getElementById(theItempass1).style.color = "mediumseagreen";
         document.getElementById(theItemfail1).style.color = "black";
+        document.getElementById(thisdiv1).style.display   = "block"; 
+
         this.frmData1.notes = notes;
-        this.setStars(item,value);
-        document.getElementById(thisdiv1).style.display   = "block";   
+        this.setStars(item,value);  
         this.checkeditems.push(item);
-        for( var i = 0; i < this.delitems.length; i++){     
+
+        var reportUrl1 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
+        this.imageResolves(reportUrl1);
+        
+        for( var i = 0; i < this.delitems.length; i++){     
           if ( this.delitems[i] === item) {     
               this.delitems.splice(i, 1); 
           }   
         }
+
         this.addcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
         if (this.addcheck == true) {
           this.allChecked = true;
@@ -578,38 +630,38 @@ export class InspectionitemsPage {
           this.allChecked = false;
         } 
                          
-        var reportUrl = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
-        this.imageResolves(reportUrl);
+        //var reportUrl = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
+        //this.imageResolves(reportUrl);
         
         //this.reportImage = Constants.publicUploadPath+"inspectionimages/noimage.jpg";
-        console.log("repimg:  ",this.reportImage);
+        //console.log("repimg:  ",this.reportImage);
 
-      } else if(document.getElementById(theItempass1).style.color == "mediumseagreen"){
+      } 
+      /*(else if(document.getElementById(theItempass1).style.color == "mediumseagreen"){
           this.frmData1.notes = notes;
           this.setStars(item,value);
           var reportUrl1 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
           this.imageResolves(reportUrl1);
           document.getElementById(thisdiv1).style.display   = "block";
-      }
+      }*/
     }
     else 
     {
       if(this.isOpened == true && this.openedDiv == thisdiv1){
-        this.passOrfail  = "";
+
+        this.passOrfail  = "pass";
         this.isOpened    = false;
         this.openedDiv   = "";
-        if(document.getElementById(theItempass1).style.color == "red"){
-          document.getElementById(thisdiv1).style.display   = "none";        
-          document.getElementById(theItempass1).style.color = "red";
-        } else {
+
+        if(document.getElementById(theItempass1).style.color == "mediumseagreen"){
           document.getElementById(thisdiv1).style.display   = "none";          
-          document.getElementById(theItemfail1).style.color = "black";        
-          document.getElementById(theItempass1).style.color = "black"; 
-          for( var i = 0; i < this.checkeditems.length; i++){     
+          document.getElementById(theItemfail1).style.color = "black";
+        
+          /*for( var i = 0; i < this.checkeditems.length; i++){     
             if ( this.checkeditems[i] === item) {     
                 this.checkeditems.splice(i, 1); 
             }   
-          }
+          }*/
           this.addcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
           if (this.addcheck == true) {
             this.allChecked = true;
@@ -626,24 +678,35 @@ export class InspectionitemsPage {
 
       var theItempass2 = item+"pass";
       var theItemfail2 = item+"fail";
-      var thisdiv2     = "div"+item;    
+      var thisdiv2     = "div"+item;  
+    
       this.hasFailedItem = true;
+
       if(this.isOpened == false){
+
         this.isOpened    = true;
         this.openedDiv   = thisdiv2;
         this.passOrfail  = "fail";
-        if(document.getElementById(theItemfail2).style.color == "black"){
-          document.getElementById(theItemfail2).style.color = "red";
-          document.getElementById(theItempass2).style.color = "black";
+
+        if(document.getElementById(theItemfail2).style.color == "black" || document.getElementById(theItemfail2).style.color == "red"){
+          
+          document.getElementById(theItemfail2).style.color = "red";
+          document.getElementById(theItempass2).style.color = "black";  
+          document.getElementById(thisdiv2).style.display   = "block"; 
+
           this.frmData1.notes = notes;
-          this.setStars(item,value);
-          document.getElementById(thisdiv2).style.display   = "block";   
-          this.delitems.push(item);
+          this.setStars(item,value);  
+          this.delitems.push(item);     
+
+          var reportUrl2 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
+          this.imageResolves(reportUrl2);     
+
           for( var i = 0; i < this.checkeditems.length; i++){     
             if ( this.checkeditems[i] === item) {     
                 this.checkeditems.splice(i, 1); 
             }   
           }
+
           this.addcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
           if (this.addcheck == true) {
             this.allChecked = true;
@@ -651,35 +714,36 @@ export class InspectionitemsPage {
             this.allChecked = false;
           }  
   
-          var reportUrlf = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
-          this.imageResolves(reportUrlf);
+          //var reportUrlf = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
+          //this.imageResolves(reportUrlf);
   
-        } else if (document.getElementById(theItemfail2).style.color == "red"){
+        } 
+        /*else if (document.getElementById(theItemfail2).style.color == "red"){
           this.frmData1.notes = notes;
           this.setStars(item,value);
           var reportUrlf1 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
           this.imageResolves(reportUrlf1);
           document.getElementById(thisdiv2).style.display   = "block";
-        }
+        }*/
       }
       else 
       {
         if(this.isOpened == true && this.openedDiv == thisdiv2){
-          this.passOrfail  = "";
+
+          this.passOrfail  = "fail";
           this.isOpened    = false;
           this.openedDiv   = "";
-          if(document.getElementById(theItemfail2).style.color == "mediumseagreen"){
-            document.getElementById(thisdiv2).style.display   = "none";        
-            document.getElementById(theItemfail2).style.color = "mediumseagreen";
-          } else {
-            document.getElementById(thisdiv2).style.display   = "none";          
-            document.getElementById(theItemfail2).style.color = "black";        
-            document.getElementById(theItempass2).style.color = "black"; 
-            for( var i = 0; i < this.delitems.length; i++){     
+
+          if(document.getElementById(theItemfail2).style.color == "red"){
+            document.getElementById(thisdiv2).style.display   = "none";         
+            document.getElementById(theItempass2).style.color = "black";
+   
+            /*for( var i = 0; i < this.delitems.length; i++){     
               if ( this.delitems[i] === item) {     
                   this.delitems.splice(i, 1); 
               }   
-            }
+            }*/
+
             this.addcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
             if (this.addcheck == true) {
               this.allChecked = true;
@@ -693,158 +757,6 @@ export class InspectionitemsPage {
       
 
 
-
-
-
-
-
-
-
-
-
-
-  /*
-  passClick(itemnumber,template,item,value,notes){
-
-    var theItempass1 = item+"pass";
-    var theItemfail1 = item+"fail";
-    var thisdiv1     = "div"+item;
-
-    if(this.isOpened == false){
-      this.isOpened    = true;
-      this.openedDiv   = thisdiv1;
-      this.passOrfail  = "pass";
-      if(document.getElementById(theItempass1).style.color == "black"){
-        document.getElementById(theItempass1).style.color = "mediumseagreen";
-        document.getElementById(theItemfail1).style.color = "black";
-        this.frmData1.notes = notes;
-        this.setStars(item,value);
-        document.getElementById(thisdiv1).style.display   = "block";   
-        this.checkeditems.push(item);
-        for( var i = 0; i < this.delitems.length; i++){     
-          if ( this.delitems[i] === item) {     
-              this.delitems.splice(i, 1); 
-          }   
-        }
-        this.addcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
-        if (this.addcheck == true) {
-          this.allChecked = true;
-        } else {
-          this.allChecked = false;
-        } 
-                         
-        var reportUrl = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
-        this.imageResolves(reportUrl);
-
-      } else if(document.getElementById(theItempass1).style.color == "mediumseagreen"){
-          this.frmData1.notes = notes;
-          this.setStars(item,value);
-          var reportUrl1 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
-          this.imageResolves(reportUrl1);
-          document.getElementById(thisdiv1).style.display   = "block";
-      }
-      
-    }
-    else 
-    {
-      if(this.isOpened == true && this.openedDiv == thisdiv1){
-        this.passOrfail  = "";
-        this.isOpened    = false;
-        this.openedDiv   = "";
-
-        if(document.getElementById(theItempass1).style.color == "red"){
-          document.getElementById(thisdiv1).style.display   = "none";        
-          document.getElementById(theItempass1).style.color = "red";
-        } else {
-          document.getElementById(thisdiv1).style.display   = "none";          
-          document.getElementById(theItemfail1).style.color = "black";        
-          document.getElementById(theItempass1).style.color = "black"; 
-          for( var i = 0; i < this.checkeditems.length; i++){     
-            if ( this.checkeditems[i] === item) {     
-                this.checkeditems.splice(i, 1); 
-            }   
-          }
-          this.addcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
-          console.log(this.addcheck);
-          if (this.addcheck == true) {
-            this.allChecked = true;
-          } else {
-            this.allChecked = false;
-          } 
-        }        
-      } 
-    }   
-  }
-
-  failClick(itemnumber,template,item,value,notes){
-    var theItempass2 = item+"pass";
-    var theItemfail2 = item+"fail";
-    var thisdiv2     = "div"+item;    
-
-    this.hasFailedItem = true;
-
-    if(this.isOpened == false){
-      this.isOpened    = true;
-      this.openedDiv   = thisdiv2;
-      this.passOrfail  = "fail";
-      if(document.getElementById(theItemfail2).style.color == "black"){
-        document.getElementById(theItemfail2).style.color = "red";
-        document.getElementById(theItempass2).style.color = "black";
-        this.frmData1.notes = notes;
-        this.setStars(item,value);
-        document.getElementById(thisdiv2).style.display   = "block";   
-        this.delitems.push(item);
-        for( var i = 0; i < this.checkeditems.length; i++){     
-          if ( this.checkeditems[i] === item) {     
-              this.checkeditems.splice(i, 1); 
-          }   
-        }
-        this.addcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
-        if (this.addcheck == true) {
-          this.allChecked = true;
-         } else {
-          this.allChecked = false;
-        }  
-
-        var reportUrlf = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
-        this.imageResolves(reportUrlf);
-
-      } else if (document.getElementById(theItemfail2).style.color == "red"){
-        this.frmData1.notes = notes;
-        this.setStars(item,value);
-        var reportUrlf1 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
-        this.imageResolves(reportUrlf1);
-        document.getElementById(thisdiv2).style.display   = "block";
-      }
-    }
-    else 
-    {
-      if(this.isOpened == true && this.openedDiv == thisdiv2){
-        this.passOrfail  = "";
-        this.isOpened    = false;
-        this.openedDiv   = "";
-        if(document.getElementById(theItemfail2).style.color == "mediumseagreen"){
-          document.getElementById(thisdiv2).style.display   = "none";        
-          document.getElementById(theItemfail2).style.color = "mediumseagreen";
-        } else {
-          document.getElementById(thisdiv2).style.display   = "none";          
-          document.getElementById(theItemfail2).style.color = "black";        
-          document.getElementById(theItempass2).style.color = "black"; 
-          for( var i = 0; i < this.checkeditems.length; i++){     
-            if ( this.checkeditems[i] === item) {     
-                this.checkeditems.splice(i, 1); 
-            }   
-          }
-          this.addcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
-          if (this.addcheck == true) {
-            this.allChecked = true;
-          } else {
-            this.allChecked = false;
-          }
-      }
-    }
-  }    
-*/
 
   
   imageResolves(image_url){
@@ -887,6 +799,11 @@ export class InspectionitemsPage {
 
     console.log("Checked: ",checked);
     console.log("Failed: ",failed);
+
+    var builslocname = this.locnamepart1+"-"+this.locnamepart2+"-"+this.locnamepart3+"-"+this.locnamepart4+"!";
+    var buildlocduid = this.locationpart1+"!"+this.locationpart2+"!"+this.locationpart3+"!"+this.locationpart4;
+    this.selectedlocation = builslocname+buildlocduid;
+    this.locationtext = builslocname;
 
       if(this.selectedlocation != "") {
 
@@ -957,6 +874,62 @@ export class InspectionitemsPage {
     this.allChecked = false;
   }
 
+  loc1selected(location){
+    var locp1pos = location.indexOf("-");
+    var locp1len = location.length;
+    this.locnamepart1  = location.substring(0,locp1pos);
+    this.locationpart1 = location.substring(locp1len - 36);     
+
+    console.log("locp11  ",this.locnamepart1);
+    console.log("locp12  ",this.locationpart1);
+
+    //this.selectedlocation = location;
+    //this.locationtext =  location;
+    //this.allChecked = false;
+  }
+
+  loc2selected(location){
+    var locp2pos = location.indexOf("-");
+    var locp2len = location.length;
+    this.locnamepart2 = location.substring(0,locp2pos);
+    this.locationpart2 = location.substring(locp2len - 36);
+
+    console.log("locp21  ",this.locnamepart2);
+    console.log("locp22  ",this.locationpart2);
+
+    //this.selectedlocation = location;
+    //this.locationtext =  location;
+    //this.allChecked = false;
+  }
+
+  loc3selected(location){
+    var locp3pos = location.indexOf("-");
+    var locp3len = location.length;
+    this.locnamepart3 = location.substring(0,locp3pos);
+    this.locationpart3 = location.substring(locp3len - 36);
+
+    console.log("locp31  ",this.locnamepart3);
+    console.log("locp32  ",this.locationpart3);
+
+    //this.selectedlocation = location;
+    //this.locationtext =  location;
+    //this.allChecked = false;
+  }
+
+  loc4selected(location){
+    var locp4pos = location.indexOf("-");
+    var locp4len = location.length;
+    this.locnamepart4 = location.substring(0,locp4pos);
+    this.locationpart4 = location.substring(locp4len - 36);
+
+    console.log("locp41  ",this.locnamepart4);
+    console.log("locp42  ",this.locationpart4);
+
+    //this.selectedlocation = location;
+    //this.locationtext =  location;
+    //this.allChecked = false;
+  }
+
   closeDiv(itemid){
     document.getElementById("div"+itemid).style.display="none";
     this.isOpened = false;
@@ -966,7 +939,7 @@ export class InspectionitemsPage {
     this.viewCtrl.dismiss();
   }
   
-  }
+}
 
 /*
 
