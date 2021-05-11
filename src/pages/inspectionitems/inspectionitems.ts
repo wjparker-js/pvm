@@ -33,31 +33,34 @@ export class InspectionitemsPage {
   inspectionitemss:any;
   inspectionitemssdata:any;
   showform:any;
-  inspectionoverallnotes:any;
 
+  inspectionoverallnotes:any;
   templateid:any;
   formData:any;
   updata:any;
   buttonDisabled:boolean;
-  allChecked:boolean= false;
 
+  allChecked:boolean= false;
   checkeditems:any;  
   delitems:any;
   totalItems:any;
   itemid:any;
+  
   template:any;
-
   usercompanyname:any;
   username:any;
   addcheck:any;
   delcheck:boolean = false;
-  inspectinform:any;
 
+  inspectinform:any;
   notes:any;
   showlocationlookup:any;  
   pa5038:any;
+
   lid1:any;
   lid2:any;
+  lid3:any;
+  lid4:any;
 
   urllocationlocnames:any;
   FormPlotFlatName:any;
@@ -65,36 +68,34 @@ export class InspectionitemsPage {
   FormFlatTypeName:any;
   FormComponentName:any;
 
-  lid3:any;
-  lid4:any;
   locationtext:any;
   locationtextdata:any;
-  ass:boolean = true;
-  
+  ass:boolean = true;  
   locationMaps:any;
   selectedlocation:string="";
+
   arrselectedlocation:any;  
   frmData = {notes: ""};
   currentImage: string = null;
-
   locationimage:any;
   ParentFormID:any;  
+
   itemnotes: string = "";
   formid:any;
   imageroot:string = "https://projectvaultuk.com/PublicPics/inspectionimages/";
-
   overallphoto:string = "";
   reportImage:any;
+
   divOpen:boolean = false;
   isOpened:boolean = false;
   requestid:any;
-  passOrfail:string = "";
-  
+  passOrfail:string = "";  
+
   overallimg1:string = "";
   overallimg2:string = "";
   overallimg3:string = "";
-
   openedDiv:any;
+
   location1:any;
   location2:any;
   location3:any;
@@ -109,18 +110,18 @@ export class InspectionitemsPage {
   locationpart2: string = "null";
   locationpart3: string = "null";
   locationpart4: string = "null";
-  who:any;
 
   updataO1:any;
   updataO2:any;
   updataO3:any;
+
   buttonIcon: string = "Arrow-Down";
-  valuation: any;
-  
+  valuation: any;  
 	image: string = null;
   divLock: boolean = true;
   reportimagea:any;
 
+  who:any;
   hasFailedItem:boolean = false;
 
   notes1:any;
@@ -162,7 +163,6 @@ export class InspectionitemsPage {
     public http: Http) {
   }
 
-
   ionViewWillEnter(): void {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
       
     var inspectionitemstData = JSON.parse(localStorage.getItem('userSystemData')); 
@@ -173,24 +173,15 @@ export class InspectionitemsPage {
     this.lid1                = this.navParams.get('lid1');	 
     this.lid2                = this.navParams.get('lid2');	 
     this.lid3                = this.navParams.get('lid3');	 
-    this.lid4                = this.navParams.get('lid4');	 
+    this.lid4                = this.navParams.get('lid4');
+    this.temp                = this.navParams.get('template');	 
     this.who                 = this.navParams.get('who');	 
-    this.temp                = this.navParams.get('template');
 
-    console.log("this.who   ",this.who);
-    console.log("this.temp    ",this.temp );
-
-    this.overallimg1         = "";
-    this.overallimg2         = "";
-    this.overallimg3         = "";
-    this.valuation           = 3;
-
-    if(this.temp == 0){this.temp = "sub";} 
+    if(this.temp == 0 && this.who == 0){this.temp = "sub";} 
     if(this.temp == 1 && this.who == 0){this.temp = "subi";} 
     if(this.temp == 1 && this.who >= 1){this.temp = "ins";}
 
-    
-    console.log("this.temp    ",this.temp );
+    console.log("this.temp  ",this.temp);
 
     if(this.lid1 == undefined){this.lid1 = "NULL"}
     if(this.lid2 == undefined){this.lid2 = "NULL"}
@@ -202,19 +193,22 @@ export class InspectionitemsPage {
     localStorage.setItem('overallimg3', '');
     localStorage.setItem('reportImage', '');
 
+
     this.pa5038                         = localStorage.getItem('Role-PA5038');
-    this.arrselectedlocation            = [];
-    this.selectedlocation               = "";
-    this.notes                          = "No notes...";
     this.inspectionitemsSystemProjectID = localStorage.getItem('CurrentProjectID');
-    this.clienttID                      = localStorage.getItem('CurrentProjectClientID');    
+    this.clienttID                      = localStorage.getItem('CurrentProjectClientID'); 
+
     this.inspectionitemsApiKey          = inspectionitemstData[0].apiKey;
     this.inspectionitemsUserID          = inspectionitemstData[0].SystemUserID;
     this.inspectionitemsUserID          = this.inspectionitemsUserID.trim();
     this.usercompanyname                = inspectionitemstData[0].Company;
     this.usercompanyname                = encodeURI(this.usercompanyname.trim());
     this.username                       = inspectionitemstData[0].Name;
-    this.username                       = encodeURI(this.username.trim());    
+    this.username                       = encodeURI(this.username.trim()); 
+
+    this.arrselectedlocation            = [];
+    this.selectedlocation               = "";
+    this.notes                          = "";
     this.buttonDisabled                 = true;
     this.allChecked                     = false;
     this.checkeditems                   = [];
@@ -223,29 +217,22 @@ export class InspectionitemsPage {
     this.addcheck                       = false;
     this.delcheck                       = false;
     this.formData                       = [];
-      
-
-
-
 
     if(this.temp == "sub"){
       var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.requestid+"/"+this.temp;
     } else {
       var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.inspectionitemsid+"/"+this.temp;
-    }
-    console.log("url  =  ",url);
+    } 
     this.http.get(url).map(res => res.json()).subscribe(data => {
       this._sanitizer.bypassSecurityTrustStyle(data);
       this.inspectionitemssdata = data;
-      console.log("inspectionitemssdata   ",this.inspectionitemssdata);
       if (data.length > 0) {
       if(this.inspectionitemssdata[0].Template != null){
         this.template = this.inspectionitemssdata[0].Template;
       } else {this.template = ""}
-      this.formid   = this.inspectionitemssdata[0].FormID;      
-      this.showlocationlookup = this.inspectionitemssdata[0].Template;
+        this.formid             = this.inspectionitemssdata[0].FormID;      
+        this.showlocationlookup = this.inspectionitemssdata[0].Template;
       }
-      console.log("showlocationlookup  ",this.showlocationlookup);
       this.getOnotes(this.formid);      
 
 
@@ -270,70 +257,70 @@ export class InspectionitemsPage {
 
 
       //if(this.showlocationlookup == 1){
-        var urlloctext = Constants.apiUrl+"api/locationtext/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.lid1+"/"+this.lid2+"/"+this.lid3+"/"+this.lid4;    
-        this.http.get(urlloctext).map(res => res.json()).subscribe(data => {
+      var urlloctext = Constants.apiUrl+"api/locationtext/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.lid1+"/"+this.lid2+"/"+this.lid3+"/"+this.lid4;    
+      this.http.get(urlloctext).map(res => res.json()).subscribe(data => {
+      this._sanitizer.bypassSecurityTrustStyle(data);
+      this.locationtextdata = data;
+      if (data.length > 0) {
+      //this.locationtext = this.locationtextdata[0].name;
+      this.selectedlocation = this.locationtextdata[0].name;
+      console.log("this.locationtext   ",this.locationtext);
+      } else {
+        //this.locationtext = "No Data Available";
+        this.selectedlocation = "No Data Available";
+      }      
+      },
+      err => {
+          console.log("Oops! Error getting location data");
+      }); 
+
+
+      // Location custom names
+      var urllocationlocname = Constants.apiUrl+"api/locationlocnames/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID;    
+      this.http.get(urllocationlocname).map(res => res.json()).subscribe(data => {
         this._sanitizer.bypassSecurityTrustStyle(data);
-        this.locationtextdata = data;
+        this.urllocationlocnames = data;
         if (data.length > 0) {
-        //this.locationtext = this.locationtextdata[0].name;
-        this.selectedlocation = this.locationtextdata[0].name;
-        console.log("this.locationtext   ",this.locationtext);
-        } else {
-          //this.locationtext = "No Data Available";
-          this.selectedlocation = "No Data Available";
-        }      
-        },
-        err => {
-            console.log("Oops! Error getting location data");
-        }); 
+          this.FormPlotFlatName   = this.urllocationlocnames[0].FormPlotFlatName;
+          this.FormFloorLevelName = this.urllocationlocnames[0].FormFloorLevelName;
+          this.FormFlatTypeName   = this.urllocationlocnames[0].FormFlatTypeName;
+          this.FormComponentName  = this.urllocationlocnames[0].FormComponentName;
+        }     
+      },
+      err => {
+          console.log("Oops! Error getting location data");
+      }); 
 
 
 
-        var urllocationlocname = Constants.apiUrl+"api/locationlocnames/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID;    
-        this.http.get(urllocationlocname).map(res => res.json()).subscribe(data => {
-          this._sanitizer.bypassSecurityTrustStyle(data);
-          this.urllocationlocnames = data;
-          if (data.length > 0) {
-            this.FormPlotFlatName = this.urllocationlocnames[0].FormPlotFlatName;
-            this.FormFloorLevelName = this.urllocationlocnames[0].FormFloorLevelName;
-            this.FormFlatTypeName = this.urllocationlocnames[0].FormFlatTypeName;
-            this.FormComponentName = this.urllocationlocnames[0].FormComponentName;
-            console.log("FormPlotFlatName ",this.FormPlotFlatName);
-            console.log("FormFloorLevelName ",this.FormFloorLevelName);
-            console.log("FormFlatTypeName ",this.FormFlatTypeName);
-            console.log("FormComponentName ",this.FormComponentName);
-          }     
-        },
-        err => {
-            console.log("Oops! Error getting location data");
-        }); 
+      // Locations lookups
+      var urlloctext1 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location1";    
+      this.http.get(urlloctext1).map(res => res.json()).subscribe(data => {
+      this._sanitizer.bypassSecurityTrustStyle(data);
+      this.location1 = data;
+      }, err => {console.log("Oops! Error getting location data");}); 
+      
+      var urlloctext2 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location2";    
+      this.http.get(urlloctext2).map(res => res.json()).subscribe(data => {
+      this._sanitizer.bypassSecurityTrustStyle(data);
+      this.location2 = data;
+      }, err => {console.log("Oops! Error getting location data");}); 
 
-        var urlloctext1 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location1";    
-        this.http.get(urlloctext1).map(res => res.json()).subscribe(data => {
-        this._sanitizer.bypassSecurityTrustStyle(data);
-        this.location1 = data;
-        }, err => {console.log("Oops! Error getting location data");}); 
-        
-        var urlloctext2 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location2";    
-        this.http.get(urlloctext2).map(res => res.json()).subscribe(data => {
-        this._sanitizer.bypassSecurityTrustStyle(data);
-        this.location2 = data;
-        }, err => {console.log("Oops! Error getting location data");}); 
+      var urlloctext3 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location3";    
+      this.http.get(urlloctext3).map(res => res.json()).subscribe(data => {
+      this._sanitizer.bypassSecurityTrustStyle(data);
+      this.location3 = data;
+      }, err => {console.log("Oops! Error getting location data");}); 
 
-        var urlloctext3 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location3";    
-        this.http.get(urlloctext3).map(res => res.json()).subscribe(data => {
-        this._sanitizer.bypassSecurityTrustStyle(data);
-        this.location3 = data;
-        }, err => {console.log("Oops! Error getting location data");}); 
+      var urlloctext4 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location4";    
+      this.http.get(urlloctext4).map(res => res.json()).subscribe(data => {
+      this._sanitizer.bypassSecurityTrustStyle(data);
+      this.location4 = data;
+      }, err => {console.log("Oops! Error getting location data");}); 
 
-        var urlloctext4 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location4";    
-        this.http.get(urlloctext4).map(res => res.json()).subscribe(data => {
-        this._sanitizer.bypassSecurityTrustStyle(data);
-        this.location4 = data;
-        }, err => {console.log("Oops! Error getting location data");}); 
 
-      //}
 
+      // passed and failed
       var myStringArray = this.inspectionitemssdata;
       var arrayLength   = myStringArray.length;
 
@@ -378,7 +365,7 @@ export class InspectionitemsPage {
       //var oimages= [this.overallimg1,this.overallimg2,this.overallimg3];
 
       if (data.length > 0) {
-      var overallimg1      = Constants.publicUploadPath+"inspectionimages/"+this.formid+"/"+this.formid+"1.jpg";
+      var overallimg1 = Constants.publicUploadPath+"inspectionimages/"+this.formid+"/"+this.formid+"1.jpg";
       this.imageResolves1(overallimg1);
       this.frmData1.onotes1 = this.inspectionoverallnotes[0].note;
       }
@@ -592,6 +579,19 @@ export class InspectionitemsPage {
   }
 
 
+  openUp(item,value){
+    var thisdiv1 = "div"+item;
+    if(document.getElementById(thisdiv1).style.display == "block"){
+      document.getElementById(thisdiv1).style.display   = "none"; 
+    } else {
+      document.getElementById(thisdiv1).style.display   = "block"; 
+      this.setStars(item,value)   
+      var reportUrl1 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
+      this.imageResolves(reportUrl1); 
+    }
+  }
+
+
   passClick(itemnumber,template,item,value,notes){
 
     var theItempass1 = item+"pass";
@@ -791,14 +791,8 @@ export class InspectionitemsPage {
     var checked = "";
     var failed  = "";
 
-    console.log("Checked: ",this.checkeditems.length);
-    console.log("Failed: ",this.delitems.length);
-
     if(this.checkeditems.length == 0){checked = "ppp"} else {checked = this.checkeditems} //JSON.stringify(this.checkeditems)}
     if(this.delitems.length     == 0){failed  = "fff"} else {failed  = this.delitems}
-
-    console.log("Checked: ",checked);
-    console.log("Failed: ",failed);
 
     var builslocname = this.locnamepart1+"-"+this.locnamepart2+"-"+this.locnamepart3+"-"+this.locnamepart4+"!";
     var buildlocduid = this.locationpart1+"!"+this.locationpart2+"!"+this.locationpart3+"!"+this.locationpart4;
@@ -808,7 +802,7 @@ export class InspectionitemsPage {
       if(this.selectedlocation != "") {
 
         if(this.showlocationlookup == 0){  
-          var formurl = Constants.apiUrl+"api/inspectinform/"+this.inspectionitemsApiKey +"/"+this.clienttID+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.requestid+"/"+this.selectedlocation+"/"+checked+"/"+failed+"/"+this.usercompanyname+"/"+this.username+"/"+this.showlocationlookup+"/No notes"; //+this.frmData1.details;
+          var formurl = Constants.apiUrl+"api/inspectinform/"+this.inspectionitemsApiKey +"/"+this.clienttID+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.requestid+"/"+this.selectedlocation+"/"+checked+"/"+failed+"/"+this.usercompanyname+"/"+this.username+"/"+this.showlocationlookup+"/Nonotes"; //+this.frmData1.details;
           console.log("Sending overall Data");
           this.http.get(formurl).map(res => res.json()).subscribe(data => {
             this.inspectinform = data;
@@ -820,7 +814,7 @@ export class InspectionitemsPage {
         
         if(this.showlocationlookup == 1){ 
           console.log("sending inspector");
-          var formurl1 = Constants.apiUrl+"api/inspectinform/"+this.inspectionitemsApiKey +"/"+this.clienttID+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.ParentFormID+"/"+this.selectedlocation+"/"+checked+"/"+failed+"/"+this.usercompanyname+"/"+this.username+"/"+this.showlocationlookup+"/No notes"; //+this.frmData1.details;
+          var formurl1 = Constants.apiUrl+"api/inspectinform/"+this.inspectionitemsApiKey +"/"+this.clienttID+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.ParentFormID+"/"+this.selectedlocation+"/"+checked+"/"+failed+"/"+this.usercompanyname+"/"+this.username+"/"+this.showlocationlookup+"/Nonotes"; //+this.frmData1.details;
           console.log("Sending overall Data");
             this.http.get(formurl1).map(res => res.json()).subscribe(data => {
               this.inspectinform = data;

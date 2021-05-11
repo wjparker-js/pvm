@@ -26,16 +26,12 @@ export class InspectPage {
   templateid:any;
   pa5038:any;
   today:any;
-  suborinspector:any;
-  
+  suborinspector:any;  
   defectslist:any;
   subdefectslist:any;
-
   usercompanyname:any;
   username:any;
-
   isinspector:any;
-
   lid1:any;
   lid2:any;
   lid3:any;
@@ -51,25 +47,19 @@ export class InspectPage {
 		this.inspectionrequestApiKey          = inspectionrequestData[0].apiKey;
 		this.inspectionrequestUserID          = inspectionrequestData[0].SystemUserID;
 		this.inspectionrequestUserID          = this.inspectionrequestUserID.trim();
-
-    this.usercompanyname                = inspectionrequestData[0].Company;
-    this.usercompanyname                = this.usercompanyname.trim();
-    this.username                       = inspectionrequestData[0].Name;
-    this.username                       = this.username.trim(); 
-
-    this.subdefectslist = "submit";
-    this.defectslist = "inspect";
-
-    this.today =new Date();
-    console.log("this.today  ",this.today);
-
+    this.usercompanyname                  = inspectionrequestData[0].Company;
+    this.usercompanyname                  = this.usercompanyname.trim();
+    this.username                         = inspectionrequestData[0].Name;
+    this.username                         = this.username.trim(); 
+    this.subdefectslist                   = "submit";
+    this.defectslist                      = "inspect";
+    this.today                            = new Date();
 
 		var url1 = Constants.apiUrl+"api/inspectinusers/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID;
     this.http.get(url1).map(res => res.json()).subscribe(data => {
       this._sanitizer.bypassSecurityTrustStyle(data);
       this.inspectionusers = data;  			  
       this.isinspector = this.inspectionusers[0].isinspector;
-
         if(this.isinspector == 0){
           console.log("is subby");
           var url11 = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/submit/sub";
@@ -81,8 +71,7 @@ export class InspectPage {
                 console.log("Oops!");
             }
           ); 
-        } 
-      
+        }       
         if(this.isinspector != 0){
           console.log("in ins");
           var url22 = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/inspect/ins";
@@ -95,11 +84,8 @@ export class InspectPage {
             }
           );       
         }
-
       },
-      err => {
-          console.log("Oops! no inspectionusers");
-      }
+      err => {console.log("Oops! no inspectionusers");}
     );
   }
 

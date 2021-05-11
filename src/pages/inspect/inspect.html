@@ -38,24 +38,29 @@
   <ion-grid>
     <ion-row>                  
       <ion-col  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
-        <ion-list *ngFor="let request of inspectionrequests"   class="small-list"  style="margin: 0px; padding-left:3px;padding-right:3px;">
-          
+        <ion-list *ngFor="let request of inspectionrequests"   class="small-list"  style="margin: 0px; padding-left:3px;padding-right:3px;">         
           <ion-card style="border-top: 0px solid #ffffff !important;position:relative;top:10px;min-height:50px; max-height:500px;padding-bottom: 0px;margin-top: 3px;margin-bottom: 3px;">
-            
-            <ion-item style="padding:0px;padding-left:3px;font-size:1.3rem;"  (click)="showtheform(request.ParentFormID,request.FormID,request.LID1,request.LID2,request.LID3,request.LID4,request.Template,this.isinspector)">                      
-              <b>{{request.FormName}}{{request.Form_Name}} - {{request.FormNumber}}</b>
+            <ion-item>  
+
+            <div style="padding:0px;padding-left:3px;font-size:1.3rem;"  (click)="showtheform(request.ParentFormID,request.FormID,request.LID1,request.LID2,request.LID3,request.LID4,request.Template,this.isinspector)">  
+
+              <div [hidden]="this.isinspector == 0"><h3><b>Location: {{request.LocationText}}</b></h3></div> 
+              <div [hidden]="this.isinspector == 0"><h4>{{request.PackageTitleValue}} Package</h4></div>
+              <!--<span [hidden]="this.isinspector == 0" style="float:right;"><h4>3 of 25</h4></span>-->              
+              <div [hidden]="this.isinspector == 0"><h4>Contractor: {{request.SubcontractorValue}}</h4></div> 
+              <div [hidden]="this.isinspector == 0" *ngIf="request.daydiff < 0" style="color:red;float:left;"><h4><b>Due: {{request.reqdate | date : 'dd MMM yy'}}&nbsp;Overdue.</b></h4></div>    
+              <div [hidden]="this.isinspector == 0" *ngIf="request.daydiff >= 0"><h4>Due: {{request.reqdate | date : 'dd MMM yy'}}</h4></div>  
+
               
-              <div [hidden]="this.isinspector == 0"><h3>Location: {{request.LocationText}}</h3></div> 
-              <h3>{{request.PackageTitleValue}} Package</h3> 
-              <div [hidden]="this.isinspector == 0"><h3>Contractor: {{request.SubcontractorValue}}</h3></div> 
-              <div [hidden]="this.isinspector == 0">Due: {{request.reqdate | date : 'dd MMM yy'}} &nbsp;<ion-icon *ngIf="request.daydiff < 0" name="alert" style="position:relative;top:1px;color:red;">&nbsp;Overdue.</ion-icon></div>      
-              <div [hidden]="this.isinspector != 0"><h3>Inspector: {{request.InspectorF}} {{request.InspectorL}}</h3></div> 
-              <div [hidden]="this.isinspector != 0">Due: {{request.reqdate | date : 'dd MMM yy'}}</div>                  
-                                                                                                                                                                                                                                                                                                                                                                                                                           
-            </ion-item>   
+              <div [hidden]="this.isinspector != 0"><h3><b>{{request.FormName}}{{request.Form_Name}} - {{request.FormNumber}}</b></h3></div>        
+              <div [hidden]="this.isinspector != 0"><h4>{{request.PackageTitleValue}} Package ({{request.ExpectedForms}} expected)</h4></div>
+              <div [hidden]="this.isinspector != 0"><h4>Inspector: {{request.InspectorF}} {{request.InspectorL}}</h4></div> 
+              <div [hidden]="this.isinspector != 0"><h4>Due: {{request.reqdate | date : 'dd MMM yy'}}</h4></div>                  
+                
+            </div> 
 
+            </ion-item>  
           </ion-card> 
-
         </ion-list>        
       </ion-col>
     </ion-row>
