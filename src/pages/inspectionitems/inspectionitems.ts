@@ -12,6 +12,7 @@ import { FilePath } from '@ionic-native/file-path';
 
 import { ImgEditPage } from '../imgedit/imgedit';
 import { NgStyle } from '@angular/common';
+import { e } from '@angular/core/src/render3';
 
 
 @IonicPage()
@@ -147,6 +148,16 @@ export class InspectionitemsPage {
 
   temp:any;
 
+  // Initalial values.
+  newItem: string = "";
+  newStr: string = "";
+  toggleNew: boolean = true;
+  todos: any [];
+  todosnotes: any [];
+  notescount:any;
+  reportOverallImage :any;
+
+
   frmData1 = {notes:"", onotes1:"", onotes2:"", onotes3:"", notes1:"", notes2:"", notes3:"", notes4:"", notes5:"", notes6:"",  notes7:"", notes8:"", notes9:"",  notes10:"", notes11:"", notes12:"",  notes13:"", notes14:"", notes15:"",  notes16:"", notes17:"", note18:"",  notes19:"", notes20:"", notes21:"",  notes22:"", notes23:"", notes24:"",  notes25:"", notes26:"", notes27:"",  notes28:"", notes29:"", notes30:"",   details: ""};
 
 	constructor(
@@ -163,7 +174,11 @@ export class InspectionitemsPage {
     public http: Http) {
   }
 
-  ionViewWillEnter(): void {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+  ionViewWillEnter(): void {           
+    
+    this.todos =[];
+    this.todosnotes =[];
+    this.notescount = 0;
       
     var inspectionitemstData = JSON.parse(localStorage.getItem('userSystemData')); 
  
@@ -177,9 +192,9 @@ export class InspectionitemsPage {
     this.temp                = this.navParams.get('template');	 
     this.who                 = this.navParams.get('who');	 
 
-    if(this.temp == 0 && this.who == 0){this.temp = "sub";} 
-    if(this.temp == 1 && this.who == 0){this.temp = "subi";} 
-    if(this.temp == 1 && this.who >= 1){this.temp = "ins";}
+    if(this.temp == 0 && this.who == "sub"){this.temp = "sub";} 
+    if(this.temp == 1 && this.who == "subi"){this.temp = "subi";} 
+    if(this.temp == 1 && this.who >= "ins"){this.temp = "ins";}
 
     console.log("this.temp  ",this.temp);
 
@@ -192,7 +207,6 @@ export class InspectionitemsPage {
     localStorage.setItem('overallimg2', '');
     localStorage.setItem('overallimg3', '');
     localStorage.setItem('reportImage', '');
-
 
     this.pa5038                         = localStorage.getItem('Role-PA5038');
     this.inspectionitemsSystemProjectID = localStorage.getItem('CurrentProjectID');
@@ -227,22 +241,24 @@ export class InspectionitemsPage {
       this._sanitizer.bypassSecurityTrustStyle(data);
       this.inspectionitemssdata = data;
       if (data.length > 0) {
+        console.log("this.inspectionitemssdata: ",this.inspectionitemssdata);
       if(this.inspectionitemssdata[0].Template != null){
         this.template = this.inspectionitemssdata[0].Template;
+        this.locationtext = this.inspectionitemssdata[0].LocationText;
       } else {this.template = ""}
         this.formid             = this.inspectionitemssdata[0].FormID;      
         this.showlocationlookup = this.inspectionitemssdata[0].Template;
-      }
-      this.getOnotes(this.formid);      
+        this.getOnotes(this.formid);
+      }          
 
-
+/*
       var locationurl = Constants.apiUrl+"api/locationmap/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.pa5038;
       this.http.get(locationurl).map(res => res.json()).subscribe(data => {
         this._sanitizer.bypassSecurityTrustStyle(data);
         this.locationMaps = data;  
         if (data.length > 0) {
-          this.locationtext = this.locationMaps[0].name;
-          this.selectedlocation = this.locationMaps[0].name;
+          //this.locationtext = this.locationMaps[0].LocationText;
+          //this.selectedlocation = this.locationMaps[0].LocationText;
           console.log("this.locationtext xxx  ",this.locationtext);
           } else {
             this.locationtext = "No Data ";
@@ -254,7 +270,7 @@ export class InspectionitemsPage {
           console.log("Oops!");
         }
       ); 
-
+*/
 
       //if(this.showlocationlookup == 1){
       var urlloctext = Constants.apiUrl+"api/locationtext/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.lid1+"/"+this.lid2+"/"+this.lid3+"/"+this.lid4;    
@@ -269,10 +285,8 @@ export class InspectionitemsPage {
         //this.locationtext = "No Data Available";
         this.selectedlocation = "No Data Available";
       }      
-      },
-      err => {
-          console.log("Oops! Error getting location data");
-      }); 
+      }, err => {console.log("Oops! Error getting location data");}
+      ); 
 
 
       // Location custom names
@@ -286,11 +300,8 @@ export class InspectionitemsPage {
           this.FormFlatTypeName   = this.urllocationlocnames[0].FormFlatTypeName;
           this.FormComponentName  = this.urllocationlocnames[0].FormComponentName;
         }     
-      },
-      err => {
-          console.log("Oops! Error getting location data");
-      }); 
-
+      }, err => {console.log("Oops! Error getting location data");}
+      ); 
 
 
       // Locations lookups
@@ -319,13 +330,14 @@ export class InspectionitemsPage {
       }, err => {console.log("Oops! Error getting location data");}); 
 
 
-
       // passed and failed
       var myStringArray = this.inspectionitemssdata;
       var arrayLength   = myStringArray.length;
 
       for (var i = 0; i < arrayLength; i++) {
+
         this.itemid = this.inspectionitemssdata[i].ItemID;
+
         this.totalItems.push(this.itemid);
 
         if(this.inspectionitemssdata[i].Check2 == 1){
@@ -333,23 +345,111 @@ export class InspectionitemsPage {
         }
         if(this.inspectionitemssdata[i].Check2 == 0){          
           this.delitems.push(this.itemid);
-        }
-        if(this.inspectionitemssdata[i].Check2 != 1 && this.inspectionitemssdata[i].Check2 != 0){}
-
-        console.log("this.totalItems  ",this.totalItems);
-        console.log("this.checkeditems  ",this.checkeditems);
-        console.log("this.delitems  ",this.delitems);
+        }        
       }
 
       var  allitemsadded = JSON.stringify(this.totalItems);
 
-    },
-      err => {
-          console.log("Oops! Error reading template data");
-    }); 
+    }, err => {console.log("Oops! Error reading template data");}
+    ); 
 
     
   } 
+
+
+// Saving function
+saveNew( newItem: string, newStr: string ): void {
+  this.todos.push(newItem);
+  this.todosnotes.push(newStr);
+  this.toggleNew = false;
+  this.newItem = "";
+  this.newStr = "";
+}
+
+
+right(str, chr) {
+  return str.slice(str.length-chr,str.length);
+}
+ 
+left(str, chr) {
+  return str.slice(0, chr - str.length);
+}
+
+
+sendOverallPhotoData(){
+
+  this.notescount++;
+
+  var upurl           = "https://pvmobile.online/iuploadoverallphotdata.php";
+  var OverallImageurl = "https://projectvaultuk.com/publicpics/inspectionimages/";
+
+  var urlstr = this.left(this.requestid,33);
+  var itemcount = this.right("000"+this.notescount,3);
+  var imgviewurl = OverallImageurl+urlstr+itemcount+".jpg";
+
+  //var imgviewurl1 = urlstr+itemcount;
+  //var newurl = localStorage.getItem('reportOverallImage');
+  //localStorage.setItem(imgviewurl1,newurl);
+
+
+  const formData = new FormData();	
+
+  formData.append('count', this.notescount);
+  formData.append('photo', this.reportOverallImage);
+  formData.append('notes', this.frmData1.onotes1);
+  formData.append('templateid', this.requestid);    
+  formData.append('uid', this.inspectionitemsUserID);
+
+  this.http.post(upurl,formData).map(res => res.json()).subscribe(data => {
+        this.updata = data;
+        console.log(data);
+    },err => {console.log("Error Uploading sendPhotoData error.")}); 
+
+
+  this.todos.push(imgviewurl);
+  if(this.frmData1.onotes1 == ''){this.frmData1.onotes1 = 'No Notes.'}
+  this.todosnotes.push(this.frmData1.onotes1);
+
+  console.log("todos: ",this.todos);
+
+  this.toggleNew = false;
+  this.newItem = "";
+  this.newStr = "";
+  this.frmData1.onotes1 = "";
+  localStorage.setItem('reportOverallImage','');
+
+  this.presentToast("Image and data uploaded.")
+}
+
+
+takeOverallPhoto() {
+ 
+  var OverallImageurl = "https://projectbaultuk.com/publicpics/handover/overallimages";
+
+  let options = {
+    quality: 50,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    targetWidth: 400,
+    targetHeight: 400,
+    cameraDirection   : 0,
+    correctOrientation: true,
+    saveToPhotoAlbum: false
+  };                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+  this.camera.getPicture(options).then(imageData => {
+    var base = 'data:image/jpg;base64,' + imageData;
+    localStorage.setItem('reportOverallImage', base);
+    this.reportOverallImage = localStorage.getItem('reportOverallImage');    
+  },
+  err => {
+    console.log(err);
+  }
+);
+}
+
+
 
 
   getOnotes(theformid){
@@ -522,32 +622,44 @@ export class InspectionitemsPage {
 
 
   setStars(item,position){
-
+    //console.log("position: ",position);
     var star="";
     var newposition = position+1;
     this.valuation  = position;
 
-      for (let i = 1; i < 6; i++) {
-        star = item+i;
-        document.getElementById(star).style.color = "#c8c8c8";
-      }
+    for (let i = 1; i < 6; i++) {
+      star = item+i;
+      document.getElementById(star).style.color = "#c8c8c8";
+      //console.log("Clear: ",star);
+    }
 
-      for (let i = 1; i <= position; i++) {
-        star = item+i;
-        document.getElementById(star).style.color = "orange";
-      }
+    for (let i = 1; i <= position; i++) {
+      star = item+i;
+      document.getElementById(star).style.color = "orange";
+      //console.log("Orange ",star);
+    }
   }
 
+  openUp(item,value,notes){
+    var thisdiv1 = "div"+item;
+    if(document.getElementById(thisdiv1).style.display == "block"){
+      document.getElementById(thisdiv1).style.display   = "none"; 
+    } else {
+      document.getElementById(thisdiv1).style.display   = "block"; 
+      this.frmData1.notes = notes;
+      this.setStars(item,value);   
+      var reportUrl1 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
+      this.imageResolves(reportUrl1); 
+    }
+  }
 
-  passClick1(itemnumber,template,item,value,notes){
+  passClick1(item){
     
     var theItempass1 = item+"pass";
     var thisdiv1     = "div"+item;
 
       if(document.getElementById(theItempass1).style.color == "black"){
         document.getElementById(theItempass1).style.color = "MediumSeaGreen";
-        //this.frmData1.notes = notes;
-        //this.setStars(item,value);
         this.checkeditems.push(item);
         for( var i = 0; i < this.delitems.length; i++){     
           if ( this.delitems[i] === item) {     
@@ -578,21 +690,7 @@ export class InspectionitemsPage {
     }
   }
 
-
-  openUp(item,value){
-    var thisdiv1 = "div"+item;
-    if(document.getElementById(thisdiv1).style.display == "block"){
-      document.getElementById(thisdiv1).style.display   = "none"; 
-    } else {
-      document.getElementById(thisdiv1).style.display   = "block"; 
-      this.setStars(item,value)   
-      var reportUrl1 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
-      this.imageResolves(reportUrl1); 
-    }
-  }
-
-
-  passClick(itemnumber,template,item,value,notes){
+  passClick(item,value,notes){
 
     var theItempass1 = item+"pass";
     var theItemfail1 = item+"fail";
@@ -673,8 +771,7 @@ export class InspectionitemsPage {
     }   
   }
 
-
-  failClick(itemnumber,template,item,value,notes){
+  failClick(item,value,notes){
 
       var theItempass2 = item+"pass";
       var theItemfail2 = item+"fail";
@@ -805,10 +902,10 @@ export class InspectionitemsPage {
           var formurl = Constants.apiUrl+"api/inspectinform/"+this.inspectionitemsApiKey +"/"+this.clienttID+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.requestid+"/"+this.selectedlocation+"/"+checked+"/"+failed+"/"+this.usercompanyname+"/"+this.username+"/"+this.showlocationlookup+"/Nonotes"; //+this.frmData1.details;
           console.log("Sending overall Data");
           this.http.get(formurl).map(res => res.json()).subscribe(data => {
-            this.inspectinform = data;
-            this.presentToast("Request Complete.");
+            //this.inspectinform = data;
+            //this.presentToast("Request Complete.");
           },
-          err => {console.log("Error sending sendReport data");}
+          err => {console.log("Error sending subby sendReport data");}
           );
         } 
         
@@ -817,10 +914,10 @@ export class InspectionitemsPage {
           var formurl1 = Constants.apiUrl+"api/inspectinform/"+this.inspectionitemsApiKey +"/"+this.clienttID+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.ParentFormID+"/"+this.selectedlocation+"/"+checked+"/"+failed+"/"+this.usercompanyname+"/"+this.username+"/"+this.showlocationlookup+"/Nonotes"; //+this.frmData1.details;
           console.log("Sending overall Data");
             this.http.get(formurl1).map(res => res.json()).subscribe(data => {
-              this.inspectinform = data;
-              this.presentToast("Request Complete.");
+              //this.inspectinform = data;
+              //this.presentToast("Request Complete.");
             },
-            err => {console.log("Error sending sendReport data");}    
+            err => {console.log("Error sending inspector sendReport data");}    
           );  
         }       
 
@@ -828,23 +925,21 @@ export class InspectionitemsPage {
 
       } else {
         this.presentToast("Request Failled - Please complete form.");
-      }
+      }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
   }
 
   cancelitem(number,template,item,value,notes){                                                                             
-    this.failClick(number,template,item,value,notes);
+    this.failClick(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              item,value,notes);
   }
-
 
   presentToast(msg) {
     const toast =  this.toastCtrl.create({
       message: msg,
       duration: 1000,
-      position: 'middle'
+      position: 'bottom'
     });
     toast.present();
   }
-
 
   checkAllTicked(a,b){
     {
@@ -855,7 +950,6 @@ export class InspectionitemsPage {
       }
     }
   }
-
 
   locselected(location){
     if(location == "No Location Selected"){

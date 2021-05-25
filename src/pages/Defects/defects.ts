@@ -62,7 +62,8 @@ export class DefectsPage {
 		public navCtrl: NavController, 
 		private barcodeScanner:BarcodeScanner, 
 		private _sanitizer: DomSanitizer, 
-		public http: Http) {}
+		public http: Http
+		) {}
 
 
 
@@ -335,8 +336,7 @@ export class DefectsPage {
 
 	segmentChanged(segment){ 
 
-			var searchTerm = "";		
-
+			var searchTerm  = "";	
 			var htmlElement = document.getElementsByClassName("searchbar-input");
 			
 			if(htmlElement.length == 1){ searchTerm = htmlElement["0"].value;}

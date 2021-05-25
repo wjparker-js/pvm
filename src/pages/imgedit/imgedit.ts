@@ -5,6 +5,7 @@ import { DrawingProvider } from '../../providers/drawing/drawing';
 import { ColorsPopoverPage } from '../colors-popover/colors-popover';
 import { WidthPopoverPage } from '../width-popover/width-popover';
 import { BrushTypePopoverPage } from '../brush-type-popover/brush-type-popover';
+import { QueryEncoder } from '@angular/http';
 
 @Component({
   selector: 'page-imgedit',
@@ -20,6 +21,7 @@ export class ImgEditPage {
   imgheight:any;
   callback: any;
   noedit:any;
+  source:any;
 
   constructor(
     public alertCtrl: AlertController,
@@ -35,11 +37,12 @@ export class ImgEditPage {
 
   ionViewDidLoad() {
 
-    this.callback = this.navParams.get("callback");
-    
+    this.callback  = this.navParams.get("callback");    
+    this.source    = this.navParams.get("source");
+
     let dimensions = this.content.getContentDimensions();
-    let width   = dimensions.contentWidth;
-    let height  = dimensions.scrollHeight;
+    let width      = dimensions.contentWidth;
+    let height     = dimensions.scrollHeight;
 
     if(this.platform.is('ios')) {
       height -= 44; // size of header
@@ -52,15 +55,15 @@ export class ImgEditPage {
     this.imgheight = height;
     this.imgwidth  = width;
     this.drawing.create(width, height);   
-
+console.log(this.source);
     this.drawingEnabled = true;
-    var imageToView = localStorage.getItem('locationimage');    
+    var imageToView = localStorage.getItem(this.source);    
     this.drawing.addImage(imageToView);
     this.drawing.enableDrawing();
-   }
+  }
 
   save() {
-    localStorage.setItem('locationimage', this.drawing.getAsImage()); 
+    localStorage.setItem(this.source, this.drawing.getAsImage()); 
     this.dismiss();
   }
 

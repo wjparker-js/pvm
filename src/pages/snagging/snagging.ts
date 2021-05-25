@@ -476,7 +476,7 @@ export class SnaggingPage {
 	}
 
 	editloc(){
-		this.navCtrl.push(ImgEditPage, {callback:this.myCallbackFunction6});	
+		this.navCtrl.push(ImgEditPage, {"source":"locationimage",callback:this.myCallbackFunction6});	
 	}
 
 	takepre(){
@@ -616,8 +616,6 @@ export class SnaggingPage {
 		return new Promise((resolve, reject) => {
 			this.image = _params;
 			resolve();
-			//this.image = localStorage.getItem('locationimage');
-			console.log("In 6");
 		}); 
 	 }
 
@@ -631,10 +629,7 @@ export class SnaggingPage {
 		return new Promise((resolve, reject) => {
 			this.currentImage = _params;
 			resolve();
-			console.log("In 8");	
-			console.log(this.currentImage);		
-		}); 	
-		
+		}); 
 	 }
 
 	 myCallbackFunction9 = (_params,remediatorid) => {

@@ -36,6 +36,7 @@ export class InspectPage {
   lid2:any;
   lid3:any;
   lid4:any;
+  who:any;
 
 	constructor(public navCtrl: NavController, private _sanitizer: DomSanitizer, public viewCtrl: ViewController, public navParams: NavParams, public http: Http) {}
 
@@ -60,8 +61,10 @@ export class InspectPage {
       this._sanitizer.bypassSecurityTrustStyle(data);
       this.inspectionusers = data;  			  
       this.isinspector = this.inspectionusers[0].isinspector;
+
         if(this.isinspector == 0){
           console.log("is subby");
+          this.who = "sub";
           var url11 = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/submit/sub";
           this.http.get(url11).map(res => res.json()).subscribe(data => {
             this._sanitizer.bypassSecurityTrustStyle(data);
@@ -72,7 +75,9 @@ export class InspectPage {
             }
           ); 
         }       
+        
         if(this.isinspector != 0){
+          this.who = "ins";
           console.log("in ins");
           var url22 = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/inspect/ins";
           this.http.get(url22).map(res => res.json()).subscribe(data => {
