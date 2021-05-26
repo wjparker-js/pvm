@@ -192,9 +192,12 @@ export class InspectionitemsPage {
     this.temp                = this.navParams.get('template');	 
     this.who                 = this.navParams.get('who');	 
 
+    console.log("this.temp  ",this.temp);
+    console.log("in items who  ",this.who);
+
     if(this.temp == 0 && this.who == "sub"){this.temp = "sub";} 
     if(this.temp == 1 && this.who == "subi"){this.temp = "subi";} 
-    if(this.temp == 1 && this.who >= "ins"){this.temp = "ins";}
+    if(this.temp == 1 && this.who == "ins"){this.temp = "ins";}
 
     console.log("this.temp  ",this.temp);
 
@@ -208,10 +211,8 @@ export class InspectionitemsPage {
     localStorage.setItem('overallimg3', '');
     localStorage.setItem('reportImage', '');
 
-    this.pa5038                         = localStorage.getItem('Role-PA5038');
     this.inspectionitemsSystemProjectID = localStorage.getItem('CurrentProjectID');
     this.clienttID                      = localStorage.getItem('CurrentProjectClientID'); 
-
     this.inspectionitemsApiKey          = inspectionitemstData[0].apiKey;
     this.inspectionitemsUserID          = inspectionitemstData[0].SystemUserID;
     this.inspectionitemsUserID          = this.inspectionitemsUserID.trim();
@@ -219,7 +220,6 @@ export class InspectionitemsPage {
     this.usercompanyname                = encodeURI(this.usercompanyname.trim());
     this.username                       = inspectionitemstData[0].Name;
     this.username                       = encodeURI(this.username.trim()); 
-
     this.arrselectedlocation            = [];
     this.selectedlocation               = "";
     this.notes                          = "";
@@ -234,12 +234,21 @@ export class InspectionitemsPage {
 
     if(this.temp == "sub"){
       var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.requestid+"/"+this.temp;
-    } else {
-      var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.inspectionitemsid+"/"+this.temp;
+      console.log("url sub",url);
     } 
+    if(this.temp == "subi"){
+      var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.inspectionitemsid+"/"+this.temp;
+      console.log("urlsubi",url);
+    } 
+    if(this.temp == "ins"){
+      var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.inspectionitemsid+"/"+this.temp;
+      console.log("urlins",url);
+    }     
+
     this.http.get(url).map(res => res.json()).subscribe(data => {
       this._sanitizer.bypassSecurityTrustStyle(data);
-      this.inspectionitemssdata = data;
+      this.inspectionitemssdata = data;      
+      console.log("this.inspectionitemssdata: ",this.inspectionitemssdata);
       if (data.length > 0) {
         console.log("this.inspectionitemssdata: ",this.inspectionitemssdata);
       if(this.inspectionitemssdata[0].Template != null){
@@ -251,26 +260,6 @@ export class InspectionitemsPage {
         this.getOnotes(this.formid);
       }          
 
-/*
-      var locationurl = Constants.apiUrl+"api/locationmap/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.pa5038;
-      this.http.get(locationurl).map(res => res.json()).subscribe(data => {
-        this._sanitizer.bypassSecurityTrustStyle(data);
-        this.locationMaps = data;  
-        if (data.length > 0) {
-          //this.locationtext = this.locationMaps[0].LocationText;
-          //this.selectedlocation = this.locationMaps[0].LocationText;
-          console.log("this.locationtext xxx  ",this.locationtext);
-          } else {
-            this.locationtext = "No Data ";
-            this.selectedlocation = "No Data ";
-          } 
-        console.log("locationMaps  ",this.locationMaps);      
-        },
-        err => {
-          console.log("Oops!");
-        }
-      ); 
-*/
 
       //if(this.showlocationlookup == 1){
       var urlloctext = Constants.apiUrl+"api/locationtext/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.lid1+"/"+this.lid2+"/"+this.lid3+"/"+this.lid4;    
@@ -278,8 +267,8 @@ export class InspectionitemsPage {
       this._sanitizer.bypassSecurityTrustStyle(data);
       this.locationtextdata = data;
       if (data.length > 0) {
-      //this.locationtext = this.locationtextdata[0].name;
-      this.selectedlocation = this.locationtextdata[0].name;
+        //this.locationtext = this.locationtextdata[0].name;
+        this.selectedlocation = this.locationtextdata[0].name;
       console.log("this.locationtext   ",this.locationtext);
       } else {
         //this.locationtext = "No Data Available";
@@ -287,7 +276,6 @@ export class InspectionitemsPage {
       }      
       }, err => {console.log("Oops! Error getting location data");}
       ); 
-
 
       // Location custom names
       var urllocationlocname = Constants.apiUrl+"api/locationlocnames/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID;    
@@ -302,7 +290,6 @@ export class InspectionitemsPage {
         }     
       }, err => {console.log("Oops! Error getting location data");}
       ); 
-
 
       // Locations lookups
       var urlloctext1 = Constants.apiUrl+"api/locationparts/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/location1";    
@@ -330,7 +317,7 @@ export class InspectionitemsPage {
       }, err => {console.log("Oops! Error getting location data");}); 
 
 
-      // passed and failed
+      // passed and failed arrays
       var myStringArray = this.inspectionitemssdata;
       var arrayLength   = myStringArray.length;
 
@@ -356,101 +343,85 @@ export class InspectionitemsPage {
     
   } 
 
-
-// Saving function
-saveNew( newItem: string, newStr: string ): void {
-  this.todos.push(newItem);
-  this.todosnotes.push(newStr);
-  this.toggleNew = false;
-  this.newItem = "";
-  this.newStr = "";
-}
-
-
-right(str, chr) {
-  return str.slice(str.length-chr,str.length);
-}
- 
-left(str, chr) {
-  return str.slice(0, chr - str.length);
-}
-
-
-sendOverallPhotoData(){
-
-  this.notescount++;
-
-  var upurl           = "https://pvmobile.online/iuploadoverallphotdata.php";
-  var OverallImageurl = "https://projectvaultuk.com/publicpics/inspectionimages/";
-
-  var urlstr = this.left(this.requestid,33);
-  var itemcount = this.right("000"+this.notescount,3);
-  var imgviewurl = OverallImageurl+urlstr+itemcount+".jpg";
-
-  //var imgviewurl1 = urlstr+itemcount;
-  //var newurl = localStorage.getItem('reportOverallImage');
-  //localStorage.setItem(imgviewurl1,newurl);
-
-
-  const formData = new FormData();	
-
-  formData.append('count', this.notescount);
-  formData.append('photo', this.reportOverallImage);
-  formData.append('notes', this.frmData1.onotes1);
-  formData.append('templateid', this.requestid);    
-  formData.append('uid', this.inspectionitemsUserID);
-
-  this.http.post(upurl,formData).map(res => res.json()).subscribe(data => {
-        this.updata = data;
-        console.log(data);
-    },err => {console.log("Error Uploading sendPhotoData error.")}); 
-
-
-  this.todos.push(imgviewurl);
-  if(this.frmData1.onotes1 == ''){this.frmData1.onotes1 = 'No Notes.'}
-  this.todosnotes.push(this.frmData1.onotes1);
-
-  console.log("todos: ",this.todos);
-
-  this.toggleNew = false;
-  this.newItem = "";
-  this.newStr = "";
-  this.frmData1.onotes1 = "";
-  localStorage.setItem('reportOverallImage','');
-
-  this.presentToast("Image and data uploaded.")
-}
-
-
-takeOverallPhoto() {
- 
-  var OverallImageurl = "https://projectbaultuk.com/publicpics/handover/overallimages";
-
-  let options = {
-    quality: 50,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-    targetWidth: 400,
-    targetHeight: 400,
-    cameraDirection   : 0,
-    correctOrientation: true,
-    saveToPhotoAlbum: false
-  };                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-
-  this.camera.getPicture(options).then(imageData => {
-    var base = 'data:image/jpg;base64,' + imageData;
-    localStorage.setItem('reportOverallImage', base);
-    this.reportOverallImage = localStorage.getItem('reportOverallImage');    
-  },
-  err => {
-    console.log(err);
+  saveNew( newItem: string, newStr: string ): void {
+    this.todos.push(newItem);
+    this.todosnotes.push(newStr);
+    this.toggleNew = false;
+    this.newItem = "";
+    this.newStr = "";
   }
-);
-}
+
+  right(str, chr) {
+    return str.slice(str.length-chr,str.length);
+  }
+  
+  left(str, chr) {
+    return str.slice(0, chr - str.length);
+  }
+
+  sendOverallPhotoData(){
+
+    this.notescount++;
+
+    var upurl           = "https://pvmobile.online/iuploadoverallphotdata.php";
+    var OverallImageurl = "https://projectvaultuk.com/publicpics/inspectionimages/";
+    var urlstr          = this.left(this.requestid,33);
+    var itemcount       = this.right("000"+this.notescount,3);
+    var imgviewurl      = OverallImageurl+urlstr+itemcount+".jpg";
+
+    const formData = new FormData();	
+
+    formData.append('count', this.notescount);
+    formData.append('photo', this.reportOverallImage);
+    formData.append('notes', this.frmData1.onotes1);
+    formData.append('templateid', this.requestid);    
+    formData.append('uid', this.inspectionitemsUserID);
+
+    this.http.post(upurl,formData).map(res => res.json()).subscribe(data => {
+          this.updata = data;
+          console.log(data);
+      },err => {console.log("Error Uploading sendPhotoData error.")}); 
 
 
+    this.todos.push(imgviewurl);
+    if(this.frmData1.onotes1 == ''){this.frmData1.onotes1 = 'No Notes.'}
+    this.todosnotes.push(this.frmData1.onotes1);
 
+    console.log("todos: ",this.todos);
+
+    this.toggleNew = false;
+    this.newItem = "";
+    this.newStr = "";
+    this.frmData1.onotes1 = "";
+    localStorage.setItem('reportOverallImage','');
+
+    this.presentToast("Image and data uploaded.")
+  }
+
+  takeOverallPhoto() {
+  
+    var OverallImageurl = "https://projectbaultuk.com/publicpics/handover/overallimages";
+
+    let options = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+      targetWidth: 400,
+      targetHeight: 400,
+      cameraDirection   : 0,
+      correctOrientation: true,
+      saveToPhotoAlbum: false
+    };                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+    this.camera.getPicture(options).then(imageData => {
+      var base = 'data:image/jpg;base64,' + imageData;
+      localStorage.setItem('reportOverallImage', base);
+      this.reportOverallImage = localStorage.getItem('reportOverallImage');    
+    },
+    err => {console.log(err);}
+  );
+  }
 
   getOnotes(theformid){
 
@@ -478,11 +449,8 @@ takeOverallPhoto() {
       }*/
      
       },
-      err => {
-        console.log("Oops!");
-      }
+      err => {console.log("Oops!");}
     );  
-
 
   }
 
@@ -532,10 +500,8 @@ takeOverallPhoto() {
         this.overallimg3 = localStorage.getItem('overallimg3');
       }      
     },
-    err => {
-      console.log(err);
-    }
-  );
+    err => {console.log(err);}
+    );
   }
 
 
@@ -563,13 +529,11 @@ takeOverallPhoto() {
       formData.append('photo', this.overallimg1);
       formData.append('notes', this.frmData1.onotes1);
     }
-
     if(click == "overall2"){
       formData.append('type', 'overall2');
       formData.append('photo', this.overallimg2);
       formData.append('notes', this.frmData1.onotes2);
     }
-
     if(click == "overall3"){
       formData.append('type', 'overall3');
       formData.append('photo', this.overallimg3);
@@ -593,7 +557,6 @@ takeOverallPhoto() {
           console.log(data);
       },err => {console.log("Error Uploading sendPhotoData error.")}); 
 
-
     if(click == "clickitem"){
       document.getElementById("div"+itemid).style.display="none";
       this.frmData1.notes = "";
@@ -608,12 +571,10 @@ takeOverallPhoto() {
     if(click == "overall1"){
       document.getElementById("thumbs1").style.color = "Blue";
     }
-    
-    if(click == "overall2"){
+        if(click == "overall2"){
       document.getElementById("thumbs2").style.color = "Blue";
     }
-    
-    if(click == "overall3"){
+        if(click == "overall3"){
       document.getElementById("thumbs3").style.color = "Blue";
     }
 
@@ -622,29 +583,31 @@ takeOverallPhoto() {
 
 
   setStars(item,position){
-    //console.log("position: ",position);
+    console.log("setStars: ",position);
+
     var star="";
-    var newposition = position+1;
     this.valuation  = position;
 
     for (let i = 1; i < 6; i++) {
       star = item+i;
       document.getElementById(star).style.color = "#c8c8c8";
-      //console.log("Clear: ",star);
+      console.log("Clear: ",star);
     }
 
     for (let i = 1; i <= position; i++) {
       star = item+i;
       document.getElementById(star).style.color = "orange";
-      //console.log("Orange ",star);
+      console.log("Orange ",star);
     }
   }
 
   openUp(item,value,notes){
     var thisdiv1 = "div"+item;
     if(document.getElementById(thisdiv1).style.display == "block"){
+      console.log("Closing");
       document.getElementById(thisdiv1).style.display   = "none"; 
     } else {
+      console.log("Opening");
       document.getElementById(thisdiv1).style.display   = "block"; 
       this.frmData1.notes = notes;
       this.setStars(item,value);   
@@ -656,7 +619,6 @@ takeOverallPhoto() {
   passClick1(item){
     
     var theItempass1 = item+"pass";
-    var thisdiv1     = "div"+item;
 
       if(document.getElementById(theItempass1).style.color == "black"){
         document.getElementById(theItempass1).style.color = "MediumSeaGreen";
@@ -727,21 +689,8 @@ takeOverallPhoto() {
         } else {
           this.allChecked = false;
         } 
-                         
-        //var reportUrl = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
-        //this.imageResolves(reportUrl);
-        
-        //this.reportImage = Constants.publicUploadPath+"inspectionimages/noimage.jpg";
-        //console.log("repimg:  ",this.reportImage);
 
       } 
-      /*(else if(document.getElementById(theItempass1).style.color == "mediumseagreen"){
-          this.frmData1.notes = notes;
-          this.setStars(item,value);
-          var reportUrl1 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
-          this.imageResolves(reportUrl1);
-          document.getElementById(thisdiv1).style.display   = "block";
-      }*/
     }
     else 
     {
@@ -754,12 +703,7 @@ takeOverallPhoto() {
         if(document.getElementById(theItempass1).style.color == "mediumseagreen"){
           document.getElementById(thisdiv1).style.display   = "none";          
           document.getElementById(theItemfail1).style.color = "black";
-        
-          /*for( var i = 0; i < this.checkeditems.length; i++){     
-            if ( this.checkeditems[i] === item) {     
-                this.checkeditems.splice(i, 1); 
-            }   
-          }*/
+
           this.addcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
           if (this.addcheck == true) {
             this.allChecked = true;
@@ -810,18 +754,7 @@ takeOverallPhoto() {
            } else {
             this.allChecked = false;
           }  
-  
-          //var reportUrlf = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
-          //this.imageResolves(reportUrlf);
-  
         } 
-        /*else if (document.getElementById(theItemfail2).style.color == "red"){
-          this.frmData1.notes = notes;
-          this.setStars(item,value);
-          var reportUrlf1 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+item+".jpg";
-          this.imageResolves(reportUrlf1);
-          document.getElementById(thisdiv2).style.display   = "block";
-        }*/
       }
       else 
       {
@@ -834,12 +767,6 @@ takeOverallPhoto() {
           if(document.getElementById(theItemfail2).style.color == "red"){
             document.getElementById(thisdiv2).style.display   = "none";         
             document.getElementById(theItempass2).style.color = "black";
-   
-            /*for( var i = 0; i < this.delitems.length; i++){     
-              if ( this.delitems[i] === item) {     
-                  this.delitems.splice(i, 1); 
-              }   
-            }*/
 
             this.addcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
             if (this.addcheck == true) {
@@ -893,13 +820,13 @@ takeOverallPhoto() {
 
     var builslocname = this.locnamepart1+"-"+this.locnamepart2+"-"+this.locnamepart3+"-"+this.locnamepart4+"!";
     var buildlocduid = this.locationpart1+"!"+this.locationpart2+"!"+this.locationpart3+"!"+this.locationpart4;
-    this.selectedlocation = builslocname+buildlocduid;
+    this.selectedlocation = this.locationtext+buildlocduid;
     this.locationtext = builslocname;
 
       if(this.selectedlocation != "") {
 
         if(this.showlocationlookup == 0){  
-          var formurl = Constants.apiUrl+"api/inspectinform/"+this.inspectionitemsApiKey +"/"+this.clienttID+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.requestid+"/"+this.selectedlocation+"/"+checked+"/"+failed+"/"+this.usercompanyname+"/"+this.username+"/"+this.showlocationlookup+"/Nonotes"; //+this.frmData1.details;
+          var formurl = Constants.apiUrl+"api/inspectinform/"+this.inspectionitemsApiKey +"/"+this.clienttID+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.requestid+"/"+this.selectedlocation+"/"+checked+"/"+failed+"/"+this.usercompanyname+"/"+this.username+"/"+this.showlocationlookup+"/"+this.frmData1.notes;
           console.log("Sending overall Data");
           this.http.get(formurl).map(res => res.json()).subscribe(data => {
             //this.inspectinform = data;
@@ -911,7 +838,7 @@ takeOverallPhoto() {
         
         if(this.showlocationlookup == 1){ 
           console.log("sending inspector");
-          var formurl1 = Constants.apiUrl+"api/inspectinform/"+this.inspectionitemsApiKey +"/"+this.clienttID+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.ParentFormID+"/"+this.selectedlocation+"/"+checked+"/"+failed+"/"+this.usercompanyname+"/"+this.username+"/"+this.showlocationlookup+"/Nonotes"; //+this.frmData1.details;
+          var formurl1 = Constants.apiUrl+"api/inspectinform/"+this.inspectionitemsApiKey+"/"+this.clienttID+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.ParentFormID+"/"+this.selectedlocation+"/"+checked+"/"+failed+"/"+this.usercompanyname+"/"+this.username+"/"+this.showlocationlookup+"/"+this.frmData1.notes;
           console.log("Sending overall Data");
             this.http.get(formurl1).map(res => res.json()).subscribe(data => {
               //this.inspectinform = data;
