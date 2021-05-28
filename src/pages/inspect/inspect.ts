@@ -113,12 +113,12 @@ export class InspectPage {
 		}
 
     if(segment == "approved"){
-      var approvedurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/approved/ins";
+      var approvedurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/approved/subi";
       this.http.get(approvedurl).map(res => res.json()).subscribe(data => {
         this._sanitizer.bypassSecurityTrustStyle(data);
         this.inspectionrequests = data;  	
-        this.suborinspector = "ins";	
-        this.who = "ins";		  			 	 
+        this.suborinspector = "subi";	
+        this.who = "subi";		  			 	 
         },
         err => {
            console.log("Oops!");
@@ -127,12 +127,12 @@ export class InspectPage {
     }	    
     
 		if(segment == "failed"){
-      var failedurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/failed/ins";
+      var failedurl = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionrequestApiKey+"/"+this.inspectionrequestSystemProjectID+"/"+this.inspectionrequestUserID+"/"+this.username+"/"+this.usercompanyname+"/failed/subi";
       this.http.get(failedurl).map(res => res.json()).subscribe(data => {
         this._sanitizer.bypassSecurityTrustStyle(data);
         this.inspectionrequests = data;  	
-        this.suborinspector = "ins";	
-        this.who = "ins";		  			 	  
+        this.suborinspector = "subi";	
+        this.who = "subi";		  			 	  
         },
         err => {
            console.log("Oops!");
@@ -189,7 +189,11 @@ export class InspectPage {
   }
 
 	showtheform(ParentFormID,requestid,lid1,lid2,lid3,lid4,template,who) { 
-		console.log("wend ",who);
+    
+		console.log("ParentFormID ",ParentFormID);
+    console.log("requestid ",requestid);
+    console.log("template ",template);
+    console.log("wend ",who);
 
     this.navCtrl.push(InspectionitemsPage,{ParentFormID,requestid,lid1,lid2,lid3,lid4,template,who});
 	}

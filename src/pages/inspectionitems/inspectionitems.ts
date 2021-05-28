@@ -157,8 +157,7 @@ export class InspectionitemsPage {
   notescount:any;
   reportOverallImage :any;
 
-
-  frmData1 = {notes:"", onotes1:"", onotes2:"", onotes3:"", notes1:"", notes2:"", notes3:"", notes4:"", notes5:"", notes6:"",  notes7:"", notes8:"", notes9:"",  notes10:"", notes11:"", notes12:"",  notes13:"", notes14:"", notes15:"",  notes16:"", notes17:"", note18:"",  notes19:"", notes20:"", notes21:"",  notes22:"", notes23:"", notes24:"",  notes25:"", notes26:"", notes27:"",  notes28:"", notes29:"", notes30:"",   details: ""};
+  frmData1 = {notes:"", inotes:"", onotes1:""};
 
 	constructor(
     public navCtrl: NavController, 
@@ -257,6 +256,7 @@ export class InspectionitemsPage {
       } else {this.template = ""}
         this.formid             = this.inspectionitemssdata[0].FormID;      
         this.showlocationlookup = this.inspectionitemssdata[0].Template;
+        console.log("formid  ",this.formid)
         this.getOnotes(this.formid);
       }          
 
@@ -359,44 +359,7 @@ export class InspectionitemsPage {
     return str.slice(0, chr - str.length);
   }
 
-  sendOverallPhotoData(){
 
-    this.notescount++;
-
-    var upurl           = "https://pvmobile.online/iuploadoverallphotdata.php";
-    var OverallImageurl = "https://projectvaultuk.com/publicpics/inspectionimages/";
-    var urlstr          = this.left(this.requestid,33);
-    var itemcount       = this.right("000"+this.notescount,3);
-    var imgviewurl      = OverallImageurl+urlstr+itemcount+".jpg";
-
-    const formData = new FormData();	
-
-    formData.append('count', this.notescount);
-    formData.append('photo', this.reportOverallImage);
-    formData.append('notes', this.frmData1.onotes1);
-    formData.append('templateid', this.requestid);    
-    formData.append('uid', this.inspectionitemsUserID);
-
-    this.http.post(upurl,formData).map(res => res.json()).subscribe(data => {
-          this.updata = data;
-          console.log(data);
-      },err => {console.log("Error Uploading sendPhotoData error.")}); 
-
-
-    this.todos.push(imgviewurl);
-    if(this.frmData1.onotes1 == ''){this.frmData1.onotes1 = 'No Notes.'}
-    this.todosnotes.push(this.frmData1.onotes1);
-
-    console.log("todos: ",this.todos);
-
-    this.toggleNew = false;
-    this.newItem = "";
-    this.newStr = "";
-    this.frmData1.onotes1 = "";
-    localStorage.setItem('reportOverallImage','');
-
-    this.presentToast("Image and data uploaded.")
-  }
 
   takeOverallPhoto() {
   
@@ -424,12 +387,13 @@ export class InspectionitemsPage {
   }
 
   getOnotes(theformid){
-
+    console.log("getOnotes:  ",theformid);
+    
     var inspectionoverallnotesurl = Constants.apiUrl+"api/inspectionoverallnotes/"+this.inspectionitemsApiKey+"/"+theformid;
     this.http.get(inspectionoverallnotesurl).map(res => res.json()).subscribe(data => {
       this._sanitizer.bypassSecurityTrustStyle(data);
       this.inspectionoverallnotes = data;  
-      
+      console.log("this.inspectionoverallnotes:  ",this.inspectionoverallnotes);
       //this.overallimg1 = Constants.publicUploadPath+"inspectionimages"+"/"+this.formid+"/"+this.formid+"1.jpg";
       //console.log("overallimg1:  ",this.overallimg1);
       //var onotes = [this.frmData1.onotes1,this.frmData1.onotes2,this.frmData1.onotes3];
@@ -507,41 +471,18 @@ export class InspectionitemsPage {
 
   sendPhotoData(itemid,template,number,click,noteno){
 
-    console.log(itemid);
-    console.log(template);
-    console.log(number);
-    console.log("sendPhotoData");
-
     var itemOpen = itemid+"open";
-
     var upurl = "https://pvmobile.online/iuploadphotodata.php";
-
     const formData = new FormData();	
 
     if(click == "clickitem"){
       formData.append('type', 'clickitem');
       formData.append('photo', this.reportImage);
-      formData.append('notes', this.frmData1.notes);  //this.frmData1.notes
-    }
-
-    if(click == "overall1"){
-      formData.append('type', 'overall1');
-      formData.append('photo', this.overallimg1);
-      formData.append('notes', this.frmData1.onotes1);
-    }
-    if(click == "overall2"){
-      formData.append('type', 'overall2');
-      formData.append('photo', this.overallimg2);
-      formData.append('notes', this.frmData1.onotes2);
-    }
-    if(click == "overall3"){
-      formData.append('type', 'overall3');
-      formData.append('photo', this.overallimg3);
-      formData.append('notes', this.frmData1.onotes3);
+      formData.append('notes', this.frmData1.inotes);  //this.frmData1.notes
     }
 
     if(noteno == "x"){
-      formData.append('item', 'NA');
+      formData.append('item', '0');
     } else {
       formData.append('item', noteno);
     }
@@ -557,30 +498,60 @@ export class InspectionitemsPage {
           console.log(data);
       },err => {console.log("Error Uploading sendPhotoData error.")}); 
 
-    if(click == "clickitem"){
-      document.getElementById("div"+itemid).style.display="none";
-      this.frmData1.notes = "";
-      document.getElementById(itemOpen).style.color = "Blue";
-      this.reportImage = null;
-      localStorage.setItem('reportImage','');
-      this.passOrfail  = "";
-      this.isOpened    = false;
-      this.openedDiv   = "";
-    }
 
-    if(click == "overall1"){
-      document.getElementById("thumbs1").style.color = "Blue";
-    }
-        if(click == "overall2"){
-      document.getElementById("thumbs2").style.color = "Blue";
-    }
-        if(click == "overall3"){
-      document.getElementById("thumbs3").style.color = "Blue";
-    }
+    document.getElementById("div"+itemid).style.display="none"
+    document.getElementById(itemOpen).style.color = "Blue";
+
+    this.frmData1.notes = "";
+    localStorage.setItem('reportImage','');
+    this.reportImage = localStorage.getItem('reportImage');
+    this.passOrfail  = "";
+    this.isOpened    = false;
+    this.openedDiv   = "";
 
     this.presentToast("Image and data uploaded.")
   }
 
+  sendOverallPhotoData(){
+
+    this.notescount++;
+
+    var upurl           = "https://pvmobile.online/iuploadoverallphotdata.php";
+    var OverallImageurl = "https://projectvaultuk.com/publicpics/inspectionimages/";
+    var urlstr          = this.left(this.requestid,33);
+    var itemcount       = this.right("000"+this.notescount,3);
+    var imgviewurl      = OverallImageurl+urlstr+itemcount+".jpg";
+
+    const formData = new FormData();	
+
+    formData.append('count', this.notescount);
+    formData.append('photo', this.reportOverallImage);
+    formData.append('notes', this.frmData1.onotes1);
+    formData.append('templateid', this.requestid);    
+    formData.append('uid', this.inspectionitemsUserID);
+
+    this.http.post(upurl,formData).map(res => res.json()).subscribe(data => {
+          this.updata = data;
+          console.log(data);
+      },err => {console.log("Error Uploading sendPhotoData error.")}); 
+
+
+    this.todos.push(this.reportOverallImage);
+    if(this.frmData1.onotes1 == ''){
+      this.frmData1.onotes1 = 'No Notes.'
+    }
+    this.todosnotes.push(this.frmData1.onotes1);
+
+    console.log("todos: ",this.todos);
+
+    this.toggleNew = false;
+    this.newItem = "";
+    this.newStr = "";
+    this.frmData1.onotes1 = "";
+    localStorage.setItem('reportOverallImage','');
+
+    this.presentToast("Image and data uploaded.")
+  }
 
   setStars(item,position){
     console.log("setStars: ",position);
@@ -820,14 +791,16 @@ export class InspectionitemsPage {
 
     var builslocname = this.locnamepart1+"-"+this.locnamepart2+"-"+this.locnamepart3+"-"+this.locnamepart4+"!";
     var buildlocduid = this.locationpart1+"!"+this.locationpart2+"!"+this.locationpart3+"!"+this.locationpart4;
-    this.selectedlocation = this.locationtext+buildlocduid;
-    this.locationtext = builslocname;
+    this.selectedlocation = builslocname+buildlocduid;
+    //this.locationtext = builslocname;
+
+    if(this.frmData1.notes == ''){this.frmData1.notes = "No notes";}
 
       if(this.selectedlocation != "") {
 
         if(this.showlocationlookup == 0){  
           var formurl = Constants.apiUrl+"api/inspectinform/"+this.inspectionitemsApiKey +"/"+this.clienttID+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.requestid+"/"+this.selectedlocation+"/"+checked+"/"+failed+"/"+this.usercompanyname+"/"+this.username+"/"+this.showlocationlookup+"/"+this.frmData1.notes;
-          console.log("Sending overall Data");
+          console.log("Sending overall Data  ",formurl);
           this.http.get(formurl).map(res => res.json()).subscribe(data => {
             //this.inspectinform = data;
             //this.presentToast("Request Complete.");

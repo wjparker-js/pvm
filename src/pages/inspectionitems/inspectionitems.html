@@ -19,104 +19,106 @@
       <ion-col col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
         <ion-list style="margin-bottom: 0px;"> 
 
+
           <!-- Location headers -->
-          <div [hidden]="this.temp != 'sub'">
-            <ion-item [hidden]="(this.showlocationlookup == 1 || this.FormPlotFlatName == null)" style="padding-left: 0px;">
-              <ion-select placeholder="{{this.FormPlotFlatName}}" id="selectlocation1" (ionChange)="loc1selected(loc1)"              
-                class="myCustomSelect" [(ngModel)]="loc1"
-                style="padding-top: 10px;margin:0px;border-bottom-color:black;padding-right: 10px;padding-bottom: 0px;text-align:left;font-size:1.3rem;">
-                <ion-option *ngFor="let loc1 of this.location1" style="padding-left:5px;font-size:1.3rem;" 
-                  [value]="loc1.TextValue+'-'+loc1.PlotFlatValueID">
-                  {{loc1.TextValue}}</ion-option>
-              </ion-select>
+          <!-- Location headers -->
+          <!-- Location headers -->
+          <ion-card style="border-top: 0px solid #ffffff !important;position:relative;top:5px;min-height:40px; max-height:600px;padding-bottom: 0px;padding-top: 10px;margin-top: 3px;margin-bottom: 3px;">
+            <div [hidden]="this.temp != 'sub'">
+              <ion-item [hidden]="(this.showlocationlookup == 1 || this.FormPlotFlatName == null)" style="padding-left: 0px;">
+                <ion-select placeholder="{{this.FormPlotFlatName}}" id="selectlocation1" (ionChange)="loc1selected(loc1)"              
+                  class="myCustomSelect" [(ngModel)]="loc1"
+                  style="padding-top: 10px;margin:0px;border-bottom-color:black;padding-right: 10px;padding-bottom: 0px;text-align:left;font-size:1.2 em;">
+                  <ion-option *ngFor="let loc1 of this.location1" style="padding-left:5px;font-size:1.2 em;" 
+                    [value]="loc1.TextValue+'-'+loc1.PlotFlatValueID">
+                    {{loc1.TextValue}}</ion-option>
+                </ion-select>
+              </ion-item>
+              <ion-item [hidden]="(this.showlocationlookup == 1 || this.FormFloorLevelName == null)" style="padding-left: 0px;">
+                <ion-select placeholder="{{this.FormFloorLevelName}}" id="selectlocation2" (ionChange)="loc2selected(loc2)"  
+                  class="myCustomSelect" [(ngModel)]="loc2"
+                  style="padding-top: 10px;margin:0px;border-bottom-color:black;padding-right: 10px;padding-bottom: 0px;text-align:left;font-size:1.2 em;">
+                  <ion-option *ngFor="let loc2 of this.location2" style="padding-left:5px;font-size:1.2 em;"
+                    [value]="loc2.TextValue+'-'+loc2.FloorLevelValueID">
+                    {{loc2.TextValue}}</ion-option>
+                </ion-select>
+              </ion-item>
+              <ion-item [hidden]="(this.showlocationlookup == 1 || this.FormFlatTypeName == null)" style="padding-left: 0px;">
+                <ion-select placeholder="{{this.FormFlatTypeName}}" id="selectlocation3" (ionChange)="loc3selected(loc3)"  
+                  class="myCustomSelect" [(ngModel)]="loc3"
+                  style="padding-top: 10px;margin:0px;border-bottom-color:black;padding-right: 10px;padding-bottom: 0px;text-align:left;font-size:1.2 em;">
+                  <ion-option *ngFor="let loc3 of this.location3" style="padding-left:5px;font-size:1.2 em;"
+                    [value]="loc3.TextValue+'-'+loc3.FlatTypeValueID">
+                    {{loc3.TextValue}}</ion-option>
+                </ion-select>
+              </ion-item>
+              <ion-item [hidden]="(this.showlocationlookup == 1 || this.FormComponentName == null)" style="padding-left: 0px;">
+                <ion-select placeholder="{{this.FormComponentName}}" id="selectlocation4" (ionChange)="loc4selected(loc4)"  
+                  class="myCustomSelect" [(ngModel)]="loc4"
+                  style="padding-top: 10px;margin:0px;border-bottom-color:black;padding-right: 10px;padding-bottom: 0px;text-align:left;font-size:1.2 em;">
+                  <ion-option *ngFor="let loc4 of this.location4" style="padding-left:5px;font-size:1.2 em;"
+                    [value]="loc4.TextValue+'-'+loc4.ComponentValueID">
+                    {{loc4.TextValue}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </div> 
+            <ion-item [hidden]="this.temp == 'sub'">
+              <ion-grid item-content>
+                <ion-row>
+                  <ion-col col-1></ion-col>
+                  <ion-col col-11 style="font-size:1.2 em;">
+                  {{this.locationtext}}
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
             </ion-item>
-            <ion-item [hidden]="(this.showlocationlookup == 1 || this.FormFloorLevelName == null)" style="padding-left: 0px;">
-              <ion-select placeholder="{{this.FormFloorLevelName}}" id="selectlocation2" (ionChange)="loc2selected(loc2)"  
-                class="myCustomSelect" [(ngModel)]="loc2"
-                style="padding-top: 10px;margin:0px;border-bottom-color:black;padding-right: 10px;padding-bottom: 0px;text-align:left;font-size:1.3rem;">
-                <ion-option *ngFor="let loc2 of this.location2" style="padding-left:5px;font-size:1.3rem;"
-                  [value]="loc2.TextValue+'-'+loc2.FloorLevelValueID">
-                  {{loc2.TextValue}}</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item [hidden]="(this.showlocationlookup == 1 || this.FormFlatTypeName == null)" style="padding-left: 0px;">
-              <ion-select placeholder="{{this.FormFlatTypeName}}" id="selectlocation3" (ionChange)="loc3selected(loc3)"  
-                class="myCustomSelect" [(ngModel)]="loc3"
-                style="padding-top: 10px;margin:0px;border-bottom-color:black;padding-right: 10px;padding-bottom: 0px;text-align:left;font-size:1.3rem;">
-                <ion-option *ngFor="let loc3 of this.location3" style="padding-left:5px;font-size:1.3rem;"
-                  [value]="loc3.TextValue+'-'+loc3.FlatTypeValueID">
-                  {{loc3.TextValue}}</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item [hidden]="(this.showlocationlookup == 1 || this.FormComponentName == null)" style="padding-left: 0px;">
-              <ion-select placeholder="{{this.FormComponentName}}" id="selectlocation4" (ionChange)="loc4selected(loc4)"  
-                class="myCustomSelect" [(ngModel)]="loc4"
-                style="padding-top: 10px;margin:0px;border-bottom-color:black;padding-right: 10px;padding-bottom: 0px;text-align:left;font-size:1.3rem;">
-                <ion-option *ngFor="let loc4 of this.location4" style="padding-left:5px;font-size:1.3rem;"
-                  [value]="loc4.TextValue+'-'+loc4.ComponentValueID">
-                  {{loc4.TextValue}}</ion-option>
-              </ion-select>
-            </ion-item>
-          </div>
-          <ion-item [hidden]="this.temp == 'sub'">
-            <ion-grid item-content>
-              <ion-row>
-                <ion-col col-1></ion-col>
-                <ion-col col-11 style="font-size:1.7rem;">
-                {{this.locationtext}}
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-item>
+          </ion-card>
+
+          <br>
 
           <!-- Items list -->
+          <!-- Items list -->
+          <!-- Items list -->
           <div *ngFor="let inspectionitem of inspectionitemssdata"> 
-            <ion-card style="border-top: opx solid #ffffff !important;position:relative;top:5px;min-height:40px; max-height:600px;padding-bottom: 0px;padding-top: 10px;margin-top: 3px;margin-bottom: 3px;"> 
+            <ion-card style="border-top: 0px solid #ffffff !important;position:relative;top:5px;min-height:40px; max-height:600px;padding-bottom: 0px;padding-top: 10px;margin-top: 3px;margin-bottom: 3px;"> 
               <ion-item class="card card-md" class="lite -block item-md" style="padding-left: 0px;padding-top: 0px;margin:0px;width:100%;border-bottom-color:white;padding-right: 0px;padding-bottom: 0px;">
                 <div item-content style="width:100%;"> 
 
+
+                  <!-- Pass/Fail/Thumbs  icons--> 
+                  <!-- Pass/Fail/Thumbs  icons--> 
                   <!-- Pass/Fail/Thumbs  icons-->  
                   <div *ngIf="inspectionitem.Template == '0' && this.temp == 'sub'">
-                    <ion-row style="width:100%">
-                      <ion-col col-1 style="position:relative;top:5px;font-size:1.3rem;">{{inspectionitem.ItemNumber}}</ion-col>
-                      <ion-col col-8 text-wrap style="position:relative;top:5px;max-height:80px;word-wrap: break-word;font-size:1.3rem;">{{inspectionitem.ItemText}}</ion-col>             
-                      <ion-col col-1></ion-col>
-                      <ion-col col-1></ion-col>
-                      <ion-col col-1>
+                    <ion-row style="width:100%">  
+                      <ion-col col-1 style="position:relative;top:5px;font-size:1.2 em;text-align:center;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-9 text-wrap style="position:relative;top:5px;max-height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>             
+                      <ion-col col-2 style="text-align:center;">
                         <ion-icon id="{{inspectionitem.ItemID}}pass" (click)="passClick1(inspectionitem.ItemID,'','')" name="checkmark-circle" style="position:relative;left:-10px;color:black;font-size:25px; display: inline-block;vertical-align: middle;margin-left:5px;margin-right:5px;padding-right:5px;"></ion-icon>
                       </ion-col>     
                     </ion-row>                                               
                   </div>
-
                   <div *ngIf="inspectionitem.Template == '0' && this.temp == 'subi' && inspectionitem.Check2 == '0'">
                     <ion-row style="width:100%">
-                      <ion-col col-1 style="position:relative;top:5px;font-size:1.3rem;">{{inspectionitem.ItemNumber}}</ion-col>
-                      <ion-col col-8 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.3rem;">{{inspectionitem.ItemText}}</ion-col>             
-                      <ion-col col-1></ion-col>
-                      <ion-col col-1>
-                        <ion-icon id="{{inspectionitem.ItemID}}fail" (click)="openUp(inspectionitem.ItemID,inspectionitem.Check2Valuation)" name="close-circle" style="color:red;font-size:25px; display: inline-block;vertical-align: middle;padding-left:5px"></ion-icon>
+                      <ion-col col-1 style="position:relative;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-9 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>             
+                      <ion-col col-2 style="text-align:center;">
+                        <ion-icon style="text-align:center;" id="{{inspectionitem.ItemID}}fail" (click)="openUp(inspectionitem.ItemID,inspectionitem.Check2Valuation)" name="close-circle" style="color:red;font-size:25px; display: inline-block;vertical-align: middle;padding-left:5px"></ion-icon>
                       </ion-col>
-                      <ion-col col-1></ion-col>
                     </ion-row>
                   </div>
-
                   <div *ngIf="inspectionitem.Template == '0' && this.temp == 'subi' && inspectionitem.Check2 == '1'">
                     <ion-row style="width:100%">
-                      <ion-col col-1 style="position:relative;top:5px;font-size:1.3rem;">{{inspectionitem.ItemNumber}}</ion-col>
-                      <ion-col col-8 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.3rem;">{{inspectionitem.ItemText}}</ion-col>             
-                      <ion-col col-1></ion-col>                   
-                      <ion-col col-1>
-                        <ion-icon id="{{inspectionitem.ItemID}}pass"  (click)="openUp(inspectionitem.ItemID,inspectionitem.Check2Valuation)" name="checkmark-circle" style="color:mediumseagreen;font-size:25px; display: inline-block;vertical-align: middle;margin-left:5px;margin-right:5px;padding-right:5px;"></ion-icon>
+                      <ion-col col-1 style="position:relative;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-9 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>             
+                      <ion-col col-2>
+                        <ion-icon style="text-align:center;" id="{{inspectionitem.ItemID}}pass"  (click)="openUp(inspectionitem.ItemID,inspectionitem.Check2Valuation)" name="checkmark-circle" style="color:mediumseagreen;font-size:25px; display: inline-block;vertical-align: middle;margin-left:5px;margin-right:5px;padding-right:5px;"></ion-icon>
                       </ion-col>
-                      <ion-col col-1></ion-col>
                     </ion-row>
                   </div>
-
                   <div *ngIf="inspectionitem.Template == '1' && this.temp == 'ins' && inspectionitem.Check2 == null">
                     <ion-row style="width:100%">
-                      <ion-col col-1 style="position:relative;top:5px;font-size:1.3rem;">{{inspectionitem.ItemNumber}}</ion-col>
-                      <ion-col col-8 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.3rem;">{{inspectionitem.ItemText}}</ion-col>                        
-                      <ion-col col-1></ion-col>
+                      <ion-col col-1 style="position:relative;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-8 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>                        
                       <ion-col col-1>
                         <ion-icon id="{{inspectionitem.ItemID}}pass" (click)="passClick(inspectionitem.ItemID,inspectionitem.Check2Valuation,inspectionitem.Check2Notes)" name="checkmark-circle" style="color:black;font-size:25px; display: inline-block;vertical-align: middle;"></ion-icon>
                       </ion-col>
@@ -127,12 +129,11 @@
                         <ion-icon id="{{inspectionitem.ItemID}}open"  name="thumbs-up" style="color:white;font-size:25px; display: inline-block;vertical-align: middle;"></ion-icon> 
                       </ion-col>
                     </ion-row>
-                  </div>
-                    
-                  <div *ngIf="inspectionitem.Template == '1' && this.temp == 'ins' && inspectionitem.Check2 == '0'">
+                  </div>                    
+              <!--<div *ngIf="inspectionitem.Template == '1' && this.temp == 'ins' && inspectionitem.Check2 == '0'">
                     <ion-row style="width:100%">
-                      <ion-col col-1 style="position:relative;top:5px;font-size:1.3rem;">{{inspectionitem.ItemNumber}}</ion-col>
-                      <ion-col col-8 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.3rem;">{{inspectionitem.ItemText}}</ion-col>                        
+                      <ion-col col-1 style="position:relative;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-7 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>                        
                       <ion-col col-1></ion-col>
                       <ion-col col-1>
                         <ion-icon id="{{inspectionitem.ItemID}}pass" (click)="passClick(inspectionitem.ItemID,inspectionitem.Check2Valuation,inspectionitem.Check2Notes)" name="checkmark-circle" style="color:black;font-size:25px; display: inline-block;vertical-align: middle;margin-left:5px;margin-right:5px;padding-right:5px;"></ion-icon>
@@ -144,12 +145,11 @@
                         <ion-icon id="{{inspectionitem.ItemID}}open"  name="thumbs-up" (click)="closeDiv(inspectionitem.ItemID)" style="color:rgb(255, 255, 255);font-size:25px; display: inline-block;vertical-align: middle;margin-left:5px;margin-right:5px;padding-right:5px;"></ion-icon> 
                       </ion-col>
                     </ion-row>
-                  </div>                      
-
+                  </div>
                   <div *ngIf="inspectionitem.Template == '1' && this.temp == 'ins' && inspectionitem.Check2 == '1'">
                     <ion-row style="width:100%">
-                      <ion-col col-1 style="position:relative;top:5px;font-size:1.3rem;">{{inspectionitem.ItemNumber}}</ion-col>
-                      <ion-col col-8 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.3rem;">{{inspectionitem.ItemText}}</ion-col>                        
+                      <ion-col col-1 style="position:relative;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-7 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>                        
                       <ion-col col-1></ion-col>
                       <ion-col col-1>
                         <ion-icon id="{{inspectionitem.ItemID}}pass" (click)="passClick(inspectionitem.ItemID,inspectionitem.Check2Valuation,inspectionitem.Check2Notes)" name="checkmark-circle" style="color:mediumseagreen;font-size:25px; display: inline-block;vertical-align: middle;margin-left:5px;margin-right:5px;padding-right:5px;"></ion-icon>
@@ -162,11 +162,39 @@
                       </ion-col> 
                     </ion-row>
                   </div>   
+                  <div *ngIf="inspectionitem.Template == '1' && this.temp == 'ins' && inspectionitem.Check2 == '0'">
+                    <ion-row style="width:100%">
+                      <ion-col col-1 style="position:relative;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-8 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>             
+                      <ion-col col-1></ion-col>
+                      <ion-col col-1>
+                        <ion-icon id="{{inspectionitem.ItemID}}fail" (click)="openUp(inspectionitem.ItemID,inspectionitem.Check2Valuation)" name="close-circle" style="color:red;font-size:25px; display: inline-block;vertical-align: middle;padding-left:5px"></ion-icon>
+                      </ion-col>
+                      <ion-col col-1></ion-col>
+                    </ion-row>
+                  </div>
+                  <div *ngIf="inspectionitem.Template == '1' && this.temp == 'ins' && inspectionitem.Check2 == '1'">
+                    <ion-row style="width:100%">
+                      <ion-col col-1 style="position:relative;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-8 text-wrap style="position:relative;top:5px;max-height:500px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>             
+                      <ion-col col-1></ion-col>                   
+                      <ion-col col-1>
+                        <ion-icon id="{{inspectionitem.ItemID}}pass"  (click)="openUp(inspectionitem.ItemID,inspectionitem.Check2Valuation)" name="checkmark-circle" style="color:mediumseagreen;font-size:25px; display: inline-block;vertical-align: middle;margin-left:5px;margin-right:5px;padding-right:5px;"></ion-icon>
+                      </ion-col>
+                      <ion-col col-1></ion-col>
+                    </ion-row>
+                  </div>-->
 
 
+                  <!-- individual item notes, stars and image -->
+                  <!-- individual item notes, stars and image -->
+                  <!-- individual item notes, stars and image -->
                   <div [hidden]="this.temp == 'sub'" id="div{{inspectionitem.ItemID}}"  style="position:relative;top:-10px;display:none;">
-                      
-                    <ion-row  *ngIf = "this.temp == 'subi'" style="position:relative;top:-10px;">
+                    
+                    <!-- Subbie stuff -->
+                    <!-- Subbie stuff -->
+                    <!-- Subbie stuff -->
+                    <ion-row *ngIf = "this.temp == 'subi'" style="position:relative;top:0px;">
                       <ion-col col-1></ion-col>
                       <ion-col col-11> 
                         <ion-textarea 
@@ -175,13 +203,13 @@
                         name="notes" 
                         id="notes"
                         placeholder=""
-                        style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#ffffff;margin-top:5px;top:5px;left:15px;font-size: 1.3rem;"
+                        style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;margin-top:5px;top:5px;left:15px;font-size: 1.2 em;"
                         value="{{inspectionitem.Check2Notes}}"
                         >                        
                       </ion-textarea>
                       </ion-col>
                     </ion-row>
-                    <ion-row *ngIf = "this.temp == 'subi'" style="position:relative;top:-10px;text-align:right;">
+                    <ion-row *ngIf = "this.temp == 'subi'" style="position:relative;top:0px;text-align:right;">
                       <ion-col col-12 style = "position:relative;left:-7px;">
                         <ion-icon name="star" item-right  id="{{inspectionitem.ItemID}}1" style="color:#c8c8c8;font-size:15px;"></ion-icon>
                         <ion-icon name="star" item-right  id="{{inspectionitem.ItemID}}2" style="color:#c8c8c8;font-size:15px;"></ion-icon>
@@ -190,32 +218,42 @@
                         <ion-icon name="star" item-right  id="{{inspectionitem.ItemID}}5" style="color:#c8c8c8;font-size:15px;"></ion-icon>
                       </ion-col>
                     </ion-row>
-                    <ion-row *ngIf="inspectionitem.xmlImage != null">
+                    <ion-row *ngIf = "this.temp == 'subi' && this.reportImage != ''" style="margin: auto;position:relative;height:auto;width:100%;border:1px;">
+                      <ion-col col-12 style="margin: auto;position:relative;height:auto;width:100%;border:1px;">
+                        <ion-thumbnail>                        
+                          <img [src]="this.reportImage" style="padding: 10px 10px 10px 10px;position:relative;height:auto;width:100%;border:1px;" imageViewer/>
+                        </ion-thumbnail>
+                      </ion-col>                     
+                    </ion-row>   
+                                     
+                    <!--<ion-row *ngIf="this.temp == 'subi' && inspectionitem.xmlImage != null">
                       <ion-col>
                         <ion-thumbnail item-left>
                           <img [src]="'data:image/jpg;base64,'+inspectionitem.xmlImage" style="margin: auto;position:relative;height:200px;width:120px;border:1px;" imageViewer/>
                         </ion-thumbnail>
                       </ion-col>
-                    </ion-row>
+                    </ion-row>-->
 
-                    
-                    <ion-row  *ngIf = "this.temp == 'ins'"style="position:relative;top:-20px;">
+                    <!-- Inspector stuff -->
+                    <!-- Inspector stuff -->
+                    <!-- Inspector stuff -->
+                    <ion-row  *ngIf = "this.temp == 'ins'" style="position:relative;top:0px;">
                       <ion-col col-1></ion-col>
                       <ion-col col-11> 
                         <ion-textarea 
                         #myInput 
                         rows="3" 
                         name="{{inspectionitem.ItemNumber}}notes" 
-                        [(ngModel)]="frmData1.onotes" 
+                        [(ngModel)]="frmData1.inotes" 
                         id="{{inspectionitem.ItemNumber}}notes"
                         placeholder=""
-                        style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;margin-top:0px;top:-5px;left:15px;font-size: 1.3rem;">
+                        style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;margin-top:0px;top:-5px;left:15px;font-size: 1.2 em;">
                       </ion-textarea>
                       </ion-col>
                     </ion-row>
                     <ion-row  *ngIf = "this.temp == 'ins'">
                       <ion-col col-1></ion-col>
-                      <ion-col col-6 style = "position:relative;top:-30px;left:0px;">
+                      <ion-col col-6 style = "position:relative;top:-10px;left:0px;">
                         <ion-icon name="star" (click)="setStars(inspectionitem.ItemID,'1')" id="{{inspectionitem.ItemID}}1" style="color:#c8c8c8;font-size:25px;"></ion-icon>
                         <ion-icon name="star" (click)="setStars(inspectionitem.ItemID,'2')" id="{{inspectionitem.ItemID}}2" style="color:#c8c8c8;font-size:25px;"></ion-icon>
                         <ion-icon name="star" (click)="setStars(inspectionitem.ItemID,'3')" id="{{inspectionitem.ItemID}}3" style="color:#c8c8c8;font-size:25px;"></ion-icon>
@@ -223,14 +261,14 @@
                         <ion-icon name="star" (click)="setStars(inspectionitem.ItemID,'5')" id="{{inspectionitem.ItemID}}5" style="color:#c8c8c8;font-size:25px;"></ion-icon>
                       </ion-col>                      
                       <ion-col col-1></ion-col>
-                      <ion-col col-2 style="padding-bottom: 0px;top: 6px;">
+                      <ion-col col-2 style="position:relative;top:15px;padding-bottom: 0px;">
                         <button ion-button color="light" right
                           style="position:relative;top:-30px;left:-30px;height:25px;width:55px;padding-left:5px;padding-right:5px;margin-top: 0px;margin-bottom: 0px;font-size:12px;margin-left: auto;margin-right: auto;"
                           item-left (click)="takePhoto(inspectionitem.ItemID,inspectionitem.FormID,'clickitem','x')">
                           Photo
                         </button>
                       </ion-col>
-                      <ion-col col-2 style="margin-left:auto;margin-right:auto;padding-bottom: 0px;top: 6px;">
+                      <ion-col col-2 style="position:relative;top:15px;margin-left:auto;margin-right:auto;padding-bottom: 0px;">
                         <button ion-button color="light" right
                           style="position:relative;top:-30px;left:-15px;height:25px;width:55px;padding-left:5px;padding-right:5px;margin-top: 0px;margin-bottom: 0px;font-size:12px;margin-left: auto;margin-right: auto;"
                           (click)="sendPhotoData(inspectionitem.ItemID,inspectionitem.FormID,inspectionitem.ItemNumber,'clickitem','x')">
@@ -239,16 +277,30 @@
                       </ion-col>
                       <ion-col col-1></ion-col>
                     </ion-row>
-                      
+                    <ion-row *ngIf="this.temp == 'ins' && this.reportImage != ''">
+                      <ion-thumbnail>
+                        <img [src]="this.reportImage" style="padding: 10px 10px 10px 10px;position:relative;height:auto;width:100%;border:1px;" imageViewer/>
+                      </ion-thumbnail>                     
+                    </ion-row>
+                    <!--<ion-row *ngIf="this.temp == 'ins' && inspectionitem.xmlImage != null">
+                      <ion-col>
+                        <ion-thumbnail>
+                          <img [src]="'data:image/jpg;base64,'+inspectionitem.xmlImage" style="margin: auto;position:relative;height:200px;width:120px;border:1px;" imageViewer/>
+                        </ion-thumbnail>
+                      </ion-col>
+                    </ion-row>-->
+
                   </div>
 
                 </div>
               </ion-item>
             </ion-card>
-          </div>
-          
+          </div>          
 
-          <!-- sub notes -->
+
+          <!-- sub overall note -->
+          <!-- sub overall note -->
+          <!-- sub overall note -->
           <ion-row *ngIf="this.temp == 'sub'" style="width:100%;">
             <ion-col col-1></ion-col>
             <ion-col col-10> 
@@ -259,37 +311,48 @@
               [(ngModel)]="frmData1.notes" 
               id="notes"
               placeholder="Notes..."
-              style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;left:15px;font-size: 1.3rem;">
+              style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;left:15px;font-size: 1.2 em;">
             </ion-textarea>
             </ion-col>
             <ion-col col-1></ion-col>
           </ion-row>
+          <br>
 
-          <!--  subi overall notes etc -->
+
+          <!-- subi overall notes view only -->
+          <!-- subi overall notes view only -->
+          <!-- subi overall notes view only -->
           <ion-item  *ngIf="this.temp == 'subi'" style="position:relative;left:-5px;margin-left:0px;padding-left: 2px;">
             <ion-grid style="padding-top: 0px;padding-bottom: 0px;" item-content>
               <ion-row>
-                <ion-col col-1></ion-col>
-                <ion-col col-10 style="padding-right:0px;">
-                  <ion-textarea #myInput rows="3" name="notes1" id="notes1" [(ngModel)]="frmData1.onotes1"
-                    placeholder=""
-                    style="padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;font-size: 1.3rem;">
-                  </ion-textarea>
+                <ion-col *ngFor="let xmlImages of inspectionoverallnotes; index as i"  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+                  <ion-list  style="margin-top: 2px;margin-bottom: 5px;">  
+                    <ion-card style="border-top: 0px solid #ffffff !important;position:relative;top:5px;min-height:60px; max-height:60px;padding-bottom: 0px;padding-top: 10px;margin-top: 3px;margin-bottom: 3px;"> 
+                      <ion-item class="card card-md" class="lite -block item-md" style="padding-left:10px;">   
+                        <ion-thumbnail item-left>
+                          <img [src]="'data:image/jpg;base64,'+xmlImages.xmlImage" style="position:relative;top:-10px;height:50px;width:30px;border:1px;" imageViewer/>
+                        </ion-thumbnail>
+                        <ion-textarea #myInput rows="2" value = "{{this.xmlImages.note}}" style="padding-right:0px;height:50px;border:1px;border-color:#000000;background-color:#ffffff;position:relative;top:-5px;font-size: 1.2 em;"></ion-textarea>
+                      </ion-item>
+                    </ion-card>
+                  </ion-list>        
                 </ion-col>
-                <ion-col col-1><ion-icon id="thumbs1"  name="thumbs-up" style="position:relative;top:10px;color:white;font-size:25px; display: inline-block;vertical-align: middle;margin-left:5px;margin-right:5px;padding-right:5px;"></ion-icon>
-                </ion-col>
-              </ion-row>
-              <ion-row style="position:relative;top:-10px;">
-                <ion-col col-12></ion-col>
               </ion-row>
             </ion-grid>
           </ion-item>
           
-          <!-- inspector overall etc  -->
+
+          <!-- inspector overall etc edit -->
+          <!-- inspector overall etc edit -->
+          <!-- inspector overall etc edit -->
           <ion-item  *ngIf="this.temp == 'ins'" style="position:relative;left:-5px;margin-left:0px;padding-left: 2px;">            
             <ion-grid style="padding-top: 0px;padding-bottom: 0px;" item-content>              
               <div>
 
+                
+                <!-- overall photos/notes grid  -->
+                <!-- overall photos/notes grid  -->
+                <!-- overall photos/notes grid  -->
                 <ion-row>
                   <ion-col *ngFor="let image of todos; index as i"  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
                     <ion-list  style="margin-top: 2px;margin-bottom: 5px;">  
@@ -298,13 +361,17 @@
                           <ion-thumbnail item-left>
                             <img [src]="image" style="position:relative;top:-10px;height:50px;width:30px;border:1px;" imageViewer/>
                           </ion-thumbnail>
-                          <ion-textarea #myInput rows="2" value = "{{this.todosnotes[i]}}" style="padding-right:0px;height:50px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;font-size: 1.3rem;"></ion-textarea>
+                          <ion-textarea #myInput rows="2" value = "{{this.todosnotes[i]}}" style="padding-right:0px;height:50px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;font-size: 1.2 em;"></ion-textarea>
                         </ion-item>
                       </ion-card>
                     </ion-list>        
                   </ion-col>
                 </ion-row>
 
+                
+                <!-- add overall photos/notes  -->
+                <!-- add overall photos/notes  -->
+                <!-- add overall photos/notes  -->
                 <ion-item  *ngIf="this.temp == 'ins'" style="position:relative;left:-5px;margin-left:0px;padding-left: 2px;">
                   <ion-grid style="padding-top: 0px;padding-bottom: 0px;" item-content>
                     <div [hidden]="this.temp != 'ins'" style="position:relative;top:0px;display:block;">                     
@@ -314,11 +381,11 @@
                           <ion-textarea 
                             #myInput 
                             rows="3" 
-                            name="notes1" 
+                            name="onotes1" 
                             [(ngModel)]="frmData1.onotes1" 
-                            id="notes1"
+                            id="onotes1"
                             placeholder="Overall Notes..."
-                            style="padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;left:0px !important;font-size: 1.3rem;">
+                            style="padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;left:0px !important;font-size: 1.2 em;">
                           </ion-textarea>
                         </ion-col>
                       </ion-row>       
@@ -340,7 +407,32 @@
                   </ion-grid>
                 </ion-item>
 
-                <!--<ion-row *ngFor="let image of todos; index as i"  col-12 col-md-6 col-lg-4 col-xl-3>
+
+              </div>
+            </ion-grid>
+          </ion-item>
+
+          
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+
+<!-- footer with submit for sub and ins -->
+<!-- footer with submit for sub and ins -->
+<!-- footer with submit for sub and ins -->
+<ion-footer [hidden]="this.temp == 'subi'">
+  <ion-buttons>
+    <button full ion-button icon-left  (click)="sendReport()">
+      <ion-icon name="cloud-upload"></ion-icon>Update Inspection Request
+    </button>
+  </ion-buttons>
+</ion-footer>
+
+<!--<ion-row *ngFor="let image of todos; index as i"  col-12 col-md-6 col-lg-4 col-xl-3>
                   <ion-col col-12>
                   <ion-card style="
                   position:relative;
@@ -360,7 +452,7 @@
                       [(ngModel)]="frmData1.onotes1" 
                       id="notes1"
                       placeholder="Overall Notes..."
-                      style="position:relative;top:0px;left:10px !important;font-size: 1.3rem;margin:0px;padding:1px;height:45px;border:1px;background-color:silver;">
+                      style="position:relative;top:0px;left:10px !important;font-size: 1.2 em;margin:0px;padding:1px;height:45px;border:1px;background-color:silver;">
                     </ion-textarea>
                       
                   </ion-card>
@@ -378,7 +470,7 @@
                         [(ngModel)]="frmData1.onotes1" 
                         id="notes1"
                         placeholder="Overall Notes..."
-                        style="padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;left:0px !important;font-size: 1.3rem;">
+                        style="padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;left:0px !important;font-size: 1.2 em;">
                       </ion-textarea>
                     </ion-col>
                   </ion-row>       
@@ -404,22 +496,3 @@
                     <ion-col col-1></ion-col>
                   </ion-row>
                 </div>-->
-
-              </div>
-            </ion-grid>
-          </ion-item>
-
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
-
-
-<ion-footer [hidden]="this.temp == 'subi'">
-  <ion-buttons>
-    <button full ion-button icon-left  (click)="sendReport()">
-      <ion-icon name="cloud-upload"></ion-icon>Update Inspection Request
-    </button>
-  </ion-buttons>
-</ion-footer>
