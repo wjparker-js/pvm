@@ -13,18 +13,21 @@
 
       <ion-content style="position:relative;">
         <ion-list>
+
           <ion-item style="position: absolute; bottom:   0;">
             <button ion-item (click)="logout()">
               <ion-icon padding name="exit" item-start></ion-icon>
               Log Out User
             </button>
           </ion-item>
+
+
         </ion-list>
       </ion-content>
 
       <ion-footer>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;App: PVM ProjectVault Mobile</span><br>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;Ver: 0.0.39 Jume 1 2021</span><br>        
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;Ver: 0.0.40 Jume 7 2021</span><br>        
         <span> &nbsp;</span>
       </ion-footer>
 
@@ -69,6 +72,13 @@
             <button ion-item >
                 <ion-icon padding name="ios-checkbox" item-start></ion-icon>
               Defects
+            </button>
+          </ion-item>
+
+          <ion-item lines="none" mode="ios">
+            <button ion-item >
+                <ion-icon padding name="ios-checkbox" item-start></ion-icon>
+              Handover Inspections
             </button>
           </ion-item>
 
@@ -152,6 +162,64 @@
       </ion-grid>     
 
     </ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+          <ion-item lines="none" mode="ios">
+            <button ion-item (click)= "this.nav.setRoot(this.tabsPage, {tabIndex: 0});" >
+              <ion-icon padding name="ios-home" item-start></ion-icon>
+              Dash
+            </button>
+          </ion-item>
+
+          <ion-item lines="none" mode="ios">
+            <button ion-item (click)= "this.nav.setRoot(this.tabsPage, {tabIndex: 1});">
+                <ion-icon padding name="ios-folder-open" item-start></ion-icon>
+              Projects
+            </button>
+          </ion-item>
+
+          <ion-item lines="none" mode="ios">
+            <button ion-item (click)= "this.nav.setRoot(this.tabsPage, {tabIndex: 2});">
+                <ion-icon padding name="ios-document" item-start></ion-icon>
+              Documents
+            </button>
+          </ion-item>
+
+          <ion-item lines="none" mode="ios">
+            <button ion-item (click)= "this.nav.setRoot(this.tabsPage, {tabIndex: 3})";>
+                <ion-icon padding name="ios-checkbox" item-start></ion-icon>
+              Defects
+            </button>
+          </ion-item>
+
+          <ion-item lines="none" mode="ios">
+            <button ion-item (click)= "this.nav.setRoot(this.tabsPage, {tabIndex: 4})";>
+                <ion-icon padding name="ios-checkbox" item-start></ion-icon>
+              Handover Inspections
+            </button>
+          </ion-item>
+
+          <ion-item lines="none" mode="ios">              
+            <button ion-item (click)= "this.nav.setRoot(this.tabsPage, {tabIndex: 5})";>
+                <ion-icon padding name="ios-people" item-start></ion-icon>
+              Contacts
+            </button>
+          </ion-item>
+
   -->
 
 

@@ -24,15 +24,12 @@ export class DocumentsPage {
 
  
   userdocuments: any;
-  
   documentID: any;
   documentNumber: any;
   photoTiny: any;
   projectID: any;
   systemclientID: any;
   fromProcess: string = "N";
-
-
   documentQRData:any;
   apiKey:any;
 	options: any;
@@ -55,14 +52,12 @@ export class DocumentsPage {
   selecteddocument:any;
   selecteddocid:any;
   selecteddocno:any;
-
   callback: any;
   adddoc: any;
   adddocids:any;
   api: any;
-
-  addDocuments = [];
-  
+  wherefrom: any;
+  addDocuments = [];  
   userdocumentData = {
     "SystemProjectID":"",
     "SystemProjectName":"",
@@ -75,7 +70,7 @@ export class DocumentsPage {
   };
 
   constructor(
-		          public actionSheetCtrl: ActionSheetController,
+              public actionSheetCtrl: ActionSheetController,
               public navCtrl: NavController, 
               public navParams: NavParams, 
               public viewCtrl: ViewController,
@@ -83,13 +78,13 @@ export class DocumentsPage {
               private _sanitizer: DomSanitizer, 
               private renderer:Renderer,
               private barcodeScanner:BarcodeScanner,
-              public modalCtrl: ModalController) {}
-
+              public modalCtrl: ModalController) 
+  {}
  
   ionViewWillEnter() {
 
-    this.inprocess = this.navParams.get('inprocess');
-    this.callback = this.navParams.get("callback")
+    this.inprocess        = this.navParams.get('inprocess');
+    this.callback         = this.navParams.get("callback")
     this.selecteddocument = "";
 
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
@@ -131,16 +126,18 @@ export class DocumentsPage {
 
       document.getElementsByClassName("searchbar-input")["0"].value = "";
       //document.getElementById("main").style.display = "none";
-
-      var oldurl = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxxxxxxxxxxxxxxx/xxx";
-      this.http.get(oldurl).map(res => res.json()).subscribe(data => {
+      
+      var oldurl = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxxx/xxx";
+      console.log(oldurl);
+      this.http.get(oldurl).map(res => res.json()).subscribe(data => {
             this._sanitizer.bypassSecurityTrustStyle(data);
             this.userdocuments = data;
             console.log(this.userdocuments);
             localStorage.setItem('OldProjectName', this.userdocumentData.SystemProjectName);
             console.log("Old Proj 2 = ", oldProjectName);
-
+            this.hasdocs = false;
             document.getElementById("maindiv").style.display="block";
+            this.wherefrom = "sys";
         },
         err => {
             console.log("Oops!");
@@ -173,13 +170,11 @@ export class DocumentsPage {
     ); 
   }
 
-
-
   keys(obj){
       return Object.keys(obj);
   }
 
-	public presentQRDocSearchActionSheet() {
+	presentQRDocSearchActionSheet() {
 		let actionSheet = this.actionSheetCtrl.create({
 			title: 'Scan a QR Code',
 			buttons: [
@@ -197,7 +192,6 @@ export class DocumentsPage {
 		});
 		actionSheet.present();
 	}
-
 
 	scanDocQRCode(){
 			
@@ -236,18 +230,16 @@ export class DocumentsPage {
 		});
 	}
 
-
-
   checkBlur($event){
     console.log("Got Blur");
     console.log("Value ",$event._value);
     console.log("Value ",$event._value);
   }
 
-checkFocus($event){
-  console.log("Got Focus");
-  console.log("Value ",$event._value);
-}
+  checkFocus($event){
+    console.log("Got Focus");
+    console.log("Value ",$event._value);
+  }
 
   searchByKeyword($event){
 
@@ -281,26 +273,57 @@ checkFocus($event){
     }
     
   } else {
-      var oldurl1 = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxxxxxxxxxxxxxxx/xxx";
+      var oldurl1 = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxx/xxx";
       this.http.get(oldurl1).map(res => res.json()).subscribe(data => {
-            this._sanitizer.bypassSecurityTrustStyle(data);
-            this.userdocuments = data;
-            document.getElementById("maindiv").style.display="block";
-            console.log(this.userdocuments);
-        },
-        err => {
-            console.log("Oops!");
-        }
-      );      
-    }
+        this._sanitizer.bypassSecurityTrustStyle(data);
+      this.userdocuments = data;
+      document.getElementById("maindiv").style.display="block";
+      console.log(this.userdocuments);
+      this.hasdocs = false;            
+      this.wherefrom = "sys";
+      },
+      err => {
+          console.log("Oops!");
+      }
+    );      
+  }
     
   }
+
+  backtofolders(){
+    var oldurl1 = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxxx/xxx";
+    this.http.get(oldurl1).map(res => res.json()).subscribe(data => {
+    this._sanitizer.bypassSecurityTrustStyle(data);
+    this.userdocuments = data;
+    document.getElementById("maindiv").style.display="block";
+    console.log(this.userdocuments);
+    this.hasdocs = false;            
+    this.wherefrom = "sys";
+    },
+    err => {
+        console.log("Oops!");
+    });      
+  }
+
+  folderClick(folderid){
+    var url   = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/folder-"+folderid+"/xxx";
+    this.http.get(url).map(res => res.json()).subscribe(data => {
+        this._sanitizer.bypassSecurityTrustStyle(data);
+    this.userdocuments = data;
+    this.hasdocs = true;        
+    this.wherefrom = "folder";
+    console.log(this.userdocuments);
+    },
+    err => {
+        console.log("Oops!");
+    }); 
+  }
   
+
 
   openDocument(clientid,projectid,docid,ext){
     this.navCtrl.push(DocumentViewer,{clientid,projectid,docid,ext});
   }
-  
 
   openRasterDocument(clientid,projectid,docid,ext){
     this.navCtrl.push(DocumentViewer,{clientid,projectid,docid,ext});
@@ -330,12 +353,10 @@ checkFocus($event){
 
     this.navCtrl.push(DocumentInfo,{docimg, docid, docno1, search});
   }
-
   
   openDocumentIdInfo(iscid,idid,ipid,iuid){ 
     this.navCtrl.push(DocumentIdInfo,{iscid,idid,ipid,iuid});
   }
-
 
   openDocumentAudit(docimg, docid, docno1){ 
     this.navCtrl.push(DocumentAudit,{docimg, docid, docno1});
@@ -344,7 +365,6 @@ checkFocus($event){
   openDocumentSend(docimg, docid, docno1){ 
     this.navCtrl.push(AboutPage,{docimg, docid, docno1});
   }
-
 
   documentAdd(docid,docnumber){
 

@@ -46,18 +46,18 @@
 
               <div [hidden]="this.isinspector == 0"><h3><b>{{request.FormName}}{{request.Form_Name}} - {{request.FormNumber}}</b></h3></div> 
               <div [hidden]="this.isinspector == 0"><h3><b>Location: {{request.LocationText}}</b></h3></div> 
-              <div [hidden]="this.isinspector == 0"><h4>{{request.PackageTitleValue}} Package ({{request.ExpectedForms}} expected</h4></div>             
+              <div [hidden]="this.isinspector == 0"><h4>{{request.PackageTitleValue}} Package</h4></div>             
               <div [hidden]="this.isinspector == 0"><h4>Contractor: {{request.SubcontractorValue}}</h4></div> 
-              <div [hidden]="this.isinspector == 0" *ngIf="request.daydiff < 0" style="color:red;float:left;"><h4><b>Due: {{request.reqdate | date : 'dd MMM yy'}}&nbsp;Overdue.</b></h4></div>    
-              <div [hidden]="this.isinspector == 0" *ngIf="request.daydiff >= 0"><h4>Due: {{request.reqdate | date : 'dd MMM yy'}}</h4></div>  
+              <!--<div [hidden]="this.isinspector == 0" *ngIf="request.daydiff < 0 && request.who != 'subi'" style="color:red;float:left;"><h4><b>Due: {{request.reqdate | date : 'dd MMM yy'}}&nbsp;Overdue.</b></h4></div>-->   
+              <div [hidden]="this.isinspector == 0 || this.who == 'subi'"><h4>Due: {{request.reqdate | date : 'dd MMM yy'}}</h4></div>  
 
               
               <div [hidden]="this.isinspector != 0"><h3><b>{{request.FormName}}{{request.Form_Name}} - {{request.FormNumber}}</b></h3></div>   
               <div [hidden]="this.isinspector != 0"><h3><b>Location: {{request.LocationText}}</b></h3></div>       
               <div [hidden]="this.isinspector != 0"><h4>{{request.PackageTitleValue}} Package ({{request.ExpectedForms}} expected)</h4></div>
-              <div [hidden]="this.isinspector != 0"><h4>Inspector: {{request.InspectorF}} {{request.InspectorL}}</h4></div> 
-              <div [hidden]="this.isinspector != 0" *ngIf="request.daydiff < 0" style="color:red;float:left;"><h4><b>Due: {{request.reqdate | date : 'dd MMM yy'}}&nbsp;Overdue.</b></h4></div>    
-              <div [hidden]="this.isinspector != 0" *ngIf="request.daydiff >= 0"><h4>Due: {{request.reqdate | date : 'dd MMM yy'}}</h4></div>                
+              <div [hidden]="this.isinspector != 0"><h4>Inspector: {{request.Fname}} {{request.Lname}}</h4></div> 
+              <!--<div [hidden]="this.isinspector != 0" *ngIf="request.daydiff < 0 && request.who != 'subi'" style="color:red;float:left;"><h4><b>Due: {{request.reqdate | date : 'dd MMM yy'}}&nbsp;Overdue.</b></h4></div>    
+              <div [hidden]="this.isinspector != 0 || request.who == 'subi'"><h4>Due: {{request.reqdate | date : 'dd MMM yy'}}</h4></div> -->               
             
             </div> 
 

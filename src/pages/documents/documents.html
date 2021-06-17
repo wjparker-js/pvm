@@ -30,12 +30,20 @@
       class="android">
     </ion-searchbar>
   </div>
-
 </ion-header>
 
+
 <ion-content>
-  <div id="maindiv"  *ngIf="this.hasdocs; else nodocs" >
+  <div id="maindiv" *ngIf="this.hasdocs; else nodocs" >
     <ion-grid>
+      <ion-row *ngIf="this.wherefrom == 'folder'" style="height: 30px;">          
+        <ion-col col-2>
+          <ion-thumbnail>                  
+            &nbsp;..<ion-icon name="rewind" (click) = "backtofolders()" style="position:relative;height:30px;bottom:8px;font-size:28px;color:blue"></ion-icon>
+          </ion-thumbnail>            
+        </ion-col>
+        <ion-col col-10></ion-col>
+      </ion-row>
       <ion-row>
         <ion-col *ngFor="let document of userdocuments"  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
           <ion-list  style="margin-bottom: 0px;">
@@ -105,10 +113,42 @@
     </ion-grid>     
   </div>
 
-  <ng-template #nodocs>
-    <div>
-          <div style="font-family:arial;font-size: 20px;text-align: center;"><br>No Documents</div>
-    </div>
+  <ng-template #nodocs>    
+    <br>
+    <ion-grid> 
+
+        <!--<ion-row style="height: 30px;">          
+          <ion-col col-2>
+            <ion-thumbnail>                  
+              &nbsp;..<ion-icon name="folder" style="position:relative;height:30px;bottom:8px;font-size:28px;color:orange"></ion-icon>
+            </ion-thumbnail>            
+          </ion-col>
+          <ion-col col-10></ion-col>
+        </ion-row>-->
+        <br>
+        <ion-row style="position:relative;top:15px;">
+        <ion-col *ngFor="let document of userdocuments"  col-12 col-md-6 col-lg-4 col-xl-3>
+          <ion-list  style="margin-bottom: 0px;">
+            <ion-item padding class="item item-block item-md" style="position:relative;top:-25px;height:30px;padding-top: 0px;padding-bottom: 0px;" (click)="folderClick(document.FolderID)">
+              <ion-row style="height: 30px;">
+                <ion-col col-1></ion-col>
+                <ion-col col-1>
+                  <ion-thumbnail>                  
+                    <ion-icon name="folder" style="position:relative;height:30px;bottom:8px;font-size:26px;color:orange"></ion-icon>
+                  </ion-thumbnail>
+                </ion-col>
+                <ion-col col-8 style="position:relative;top:-5px;padding-left:25px;font-size: 13px;height:25px;">
+                  {{document.FolderName}}
+                </ion-col>
+                <ion-col col-2 style="position:relative;top:-5px;font-size: 13px;height:25px;">
+                  ({{document.Docs}})
+                </ion-col>
+              </ion-row>
+            </ion-item> 
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>   
   </ng-template>
 
 </ion-content>

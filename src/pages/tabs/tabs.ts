@@ -5,6 +5,8 @@ import { DocumentsPage } from '../documents/documents';
 import { ProjectsPage } from '../projects/projects';
 import { DefectsPage } from '../Defects/defects';
 import { InspectPage } from '../inspect/inspect';
+import { NavController, NavParams} from 'ionic-angular';
+
 
 @Component({
   templateUrl: 'tabs.html'
@@ -21,15 +23,16 @@ export class TabsPage {
 
   online : boolean=true;
   defectsShow : boolean=true;
- 
-  constructor() {
 
-    var isonline         = localStorage.getItem('online');
+  constructor(public navParams: NavParams) {
+
+    var isonline = localStorage.getItem('online');
     
     if(isonline != "1"){
       this.online = false;  
     }
 
   }
+
                                                                                           
 }

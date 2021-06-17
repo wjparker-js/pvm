@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform, App, MenuController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, App, MenuController, Nav} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SplitPane } from '../providers/split-pane';
@@ -12,10 +12,20 @@ import { Http } from '@angular/http';
 
 export class MyApp {
 
+  @ViewChild('content') nav: Nav;
+
   rootPage:any = Login; 
   SysUserID:any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public app: App, public splitPane: SplitPane, public http: Http, public menu: MenuController) {
+  constructor(
+    platform: Platform, 
+    statusBar: StatusBar, 
+    splashScreen: SplashScreen, 
+    public app: App, 
+    public splitPane: SplitPane, 
+    public http: Http, 
+    public menu: MenuController) 
+    {
     platform.ready().then(() => {
       //statusBar.styleDefault();
       //splashScreen.hide();
