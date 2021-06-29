@@ -37,9 +37,9 @@
 <ion-content>
   <ion-grid>
     <ion-row>                  
-      <ion-col  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
-        <ion-list *ngFor="let request of inspectionrequests" class="small-list"  style="margin: 0px; padding-left:3px;padding-right:3px;">         
-          <ion-card style="border-top: 0px solid #ffffff !important;position:relative;top:10px;min-height:50px; max-height:500px;padding-bottom: 0px;margin-top: 3px;margin-bottom: 3px;">
+      <ion-col *ngFor="let request of inspectionrequests"   col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+        <ion-list class="small-list"  style="margin: 0px; padding-left:3px;padding-right:3px;">         
+          <ion-card [hidden]="request.ExpectedForms == 0 " style="border-top: 0px solid #ffffff !important;position:relative;top:10px;min-height:50px; max-height:500px;padding-bottom: 0px;margin-top: 3px;margin-bottom: 3px;">
             <ion-item>  
 
             <div style="padding:0px;padding-left:3px;font-size:1.2 em;"  (click)="showtheform(request.ParentFormID,request.FormID,request.LID1,request.LID2,request.LID3,request.LID4,request.Template,this.who)">  
@@ -52,10 +52,10 @@
               <div [hidden]="this.isinspector == 0 || this.who == 'subi'"><h4>Due: {{request.reqdate | date : 'dd MMM yy'}}</h4></div>  
 
               
-              <div [hidden]="this.isinspector != 0"><h3><b>{{request.FormName}}{{request.Form_Name}} - {{request.FormNumber}}</b></h3></div>   
-              <div [hidden]="this.isinspector != 0"><h3><b>Location: {{request.LocationText}}</b></h3></div>       
-              <div [hidden]="this.isinspector != 0"><h4>{{request.PackageTitleValue}} Package ({{request.ExpectedForms}} expected)</h4></div>
-              <div [hidden]="this.isinspector != 0"><h4>Inspector: {{request.Fname}} {{request.Lname}}</h4></div> 
+              <div [hidden]="this.isinspector != 0 || request.ExpectedForms == 0 "><h3><b>{{request.FormName}}{{request.Form_Name}} - {{request.FormNumber}}</b></h3></div>   
+              <!--<div [hidden]="this.isinspector != 0"><h3><b>Location: {{request.LocationText}}</b></h3></div>-->       
+              <div [hidden]="this.isinspector != 0 || request.ExpectedForms == 0 "><h4>{{request.PackageTitleValue}} Package ({{request.ExpectedForms}} expected)</h4></div>
+              <!--<div [hidden]="this.isinspector != 0"><h4>Inspector: {{request.Fname}} {{request.Lname}}</h4></div>--> 
               <!--<div [hidden]="this.isinspector != 0" *ngIf="request.daydiff < 0 && request.who != 'subi'" style="color:red;float:left;"><h4><b>Due: {{request.reqdate | date : 'dd MMM yy'}}&nbsp;Overdue.</b></h4></div>    
               <div [hidden]="this.isinspector != 0 || request.who == 'subi'"><h4>Due: {{request.reqdate | date : 'dd MMM yy'}}</h4></div> -->               
             

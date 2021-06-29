@@ -1,16 +1,11 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { IonicPage, NavController, ViewController, NavParams, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, NavParams, ActionSheetController, ToastController, Loading } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
-import { File } from '@ionic-native/file';
-import { FilePath } from '@ionic-native/file-path';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
-import { normalizeURL } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ImgEditPagePost } from '../imgeditpost/imgeditpost';
 import { ImgViewPage } from '../imgview/imgview';
 import { DocumentViewer } from '../documentviewer/documentviewer';
-import { DocumentInfo } from '../documentinfo/documentinfo';
 import { DocumentIdInfo } from '../documentidinfo/documentidinfo';
 import { DocumentAudit } from '../documentaudit/documentaudit';
 import { AboutPage } from '../about/about';
@@ -20,7 +15,6 @@ import { InspectorPage } from '../inspector/inspector';
 import * as Constants from '../../providers/constants';
 import { ChangedatePage } from '../changedate/changedate';
 
-declare var cordova: any;
 
 @IonicPage()
 
@@ -99,14 +93,9 @@ export class Snagging51Page {
 		private navCtrl: NavController, 
 		private navParams: NavParams,
 		private camera: Camera,
-		private transfer: FileTransfer,
-		private file: File,
-		private filePath: FilePath,
 		private actionSheetCtrl: ActionSheetController, 
-		private toastCtrl: ToastController, 
-		private platform: Platform,
+		private toastCtrl: ToastController,
 		public viewCtrl: ViewController,
-		private loadingCtrl: LoadingController, 
 		private http: Http, 
 		private _sanitizer: DomSanitizer
 	) 
@@ -402,7 +391,7 @@ export class Snagging51Page {
 	}
 
 
-	private addimage(action){
+	public addimage(action){
 		if(action === "add"){
 			this.presentActionSheet()
 		} else {

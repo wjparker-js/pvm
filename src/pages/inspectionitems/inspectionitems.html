@@ -80,8 +80,8 @@
           <!-- Items list -->
           <!-- Items list -->
           <div *ngFor="let inspectionitem of inspectionitemssdata">
-            <ion-card  id="topdiv{{inspectionitem.ItemID}}" style="border-top: 0px solid #ffffff !important;position:relative;top:5px;height:40px;max-height:800px;min-height:40px;padding-bottom:6px;padding-top:6px;margin-top:3px;margin-bottom:3px;"> 
-              <ion-item class="card card-md" class="lite -block item-md" style="padding-left:0px;padding-top:0px;margin:0px;width:100%;max-height:800px;border-bottom-color:rgb(32, 29, 29);padding-right: 0px;padding-bottom: 0px;"> 
+            <ion-card  id="topdiv{{inspectionitem.ItemID}}" style="border-top: 0px solid #e8e8e8 !important;position:relative;top:5px;max-height:800px;min-height:40px;padding-bottom:6px;padding-top:1px;margin-top:3px;margin-bottom:3px;"> 
+              <ion-item class="card card-md" class="lite -block item-md" style="padding-left:0px;padding-top:7px;margin:0px;width:100%;max-height:800px;min-height:40px;border-bottom-color:rgb(32, 29, 29);padding-right: 0px;padding-bottom: 0px;"> 
                 <div item-content style="width:100%;"> 
 
 
@@ -90,75 +90,75 @@
                   <!-- Pass/Fail/Thumbs  icons-->  
                   <div *ngIf="inspectionitem.Template == '0' && this.temp == 'sub'">
                     <ion-row style="width:100%;">  
-                      <ion-col col-1 style="position:relative;top:5px;font-size:1.2 em;text-align:center;">{{inspectionitem.ItemNumber}}</ion-col>
-                      <ion-col col-9 text-wrap style="position:relative;top:5px;max-height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>             
-                      <ion-col col-2 style="text-align:center;">
+                      <ion-col col-1 style="position:relative;top:3px;font-size:1.2 em;text-align:center;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-9 text-wrap style="position:relative;top:3px;max-height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>             
+                      <ion-col col-2 style="text-align:center;padding-top: 5px;">
                         <ion-icon id="{{inspectionitem.ItemID}}pass" (click)="passClick1(inspectionitem.ItemID,'','')" name="checkmark-circle" style="position:relative;left:-10px;color:black;font-size:25px; display: inline-block;vertical-align: middle;margin-left:5px;margin-right:5px;padding-right:5px;"></ion-icon>
                       </ion-col>     
                     </ion-row>                                               
                   </div>
                   <div *ngIf="inspectionitem.Template == '0' && this.temp == 'subi' && inspectionitem.Check2 == '0'">
                     <ion-row style="width:100%;height:45px;">
-                      <ion-col col-1 style="position:relative;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
-                      <ion-col col-9 text-wrap style="position:relative;top:5px;max-height:600px;height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>             
-                      <ion-col col-2 style="text-align:center;">
+                      <ion-col col-1 style="position:relative;top:3px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-9 text-wrap style="position:relative;top:3px;max-height:600px;height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>             
+                      <ion-col col-2 style="text-align:center;padding-top: 5px;">
                         <ion-icon style="text-align:center;" id="{{inspectionitem.ItemID}}fail" (click)="openUp(inspectionitem.ItemID,inspectionitem.Check2Valuation)" name="close-circle"     style="color:red;           font-size:25px; display: inline-block;vertical-align: middle;margin-left:5px"></ion-icon>
                       </ion-col>
                     </ion-row>
                   </div>
                   <div *ngIf="inspectionitem.Template == '0' && this.temp == 'subi' && inspectionitem.Check2 == '1'">
                     <ion-row style="width:100%;height:45px;">
-                      <ion-col col-1 style="position:relative;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
-                      <ion-col col-9 text-wrap style="position:relative;top:5px;max-height:600px;height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>             
-                      <ion-col col-2 style="text-align:center;">
+                      <ion-col col-1 style="position:relative;top:3px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-9 text-wrap style="position:relative;top:3px;max-height:600px;height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>             
+                      <ion-col col-2 style="text-align:center;padding-top: 5px;">
                         <ion-icon style="text-align:center;" id="{{inspectionitem.ItemID}}pass" (click)="openUp(inspectionitem.ItemID,inspectionitem.Check2Valuation)" name="checkmark-circle" style="color:mediumseagreen;font-size:25px; display: inline-block;vertical-align: middle;margin-left:5px;"></ion-icon>
                       </ion-col>
                     </ion-row>
                   </div>
                   <div *ngIf="inspectionitem.Template == '1' && this.temp == 'ins' && inspectionitem.Check2 == null">
                     <ion-row style="width:100%;height:45px;">
-                      <ion-col col-1 style="position:relative;height:45px;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
-                      <ion-col col-7 text-wrap style="position:relative;height:45px;top:5px;max-height:600px;height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>                        
+                      <ion-col col-1 style="position:relative;height:45px;top:3px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-7 text-wrap style="position:relative;height:45px;top:3px;max-height:600px;height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>                        
                       <ion-col col-1  style="height:45px;"></ion-col>
-                      <ion-col col-1 style="height:45px;">
+                      <ion-col col-1 style="height:45px;padding-top: 5px;">
                         <ion-icon id="{{inspectionitem.ItemID}}pass" (click)="passClick(inspectionitem.ItemID,inspectionitem.Check2Valuation,inspectionitem.Check2Notes)" name="checkmark-circle" style="color:black;font-size:25px; display: inline-block;vertical-align: middle;"></ion-icon>
                       </ion-col>
-                      <ion-col col-1 style="height:45px;">
+                      <ion-col col-1 style="height:45px;padding-top: 5px;">
                         <ion-icon id="{{inspectionitem.ItemID}}fail" (click)="failClick(inspectionitem.ItemID,inspectionitem.Check2Valuation,inspectionitem.Check2Notes)" name="close-circle"     style="color:black;font-size:25px; display: inline-block;vertical-align: middle;"></ion-icon>
                       </ion-col>
-                      <ion-col col-1 style="height:45px;">
+                      <ion-col col-1 style="height:45px;padding-top: 5px;">
                         <ion-icon id="{{inspectionitem.ItemID}}open"  name="thumbs-up" style="color:white;font-size:20px; display: inline-block;vertical-align: middle;"></ion-icon> 
                       </ion-col>
                     </ion-row>
                   </div>                         
                   <div *ngIf="inspectionitem.Template == '1' && this.temp == 'ins' && inspectionitem.Check2 == '0'">
                         <ion-row style="width:100%;height:45px;">
-                          <ion-col col-1 style="position:relative;height:45px;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
-                          <ion-col col-7 text-wrap style="position:relative;height:45px;top:5px;max-height:600px;height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>                        
+                          <ion-col col-1 style="position:relative;height:45px;top:3px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                          <ion-col col-7 text-wrap style="position:relative;height:45px;top:3px;max-height:600px;height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>                        
                           <ion-col col-1  style="height:45px;"></ion-col>
-                          <ion-col col-1  style="height:45px;">
+                          <ion-col col-1  style="height:45px;padding-top: 5px;">
                             <ion-icon id="{{inspectionitem.ItemID}}pass" (click)="passClick(inspectionitem.ItemID,inspectionitem.Check2Valuation,inspectionitem.Check2Notes)" name="checkmark-circle" style="color:black;font-size:25px; display: inline-block;vertical-align: middle;"></ion-icon>
                           </ion-col>
-                          <ion-col col-1  style="height:45px;">
+                          <ion-col col-1  style="height:45px;padding-top: 5px;">
                             <ion-icon id="{{inspectionitem.ItemID}}fail" (click)="failClick(inspectionitem.ItemID,inspectionitem.Check2Valuation,inspectionitem.Check2Notes)" name="close-circle"     style="color:red;font-size:25px; display: inline-block;vertical-align: middle;"></ion-icon>
                           </ion-col>
-                          <ion-col col-1  style="height:45px;">
+                          <ion-col col-1  style="height:45px;padding-top: 5px;">
                             <ion-icon id="{{inspectionitem.ItemID}}open"  name="thumbs-up" (click)="closeDiv(inspectionitem.ItemID)" style="color:rgb(255, 255, 255);font-size:20px; display: inline-block;vertical-align: middle;margin-left:5px;margin-right:5px;padding-right:5px;"></ion-icon> 
                           </ion-col>
                         </ion-row>
                   </div>
                   <div *ngIf="inspectionitem.Template == '1' && this.temp == 'ins' && inspectionitem.Check2 == '1'">
                     <ion-row style="width:100%;height:45px;">
-                      <ion-col col-1 style="position:relative;height:45px;top:5px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
-                      <ion-col col-7 text-wrap style="position:relative;height:45px;top:5px;max-height:600px;height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>                        
+                      <ion-col col-1 style="position:relative;height:45px;top:3px;font-size:1.2 em;">{{inspectionitem.ItemNumber}}</ion-col>
+                      <ion-col col-7 text-wrap style="position:relative;height:45px;top:3px;max-height:600px;height:80px;word-wrap: break-word;font-size:1.2 em;">{{inspectionitem.ItemText}}</ion-col>                        
                       <ion-col col-1  style="height:45px;"></ion-col>
-                      <ion-col col-1  style="height:45px;">
+                      <ion-col col-1  style="height:45px;padding-top: 5px;">
                         <ion-icon id="{{inspectionitem.ItemID}}pass" (click)="passClick(inspectionitem.ItemID,inspectionitem.Check2Valuation,inspectionitem.Check2Notes)" name="checkmark-circle" style="color:mediumseagreen;font-size:25px; display: inline-block;vertical-align: middle;"></ion-icon>
                       </ion-col>
-                      <ion-col col-1  style="height:45px;">
+                      <ion-col col-1  style="height:45px;padding-top: 5px;">
                         <ion-icon id="{{inspectionitem.ItemID}}fail" (click)="failClick(inspectionitem.ItemID,inspectionitem.Check2Valuation,inspectionitem.Check2Notes)" name="close-circle" style="color:black;font-size:25px; display: inline-block;vertical-align: middle;"></ion-icon>
                       </ion-col>
-                      <ion-col col-1 style="height:45px;" >
+                      <ion-col col-1 style="height:45px;padding-top: 5px;" >
                         <ion-icon id="{{inspectionitem.ItemID}}open"  name="thumbs-up" (click)="closeDiv(inspectionitem.ItemID)" style="color:rgb(255, 255, 255);font-size:20px; display: inline-block;vertical-align: middle;"></ion-icon> 
                       </ion-col> 
                     </ion-row>
@@ -189,7 +189,7 @@
                         name="notes" 
                         id="notes"
                         placeholder=""
-                        style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;margin-top:5px;top:5px;left:15px;font-size: 1.2 em;"
+                        style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;margin-top:3px;top:5px;left:15px;font-size: 1.2 em;"
                         value="{{inspectionitem.Check2Notes}}"
                         >                        
                         </ion-textarea>
@@ -304,8 +304,7 @@
           <!-- sub notes -->
           <!-- sub notes -->                
           <ion-row *ngIf="this.temp == 'sub'" style="width:100%;">
-            <ion-col col-1></ion-col>
-            <ion-col col-10> 
+            <ion-col col-12> 
               <ion-textarea 
               #myInput 
               rows="3" 
@@ -313,10 +312,9 @@
               [(ngModel)]="this.frmData1.notes" 
               id="notes"
               placeholder="Notes..."
-              style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;left:15px;font-size: 1.2 em;">
+              style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:10px;left:15px;font-size: 1.2 em;">
             </ion-textarea>
             </ion-col>
-            <ion-col col-1></ion-col>
           </ion-row>
           <br>
 
@@ -358,7 +356,7 @@
               <!-- show overall photos/notes grid  -->
               <!-- show overall photos/notes grid  -->
               <!-- show overall photos/notes grid  -->
-              <ion-row>
+              <ion-row [hidden]="!image">
                 <ion-col *ngFor="let image of todos; index as i"  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
                   <ion-list  style="margin-top: 2px;margin-bottom: 5px;"> 
                     <ion-card style="border-top: 0px solid #ffffff !important;position:relative;top:5px;min-height:60px; max-height:60px;padding-bottom: 0px;padding-top: 10px;margin-top: 3px;margin-bottom: 3px;"> 
@@ -377,51 +375,56 @@
               <!-- add overall photos/notes  -->
               <!-- add overall photos/notes  -->
               <!-- add overall photos/notes  -->
-              <ion-item  *ngIf="this.temp == 'ins'" style="position:relative;left:-5px;margin-left:0px;padding-left: 2px;">
-                <ion-grid style="padding-top: 0px;padding-bottom: 0px;" item-content>
-                  <div [hidden]="this.temp != 'ins'" style="position:relative;top:0px;display:block;">                     
-                    <ion-row>
-                      <ion-col col-1></ion-col>
-                      <ion-col col-11> 
-                        <ion-textarea 
-                          #myInput 
-                          rows="3" 
-                          name="onotes1" 
-                          [(ngModel)]="frmData1.onotes1" 
-                          id="onotes1"
-                          placeholder="Overall Notes..."
-                          style="padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;left:0px !important;font-size: 1.2 em;">
-                        </ion-textarea>
-                      </ion-col>
-                    </ion-row>       
-                    <ion-row style="position:relative;top:-10px;">
-                      <ion-col col-7></ion-col>
-                      <ion-col col-2 style="position:relative;top:0px;margin-left:auto;margin-right:auto;padding-bottom: 0px;top: 6px;">
-                        <button ion-button color="light" right style="position:relative;left:-30px;padding-left:11px;padding-right:11px;height:35px;margin-top: 0px;margin-bottom: 0px;font-size:12px;margin-left: auto;margin-right: auto;" (click)="presentActionSheetOverall()">
-                          Photo
-                        </button>     
-                      </ion-col>
-                      <ion-col col-2 style="position:relative;left:-15px;top:0px;margin-left:auto;margin-right:auto;padding-bottom: 0px;top: 6px;">
-                        <button ion-button color="light" right style="padding-left:11px;padding-right:11px;height:35px;margin-top: 0px;margin-bottom: 0px;font-size:12px;margin-left: auto;margin-right: auto;" (click)="sendOverallPhotoData()">
-                          Upload
-                        </button>
-                      </ion-col>
-                      <ion-col col-1></ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col col-12>  
-                        <ion-thumbnail>
-                          <img 
-                          [hidden]="this.temp != 'ins'" 
-                          [src]="this.reportOverallImage" 
-                          style="margin:auto;position:relative;height:400px;width:240px;border:1px;" 
-                          imageViewer/>
-                        </ion-thumbnail>
-                      </ion-col>                     
-                    </ion-row>
-                  </div>
-                </ion-grid>
-              </ion-item>
+              <ion-row >
+                <ion-col col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+                  <ion-list  style="margin-top: 2px;margin-bottom: 5px;">
+                    <ion-item  *ngIf="this.temp == 'ins'" style="position:relative;left:-5px;margin-left:0px;padding-left: 2px;">
+                      <ion-grid style="padding-top: 0px;padding-bottom: 0px;" item-content>
+                        <div [hidden]="this.temp != 'ins'" style="position:relative;top:0px;display:block;">                     
+                          <ion-row>
+                            <ion-col col-12> 
+                              <ion-textarea 
+                                #myInput 
+                                rows="3" 
+                                name="onotes1" 
+                                [(ngModel)]="frmData1.onotes1" 
+                                id="onotes1"
+                                placeholder="Overall Notes..."
+                                style="padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:-5px;left:0px !important;font-size: 1.2 em;">
+                              </ion-textarea>
+                            </ion-col>
+                          </ion-row>       
+                          <ion-row style="position:relative;top:-10px;">
+                            <ion-col col-7></ion-col>
+                            <ion-col col-2 style="position:relative;top:0px;margin-left:auto;margin-right:auto;padding-bottom: 0px;top: 6px;">
+                              <button ion-button color="light" right style="position:relative;left:-30px;padding-left:11px;padding-right:11px;height:35px;margin-top: 0px;margin-bottom: 0px;font-size:12px;margin-left: auto;margin-right: auto;" (click)="presentActionSheetOverall()">
+                                Photo
+                              </button>     
+                            </ion-col>
+                            <ion-col col-2 style="position:relative;left:-15px;top:0px;margin-left:auto;margin-right:auto;padding-bottom: 0px;top: 6px;">
+                              <button ion-button color="light" right style="padding-left:11px;padding-right:11px;height:35px;margin-top: 0px;margin-bottom: 0px;font-size:12px;margin-left: auto;margin-right: auto;" (click)="sendOverallPhotoData()">
+                                Upload
+                              </button>
+                            </ion-col>
+                            <ion-col col-1></ion-col>
+                          </ion-row>
+                          <ion-row>
+                            <ion-col col-12>  
+                              <ion-thumbnail>
+                                <img 
+                                [hidden]="this.temp != 'ins'" 
+                                [src]="this.reportOverallImage" 
+                                style="margin:auto;position:relative;height:400px;width:240px;border:1px;" 
+                                imageViewer/>
+                              </ion-thumbnail>
+                            </ion-col>                     
+                          </ion-row>
+                        </div>
+                      </ion-grid>
+                    </ion-item>
+                  </ion-list>
+                </ion-col>
+              </ion-row>
 
             </ion-grid>
           </ion-item>

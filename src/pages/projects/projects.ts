@@ -1,5 +1,3 @@
-import { ReasonsPage } from './../reasons/reasons';
-import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController  } from 'ionic-angular';
 import { Http } from '@angular/http';

@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { IonicPage, NavController, ViewController, NavParams, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, NavParams, ActionSheetController, ToastController, Loading } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
-import { File } from '@ionic-native/file';
-import { FilePath } from '@ionic-native/file-path';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
-import { normalizeURL } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ImgEditPagePostPost } from '../imgeditpostpost/imgeditpostpost';
 import { ImgViewPage } from '../imgview/imgview';
@@ -15,7 +11,6 @@ import { InspectorPage } from '../inspector/inspector';
 import * as Constants from '../../providers/constants';
 import { ChangedatePage } from '../changedate/changedate';
 
-declare var cordova: any;
 
 @IonicPage()
 
@@ -82,14 +77,9 @@ export class Snagging52Page {
 		private navCtrl: NavController, 
 		private navParams: NavParams,
 		private camera: Camera,
-		private transfer: FileTransfer,
-		private file: File,
-		private filePath: FilePath,
 		private actionSheetCtrl: ActionSheetController, 
 		private toastCtrl: ToastController, 
-		private platform: Platform,
-		public viewCtrl: ViewController,
-		private loadingCtrl: LoadingController, 
+		public viewCtrl: ViewController, 
 		private http: Http, 
 		private _sanitizer: DomSanitizer
 	) 
@@ -305,7 +295,7 @@ export class Snagging52Page {
 	}
 
 
-	private addimage(action){
+	public addimage(action){
 		if(action === "add"){
 			this.presentActionSheet()
 		} else {

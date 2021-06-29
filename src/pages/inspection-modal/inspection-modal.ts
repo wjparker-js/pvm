@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Http } from '@angular/http';
-import { DomSanitizer } from '@angular/platform-browser';
-import * as Constants from '../../providers/constants';
-
 
 @IonicPage()
 @Component({
@@ -19,7 +16,6 @@ export class InspectionModalPage implements OnInit {
 
   constructor(
     public navCtrl: NavController,     
-    private _sanitizer: DomSanitizer, 
     public viewCtrl: ViewController, 
     public navParams: NavParams, 
     public http: Http

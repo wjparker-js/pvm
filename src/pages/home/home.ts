@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
 import {NavController, NavParams, MenuController } from 'ionic-angular';
-import {App, AlertController} from 'ionic-angular';
+import {App} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
 import {Common} from "../../providers/common";
 import {Http} from '@angular/http';
@@ -10,7 +10,6 @@ import {DefectsviewPage} from '../defectsview/defectsview';
 import {WeatherProvider} from '../../providers/weather/weather';
 import { Geolocation } from '@ionic-native/geolocation';
 import * as Constants from '../../providers/constants';
-import { Network } from '@ionic-native/network';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -80,13 +79,11 @@ export class HomePage {
     public common: Common, 
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder,
-    private alertCtrl: AlertController, 
     public weatherProvider:WeatherProvider, 
     public http: Http, 
     public navCtrl : NavController, 
     public menu: MenuController,
     public navParams: NavParams, 
-    private network: Network,
     public app : App, 
     private storage: Storage,
     public authService : AuthService) {
@@ -132,7 +129,6 @@ export class HomePage {
   var apiKey  = this.userPostData.apiKey;
   var uid     = this.userPostData.SystemUserID;  
   var pid     = this.userPostData.ProjectID;  
-  var pname   = this.userPostData.ProjectName;
 
   var urld    = Constants.apiUrl+"api/dashboard/"+uid+"/"+pid;
   var urlt3   = Constants.apiUrl+"api/t3/"+apiKey+"/"+uid+"/"+pid;

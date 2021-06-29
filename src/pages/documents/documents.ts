@@ -3,7 +3,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ViewChild, ElementRef, Renderer } from '@angular/core';
 import { IonicPage,  ActionSheetController, ModalController, NavController, NavParams,  ViewController , Searchbar} from 'ionic-angular';
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 import { DocumentViewer } from '../documentviewer/documentviewer';
 import { DocumentInfo } from '../documentinfo/documentinfo';
 import { DocumentIdInfo } from '../documentidinfo/documentidinfo';
@@ -11,6 +10,7 @@ import { DocumentAudit } from '../documentaudit/documentaudit';
 import { AboutPage } from '../about/about';
 import * as Constants from '../../providers/constants';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import 'rxjs/add/operator/map';
 
 @IonicPage()
 
@@ -20,8 +20,6 @@ export class DocumentsPage {
 
 
   @ViewChild('mySearchbar', { read: ElementRef }) myInput: ElementRef;
-  //@ViewChild('mySearchbar') searchbar: Searchbar;
-
  
   userdocuments: any;
   documentID: any;
@@ -57,6 +55,7 @@ export class DocumentsPage {
   adddocids:any;
   api: any;
   wherefrom: any;
+  foldertrail = [];
   addDocuments = [];  
   userdocumentData = {
     "SystemProjectID":"",
@@ -81,14 +80,15 @@ export class DocumentsPage {
               public modalCtrl: ModalController) 
   {}
  
-  ionViewWillEnter() {
 
-    this.inprocess        = this.navParams.get('inprocess');
-    this.callback         = this.navParams.get("callback")
-    this.selecteddocument = "";
 
+  ionViewDidEnter(){
+   
     const documentData = JSON.parse(localStorage.getItem('userSystemData'));
 
+    this.inprocess                          = this.navParams.get('inprocess');
+    this.callback                           = this.navParams.get("callback")
+    this.selecteddocument                   = "";
     this.userdocumentData.SystemProjectID   = localStorage.getItem('CurrentProjectID');
     this.userdocumentData.SystemProjectName = localStorage.getItem('CurrentProjectName'); 
     this.userdocumentData.SystemClientID    = documentData[0].SystemClientID;
@@ -98,18 +98,13 @@ export class DocumentsPage {
     this.userdocumentData.DocumentNumber    = documentData[0].DocumentNumber; 
     this.userdocumentData.FileExtension     = documentData[0].FileExtension; 
 		this.apiKey                             = documentData[0].apiKey; 
-    
+    this.cpid                               = localStorage.getItem('CurrentProjectID');
+    this.scid                               = localStorage.getItem('CurrentProjectClientID'); 
+
     var documentSystemProjectID = this.userdocumentData.SystemProjectID;  
     var documentSystemClientID  = this.userdocumentData.SystemClientID;
-
     var currentProjectName      = localStorage.getItem('CurrentProjectName');
-    console.log("Current Proj = ", currentProjectName);
-
     var oldProjectName          = localStorage.getItem('OldProjectName');
-    console.log("Old Proj = ", oldProjectName);
-
-    this.cpid = localStorage.getItem('CurrentProjectID');
-    this.scid = localStorage.getItem('CurrentProjectClientID');
 
     setTimeout(() => {
       console.log("setTimeout");
@@ -118,57 +113,42 @@ export class DocumentsPage {
       this.myInput.nativeElement.focus();
     },150);
 
-    if(currentProjectName != oldProjectName ){
-      
-      console.log("Current Proj 1 = ", currentProjectName);
-      console.log("Old Proj 1 = ", oldProjectName);
+  //if(currentProjectName != oldProjectName ){
+    console.log("Current Proj 1 = ", currentProjectName);
+    console.log("Old Proj 1 = ", oldProjectName); 
 
+    document.getElementsByClassName("searchbar-input")["0"].value = "";     
+    var oldurl = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxzxxx/xxx";
+    console.log(oldurl);
+    this.http.get(oldurl).map(res => res.json()).subscribe(data => {
+    this._sanitizer.bypassSecurityTrustStyle(data);
+    this.userdocuments = data;
+    this.hasdocs = true;
+    this.wherefrom = "sys";
+    localStorage.setItem('OldProjectName', this.userdocumentData.SystemProjectName);
 
-      document.getElementsByClassName("searchbar-input")["0"].value = "";
-      //document.getElementById("main").style.display = "none";
-      
-      var oldurl = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxxx/xxx";
-      console.log(oldurl);
-      this.http.get(oldurl).map(res => res.json()).subscribe(data => {
-            this._sanitizer.bypassSecurityTrustStyle(data);
-            this.userdocuments = data;
-            console.log(this.userdocuments);
-            localStorage.setItem('OldProjectName', this.userdocumentData.SystemProjectName);
-            console.log("Old Proj 2 = ", oldProjectName);
-            this.hasdocs = false;
-            document.getElementById("maindiv").style.display="block";
-            this.wherefrom = "sys";
-        },
-        err => {
-            console.log("Oops!");
-        }
-      );    
-      
-    }
-
+      console.log(this.userdocuments);
+      console.log("Old Proj 2 = ", oldProjectName);
+      console.log("hasdocs = ", this.hasdocs);
+      //document.getElementById("maindiv").style.display="block";
+    }, err => {console.log("Oops!");});  
+  //}
     
     var furl  = Constants.apiUrl+"api/documentsfields/"+documentSystemProjectID;
     this.http.get(furl).map(res => res.json()).subscribe(data => {
-          this._sanitizer.bypassSecurityTrustStyle(data);
-          this.fieldnames = data; 
-          console.log(this.fieldnames);
-      },
-      err => {
-          console.log("Field Names Oops!");
-      }
-    ); 
+      this._sanitizer.bypassSecurityTrustStyle(data);
+      this.fieldnames = data; 
+      console.log(this.fieldnames);
+    }, err => {console.log("Field Names Oops!");}); 
 
     var cfurl = Constants.apiUrl+"api/documentscustomfields/"+documentSystemProjectID+"/"+documentSystemClientID;
     this.http.get(cfurl).map(res => res.json()).subscribe(data => {
           this._sanitizer.bypassSecurityTrustStyle(data);
           this.customfieldnames = data; 
           console.log(this.customfieldnames);
-      },
-      err => {
-          console.log("Custom Field Names Oops!");
-      }
-    ); 
-  }
+    }, err => {console.log("Custom Field Names Oops!");}); 
+  
+}
 
   keys(obj){
       return Object.keys(obj);
@@ -273,7 +253,7 @@ export class DocumentsPage {
     }
     
   } else {
-      var oldurl1 = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxx/xxx";
+      var oldurl1 = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxzxxx/xxx";
       this.http.get(oldurl1).map(res => res.json()).subscribe(data => {
         this._sanitizer.bypassSecurityTrustStyle(data);
       this.userdocuments = data;
@@ -291,7 +271,7 @@ export class DocumentsPage {
   }
 
   backtofolders(){
-    var oldurl1 = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxxxxx/xxx";
+    var oldurl1 = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/xxxzxxx/xxx";
     this.http.get(oldurl1).map(res => res.json()).subscribe(data => {
     this._sanitizer.bypassSecurityTrustStyle(data);
     this.userdocuments = data;
@@ -299,24 +279,18 @@ export class DocumentsPage {
     console.log(this.userdocuments);
     this.hasdocs = false;            
     this.wherefrom = "sys";
-    },
-    err => {
-        console.log("Oops!");
-    });      
+    }, err => {console.log("Oops!");});      
   }
 
   folderClick(folderid){
     var url   = Constants.apiUrl+"api/documents/"+this.userdocumentData.apiKey+"/"+this.userdocumentData.SystemUserID+"/"+localStorage.getItem('CurrentProjectID')+"/folder-"+folderid+"/xxx";
     this.http.get(url).map(res => res.json()).subscribe(data => {
-        this._sanitizer.bypassSecurityTrustStyle(data);
+    this._sanitizer.bypassSecurityTrustStyle(data);
     this.userdocuments = data;
     this.hasdocs = true;        
     this.wherefrom = "folder";
     console.log(this.userdocuments);
-    },
-    err => {
-        console.log("Oops!");
-    }); 
+    }, err => {console.log("Oops!");}); 
   }
   
 

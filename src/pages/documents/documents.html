@@ -39,7 +39,7 @@
       <ion-row *ngIf="this.wherefrom == 'folder'" style="height: 30px;">          
         <ion-col col-2>
           <ion-thumbnail>                  
-            &nbsp;..<ion-icon name="rewind" (click) = "backtofolders()" style="position:relative;height:30px;bottom:8px;font-size:28px;color:blue"></ion-icon>
+            &nbsp;..<ion-icon name="md-arrow-round-back" (click) = "backtofolders()" style="position:relative;height:30px;bottom:8px;font-size:28px;color:blue"></ion-icon>
           </ion-thumbnail>            
         </ion-col>
         <ion-col col-10></ion-col>
@@ -116,7 +116,6 @@
   <ng-template #nodocs>    
     <br>
     <ion-grid> 
-
         <!--<ion-row style="height: 30px;">          
           <ion-col col-2>
             <ion-thumbnail>                  

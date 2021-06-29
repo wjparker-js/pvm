@@ -5,7 +5,7 @@ import { DocumentsPage } from '../documents/documents';
 import { ProjectsPage } from '../projects/projects';
 import { DefectsPage } from '../Defects/defects';
 import { InspectPage } from '../inspect/inspect';
-import { NavController, NavParams} from 'ionic-angular';
+import { NavParams} from 'ionic-angular';
 
 
 @Component({
@@ -23,6 +23,7 @@ export class TabsPage {
 
   online : boolean=true;
   defectsShow : boolean=true;
+
 
   constructor(public navParams: NavParams) {
 

@@ -1,18 +1,11 @@
-import { Component, ɵConsole } from '@angular/core';
+import { Component} from '@angular/core';
 import { IonicPage,  ModalController, NavController, NavParams, ActionSheetController,ToastController, ViewController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import * as Constants from '../../providers/constants';
 import { DomSanitizer } from '@angular/platform-browser';
-import { pipeFromArray } from 'rxjs/util/pipe';
-import { AnonymousSubject } from 'rxjs';
-import { InspectionModalPage } from '../inspection-modal/inspection-modal';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
-
-import { ImgEditPage } from '../imgedit/imgedit';
-import { NgStyle } from '@angular/common';
-import { e } from '@angular/core/src/render3';
 
 
 @IonicPage()
@@ -139,6 +132,7 @@ export class InspectionitemsPage {
   todosnotes: any [];
   notescount:any;
   reportOverallImage :any;
+  url:any;
 
   frmData1 = {notes:"", inotes:"", onotes1:""};
 
@@ -224,15 +218,15 @@ export class InspectionitemsPage {
       console.log("url sub",url);
     } 
     if(this.temp == "subi"){
-      var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.inspectionitemsid+"/"+this.temp;
+      this.url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.inspectionitemsid+"/"+this.temp;
       console.log("urlsubi",url);
     } 
     if(this.temp == "ins"){
-      var url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.inspectionitemsid+"/"+this.temp;
+      this.url = Constants.apiUrl+"api/inspectiontemplates/"+this.inspectionitemsApiKey+"/"+this.inspectionitemsSystemProjectID+"/"+this.inspectionitemsUserID+"/"+this.username+"/"+this.usercompanyname+"/"+this.inspectionitemsid+"/"+this.temp;
       console.log("urlins",url);
     }     
 
-    this.http.get(url).map(res => res.json()).subscribe(data => {
+    this.http.get(this.url).map(res => res.json()).subscribe(data => {
       this._sanitizer.bypassSecurityTrustStyle(data);
       this.inspectionitemssdata = data;  
 
@@ -566,10 +560,6 @@ export class InspectionitemsPage {
     this.notescount++;
 
     var upurl           = "https://pvmobile.online/iuploadoverallphotdata.php";
-    var OverallImageurl = "https://projectvaultuk.com/publicpics/inspectionimages/";
-    var urlstr          = this.left(this.requestid,33);
-    var itemcount       = this.right("000"+this.notescount,3);
-    var imgviewurl      = OverallImageurl+urlstr+itemcount+".jpg";
 
     const formData = new FormData();	
 
@@ -664,9 +654,9 @@ export class InspectionitemsPage {
       else
       {  
         document.getElementById(theItempass1).style.color = "black";
-        for( var i = 0; i < this.checkeditems.length; i++){     
-          if ( this.checkeditems[i] === item) {     
-              this.checkeditems.splice(i, 1); 
+        for( var k = 0; k < this.checkeditems.length; k++){     
+          if ( this.checkeditems[k] === item) {     
+              this.checkeditems.splice(k, 1); 
           }   
         }  
         this.delcheck = this.checkAllTicked(this.totalItems,this.checkeditems); 
@@ -697,6 +687,7 @@ export class InspectionitemsPage {
         document.getElementById(theItemfail1).style.color = "black"; 
 
         document.getElementById(thisdiv1).style.display = "block"; 
+
         document.getElementById(thisdiv1).style.height  = "800px";  
 
         if(document.getElementById(theItempass1).style.color == "mediumseagreen"){

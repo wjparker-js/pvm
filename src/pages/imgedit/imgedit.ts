@@ -5,7 +5,7 @@ import { DrawingProvider } from '../../providers/drawing/drawing';
 import { ColorsPopoverPage } from '../colors-popover/colors-popover';
 import { WidthPopoverPage } from '../width-popover/width-popover';
 import { BrushTypePopoverPage } from '../brush-type-popover/brush-type-popover';
-import { QueryEncoder } from '@angular/http';
+
 
 @Component({
   selector: 'page-imgedit',

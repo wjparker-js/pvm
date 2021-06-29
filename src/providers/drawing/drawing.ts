@@ -238,8 +238,7 @@ export class DrawingProvider {
         scaleY = this.height / height;
       }
 
-      let center = this.canvas.getCenter();
-      this.canvas.setBackgroundImage(imageSrc, this.canvas.renderAll.bind(this.canvas), {
+       this.canvas.setBackgroundImage(imageSrc, this.canvas.renderAll.bind(this.canvas), {
         scaleX: scaleX,
         scaleY: scaleY,
         crossOrigin: 'anonymous'

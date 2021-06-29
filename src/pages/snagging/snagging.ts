@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { IonicPage, NavController, AlertController, NavParams, ViewController, ActionSheetController, ToastController, Platform, LoadingController, Loading, Img } from 'ionic-angular';
+import { IonicPage, NavController, AlertController, NavParams, ViewController, ActionSheetController, ToastController, Platform, LoadingController, Loading} from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
-import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
-import { normalizeURL } from 'ionic-angular';
+import { FileTransfer} from '@ionic-native/file-transfer';
 import { Http } from '@angular/http';
 import { ImgEditPage } from '../imgedit/imgedit';
 import { ImgEditPagePre } from '../imgeditpre/imgeditpre';
@@ -21,11 +20,7 @@ import { QsPage } from '../qs/qs';
 import { RemediatorPage } from '../remediator/remediator';
 import { InspectorPage } from '../inspector/inspector';
 import * as Constants from '../../providers/constants';
-import { BarcodeScanner ,BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
-import { getSymbolIterator } from '@angular/core/src/util';
-
-
-declare var cordova: any;
+import { BarcodeScanner} from '@ionic-native/barcode-scanner';
 
 @IonicPage()
 
@@ -212,7 +207,7 @@ export class SnaggingPage {
 
 
 	
-	private addimage(action){
+	public addimage(action){
 		if(action === "add"){
 			this.presentActionSheet();
 		} else {
@@ -534,8 +529,7 @@ export class SnaggingPage {
 			this.adddoc = _params;	 
 			resolve();
 
-			var checkselecteddocids = localStorage.getItem('selecteddocids')
-			
+		
 /*			if(checkselecteddocids == ""){
 				localStorage.setItem('selecteddocids',this.adddoc);
 			}
