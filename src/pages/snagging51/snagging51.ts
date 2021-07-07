@@ -13,10 +13,10 @@ import { QsPage } from '../qs/qs';
 import { RemediatorPage } from '../remediator/remediator';
 import { InspectorPage } from '../inspector/inspector';
 import * as Constants from '../../providers/constants';
-import { ChangedatePage } from '../changedate/changedate';
+//import { ChangedatePage } from '../changedate/changedate';
 
 
-@IonicPage()
+//@IonicPage()
 
 @Component({
   selector: 'page-snagging51',
@@ -506,9 +506,9 @@ export class Snagging51Page {
 	}
 
 
-	openstatuschangeList(){		
-		this.navCtrl.push(ChangedatePage, {callback:this.myCallbackFunction12});
-	}
+	//  openstatuschangeList(){		
+	//  	this.navCtrl.push(ChangedatePage, {callback:this.myCallbackFunction12});
+	// }
 
 
 	myCallbackFunction9 = (_params) => {

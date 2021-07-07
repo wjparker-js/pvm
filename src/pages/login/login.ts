@@ -8,7 +8,7 @@ import { Subscription} from 'rxjs/Subscription';
 import { Network } from '@ionic-native/network';
 import * as Constants from '../../providers/constants';
 
-@IonicPage()
+//@IonicPage()
 
 @Component({
   selector: 'page-login',

@@ -33,8 +33,8 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Geolocation } from '@ionic-native/geolocation';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { DocumentTabs }    from '../pages/documenttabs/documenttabs';
-import { DocumentIssues }  from '../pages/documenttabs/documentissues/documentissues';
+// import { DocumentTabs }    from '../pages/documenttabs/documenttabs';
+// import { DocumentIssues }  from '../pages/documenttabs/documentissues/documentissues';
 import { DocumentAudit }   from '../pages/documentaudit/documentaudit';
 import { DocumentSummary } from '../pages/documentsummary/documentsummary';
 import { CallNumber } from '@ionic-native/call-number';
@@ -58,7 +58,7 @@ import { Network } from '@ionic-native/network';
 import { IonicStorageModule } from '@ionic/storage';
 import { RfiPage } from '../pages/rfi/rfi';
 import { RemediatorPage } from '../pages/remediator/remediator';
-import { ChangedatePage } from '../pages/changedate/changedate';
+//import { ChangedatePage } from '../pages/changedate/changedate';
 import { QsPage } from '../pages/qs/qs';
 import { InspectorPage } from '../pages/inspector/inspector';
 import { WrapperPage } from '../pages/wrapper/wrapper';
@@ -94,9 +94,7 @@ import { InspectionModalPage } from '../pages/inspection-modal/inspection-modal'
     EffectsPage,
     ReasonsPage,
     TabsPage,
-    DocumentTabs,
     DocumentAudit,
-    DocumentIssues,
     ImgViewPage,
     ImgEditPage,
     ImgEditPagePre,
@@ -108,7 +106,6 @@ import { InspectionModalPage } from '../pages/inspection-modal/inspection-modal'
     RemediatorPage,
     QsPage,
     InspectorPage,
-    ChangedatePage,
     WrapperPage,
     InspectPage,
     InspectionitemsPage,
@@ -154,9 +151,7 @@ import { InspectionModalPage } from '../pages/inspection-modal/inspection-modal'
     EffectsPage,
     ReasonsPage,
     TabsPage,
-    DocumentTabs,
     DocumentAudit,
-    DocumentIssues,
     DocumentSummary,
     InspectionModalPage,
     ImgViewPage,
@@ -169,7 +164,6 @@ import { InspectionModalPage } from '../pages/inspection-modal/inspection-modal'
     RemediatorPage,
     QsPage,
     InspectorPage,
-    ChangedatePage,
     WrapperPage,
     InspectPage,
     InspectionitemsPage,

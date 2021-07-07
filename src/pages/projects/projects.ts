@@ -6,7 +6,7 @@ import * as Constants from '../../providers/constants';
 
 //let apiUrl = 'http/energy.lau.com.es:57689/api/auth?apiKeyUserProjects=';
 
-@IonicPage()
+//@IonicPage()
 
 @Component({
   selector: 'page-projects',

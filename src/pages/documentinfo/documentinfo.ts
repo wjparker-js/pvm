@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import { DocumentViewer } from '../documentviewer/documentviewer';
 import * as Constants from '../../providers/constants';
 
-@IonicPage()
+//@IonicPage()
 
 @Component({selector: 'page-documentinfo', templateUrl: 'documentinfo.html'})
 

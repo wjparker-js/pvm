@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 import * as Constants from '../../providers/constants';
 import { DomSanitizer } from '@angular/platform-browser';
 
-@IonicPage()
+//@IonicPage()
 
 @Component({
   selector: 'page-qrcode',

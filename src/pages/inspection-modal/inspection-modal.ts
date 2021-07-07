@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Http } from '@angular/http';
 
-@IonicPage()
+//@IonicPage()
 @Component({
   selector: 'page-inspection-modal',
   templateUrl: 'inspection-modal.html',

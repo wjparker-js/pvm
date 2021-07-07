@@ -22,7 +22,7 @@ import { InspectorPage } from '../inspector/inspector';
 import * as Constants from '../../providers/constants';
 import { BarcodeScanner} from '@ionic-native/barcode-scanner';
 
-@IonicPage()
+//@IonicPage()
 
 @Component({
   selector: 'page-snagging',

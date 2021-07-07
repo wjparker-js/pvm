@@ -5,7 +5,7 @@ import * as Constants from '../../providers/constants';
 import { DomSanitizer } from '@angular/platform-browser';
 import { InspectionitemsPage } from '../inspectionitems/inspectionitems';
 
-@IonicPage()
+//@IonicPage()
 
 @Component({
   selector: 'page-inspect',
