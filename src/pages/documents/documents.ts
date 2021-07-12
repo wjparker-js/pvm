@@ -113,7 +113,7 @@ export class DocumentsPage {
       this.myInput.nativeElement.focus();
     },150);
 
-  //if(currentProjectName != oldProjectName ){
+  if(currentProjectName != oldProjectName ){
     console.log("Current Proj 1 = ", currentProjectName);
     console.log("Old Proj 1 = ", oldProjectName); 
 
@@ -132,7 +132,7 @@ export class DocumentsPage {
       console.log("hasdocs = ", this.hasdocs);
       //document.getElementById("maindiv").style.display="block";
     }, err => {console.log("Oops!");});  
-  //}
+  }
     
     var furl  = Constants.apiUrl+"api/documentsfields/"+documentSystemProjectID;
     this.http.get(furl).map(res => res.json()).subscribe(data => {
