@@ -82,7 +82,8 @@ export class Login {
       this.userSystemData.apiKey         = userData[0].apiKey;
       this.apikey                        = userData[0].apiKey;
       this.userSystemData.password       = localStorage.getItem('login_password');
-      this.userSystemData.id             = localStorage.getItem('login_id');
+      this.userSystemData.id             = 'xxx-xxx';
+      //this.userSystemData.id             = localStorage.getItem('login_id');
       this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');     
     }
 
@@ -104,6 +105,7 @@ export class Login {
 
     this.userSystemData.password = "xxx-xxx";
 
+    if(this.userSystemData.id == ''){}
     this.authService.getData(this.userSystemData).then((result) =>{
       this.responseData = result;
 
@@ -182,13 +184,13 @@ export class Login {
         },1000);
         
       } else {
-        this.presentToast("Please enter a valid username and password");
+        this.presentToast("Please enter a valid username and PIN");
       }
     }, (err) => {
       this.presentToast("There was a connection error.");
     });
   } else {
-    this.presentToast("Please enter a valid username and password");
+    this.presentToast("Please enter a valid username and PIN");
   }  
   this.menu.enable(true);
 }

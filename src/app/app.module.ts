@@ -29,8 +29,8 @@ import { LocationmapPage } from '../pages/locationmap/locationmap';
 import { DisciplinePage } from '../pages/discipline/discipline';
 import { EffectsPage } from '../pages/effects/effects';
 import { ReasonsPage } from '../pages/reasons/reasons';
-import { NativeGeocoder } from '@ionic-native/native-geocoder';
-import { Geolocation } from '@ionic-native/geolocation';
+// import { NativeGeocoder } from '@ionic-native/native-geocoder';
+// import { Geolocation } from '@ionic-native/geolocation';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 // import { DocumentTabs }    from '../pages/documenttabs/documenttabs';
@@ -177,8 +177,6 @@ import { InspectionModalPage } from '../pages/inspection-modal/inspection-modal'
     Network,
     Common,
     BarcodeScanner,
-    Geolocation,
-    NativeGeocoder,
     CallNumber,
     WeatherProvider,
     Keyboard,

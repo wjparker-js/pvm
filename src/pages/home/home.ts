@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+//import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
 import {NavController, NavParams, MenuController } from 'ionic-angular';
 import {App} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service";
@@ -8,7 +8,7 @@ import {Http} from '@angular/http';
 import {DocumentSummary} from '../documentsummary/documentsummary';
 import {DefectsviewPage} from '../defectsview/defectsview';
 import {WeatherProvider} from '../../providers/weather/weather';
-import { Geolocation } from '@ionic-native/geolocation';
+//import { Geolocation } from '@ionic-native/geolocation';
 import * as Constants from '../../providers/constants';
 import { Storage } from '@ionic/storage';
 
@@ -60,25 +60,19 @@ export class HomePage {
     "ProjectName":""
   };
 
-  geoLatitude: number;
-  geoLongitude: number;
-  geoAccuracy:number;
-  geoAddress: string;
- 
+
   watchLocationUpdates:any; 
   loading:any;
   isWatching:boolean;
   thumb:any;
  
-  geoencoderOptions: NativeGeocoderOptions = {
-    useLocale: true,
-    maxResults: 5
-  };
+  // geoencoderOptions: NativeGeocoderOptions = {
+  //   useLocale: true,
+  //   maxResults: 5
+  // };
 
   constructor(
     public common: Common, 
-    private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder,
     public weatherProvider:WeatherProvider, 
     public http: Http, 
     public navCtrl : NavController, 
@@ -88,6 +82,9 @@ export class HomePage {
     private storage: Storage,
     public authService : AuthService) {
   }
+
+  // private geolocation: Geolocation,
+  // private nativeGeocoder: NativeGeocoder,
 
   ionViewWillEnter() {
 
@@ -137,7 +134,7 @@ export class HomePage {
   var urlcity = Constants.apiUrl+"api/locationcity/"+pid;
 
 
-  this.city = "London";
+  //this.city = "London";
 
   this.http.get(urlcity).map(res => res.json()).subscribe(data => {
 
@@ -220,28 +217,28 @@ openDefectsSummary(status,sytemordernumber){
   this.navCtrl.push(DefectsviewPage,{status,sytemordernumber});
 }
 
-public getGeolocation(){
-  this.geolocation.getCurrentPosition().then((resp) => {
-    this.geoLatitude = resp.coords.latitude;
-    this.geoLongitude = resp.coords.longitude; 
-    this.geoAccuracy = resp.coords.accuracy; 
-    this.getGeoencoder(this.geoLatitude,this.geoLongitude);
-    }).catch((error) => {
-      alert('Error getting location'+ JSON.stringify(error));
-    });
-}
+// public getGeolocation(){
+//   this.geolocation.getCurrentPosition().then((resp) => {
+//     this.geoLatitude = resp.coords.latitude;
+//     this.geoLongitude = resp.coords.longitude; 
+//     this.geoAccuracy = resp.coords.accuracy; 
+//     this.getGeoencoder(this.geoLatitude,this.geoLongitude);
+//     }).catch((error) => {
+//       alert('Error getting location'+ JSON.stringify(error));
+//     });
+// }
 
 
-public getGeoencoder(latitude,longitude){
-  this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
-  .then((result: NativeGeocoderReverseResult[]) => {
-    this.geoAddress = this.generateAddress(result[0]);
-    console.log(this.geoAddress);
-  })
-  .catch((error: any) => {
-    alert('Error getting location'+ JSON.stringify(error));
-  });
-}
+// public getGeoencoder(latitude,longitude){
+//   this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
+//   .then((result: NativeGeocoderReverseResult[]) => {
+//     this.geoAddress = this.generateAddress(result[0]);
+//     console.log(this.geoAddress);
+//   })
+//   .catch((error: any) => {
+//     alert('Error getting location'+ JSON.stringify(error));
+//   });
+// }
 
 
 public generateAddress(addressObj){
@@ -259,14 +256,14 @@ public generateAddress(addressObj){
 }
 
 
-public watchLocation(){
-  this.isWatching = true;
-  this.watchLocationUpdates = this.geolocation.watchPosition();
-  this.watchLocationUpdates.subscribe((resp) => {
-    this.geoLatitude = resp.coords.latitude;
-    this.geoLongitude = resp.coords.longitude; 
-    this.getGeoencoder(this.geoLatitude,this.geoLongitude);
-  });
-}
+// public watchLocation(){
+//   this.isWatching = true;
+//   this.watchLocationUpdates = this.geolocation.watchPosition();
+//   this.watchLocationUpdates.subscribe((resp) => {
+//     this.geoLatitude = resp.coords.latitude;
+//     this.geoLongitude = resp.coords.longitude; 
+//     this.getGeoencoder(this.geoLatitude,this.geoLongitude);
+//   });
+// }
 
 }

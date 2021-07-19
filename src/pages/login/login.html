@@ -11,13 +11,13 @@
               
     <ion-row justify-content-center align-items-center style="height: 50%;">
       <ion-card padding style="position:relative;max-width:350px;top:150px;margin-top: 40px;margin-bottom: 0px;background: #fff;">
-        <img src="assets/imgs/Sys_Logo_PV4_SG-White.png" style="height:53px;width:318px;"/>        
+        <img src="/assets/imgs/Sys_Logo_PV4_SG-White.png" style="height:53px;width:318px;"/>        
         
         <span [hidden]="this.connectionmsg == 'NONE'">
 
           <ion-list>
             <ion-item>
-              <ion-input #input type="email"  placeholder="Enter Username" [(ngModel)]="userSystemData.id" ></ion-input>
+              <ion-input #input  autocomplete="off" type="email"  placeholder="Enter Username" [(ngModel)]="userSystemData.id" ></ion-input>
             </ion-item>
             <ion-item [hidden]="showLogin === false">
               <ion-input type="password"  placeholder="Enter PIN" [(ngModel)]="userSystemData.password"></ion-input>
@@ -26,7 +26,8 @@
 
           <button [hidden]="showLogin === false" ion-button  block color="primary" (click)="login()">Login</button>
           <button [hidden]="showLogin !== false" ion-button  block color="primary" (click)="newuser()">Get PIN or Login</button>
-          <br><span [hidden]="showLogin === false" style="display: block;text-align:end;" (click)="newuser()">Request a new PIN.</span>
+          <br>
+          <span   [hidden]="showLogin === false" style="display: block;text-align:end;" (click)="newuser()">Request a new PIN.</span>
  
         </span>
 
@@ -40,7 +41,7 @@
             </ion-item>
           </ion-list>
 
-          <button ion-button block color="bold" (click)="login()">Login</button>
+          <button ion-button block color="bold" *ngIf = "this.userSystemData.id != 'xxx-xxx'"  (click)="login()">Login</button>
           
         </span>
         
@@ -58,7 +59,7 @@
         <span [hidden]="this.connectionmsg != '0'">
           <div [hidden]="showLogin === true" padding style="position:relative;color:white;border:0px;max-width:350px;top:0px;margin-top: 20px;margin-bottom: 0px;background: #aa0000;">
             <div style="text-align:center;">
-              There is no betwork connection.              
+              There is no Network connection.              
             </div>
           </div>
           <br><br><br>
