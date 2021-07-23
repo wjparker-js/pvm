@@ -16,7 +16,7 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+      <ion-col  style="padding-top: 5px;padding-bottom: 0px;">
         <ion-list style="margin-bottom: 0px;"> 
 
 
@@ -83,7 +83,6 @@
             <ion-card  id="topdiv{{inspectionitem.ItemID}}" style="border-top: 0px solid #e8e8e8 !important;position:relative;top:5px;max-height:800px;min-height:40px;padding-bottom:6px;padding-top:1px;margin-top:3px;margin-bottom:3px;"> 
               <ion-item class="card card-md" class="lite -block item-md" style="padding-left:0px;padding-top:7px;margin:0px;width:100%;max-height:800px;min-height:40px;border-bottom-color:rgb(32, 29, 29);padding-right: 0px;padding-bottom: 0px;"> 
                 <div item-content style="width:100%;"> 
-
 
                   <!-- Pass/Fail/Thumbs  icons--> 
                   <!-- Pass/Fail/Thumbs  icons--> 
@@ -189,7 +188,7 @@
                         name="notes" 
                         id="notes"
                         placeholder=""
-                        style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;margin-top:3px;top:5px;left:15px;font-size: 1.2 em;"
+                        style="width:100%;position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;margin-top:3px;top:5px;left:15px;font-size: 1.2 em;"
                         value="{{inspectionitem.Check2Notes}}"
                         >                        
                         </ion-textarea>
@@ -225,7 +224,7 @@
                         [(ngModel)]="frmData1.inotes" 
                         id="{{inspectionitem.ItemNumber}}notes"
                         placeholder=""
-                        style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;margin-top:0px;top:-5px;left:15px;font-size: 1.2 em;">
+                        style="width:100%;position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;margin-top:0px;top:-5px;left:15px;font-size: 1.2 em;">
                       </ion-textarea>
                       </ion-col>
                     </ion-row>
@@ -312,7 +311,7 @@
               [(ngModel)]="this.frmData1.notes" 
               id="notes"
               placeholder="Notes..."
-              style="position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:10px;left:15px;font-size: 1.2 em;">
+              style="width:100%;position:relative;left:0px !important;padding-right:0px;height:45px;border:1px;border-color:#000000;background-color:#e8e8e8;position:relative;top:10px;left:15px;font-size: 1.2 em;">
             </ion-textarea>
             </ion-col>
           </ion-row>
@@ -327,12 +326,13 @@
           <!-- overall notes view only -->
           <!-- overall notes view only -->
           <!-- overall notes view only -->
+          <!-- overall notes view only -->
           <ion-item  *ngIf="(this.temp == 'subi' || this.temp == 'ins') && inspectionoverallnotes != ''" style="position:relative;left:-5px;margin-left:0px;padding-left: 2px;">
              <ion-grid style="padding-top: 0px;padding-bottom: 0px;" item-content>
               <ion-row>
-                <ion-col *ngFor="let xmlImages of inspectionoverallnotes; index as i"  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+                <ion-col *ngFor="let xmlImages of inspectionoverallnotes; index as i" style="padding-top: 5px;padding-bottom: 0px;">
                   <ion-list  style="margin-top: 2px;margin-bottom: 5px;">  
-                    <ion-card style="border-top: 0px solid #ffffff !important;position:relative;top:5px;min-height:60px; max-height:60px;padding-bottom: 0px;padding-top: 10px;margin-top: 3px;margin-bottom: 3px;"> 
+                    <ion-card style="width:100%;border-top: 0px solid #ffffff !important;position:relative;top:5px;min-height:60px; max-height:60px;padding-bottom: 0px;padding-top: 10px;margin-top: 3px;margin-bottom: 3px;"> 
                       <ion-item class="card card-md" class="lite -block item-md" style="padding-left:10px;">   
                         <ion-thumbnail item-left>
                           <img [src]="'data:image/jpg;base64,'+xmlImages.xmlImage" style="position:relative;top:-10px;height:50px;width:30px;border:1px;" imageViewer/>
@@ -357,9 +357,9 @@
               <!-- show overall photos/notes grid  -->
               <!-- show overall photos/notes grid  -->
               <ion-row [hidden]="!image">
-                <ion-col *ngFor="let image of todos; index as i"  col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+                <ion-col *ngFor="let image of todos; index as i" style="padding-top: 5px;padding-bottom: 0px;">
                   <ion-list  style="margin-top: 2px;margin-bottom: 5px;"> 
-                    <ion-card style="border-top: 0px solid #ffffff !important;position:relative;top:5px;min-height:60px; max-height:60px;padding-bottom: 0px;padding-top: 10px;margin-top: 3px;margin-bottom: 3px;"> 
+                    <ion-card style="width:100%;border-top: 0px solid #ffffff !important;position:relative;top:5px;min-height:60px; max-height:60px;padding-bottom: 0px;padding-top: 10px;margin-top: 3px;margin-bottom: 3px;"> 
                       <ion-item class="card card-md" class="lite -block item-md" style="padding-left:10px;">   
                         <ion-thumbnail item-left>
                           <img [src]="image" style="position:relative;top:-10px;height:50px;width:30px;border:1px;" imageViewer/>
@@ -376,9 +376,9 @@
               <!-- add overall photos/notes  -->
               <!-- add overall photos/notes  -->
               <ion-row >
-                <ion-col col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+                <ion-col style="padding-top: 5px;padding-bottom: 0px;">
                   <ion-list  style="margin-top: 2px;margin-bottom: 5px;">
-                    <ion-item  *ngIf="this.temp == 'ins'" style="position:relative;left:-5px;margin-left:0px;padding-left: 2px;">
+                    <ion-item  *ngIf="this.temp == 'ins'" style="width:100%;position:relative;left:-5px;margin-left:0px;padding-left: 2px;">
                       <ion-grid style="padding-top: 0px;padding-bottom: 0px;" item-content>
                         <div [hidden]="this.temp != 'ins'" style="position:relative;top:0px;display:block;">                     
                           <ion-row>

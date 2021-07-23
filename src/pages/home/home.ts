@@ -153,6 +153,7 @@ export class HomePage {
       this.weatherTemp = data.main.temp - 273;
       this.weatherTemp = Math.round(this.weatherTemp);
     }); 
+    console.log("weatherCity = ",this.weatherCity);
     },err => {
         console.log("Oops! - No Weather Data");
     }

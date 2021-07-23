@@ -1,14 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, ToastController, MenuController } from 'ionic-angular';
+import { NavController, ToastController, MenuController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { AuthService } from "../../providers/auth-service";
 import { Http } from '@angular/http';
-import {Md5} from 'ts-md5/dist/md5';
+import { Md5 } from 'ts-md5/dist/md5';
 import { Subscription} from 'rxjs/Subscription';
 import { Network } from '@ionic-native/network';
 import * as Constants from '../../providers/constants';
-
-//@IonicPage()
 
 @Component({
   selector: 'page-login',
@@ -74,7 +72,7 @@ export class Login {
     }
 
 
-    if ((localStorage.getItem('login_password') !== null) && (localStorage.getItem('login_password') !== "xxx-xxx")) {
+    if ((localStorage.getItem('login_password') !== null) && (localStorage.getItem('login_password') !== " ")) {
       this.showLogin                     = true;
       var userData                       = JSON.parse(localStorage.getItem('userSystemData'));
       this.userSystemData.sysuserid      = userData[0].SystemUserID;
@@ -82,14 +80,14 @@ export class Login {
       this.userSystemData.apiKey         = userData[0].apiKey;
       this.apikey                        = userData[0].apiKey;
       this.userSystemData.password       = localStorage.getItem('login_password');
-      this.userSystemData.id             = 'xxx-xxx';
+      this.userSystemData.id             = ' ';
       //this.userSystemData.id             = localStorage.getItem('login_id');
       this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');     
     }
 
-    if ((localStorage.getItem('login_password') == null && localStorage.getItem('login_id') == null) || (localStorage.getItem('login_password') == "xxx-xxx" && localStorage.getItem('login_id') == "xxx-xxx") ) {
+    if ((localStorage.getItem('login_password') == null && localStorage.getItem('login_id') == null) || (localStorage.getItem('login_password') == " " && localStorage.getItem('login_id') == " ") ) {
       this.showLogin = false;
-      this.userSystemData.password ="xxx-xxx";
+      this.userSystemData.password =" ";
       console.log("New User.")
     }
     
@@ -103,7 +101,7 @@ export class Login {
 
   newuser(){    
 
-    this.userSystemData.password = "xxx-xxx";
+    this.userSystemData.password = " ";
 
     if(this.userSystemData.id == ''){}
     this.authService.getData(this.userSystemData).then((result) =>{

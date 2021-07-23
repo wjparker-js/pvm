@@ -11,7 +11,7 @@
               
     <ion-row justify-content-center align-items-center style="height: 50%;">
       <ion-card padding style="position:relative;max-width:350px;top:150px;margin-top: 40px;margin-bottom: 0px;background: #fff;">
-        <img src="/assets/imgs/Sys_Logo_PV4_SG-White.png" style="height:53px;width:318px;"/>        
+        <img src="/assets/imgs/Sys_Logo_PV4_SG-White.png" style="height:53px;width:300px;"/>        
         
         <span [hidden]="this.connectionmsg == 'NONE'">
 
@@ -40,8 +40,8 @@
               <ion-input type="password"  placeholder="Enter PIN" [(ngModel)]="userSystemData.password"></ion-input>
             </ion-item>
           </ion-list>
-
-          <button ion-button block color="bold" *ngIf = "this.userSystemData.id != 'xxx-xxx'"  (click)="login()">Login</button>
+          <!-- got rid of xxx-xxx -->
+          <button ion-button block color="bold" *ngIf = "this.userSystemData.id != ' '"  (click)="login()">Login</button>
           
         </span>
         

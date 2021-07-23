@@ -46,9 +46,8 @@ export class MyApp {
   logout(){
     this.menu.enable(false); 
 
-    // Clear local storage
-    localStorage.setItem('login_id', "xxx-xxx");
-    localStorage.setItem('login_password', "xxx-xxx");
+    localStorage.setItem('login_id', " ");
+    localStorage.setItem('login_password', " ");
     localStorage.setItem('userSystemData', "");
     localStorage.setItem('CurrentProjectName', "");
     localStorage.setItem('CurrentProjectID', "");
@@ -65,11 +64,9 @@ export class MyApp {
     localStorage.setItem('location', "");
     localStorage.setItem('OldProjectName', "");
     localStorage.setItem('CurrentProjectRoleID', "");
-    localStorage.setItem('ProjectThumb', "");
-    
+    localStorage.setItem('ProjectThumb', "");    
 
-    setTimeout(()=> this.backToWelcome(), 200); 
-      
+    setTimeout(()=> this.backToWelcome(), 200);       
   }
 
   

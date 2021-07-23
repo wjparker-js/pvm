@@ -45,9 +45,9 @@
 <ion-content class="bodytext">
   <ion-grid style="position:relative;top:4px;">
     <ion-row [hidden]="showDefects == 0">
-      <ion-col *ngFor="let defect of defects" col-12 col-md-6 col-lg-4 col-xl-3 style="padding-top: 5px;padding-bottom: 0px;">
+      <ion-col *ngFor="let defect of defects" style="padding-top: 5px;padding-bottom: 0px;">
         <ion-list style="margin-bottom: 0px;">
-          <ion-card style="border-top: 2px solid #e0e0e0; border-top-width: 2px; border-top-style: solid; border-top-color: rgb(224, 224, 224);min-height:100px; max-height:100px;padding-bottom: 0px;margin-top: 3px;margin-bottom: 3px;">
+          <ion-card  col-12 col-md-6 col-lg-4 col-xl-3 style="border-top: 2px solid #e0e0e0; border-top-width: 2px; border-top-style: solid; border-top-color: rgb(224, 224, 224);min-height:100px; max-height:100px;padding-bottom: 0px;margin-top: 3px;margin-bottom: 3px;">
             <ion-item-sliding>
 
               <ion-item #item (click)="openSnag(defect.SytemOrderNumber,defect.OrderStatus,defect.name,'nonote')" style="padding-left:3px;">
