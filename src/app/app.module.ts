@@ -182,7 +182,6 @@ import { InspectionModalPage } from '../pages/inspection-modal/inspection-modal'
     Keyboard,
     Camera,
     File,
-    FileTransfer,
     FilePath,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DrawingProvider
