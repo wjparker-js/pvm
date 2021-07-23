@@ -3,11 +3,11 @@
     <name>PVM</name>
     <description>Mobile app for ProjectVault.</description>
     <author email="wjparker@projectvaultuk" href="http://projectvaultuk.com/">ProjectVault Team</author>
-    <content src="index.html" />    
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <allow-navigation href="http://localhost:8080/*"/>
+    <allow-navigation href="http://localhost:8080/*" />
     <allow-navigation href="*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
