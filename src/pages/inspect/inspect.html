@@ -7,6 +7,7 @@
   <div style='padding: 10px;' [hidden]="this.isinspector == 0">   
     <ion-segment color="primary"  mode='ios' [(ngModel)]="defectslist" (ionChange)="segmentChanged(defectslist)">
       <ion-segment-button value="inspect" >
+        <!---->
         <b>New Inspections</b>
       </ion-segment-button>
       <ion-segment-button value="failed" >
@@ -48,7 +49,7 @@
               <div [hidden]="this.isinspector == 0"><h3><b>Location: {{request.LocationText}}</b></h3></div> 
               <div [hidden]="this.isinspector == 0"><h4>{{request.PackageTitleValue}} Package</h4></div>             
               <div [hidden]="this.isinspector == 0"><h4>Contractor: {{request.SubcontractorValue}}</h4></div> 
-              <!--<div [hidden]="xxxthis.isinspector == 0" *ngIf="request.daydiff < 0 && request.who != 'subi'" style="color:red;float:left;"><h4><b>Due: {{request.reqdate | date : 'dd MMM yy'}}&nbsp;Overdue.</b></h4></div>-->   
+              <!--<div [hidden]="xxx-xxxthis.isinspector == 0" *ngIf="request.daydiff < 0 && request.who != 'subi'" style="color:red;float:left;"><h4><b>Due: {{request.reqdate | date : 'dd MMM yy'}}&nbsp;Overdue.</b></h4></div>-->   
               <div [hidden]="this.isinspector == 0 || this.who == 'subi'"><h4>Due: {{request.reqdate | date : 'dd MMM yy'}}</h4></div>  
 
               
