@@ -42,7 +42,7 @@ import { WeatherProvider } from '../providers/weather/weather'
 import { Camera } from '@ionic-native/camera';
 import { DrawingProvider } from '../providers/drawing/drawing';
 import { File } from '@ionic-native/file';
-import { FileTransfer } from '@ionic-native/file-transfer';
+//import { FileTransfer } from '@ionic-native/file-transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ImgViewPage } from '../pages/imgview/imgview';
