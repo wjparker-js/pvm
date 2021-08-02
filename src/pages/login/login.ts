@@ -8,7 +8,7 @@ import { Subscription} from 'rxjs/Subscription';
 import { Network } from '@ionic-native/network';
 import * as Constants from '../../providers/constants';
 
-//@IonicPage()
+
 
 @Component({
   selector: 'page-login',
@@ -89,7 +89,7 @@ export class Login {
     if ((localStorage.getItem('login_password') == null && localStorage.getItem('login_id') == null) || (localStorage.getItem('login_password') == "" && localStorage.getItem('login_id') == "") ) {
       this.showLogin = false;
       this.userSystemData.password ="-";
-      this.userSystemData.id = "wjparker@servicepointuk.com";
+      this.userSystemData.id = "";
       console.log("New User.")
     }
     
