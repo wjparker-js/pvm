@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ToastController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, MenuController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { AuthService } from "../../providers/auth-service";
 import { Http } from '@angular/http';
-import { Md5 } from 'ts-md5/dist/md5';
+import {Md5} from 'ts-md5/dist/md5';
 import { Subscription} from 'rxjs/Subscription';
 import { Network } from '@ionic-native/network';
 import * as Constants from '../../providers/constants';
+
+//@IonicPage()
 
 @Component({
   selector: 'page-login',
@@ -72,7 +74,7 @@ export class Login {
     }
 
 
-    if ((localStorage.getItem('login_password') !== null) && (localStorage.getItem('login_password') !== " ")) {
+    if ((localStorage.getItem('login_password') !== null) && (localStorage.getItem('login_password') !== "")) {
       this.showLogin                     = true;
       var userData                       = JSON.parse(localStorage.getItem('userSystemData'));
       this.userSystemData.sysuserid      = userData[0].SystemUserID;
@@ -80,14 +82,14 @@ export class Login {
       this.userSystemData.apiKey         = userData[0].apiKey;
       this.apikey                        = userData[0].apiKey;
       this.userSystemData.password       = localStorage.getItem('login_password');
-      this.userSystemData.id             = ' ';
-      //this.userSystemData.id             = localStorage.getItem('login_id');
+      this.userSystemData.id             = localStorage.getItem('login_id');
       this.userSystemData.currentproject = localStorage.getItem('CurrentProjectID');     
     }
 
-    if ((localStorage.getItem('login_password') == null && localStorage.getItem('login_id') == null) || (localStorage.getItem('login_password') == " " && localStorage.getItem('login_id') == " ") ) {
+    if ((localStorage.getItem('login_password') == null && localStorage.getItem('login_id') == null) || (localStorage.getItem('login_password') == "" && localStorage.getItem('login_id') == "") ) {
       this.showLogin = false;
-      this.userSystemData.password =" ";
+      this.userSystemData.password ="-";
+      this.userSystemData.id = "wjparker@servicepointuk.com";
       console.log("New User.")
     }
     
@@ -101,10 +103,9 @@ export class Login {
 
   newuser(){    
 
-    this.userSystemData.password = " ";
+    console.log("in newuser");
 
-    if(this.userSystemData.id == ''){}
-    this.authService.getData(this.userSystemData).then((result) =>{
+      this.authService.getData(this.userSystemData).then((result) =>{
       this.responseData = result;
 
       if(this.responseData[0].SystemUserID === "Not Found") {
@@ -136,11 +137,15 @@ export class Login {
       },(err) => {
         this.presentToast("There was an Email Send error.");
       });
+  
   }
 
 
 
   login(){    
+    console.log("in newuser");
+
+  
 
     if(this.userSystemData.id && this.userSystemData.password){
 
@@ -154,9 +159,9 @@ export class Login {
         localStorage.setItem('login_id',       this.userSystemData.id.toLowerCase());
         localStorage.setItem('login_password', this.userSystemData.password); 
         localStorage.setItem('userSystemData', JSON.stringify(this.responseData)); 
-
-        this.http.get(Constants.apiUrl+'api/loginprojectuserdetails/'+this.apikey +'/'+this.userSystemData.id.trim().toLowerCase()).map(res => res.json()).subscribe(data => {
-          this.loginprojectuserdetails = data;
+        console.log("in auth 1");
+        this.http.get(Constants.apiUrl+'api/loginprojectuserdetails/'+this.apikey +'/'+this.userSystemData.id.trim().toLowerCase()).map(res => res.json()).subscribe(data => {
+          this.loginprojectuserdetails = data;
           localStorage.setItem('Role-Name',       	    this.loginprojectuserdetails["0"].RoleName);          
           localStorage.setItem('Role-PA5073',       	  this.loginprojectuserdetails["0"].PA5073);
           localStorage.setItem('Role-PA5038',         	this.loginprojectuserdetails["0"].PA5038);
@@ -168,13 +173,14 @@ export class Login {
           localStorage.setItem('CurrentProjectID',      this.loginprojectuserdetails["0"].ProjectID);            
           localStorage.setItem('CurrentProjectRoleID',  this.loginprojectuserdetails["0"].ProjectRoleID);
           localStorage.setItem('CurrentProjectClientID',this.loginprojectuserdetails["0"].SystemClientID);    
-          }, err => {console.log("Oops! - Write Audit");}
+          }, err => {console.log("Oops! - Write Audit");}
         );     
            
         var actiontext = "Mobile+-+Logged+In+-+"+this.userSystemData.id.toLowerCase().trim();
-        this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+'00000000-0000-0000-0000-000000000000'+'/'+'96'+'/'+actiontext).map(res => res.json()).subscribe(data => {
-          this.userLoginData = data;
-          },err => {console.log("Oops! - Write Audit");}
+        console.log("in auth 2");
+        this.http.get(Constants.apiUrl+'api/writeaudit/'+this.userSystemData.apiKey+'/'+this.userSystemData.sysuserid+'/'+this.userSystemData.currentproject+'/'+'00000000-0000-0000-0000-000000000000'+'/'+'96'+'/'+actiontext).map(res => res.json()).subscribe(data => {
+          this.userLoginData = data;
+          },err => {console.log("Oops! - Write Audit");}
         ); 
 
         setTimeout(() => {
@@ -182,15 +188,16 @@ export class Login {
         },1000);
         
       } else {
-        this.presentToast("Please enter a valid username and PIN");
+        this.presentToast("Please enter a valid username and password");
       }
     }, (err) => {
       this.presentToast("There was a connection error.");
     });
   } else {
-    this.presentToast("Please enter a valid username and PIN");
+    this.presentToast("Please enter a valid username and password");
   }  
   this.menu.enable(true);
+  
 }
 
 

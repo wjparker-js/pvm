@@ -46,8 +46,8 @@ export class MyApp {
   logout(){
     this.menu.enable(false); 
 
-    localStorage.setItem('login_id', " ");
-    localStorage.setItem('login_password', " ");
+    localStorage.setItem('login_id', "wjparker@servicepointuk.com");
+    localStorage.setItem('login_password', "");
     localStorage.setItem('userSystemData', "");
     localStorage.setItem('CurrentProjectName', "");
     localStorage.setItem('CurrentProjectID', "");
@@ -64,7 +64,10 @@ export class MyApp {
     localStorage.setItem('location', "");
     localStorage.setItem('OldProjectName', "");
     localStorage.setItem('CurrentProjectRoleID', "");
-    localStorage.setItem('ProjectThumb', "");    
+    localStorage.setItem('ProjectThumb', ""); 
+    localStorage.setItem('selecteddocids',"");
+    localStorage.setItem('removeddocids',"");  
+    localStorage.setItem('online',"");   
 
     setTimeout(()=> this.backToWelcome(), 200);       
   }
